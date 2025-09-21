@@ -1,12 +1,13 @@
 "use client";
-import RegisterForm from "@/components/forms/RegisterForm";
+import LoginForm from "@/components/forms/loginForm";
+import OtpForm from "@/components/forms/OtpForm";
 import { images } from "@/constants/images";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
-const SignUpPage = () => {
+const OtpVerificationPage = () => {
   return (
-    <div className="min-h-screen   flex">
+    <div className="min-h-screen flex">
       {/* Left side - Image */}
       <div className="hidden lg:flex lg:w-2/5 bg-primary-color1 items-center justify-center relative">
         <div className="flex ">
@@ -22,17 +23,14 @@ const SignUpPage = () => {
             height={400}
             width={400}
             alt="couple"
-            className="absolute   left-24 bottom-16 "
+            className="absolute   left-24 bottom-0 "
           />
         </div>
       </div>
 
-      <div className="w-full lg:w-3/6 flex flex-1 items-center justify-center p-8 ">
-        <div className=" w-full  space-y-8  !mx-auto">
-          <div className="max-h-svh md:px-10 overflow-scroll hide-scrollbar">
-            <RegisterForm />
-          </div>
-
+      <div className="w-full lg:w-3/6 flex items-center justify-center p-8 bg-white">
+        <div className="max-w-md w-full space-y-8">
+          <OtpForm />
           <div className="lg:hidden mt-8 flex justify-center">
             <Image
               src={images.couple}
@@ -48,4 +46,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default OtpVerificationPage;

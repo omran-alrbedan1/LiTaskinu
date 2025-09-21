@@ -6,6 +6,7 @@ import { Noto_Kufi_Arabic } from "next/font/google";
 import "@/app/globals.css";
 
 import { Metadata } from "next";
+import AppProvider from "@/components/providers/AppProvider";
 
 export const metadata: Metadata = {
   title: "LITASKUNU",
@@ -19,9 +20,8 @@ const notoKufiArabic = Noto_Kufi_Arabic({
   variable: "--font-noto-kufi-arabic",
   subsets: ["arabic"],
   weight: ["400", "500", "600", "700"],
+  adjustFontFallback: false,
 });
-
-// const dubai = Dubai;
 
 export default async function LocaleLayout({
   children,
@@ -38,12 +38,14 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${notoKufiArabic.variable} font-sans`}>
-      <body className={notoKufiArabic.className}>
+    <html lang={locale} className={`${notoKufiArabic.variable}`}>
+      <body className="font-sans text-base">
         {" "}
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+        <AppProvider>
+          <NextIntlClientProvider messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </AppProvider>
       </body>
     </html>
   );
