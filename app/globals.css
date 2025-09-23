@@ -20,7 +20,51 @@ html {
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+  display: none; 
+}
+
+.sidebar-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px; 
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--primary-color1, #3b82f6);
+    border-radius: 10px;
+    border: 2px solid #f1f1f1;
+    min-height: 20px; 
+}
+
+
+
+/* Hide scrollbar buttons (arrows) */
+.sidebar-scrollbar::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+/* Hide scrollbar corner */
+.sidebar-scrollbar::-webkit-scrollbar-corner {
+    display: none;
+    background: transparent;
+}
+
+/* For Firefox */
+.sidebar-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color1, #3b82f6) #f1f1f1;
+}
+
+/* For Firefox - make thumb smaller */
+.sidebar-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color1, #3b82f6) #f1f1f1;
 }
 
 @layer base {
@@ -50,6 +94,14 @@ html {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -76,6 +128,14 @@ html {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 

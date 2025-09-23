@@ -28,7 +28,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { FormFieldType } from "@/enums";
-import { ICONS } from "@/constants/icons";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -36,8 +35,17 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { CalendarIcon, ChevronDownIcon } from "lucide-react";
+import { CalendarIcon, CheckIcon, ChevronsUpDownIcon } from "lucide-react";
 import { format } from "date-fns";
+import { cn } from "@/lib/utils";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   const {
@@ -188,7 +196,87 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           </SelectContent>
         </Select>
       );
-
+    case FormFieldType.COMBOBOX:
+      return (
+        <FormControl>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                role="combobox"
+                className={cn(
+                  "w-full justify-between border border-gray-300 bg-white hover:bg-gray-50",
+                  !field.value && "text-muted-foreground"
+                )}
+              >
+                {field.value
+                  ? options.find((option) => option.value === field.value)
+                      ?.label
+                  : placeholder || "Select an option..."}
+                <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-full p-0" align="start">
+              <Command className="bg-white border border-gray-300 rounded-md shadow-lg">
+                <CommandInput
+                  placeholder={props.searchPlaceholder || "Search..."}
+                  className="h-12 text-base border-b border-gray-200 rounded-t-md"
+                />
+                <CommandList className="max-h-60 overflow-auto hide-scrollbar">
+                  <CommandEmpty className="py-6 text-center text-gray-500">
+                    No results found.
+                  </CommandEmpty>
+                  <CommandGroup className="!hide-scrollbar">
+                    {options.map((option) => (
+                      <CommandItem
+                        key={option.value}
+                        value={option.value}
+                        onSelect={() => {
+                          field.onChange(
+                            option.value === field.value ? "" : option.value
+                          );
+                        }}
+                        className="flex items-center px-4 py-3 cursor-pointer hover:bg-gray-100 aria-selected:!bg-primary-color1"
+                      >
+                        <CheckIcon
+                          className={cn(
+                            "mr-3 h-5 w-5 text-primary-color1 bg-white rounded-full",
+                            field.value === option.value
+                              ? "opacity-100"
+                              : "opacity-0"
+                          )}
+                        />
+                        {option.icon && (
+                          <Image
+                            src={option.icon}
+                            alt={option.label}
+                            width={20}
+                            height={20}
+                            className="mr-3"
+                          />
+                        )}
+                        {option.code && (
+                          <ReactCountryFlag
+                            countryCode={option.code}
+                            svg
+                            style={{
+                              width: "1.2em",
+                              height: "1.2em",
+                              marginRight: "0.75rem",
+                            }}
+                            title={option.code}
+                          />
+                        )}
+                        <span className="text-gray-900">{option.label}</span>
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+        </FormControl>
+      );
     case FormFieldType.TEXTAREA:
       return (
         <FormControl>

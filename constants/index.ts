@@ -31,3 +31,21 @@ export const countryOptions = [
   { value: "ru", label: "Russia", code: "RU" },
   { value: "cn", label: "China", code: "CN" },
 ];
+export const languageOptions = [
+  { value: "en", label: "English", code: "US" },
+  { value: "it", label: "Italian", code: "IT" },
+  { value: "de", label: "German", code: "DE" },
+  { value: "es", label: "Spanish", code: "ES" },
+  { value: "ru", label: "Russian", code: "RU" },
+  { value: "zh", label: "Chinese", code: "CN" },
+];
+export const kinshipOptions = [
+  { value: "mother", label: "Mother" },
+  { value: "father", label: "Father" },
+  { value: "grandmother", label: "Grandmother" },
+  { value: "grandfather", label: "Grandfather" },
+  { value: "aunt", label: "Aunt" },
+  { value: "uncle", label: "Uncle" },
+  { value: "guardian", label: "Guardian" },
+  { value: "other", label: "Other" },
+];

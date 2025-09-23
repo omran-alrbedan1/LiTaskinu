@@ -13,6 +13,7 @@ interface CustomProps {
   renderSkeleton?: (field: any) => React.ReactNode;
   required?: boolean;
   options?: SelectOption[];
+  searchPlaceholder?: string;
 }
 
 interface SelectOption {

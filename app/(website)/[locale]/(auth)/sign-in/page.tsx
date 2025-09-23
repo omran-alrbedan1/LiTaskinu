@@ -27,20 +27,10 @@ const LoginPage = () => {
         </div>
       </div>
 
-      <div className="w-full lg:w-3/6 flex items-center justify-center p-8 bg-white">
-        <div className=" w-full space-y-8">
+      <div className="w-full lg:w-3/6  mx-auto flex items-center justify-center p-8 bg-white">
+        <div className="  w-full space-y-8">
           {/* Login Form */}
           <LoginForm />
-
-          <div className="lg:hidden mt-8 flex justify-center">
-            <Image
-              src={images.couple}
-              height={400}
-              width={600}
-              alt="couple"
-              className="rounded-lg shadow-lg"
-            />
-          </div>
         </div>
       </div>
     </div>

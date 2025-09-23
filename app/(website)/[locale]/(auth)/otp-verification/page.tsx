@@ -23,12 +23,12 @@ const OtpVerificationPage = () => {
             height={400}
             width={400}
             alt="couple"
-            className="absolute   left-24 bottom-0 "
+            className="absolute   left-24 bottom-16 "
           />
         </div>
       </div>
 
-      <div className="w-full lg:w-3/6 flex items-center justify-center p-8 bg-white">
+      <div className="w-full mx-auto lg:w-3/6 flex items-center justify-center p-8 bg-white">
         <div className="max-w-md w-full space-y-8">
           <OtpForm />
           <div className="lg:hidden mt-8 flex justify-center">

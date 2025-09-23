@@ -13,28 +13,19 @@ import CustomFormField from "../shared/CustomInput";
 import { FormFieldType } from "@/enums";
 import { ICONS } from "@/constants/icons";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
-import { countryOptions, genderOptions } from "@/constants";
+import { countryOptions, kinshipOptions } from "@/constants";
 import Image from "next/image";
 import { images } from "@/constants/images";
 
 const RegisterFormValidation = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
-  gender: z.string().min(1, "Gender is required"),
-  dateOfBirth: z.union([z.string(), z.date()]).refine(
-    (val) => {
-      if (val instanceof Date) return !isNaN(val.getTime());
-      return val.length > 0;
-    },
-    { message: "Date of birth is required" }
-  ),
-  country: z.string().min(1, "Country is required"),
+  kinship: z.string().min(1, "Type of kinship is required"),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(1, "Phone number is required"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
-const RegisterForm = () => {
+const ParentRegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
@@ -44,12 +35,9 @@ const RegisterForm = () => {
     defaultValues: {
       firstName: "",
       lastName: "",
-      gender: "",
-      dateOfBirth: "",
-      country: "",
+      kinship: "",
       email: "",
       phone: "",
-      password: "",
     },
   });
 
@@ -57,7 +45,6 @@ const RegisterForm = () => {
     setIsLoading(true);
     try {
       console.log("Registration data:", values);
-
       router.push("./otp-verification");
     } catch (error) {
       console.log(error);
@@ -81,7 +68,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="w-full pb-20 px-4 md:p-6 md:pb-20 rounded-lg shadow-sm">
+    <div className="w-full overflow-y-scroll max-h-svh hide-scrollbar pb-20 md:p-6 md:pb-20 rounded-lg shadow-sm">
       <div className="text-center mb-4">
         <Image
           src={images.logo}
@@ -91,15 +78,17 @@ const RegisterForm = () => {
           className="mx-auto mb-2 md:hidden"
         />
         <h2 className="text:2xl md:text-3xl font-bold text-gray-900">
-          Create Account
+          Parent Information
         </h2>
-        <p className="mt-2 text-sm text-gray-600">Sign up for a new account</p>
+        <p className="mt-2 text-sm text-gray-600">
+          Please provide parent details
+        </p>
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 ">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <>
-            <div className="grid grid-cols-1  md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <CustomFormField
                 fieldType={FormFieldType.INPUT}
                 control={form.control}
@@ -118,31 +107,14 @@ const RegisterForm = () => {
                 iconSrc={ICONS.userInput}
               />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <CustomFormField
-                fieldType={FormFieldType.SELECT}
-                control={form.control}
-                name="gender"
-                label="Gender"
-                placeholder="Select gender"
-                options={genderOptions}
-              />
 
-              <CustomFormField
-                fieldType={FormFieldType.SELECT}
-                control={form.control}
-                name="country"
-                label="Country"
-                placeholder="Select your country"
-                options={countryOptions}
-              />
-            </div>
             <CustomFormField
-              fieldType={FormFieldType.DATE_PICKER}
+              fieldType={FormFieldType.SELECT}
               control={form.control}
-              name="dateOfBirth"
-              label="Date of Birth"
-              placeholder="Select your birth date"
+              name="kinship"
+              label="Type of kinship"
+              placeholder="Select kinship type"
+              options={kinshipOptions}
             />
 
             <CustomFormField
@@ -150,7 +122,7 @@ const RegisterForm = () => {
               control={form.control}
               name="email"
               label="Email Address"
-              placeholder="john@gmail.com"
+              placeholder="loisbecket@gmail.com"
               iconSrc={ICONS.email}
               iconAlt="email"
             />
@@ -162,15 +134,6 @@ const RegisterForm = () => {
               label="Phone Number"
             />
 
-            <CustomFormField
-              control={form.control}
-              fieldType={FormFieldType.PASSWORD}
-              name="password"
-              label="Password"
-              placeholder="Enter your password"
-              iconSrc={ICONS.lock}
-            />
-
             <SubmitButton
               isLoading={isLoading}
               loadingText="Submitting..."
@@ -178,7 +141,7 @@ const RegisterForm = () => {
               type="submit"
               onClick={() => console.log("Submit button clicked")}
             >
-              Submit
+              Continue
             </SubmitButton>
           </>
         </form>
@@ -201,20 +164,8 @@ const RegisterForm = () => {
         size="large"
         width={"100%"}
       />
-
-      <div className="mt-6 text-sm text-center">
-        <p className="text-gray-600">
-          Already have an account?{" "}
-          <button
-            onClick={() => router.push("./sign-in")}
-            className="text-primary hover:text-primary/90 transition-colors"
-          >
-            Sign in
-          </button>
-        </p>
-      </div>
     </div>
   );
 };
 
-export default RegisterForm;
+export default ParentRegisterForm;
