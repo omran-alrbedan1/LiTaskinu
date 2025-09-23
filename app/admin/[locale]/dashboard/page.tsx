@@ -16,7 +16,7 @@ import {
 } from "@/components/admin/dashboard";
 import { Header } from "@/components/admin/shared";
 
-const AdminDashboard: React.FC = () => {
+const AdminDashboard = () => {
   const statsData = INITIAL_STATS;
   const recentActivities = RECENT_ACTIVITIES;
   const quickActions = QUICK_ACTIONS(statsData);

@@ -10,6 +10,7 @@ const LoginPage = () => {
       {/* Left side - Image */}
       <div className="hidden lg:flex lg:w-2/5 bg-primary-color1 items-center justify-center relative">
         <div className="flex ">
+          <p>test</p>
           <Image
             src={images.logo}
             height={200}
