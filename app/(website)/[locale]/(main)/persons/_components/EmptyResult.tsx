@@ -6,7 +6,7 @@ const EmptyResult = () => {
   return (
     <div className="text-center py-12">
       <Image
-        src={images.search}
+        src={images.emptyResultSearch}
         height={200}
         width={200}
         alt="search"

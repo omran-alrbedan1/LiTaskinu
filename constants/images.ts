@@ -9,8 +9,8 @@ import notifications from "../public/images/notification.png";
 import hero from "../public/images/hero_image.png";
 import logo2 from "../public/images/logo2.png";
 import request from "../public/images/request.png";
-import search from "../public/images/search.png";
 import chatTest from "../public/images/snow-mountain.jpg";
+import emptyResultSearch from "../public/images/search_result.png";
 
 export const images = {
   couple,
@@ -24,6 +24,6 @@ export const images = {
   notifications,
   hero,
   request,
-  search,
   chatTest,
+  emptyResultSearch,
 };
