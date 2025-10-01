@@ -8,8 +8,8 @@ import { Form } from "@/components/ui/form";
 import { useState } from "react";
 
 import { useRouter } from "next/navigation";
-import SubmitButton from "../Buttons/SubmitButton";
-import CustomFormField from "../shared/CustomInput";
+import SubmitButton from "../../Buttons/SubmitButton";
+import CustomFormField from "../../shared/CustomInput";
 import { FormFieldType } from "@/enums";
 import { ICONS } from "@/constants/icons";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";

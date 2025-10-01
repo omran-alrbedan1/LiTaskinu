@@ -8,4 +8,7 @@ export const ICONS = {
   userInput: "/icons/user-input.svg",
   male: "/icons/male.svg",
   female: "/icons/female.svg",
+  phone: "/icons/phone.svg",
+  guardian: "/icons/guardian.svg",
+  selected: "/icons/selected.svg",
 };

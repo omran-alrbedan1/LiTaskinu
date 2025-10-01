@@ -5,7 +5,7 @@ import {
 } from "@/components/ui/input-otp";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
-import SubmitButton from "../Buttons/SubmitButton";
+import SubmitButton from "../../Buttons/SubmitButton";
 
 const OtpForm = () => {
   const router = useRouter();
@@ -34,7 +34,7 @@ const OtpForm = () => {
     setTimeout(() => {
       if (otp === "12345") {
         console.log("OTP verified successfully!");
-        router.push("/en/sign-in");
+        router.push("./user-photos");
       } else {
         setError("Invalid code. Please try again.");
       }

@@ -1,13 +1,13 @@
 "use client";
-import LoginForm from "@/components/forms/loginForm";
-import OtpForm from "@/components/forms/OtpForm";
+import LoginForm from "@/components/user/forms/loginForm";
+import OtpForm from "@/components/user/forms/OtpForm";
 import { images } from "@/constants/images";
 import Image from "next/image";
 import React, { useState } from "react";
 
 const OtpVerificationPage = () => {
   return (
-    <div className="min-h-screen flex">
+    <div className="max-h-screen overflow-hidden flex">
       {/* Left side - Image */}
       <div className="hidden lg:flex lg:w-2/5 bg-primary-color1 items-center justify-center relative">
         <div className="flex ">
@@ -23,7 +23,7 @@ const OtpVerificationPage = () => {
             height={400}
             width={400}
             alt="couple"
-            className="absolute   left-24 bottom-16 "
+            className="absolute   left-24 bottom-0 "
           />
         </div>
       </div>

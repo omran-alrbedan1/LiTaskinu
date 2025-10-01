@@ -19,7 +19,9 @@ export default function TooltipButton({
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button {...buttonProps}>{children}</Button>
+        <Button {...buttonProps} className="rounded-full h-10 relative w-10">
+          {children}
+        </Button>
       </TooltipTrigger>
       <TooltipContent>{tooltipContent}</TooltipContent>
     </Tooltip>

@@ -32,13 +32,15 @@ export const countryOptions = [
   { value: "cn", label: "China", code: "CN" },
 ];
 export const languageOptions = [
-  { value: "en", label: "English", code: "US" },
-  { value: "it", label: "Italian", code: "IT" },
-  { value: "de", label: "German", code: "DE" },
-  { value: "es", label: "Spanish", code: "ES" },
-  { value: "ru", label: "Russian", code: "RU" },
-  { value: "zh", label: "Chinese", code: "CN" },
+  { value: "en", label: "English", code: "US", native: "English" },
+  { value: "ar", label: "Arabic", code: "SA", native: "العربية" },
+  { value: "it", label: "Italian", code: "IT", native: "Italiano" },
+  { value: "de", label: "German", code: "DE", native: "Deutsch" },
+  { value: "es", label: "Spanish", code: "ES", native: "Español" },
+  { value: "ru", label: "Russian", code: "RU", native: "Русский" },
+  { value: "zh", label: "Chinese", code: "CN", native: "中文" },
 ];
+
 export const kinshipOptions = [
   { value: "mother", label: "Mother" },
   { value: "father", label: "Father" },
@@ -48,4 +50,14 @@ export const kinshipOptions = [
   { value: "uncle", label: "Uncle" },
   { value: "guardian", label: "Guardian" },
   { value: "other", label: "Other" },
+];
+
+export const religionOptions = [
+  { value: "christianity", label: "Christianity" },
+  { value: "islam", label: "Islam" },
+  { value: "judaism", label: "Judaism" },
+  { value: "hinduism", label: "Hinduism" },
+  { value: "buddhism", label: "Buddhism" },
+  { value: "other", label: "Other" },
+  { value: "prefer_not_to_say", label: "Prefer not to say" },
 ];

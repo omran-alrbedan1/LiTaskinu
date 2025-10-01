@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users } from "lucide-react";
+import { Activity, Users } from "lucide-react";
 
 import {
   INITIAL_STATS,
@@ -15,6 +15,7 @@ import {
   UserTable,
 } from "@/components/admin/dashboard";
 import { Header } from "@/components/admin/shared";
+import { Badge } from "@/components/ui/badge";
 
 const AdminDashboard = () => {
   const statsData = INITIAL_STATS;
@@ -23,11 +24,24 @@ const AdminDashboard = () => {
 
   return (
     <div className="p-6 space-y-6 max-h-screen overflow-y-auto pb-32 hide-scrollbar bg-gradient-to-br from-gray-50/50 to-blue-50/30 dark:from-gray-900 dark:to-blue-950/20">
-      <Header
-        title="Dashboard"
-        subtitle="Platform overview and performance metrics"
-      />
-
+      <div className="flex justify-between items-center mb-8">
+        <Header
+          title="Dashboard"
+          description="Platform overview and performance metrics"
+        />
+        <div className="flex items-center space-x-2">
+          <Badge
+            variant="secondary"
+            className="bg-green-500/10 border-green-500"
+          >
+            <Activity className="h-3 w-3 mr-1 text-green-500" />
+            Live
+          </Badge>
+          <span className="text-sm text-muted-foreground">
+            Last updated: Just now
+          </span>
+        </div>
+      </div>
       <StatsGrid stats={statsData} />
 
       <div className="grid gap-6 lg:grid-cols-3">

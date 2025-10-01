@@ -368,3 +368,88 @@ export const sampleUsers = [
     activeChats: 1,
   },
 ];
+
+export const NOTIFICATION_TYPES = {
+  success: {
+    label: "Success",
+    color: "text-green-600",
+    bgColor: "bg-green-50",
+  },
+  error: { label: "Error", color: "text-red-600", bgColor: "bg-red-50" },
+  warning: {
+    label: "Warning",
+    color: "text-amber-600",
+    bgColor: "bg-amber-50",
+  },
+  info: { label: "Info", color: "text-blue-600", bgColor: "bg-blue-50" },
+  user: {
+    label: "User Activity",
+    color: "text-purple-600",
+    bgColor: "bg-purple-50",
+  },
+  system: { label: "System", color: "text-gray-600", bgColor: "bg-gray-50" },
+};
+
+export const SAMPLE_NOTIFICATIONS = [
+  {
+    id: "1",
+    type: "user",
+    title: "New User Registration",
+    message: "Ahmed Mohamed has registered on the platform",
+    timestamp: new Date(Date.now() - 5 * 60 * 1000), // 5 minutes ago
+    read: false,
+    priority: "medium",
+    actionUrl: "/admin/users/123",
+    userId: "123",
+    userName: "Ahmed Mohamed",
+  },
+  {
+    id: "2",
+    type: "success",
+    title: "Verification Approved",
+    message: "User verification for Fatima Ali has been approved",
+    timestamp: new Date(Date.now() - 15 * 60 * 1000), // 15 minutes ago
+    read: true,
+    priority: "low",
+    actionUrl: "/admin/verification",
+  },
+  {
+    id: "3",
+    type: "error",
+    title: "System Error",
+    message: "Payment processing service encountered an error",
+    timestamp: new Date(Date.now() - 30 * 60 * 1000), // 30 minutes ago
+    read: false,
+    priority: "high",
+  },
+  {
+    id: "4",
+    type: "warning",
+    title: "Suspicious Activity",
+    message: "Multiple login attempts detected for user account",
+    timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
+    read: true,
+    priority: "high",
+    actionUrl: "/admin/security",
+  },
+  {
+    id: "5",
+    type: "info",
+    title: "System Maintenance",
+    message: "Scheduled maintenance will occur tonight at 2:00 AM",
+    timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000), // 5 hours ago
+    read: true,
+    priority: "medium",
+  },
+  {
+    id: "6",
+    type: "user",
+    title: "Profile Update",
+    message: "Mohammed Khaled has updated their profile information",
+    timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), // 1 day ago
+    read: false,
+    priority: "low",
+    userId: "456",
+    userName: "Mohammed Khaled",
+  },
+];

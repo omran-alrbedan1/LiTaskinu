@@ -22,3 +22,31 @@ interface SelectOption {
   icon?: string;
   code?: string;
 }
+
+interface Photo {
+  id: string;
+  url: string;
+}
+
+interface GalleryProps {
+  photos: Photo[];
+  onPhotoUpload: (files: File[]) => void;
+  onPhotoDelete: (photoId: string) => void;
+  onSetPrimary: (photoId: string) => void;
+  maxPhotos?: number;
+  isEditable?: boolean;
+}
+
+interface PhotoGalleryProps {
+  photos: Photo[];
+  onPhotoUpload: (files: File[]) => Promise<void>;
+  onPhotoDelete: (photoId: string) => void;
+  maxDisplayPhotos?: number;
+}
+
+interface PhotoUploadCardProps {
+  title: string;
+  description: string;
+  onImageUpload: (file: File) => void;
+  previewUrl?: string;
+}

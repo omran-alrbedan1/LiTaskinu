@@ -26,3 +26,20 @@ interface StatsData {
   reportedChats: number;
   bannedUsers: number;
 }
+
+interface Notification {
+  id: string;
+  type: "success" | "error" | "warning" | "info" | "user" | "system";
+  title: string;
+  message: string;
+  timestamp: Date;
+  read: boolean;
+  actionUrl?: string;
+  userId?: string;
+  userName?: string;
+}
+
+interface NotificationFilters {
+  type: string;
+  readStatus: string;
+}

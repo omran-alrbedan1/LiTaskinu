@@ -1,12 +1,12 @@
 "use client";
-import RegisterForm from "@/components/forms/RegisterForm";
+import RegisterForm from "@/components/user/forms/RegisterForm";
 import { images } from "@/constants/images";
 import Image from "next/image";
 import React from "react";
 
 const SignUpPage = () => {
   return (
-    <div className="min-h-screen   flex">
+    <div className=" flex">
       {/* Left side - Image */}
       <div className="hidden lg:flex lg:w-2/5 bg-primary-color1 items-center justify-center relative">
         <div className="flex ">

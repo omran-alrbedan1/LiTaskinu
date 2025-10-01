@@ -8,10 +8,9 @@ import { Form } from "@/components/ui/form";
 import { useState } from "react";
 
 import { useRouter } from "next/navigation";
-import SubmitButton from "../Buttons/SubmitButton";
-import CustomFormField from "../shared/CustomInput";
+import SubmitButton from "../../Buttons/SubmitButton";
+import CustomFormField from "../../shared/CustomInput";
 import { FormFieldType } from "@/enums";
-import { ICONS } from "@/constants/icons";
 import Image from "next/image";
 import { images } from "@/constants/images";
 import { languageOptions } from "@/constants";
@@ -38,7 +37,7 @@ const SelectLanguageForm = () => {
     try {
       console.log("Selected language:", language);
       // Save language preference and navigate to next page
-      // router.push("./next-page");
+      router.push("./select-user-type");
     } catch (error) {
       console.log(error);
     } finally {

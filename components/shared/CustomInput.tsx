@@ -1,14 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
+  FormControl, FormField,
   FormItem,
   FormLabel,
-  FormMessage,
+  FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
@@ -133,7 +129,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                     <span className="text-muted-foreground">{placeholder}</span>
                   )}
                 </span>
-                <CalendarIcon className="h-4 w-4 opacity-50" />
+                <CalendarIcon className="h-4 w-4 opacity-50 text-primary-color1" />
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">

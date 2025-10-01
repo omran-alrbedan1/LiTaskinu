@@ -8,9 +8,9 @@ import { Form } from "@/components/ui/form";
 import { useState } from "react";
 
 import { useRouter } from "next/navigation";
-import SubmitButton from "../Buttons/SubmitButton";
+import SubmitButton from "../../Buttons/SubmitButton";
 import { LoginFormValidation } from "@/validation";
-import CustomFormField from "../shared/CustomInput";
+import CustomFormField from "../../shared/CustomInput";
 import { FormFieldType } from "@/enums";
 import { ICONS } from "@/constants/icons";
 import Image from "next/image";
@@ -42,6 +42,7 @@ const LoginForm = () => {
       //   if (user) {
       //     router.push(`/patients/${user.$id}/register`);
       //   }
+      router.push("./home");
     } catch (error) {
       console.log(error);
     }

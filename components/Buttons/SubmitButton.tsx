@@ -2,22 +2,22 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Loader } from "lucide-react";
 
-  interface ButtonProps {
-    isLoading: boolean;
-    loadingText?: string;
-    className?: string;
-    children: React.ReactNode;
-    variant?:
-      | "default"
-      | "destructive"
-      | "outline"
-      | "secondary"
-      | "ghost"
-      | "link";
-    size?: "default" | "sm" | "lg" | "icon";
-    type?: "button" | "submit" | "reset";
-    onClick?: () => void;
-  }
+interface ButtonProps {
+  isLoading?: boolean;
+  loadingText?: string;
+  className?: string;
+  children: React.ReactNode;
+  variant?:
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link";
+  size?: "default" | "sm" | "lg" | "icon";
+  type?: "button" | "submit" | "reset";
+  onClick?: () => void;
+}
 
 const SubmitButton = ({
   isLoading,

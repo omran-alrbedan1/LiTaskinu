@@ -1,13 +1,12 @@
 "use client";
-import LoginForm from "@/components/forms/loginForm";
-import ParentRegisterForm from "@/components/forms/ParentRegisterForm";
+import ParentRegisterForm from "@/components/user/forms/ParentRegisterForm";
 import { images } from "@/constants/images";
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 
 const ParentInfo = () => {
   return (
-    <div className="min-h-screen flex">
+    <div className="max-h-screen overflow-hidden flex">
       {/* Left side - Image */}
       <div className="hidden lg:flex lg:w-2/5 bg-primary-color1 items-center justify-center relative">
         <div className="flex ">
