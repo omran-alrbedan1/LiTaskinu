@@ -129,7 +129,7 @@ const LanguagePage = () => {
           })}
         </div>
 
-        {/* Continue Button */}
+        {/* Continue Button // */}
         <div className="flex justify-center">
           <Button
             type="primary"
