@@ -1,9 +1,11 @@
-("use client");
-import ParentRegisterForm from "@/components/user/forms/ParentRegisterForm";
+"use client";
+import ForgotPasswordForm from "@/components/user/forms/ForgotPasswordForm";
+import OtpForm from "@/components/user/forms/OtpForm";
+import VerifiyResetCodeForm from "@/components/user/forms/VerifiyResetCodeForm";
 import { images } from "@/constants/images";
 import Image from "next/image";
 
-const ParentInfo = () => {
+const VerifyResetCode = () => {
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
       {/* Left side - Image Section */}
@@ -11,6 +13,18 @@ const ParentInfo = () => {
         <div className="flex flex-col items-center justify-center w-full h-full relative">
           {/* Logo */}
           <div className="absolute top-8 xl:top-12 2xl:top-16 z-10">
+            <Image
+              src={images.logo}
+              height={120}
+              width={120}
+              alt="logo"
+              className="object-contain"
+              priority
+            />
+          </div>
+
+          {/* Couple Image */}
+          <div className="relative w-full h-full flex items-end justify-center px-4 xl:px-8 2xl:px-16">
             <Image
               src={images.couple}
               height={600}
@@ -20,29 +34,17 @@ const ParentInfo = () => {
               priority
             />
           </div>
-
-          {/* Couple Image */}
-          <div className="relative w-full h-full flex items-end justify-center px-4 xl:px-8 2xl:px-16">
-            <Image
-              src={images.couple}
-              height={500}
-              width={500}
-              alt="couple"
-              className="object-contain max-w-[90%] xl:max-w-[80%] 2xl:max-w-[70%]"
-              priority
-            />
-          </div>
         </div>
       </div>
 
       {/* Right side - Form Section */}
       <div className="w-full lg:w-3/5 xl:w-2/3 max-h-screen overflow-auto 2xl:w-3/5 flex items-center justify-center p-4 sm:p-6 lg:p-8 xl:p-12 2xl:p-16 bg-white flex-1">
         <div className="w-full max-h-screen overscroll-auto max-w-md sm:max-w-lg lg:max-w-md xl:max-w-3xl 2xl:max-w-xl space-y-6 sm:space-y-8">
-          <ParentRegisterForm />
+          <VerifiyResetCodeForm />
         </div>
       </div>
     </div>
   );
 };
 
-export default ParentInfo;
+export default VerifyResetCode;

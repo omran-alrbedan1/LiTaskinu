@@ -16,6 +16,7 @@ import { ICONS } from "@/constants/icons";
 import Image from "next/image";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import { images } from "@/constants/images";
+import Link from "next/link";
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -97,6 +98,17 @@ const LoginForm = () => {
             iconSrc={ICONS.email}
             iconAlt="email"
           />
+
+          {/* Forgot Password Link */}
+          <div className="text-right">
+            <Link
+              href="./forgot-password"
+              className="text-sm text-primary hover:text-primary/90 transition-colors"
+            >
+              Forgot your password?
+            </Link>
+          </div>
+
           <SubmitButton isLoading={isLoading} className="w-full">
             Sign In
           </SubmitButton>

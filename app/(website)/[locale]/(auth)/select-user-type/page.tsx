@@ -25,10 +25,10 @@ const SelectUserType = () => {
           <div className="relative w-full h-full flex items-end justify-center px-4 xl:px-8 2xl:px-16">
             <Image
               src={images.couple}
-              height={500}
-              width={500}
+              height={600}
+              width={600}
               alt="couple"
-              className="object-contain max-w-[90%] xl:max-w-[80%] 2xl:max-w-[70%]"
+              className="object-contain max-w-[90%] xl:max-w-[90%] 2xl:max-w-[80%]"
               priority
             />
           </div>
