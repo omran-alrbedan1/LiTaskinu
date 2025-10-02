@@ -1,10 +1,11 @@
 "use client";
 
 import {
-  FormControl, FormField,
+  FormControl,
+  FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
@@ -42,6 +43,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
+import React from "react";
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   const {
@@ -55,6 +57,14 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     required,
     options = [],
   } = props;
+
+  const [dropdown, setDropdown] =
+    React.useState<React.ComponentProps<typeof Calendar>["captionLayout"]>(
+      "dropdown"
+    );
+  const [date, setDate] = React.useState<Date | undefined>(
+    new Date(2025, 5, 12)
+  );
 
   switch (fieldType) {
     case FormFieldType.INPUT:
@@ -135,12 +145,11 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
                 mode="single"
+                defaultMonth={date}
                 selected={field.value}
                 onSelect={field.onChange}
-                disabled={(date) =>
-                  date > new Date() || date < new Date("1900-01-01")
-                }
-                initialFocus
+                captionLayout={dropdown}
+                className="rounded-lg border shadow-sm"
               />
             </PopoverContent>
           </Popover>

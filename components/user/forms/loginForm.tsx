@@ -62,7 +62,7 @@ const LoginForm = () => {
     }
   };
   return (
-    <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-sm">
+    <div className="w-full max-w-md mx-auto p-6 rounded-lg shadow-sm">
       <div className="text-center mb-4">
         <Image
           src={images.logo}

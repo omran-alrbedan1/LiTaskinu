@@ -34,9 +34,7 @@ export default async function WebsiteLayout({
       <body className="font-sans text-base">
         {" "}
         <NextIntlClientProvider messages={messages}>
-          <div className="max-h-screen overflow-y-auto pb-32 hide-scrollbar">
-            {children}
-          </div>
+          <div className="max-h-screen overflow-y-auto  ">{children}</div>
         </NextIntlClientProvider>
       </body>
     </html>

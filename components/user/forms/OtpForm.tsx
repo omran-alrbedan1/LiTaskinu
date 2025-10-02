@@ -59,7 +59,7 @@ const OtpForm = () => {
 
   return (
     <div className="flex flex-col max-w-lg mx-auto items-center  justify-center min-h-screen  p-4">
-      <div className="w-full  p-8 bg-white rounded-xl  ">
+      <div className="w-full  p-8  rounded-xl  ">
         <div className=" mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Enter code</h1>
           <p className="text-gray-600 text-sm">

@@ -16,7 +16,7 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   return (
-    <html className={`${notoKufiArabic.variable}`}>
+    <html>
       <body className="font-sans text-base">
         {" "}
         <AppProvider>{children}</AppProvider>

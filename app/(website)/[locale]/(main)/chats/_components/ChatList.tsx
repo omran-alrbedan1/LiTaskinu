@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Search } from "lucide-react";
 import Image from "next/image";
 import { images } from "@/constants/images";
+import { ChatListLoader } from ".";
 
 interface Chat {
   id: string;
@@ -18,7 +19,6 @@ interface Chat {
   online: boolean;
 }
 
-// Mock data matching your design
 const mockChats: Chat[] = [
   {
     id: "1",
@@ -93,15 +93,27 @@ const mockChats: Chat[] = [
 export default function ChatList() {
   const [chats, setChats] = useState<Chat[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
 
   useEffect(() => {
-    setChats(mockChats);
+    const fetchChats = async () => {
+      setIsLoading(true);
+      try {
+        setChats(mockChats);
+      } catch (error) {
+        console.error("Failed to fetch chats:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchChats();
   }, []);
 
-  const filteredChats = chats.filter((chat) =>
-    chat.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  if (isLoading) {
+    return <ChatListLoader />;
+  }
 
   return (
     <div className="flex flex-col h-full hide-scrollbar">
@@ -128,7 +140,7 @@ export default function ChatList() {
 
       {/* Conversations list */}
       <div className="flex-1 overflow-y-auto hide-scrollbar">
-        {filteredChats.map((chat) => {
+        {chats.map((chat) => {
           const isActive = pathname === `/chats/${chat.id}`;
 
           return (
