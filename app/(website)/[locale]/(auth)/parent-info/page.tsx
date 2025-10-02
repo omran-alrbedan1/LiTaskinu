@@ -1,4 +1,4 @@
-("use client");
+"use client";
 import ParentRegisterForm from "@/components/user/forms/ParentRegisterForm";
 import { images } from "@/constants/images";
 import Image from "next/image";
