@@ -28,7 +28,7 @@ const SelectUserType = () => {
               height={600}
               width={600}
               alt="couple"
-              className="object-contain max-w-[90%] xl:max-w-[90%] 2xl:max-w-[80%]"
+              className="object-contain max-w-[95%] xl:max-w-[95%] 2xl:max-w-[90%]"
               priority
             />
           </div>

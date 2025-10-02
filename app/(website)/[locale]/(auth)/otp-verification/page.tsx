@@ -28,7 +28,7 @@ const OtpVerification = () => {
               height={500}
               width={500}
               alt="couple"
-              className="object-contain max-w-[90%] xl:max-w-[80%] 2xl:max-w-[70%]"
+              className="object-contain max-w-[95%] xl:max-w-[95%] 2xl:max-w-[90%]"
               priority
             />
           </div>

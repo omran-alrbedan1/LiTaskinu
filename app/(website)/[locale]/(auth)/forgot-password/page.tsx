@@ -4,7 +4,7 @@ import OtpForm from "@/components/user/forms/OtpForm";
 import { images } from "@/constants/images";
 import Image from "next/image";
 
-const OtpVerification = () => {
+const ForgotPassword = () => {
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
       {/* Left side - Image Section */}
@@ -29,7 +29,7 @@ const OtpVerification = () => {
               height={600}
               width={600}
               alt="couple"
-              className="object-contain max-w-[90%] xl:max-w-[90%] 2xl:max-w-[80%]"
+              className="object-contain max-w-[95%] xl:max-w-[95%] 2xl:max-w-[90%]"
               priority
             />
           </div>
@@ -46,4 +46,4 @@ const OtpVerification = () => {
   );
 };
 
-export default OtpVerification;
+export default ForgotPassword;
