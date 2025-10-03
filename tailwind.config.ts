@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+
 const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
@@ -17,11 +18,24 @@ const config: Config = {
         xs: "475px",
       },
       colors: {
+        purple: {
+          50: "#faf5ff",
+          100: "#f3e8ff",
+          200: "#e9d5ff",
+          300: "#d8b4fe",
+          400: "#c084fc",
+          500: "#a855f7",
+          600: "#9333ea",
+          700: "#7c3aed",
+          800: "#6b21a8",
+          900: "#581c87",
+        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         border: "hsl(var(--border))",
+
         primary: {
-          "100": "#EAD8B0",
+          100: "#EAD8B0",
           color1: "#A1AA8A",
           color2: "#c77971",
           hover: "#838C6E",
@@ -31,13 +45,13 @@ const config: Config = {
           foreground: "hsl(var(--primary-foreground))",
         },
         darkMod: {
-          "100": "#666461",
-          "200": "#5A5A58",
-          "300": "#4E4E4C",
-          "400": "#424240",
-          "500": "#363634",
-          "600": "#2A2A28",
-          "700": "#1E1E1C",
+          100: "#666461",
+          200: "#5A5A58",
+          300: "#4E4E4C",
+          400: "#424240",
+          500: "#363634",
+          600: "#2A2A28",
+          700: "#1E1E1C",
           DEFAULT: "#666461",
         },
         tertiary: "#E2C675",
@@ -46,13 +60,13 @@ const config: Config = {
           foreground: "hsl(var(--secondary-foreground))",
         },
         black: {
-          "100": "#666461",
-          "200": "#4E4E4C",
-          "300": "#BABABA",
+          100: "#666461",
+          200: "#4E4E4C",
+          300: "#BABABA",
           DEFAULT: "#000000",
         },
         white: {
-          "100": "#FFD7D4",
+          100: "#FFD7D4",
           DEFAULT: "#FFFFFF",
         },
         sidebar: {
@@ -88,11 +102,11 @@ const config: Config = {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
+          1: "hsl(var(--chart-1))",
+          2: "hsl(var(--chart-2))",
+          3: "hsl(var(--chart-3))",
+          4: "hsl(var(--chart-4))",
+          5: "hsl(var(--chart-5))",
         },
       },
       fontFamily: {
@@ -106,9 +120,9 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        "100": "2px 2px 0px 0px rgb(0, 0, 0)",
-        "200": "2px 2px 0px 2px rgb(0, 0, 0)",
-        "300": "2px 2px 0px 2px #DB9F9A",
+        100: "2px 2px 0px 0px rgb(0, 0, 0)",
+        200: "2px 2px 0px 2px rgb(0, 0, 0)",
+        300: "2px 2px 0px 2px #DB9F9A",
       },
       animation: {
         "bounce-x": "bouncex 1s infinite",

@@ -15,7 +15,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Notifications, UserMenu, SearchBar } from ".";
 import { getBreadcrumbs } from "@/utils/breadcrumbs";
 
-const Header = () => {
+const MainHeader = () => {
   const pathname = usePathname();
   const breadcrumbs = getBreadcrumbs(pathname);
 
@@ -63,4 +63,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default MainHeader;

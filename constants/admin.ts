@@ -373,21 +373,33 @@ export const NOTIFICATION_TYPES = {
   success: {
     label: "Success",
     color: "text-green-600",
-    bgColor: "bg-green-50",
+    bgColor: "bg-green-500",
   },
-  error: { label: "Error", color: "text-red-600", bgColor: "bg-red-50" },
+  error: {
+    label: "Error",
+    color: "text-red-600",
+    bgColor: "bg-red-500",
+  },
   warning: {
     label: "Warning",
     color: "text-amber-600",
-    bgColor: "bg-amber-50",
+    bgColor: "bg-amber-500",
   },
-  info: { label: "Info", color: "text-blue-600", bgColor: "bg-blue-50" },
+  info: {
+    label: "Info",
+    color: "text-blue-600",
+    bgColor: "bg-blue-500",
+  },
   user: {
     label: "User Activity",
     color: "text-purple-600",
-    bgColor: "bg-purple-50",
+    bgColor: "bg-primary-color1",
   },
-  system: { label: "System", color: "text-gray-600", bgColor: "bg-gray-50" },
+  system: {
+    label: "System",
+    color: "text-gray-600",
+    bgColor: "bg-blue-500",
+  },
 };
 
 export const SAMPLE_NOTIFICATIONS = [

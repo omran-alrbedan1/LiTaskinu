@@ -8,18 +8,24 @@ import { ReactNode } from "react";
 
 interface TooltipButtonProps extends ButtonProps {
   tooltipContent: ReactNode;
+  onClick?: () => void;
   children: ReactNode;
 }
 
 export default function TooltipButton({
   tooltipContent,
+  onClick,
   children,
   ...buttonProps
 }: TooltipButtonProps) {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button {...buttonProps} className="rounded-full h-10 relative w-10">
+        <Button
+          {...buttonProps}
+          onClick={onClick}
+          className="rounded-full h-10 relative w-10"
+        >
           {children}
         </Button>
       </TooltipTrigger>

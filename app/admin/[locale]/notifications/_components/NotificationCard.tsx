@@ -51,14 +51,12 @@ const NotificationCard: React.FC<NotificationCardProps> = ({
   return (
     <div
       className={cn(
-        "p-4 rounded-lg border transition-all duration-200 hover:shadow-md",
-        notification.read ? "bg-white" : "bg-blue-50 border-blue-200",
-        typeConfig.bgColor
+        "p-4 rounded-lg border transition-all duration-200 hover:shadow-md"
       )}
     >
       <div className="flex items-start justify-between">
         <div className="flex items-start space-x-3 flex-1">
-          <div className={cn("p-2 rounded-full", typeConfig.bgColor)}>
+          <div className={cn("p-2 rounded-full border ")}>
             <div className={typeConfig.color}>{getIcon()}</div>
           </div>
 

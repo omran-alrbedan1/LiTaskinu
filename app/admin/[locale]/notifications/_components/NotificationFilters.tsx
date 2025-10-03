@@ -5,6 +5,14 @@ import { Filter, X, Bell, BellOff, SlidersHorizontal } from "lucide-react";
 import { NOTIFICATION_TYPES } from "@/constants/admin";
 import { cn } from "@/lib/utils";
 
+// Define the type for notification keys
+type NotificationType = keyof typeof NOTIFICATION_TYPES;
+
+interface NotificationFilters {
+  type: string;
+  readStatus: string;
+}
+
 interface NotificationFiltersProps {
   filters: NotificationFilters;
   onFiltersChange: (filters: NotificationFilters) => void;
@@ -46,7 +54,7 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
-          <div className="p-2 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg">
+          <div className="p-2 bg-primary-color1 rounded-lg">
             <SlidersHorizontal className="h-5 w-5 text-white" />
           </div>
           <div>
@@ -75,19 +83,23 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
         {/* Type Filter */}
         <div className="space-y-3">
           <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-            <Filter className="h-4 w-4" />
+            <Filter className="h-4 w-4 text-primary-color1" />
             Notification Type
           </label>
           <div className="flex flex-wrap gap-2">
-            {Object.entries(NOTIFICATION_TYPES).map(([key, config]) => (
-              <Badge
+            {(
+              Object.entries(NOTIFICATION_TYPES) as [
+                NotificationType,
+                (typeof NOTIFICATION_TYPES)[NotificationType]
+              ][]
+            ).map(([key, config]) => (
+              <div
                 key={key}
-                variant={filters.type === key ? "default" : "outline"}
                 className={cn(
-                  "cursor-pointer transition-all duration-200 px-3 py-1.5 rounded-full border-2 font-medium",
+                  "cursor-pointer transition-all duration-200 px-3 py-1 text-sm rounded-full border-2 font-medium",
                   "hover:scale-105 hover:shadow-sm",
                   filters.type === key
-                    ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white border-blue-500 shadow-md"
+                    ? `${config.bgColor} border-transparent text-white shadow-md`
                     : "border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50"
                 )}
                 onClick={() => handleTypeChange(key)}
@@ -96,14 +108,12 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
                   <div
                     className={cn(
                       "w-2 h-2 rounded-full",
-                      filters.type === key
-                        ? "bg-white/80"
-                        : config.bgColor.replace("bg-", "bg-")
+                      filters.type === key ? "bg-white" : config.bgColor
                     )}
                   />
                   {config.label}
                 </div>
-              </Badge>
+              </div>
             ))}
           </div>
         </div>
@@ -111,7 +121,7 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
         {/* Status Filter */}
         <div className="space-y-3">
           <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-            <Bell className="h-4 w-4" />
+            <Bell className="h-4 w-4 text-primary-color1" />
             Notification Status
           </label>
           <div className="flex flex-wrap gap-3">
@@ -188,7 +198,7 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
               Active filters:
               {filters.type && (
                 <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-800 rounded-md text-xs font-medium">
-                  {NOTIFICATION_TYPES[filters.type]?.label}
+                  {NOTIFICATION_TYPES[filters.type as NotificationType]?.label}
                 </span>
               )}
               {filters.readStatus && (
@@ -219,16 +229,6 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
           </div>
         </div>
       )}
-
-      {/* Summary */}
-      <div className="mt-4 flex items-center justify-between text-xs text-gray-500">
-        <span>Showing {totalCount} notifications total</span>
-        {hasActiveFilters && (
-          <span className="text-blue-600 font-medium">
-            Filters applied • Click to clear
-          </span>
-        )}
-      </div>
     </div>
   );
 };
