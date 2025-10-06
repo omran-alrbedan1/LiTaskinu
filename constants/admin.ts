@@ -125,6 +125,7 @@ export const sampleUsers = [
     reportsCount: 0,
     marriageRequests: 3,
     activeChats: 5,
+    avatar: images.avatar,
   },
   {
     id: 2,
@@ -138,6 +139,7 @@ export const sampleUsers = [
     reportsCount: 0,
     marriageRequests: 1,
     activeChats: 2,
+    avatar: images.avatar,
   },
   {
     id: 3,
@@ -151,6 +153,7 @@ export const sampleUsers = [
     reportsCount: 3,
     marriageRequests: 0,
     activeChats: 0,
+    avatar: images.avatar,
   },
   {
     id: 4,
@@ -164,6 +167,7 @@ export const sampleUsers = [
     reportsCount: 1,
     marriageRequests: 2,
     activeChats: 3,
+    avatar: images.avatar,
   },
   {
     id: 5,
@@ -177,6 +181,7 @@ export const sampleUsers = [
     reportsCount: 0,
     marriageRequests: 0,
     activeChats: 1,
+    avatar: images.avatar,
   },
   {
     id: 1,
@@ -190,6 +195,7 @@ export const sampleUsers = [
     reportsCount: 0,
     marriageRequests: 3,
     activeChats: 5,
+    avatar: images.avatar,
   },
   {
     id: 2,
@@ -203,6 +209,7 @@ export const sampleUsers = [
     reportsCount: 0,
     marriageRequests: 1,
     activeChats: 2,
+    avatar: images.avatar,
   },
   {
     id: 3,
@@ -216,6 +223,7 @@ export const sampleUsers = [
     reportsCount: 3,
     marriageRequests: 0,
     activeChats: 0,
+    avatar: images.avatar,
   },
   {
     id: 4,
@@ -229,6 +237,7 @@ export const sampleUsers = [
     reportsCount: 1,
     marriageRequests: 2,
     activeChats: 3,
+    avatar: images.avatar,
   },
   {
     id: 5,
@@ -242,6 +251,7 @@ export const sampleUsers = [
     reportsCount: 0,
     marriageRequests: 0,
     activeChats: 1,
+    avatar: images.avatar,
   },
   {
     id: 1,
@@ -255,6 +265,7 @@ export const sampleUsers = [
     reportsCount: 0,
     marriageRequests: 3,
     activeChats: 5,
+    avatar: images.avatar,
   },
   {
     id: 2,
@@ -268,6 +279,7 @@ export const sampleUsers = [
     reportsCount: 0,
     marriageRequests: 1,
     activeChats: 2,
+    avatar: images.avatar,
   },
   {
     id: 3,
@@ -281,6 +293,7 @@ export const sampleUsers = [
     reportsCount: 3,
     marriageRequests: 0,
     activeChats: 0,
+    avatar: images.avatar,
   },
   {
     id: 4,
@@ -294,6 +307,7 @@ export const sampleUsers = [
     reportsCount: 1,
     marriageRequests: 2,
     activeChats: 3,
+    avatar: images.avatar,
   },
   {
     id: 5,
@@ -307,6 +321,7 @@ export const sampleUsers = [
     reportsCount: 0,
     marriageRequests: 0,
     activeChats: 1,
+    avatar: images.avatar,
   },
   {
     id: 1,
@@ -320,6 +335,7 @@ export const sampleUsers = [
     reportsCount: 0,
     marriageRequests: 3,
     activeChats: 5,
+    avatar: images.avatar,
   },
   {
     id: 2,
@@ -333,6 +349,7 @@ export const sampleUsers = [
     reportsCount: 0,
     marriageRequests: 1,
     activeChats: 2,
+    avatar: images.avatar,
   },
   {
     id: 3,
@@ -346,6 +363,7 @@ export const sampleUsers = [
     reportsCount: 3,
     marriageRequests: 0,
     activeChats: 0,
+    avatar: images.avatar,
   },
   {
     id: 4,
@@ -359,6 +377,7 @@ export const sampleUsers = [
     reportsCount: 1,
     marriageRequests: 2,
     activeChats: 3,
+    avatar: images.avatar,
   },
   {
     id: 5,
@@ -372,6 +391,7 @@ export const sampleUsers = [
     reportsCount: 0,
     marriageRequests: 0,
     activeChats: 1,
+    avatar: images.avatar,
   },
 ];
 

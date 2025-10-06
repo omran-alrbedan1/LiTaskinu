@@ -61,3 +61,22 @@ export const religionOptions = [
   { value: "other", label: "Other" },
   { value: "prefer_not_to_say", label: "Prefer not to say" },
 ];
+
+export const durationOptions = [
+  {
+    value: "1day",
+    label: "1 Day",
+  },
+  {
+    value: "7days",
+    label: "7 Days",
+  },
+  {
+    value: "30days",
+    label: "30 Days",
+  },
+  {
+    value: "permanent",
+    label: "Permanent",
+  },
+];

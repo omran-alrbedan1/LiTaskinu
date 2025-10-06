@@ -10,7 +10,11 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FormFieldType } from "@/enums";
 import { ICONS } from "@/constants/icons";
-import { countryOptions, genderOptions, religionOptions } from "@/constants";
+import {
+  countryOptions,
+  genderOptions,
+  religionOptions,
+} from "@/constants/options";
 import CustomFormField from "@/components/shared/CustomInput";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import useGetData from "@/hooks/useGetData";

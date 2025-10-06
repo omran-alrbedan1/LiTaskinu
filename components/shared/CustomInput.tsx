@@ -288,6 +288,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           <Textarea
             placeholder={placeholder}
             {...field}
+            rows={5}
             className="shad-textArea border border-dark-500 bg-dark-400"
             disabled={props.disabled}
           />

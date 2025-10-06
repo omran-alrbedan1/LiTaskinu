@@ -13,7 +13,7 @@ import CustomFormField from "../../shared/CustomInput";
 import { FormFieldType } from "@/enums";
 import Image from "next/image";
 import { images } from "@/constants/images";
-import { languageOptions } from "@/constants";
+import { languageOptions } from "@/constants/options";
 
 const SelectLanguageFormValidation = z.object({
   language: z.string().min(1, "Please select a language"),

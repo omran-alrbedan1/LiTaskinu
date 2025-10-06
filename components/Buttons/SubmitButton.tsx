@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Loader } from "lucide-react";
+import { Loader, LucideIcon } from "lucide-react";
 
 interface ButtonProps {
   isLoading?: boolean;
@@ -17,6 +17,8 @@ interface ButtonProps {
   size?: "default" | "sm" | "lg" | "icon";
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
+  icon?: any;
+  iconPosition?: "left" | "right";
 }
 
 const SubmitButton = ({
@@ -28,7 +30,35 @@ const SubmitButton = ({
   size = "default",
   type = "submit",
   onClick,
+  icon: Icon, // Destructure with alias
+  iconPosition = "left", // Default icon position
 }: ButtonProps) => {
+  const renderContent = () => {
+    if (isLoading) {
+      return (
+        <div className="flex items-center justify-center gap-2">
+          <Loader className="animate-spin h-4 w-4" />
+          {loadingText}
+        </div>
+      );
+    }
+
+    if (Icon) {
+      return (
+        <div
+          className={`flex items-center justify-center gap-2 ${
+            iconPosition === "right" ? "flex-row-reverse" : ""
+          }`}
+        >
+          <Icon className="h-4 w-4" />
+          {children}
+        </div>
+      );
+    }
+
+    return children;
+  };
+
   return (
     <Button
       type={type}
@@ -38,14 +68,7 @@ const SubmitButton = ({
       className={className ?? "w-full"}
       onClick={onClick}
     >
-      {isLoading ? (
-        <div className="flex items-center justify-center gap-2">
-          <Loader className="animate-spin h-4 w-4" />
-          {loadingText}
-        </div>
-      ) : (
-        children
-      )}
+      {renderContent()}
     </Button>
   );
 };

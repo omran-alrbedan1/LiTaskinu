@@ -43,3 +43,18 @@ interface NotificationFilters {
   type: string;
   readStatus: string;
 }
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  status: "active" | "pending" | "banned" | "inactive";
+  verification: "verified" | "pending" | "unverified";
+  registrationDate: string;
+  lastLogin: string;
+  reportsCount: number;
+  marriageRequests: number;
+  activeChats: number;
+  avatar?: string;
+}

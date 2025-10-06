@@ -13,7 +13,7 @@ import CustomFormField from "../../shared/CustomInput";
 import { FormFieldType } from "@/enums";
 import { ICONS } from "@/constants/icons";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
-import { countryOptions, genderOptions } from "@/constants";
+import { countryOptions, genderOptions } from "@/constants/options";
 import Image from "next/image";
 import { images } from "@/constants/images";
 

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import { Check, Globe2 } from "lucide-react";
 import { ProfileHeader } from "../_components";
-import { languageOptions } from "@/constants";
+import { languageOptions } from "@/constants/options";
 import { Button } from "antd";
 import { useRouter } from "next/navigation";
 
