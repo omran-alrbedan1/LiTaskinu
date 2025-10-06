@@ -2,11 +2,11 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Filter, X, Bell, BellOff, SlidersHorizontal } from "lucide-react";
-import { NOTIFICATION_TYPES } from "@/constants/admin";
 import { cn } from "@/lib/utils";
+import { notificationConfig } from "@/configs/notificationConfigs";
 
-// Define the type for notification keys
-type NotificationType = keyof typeof NOTIFICATION_TYPES;
+// Define the type for notification keys based on notificationConfig
+type NotificationType = keyof typeof notificationConfig;
 
 interface NotificationFilters {
   type: string;
@@ -88,9 +88,9 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
           </label>
           <div className="flex flex-wrap gap-2">
             {(
-              Object.entries(NOTIFICATION_TYPES) as [
+              Object.entries(notificationConfig) as [
                 NotificationType,
-                (typeof NOTIFICATION_TYPES)[NotificationType]
+                (typeof notificationConfig)[NotificationType]
               ][]
             ).map(([key, config]) => (
               <div
@@ -99,7 +99,7 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
                   "cursor-pointer transition-all duration-200 px-3 py-1 text-sm rounded-full border-2 font-medium",
                   "hover:scale-105 hover:shadow-sm",
                   filters.type === key
-                    ? `${config.bgColor} border-transparent text-white shadow-md`
+                    ? `${config.solidColor} border-transparent text-white shadow-md`
                     : "border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50"
                 )}
                 onClick={() => handleTypeChange(key)}
@@ -108,7 +108,7 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
                   <div
                     className={cn(
                       "w-2 h-2 rounded-full",
-                      filters.type === key ? "bg-white" : config.bgColor
+                      filters.type === key ? "bg-white" : config.solidColor
                     )}
                   />
                   {config.label}
@@ -198,7 +198,7 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
               Active filters:
               {filters.type && (
                 <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-800 rounded-md text-xs font-medium">
-                  {NOTIFICATION_TYPES[filters.type as NotificationType]?.label}
+                  {notificationConfig[filters.type as NotificationType]?.label}
                 </span>
               )}
               {filters.readStatus && (

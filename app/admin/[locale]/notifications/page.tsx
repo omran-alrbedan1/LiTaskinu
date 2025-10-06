@@ -11,11 +11,12 @@ import {
   NotificationFilters,
 } from "@/app/admin/[locale]/notifications/_components";
 import { Header } from "@/components/admin/shared";
+import { mockNotifications } from "@/constants/temporary";
 
 const NotificationsPage = () => {
   const [notifications, setNotifications] =
     //@ts-ignore
-    useState<Notification[]>(SAMPLE_NOTIFICATIONS);
+    useState<Notification[]>(mockNotifications);
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState<NotificationFilters>({
     type: "",

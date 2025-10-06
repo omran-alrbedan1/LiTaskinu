@@ -1,19 +1,9 @@
 import React from "react";
-
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  CheckCircle,
-  AlertCircle,
-  Info,
-  User,
-  ShieldAlert,
-  Clock,
-  ArrowRight,
-  Bell,
-} from "lucide-react";
+import { Info, Clock, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { NOTIFICATION_TYPES } from "@/constants/admin";
+import { notificationConfig } from "@/configs/notificationConfigs";
+import { formatTimeAgo } from "@/utils/format";
 
 interface NotificationCardProps {
   notification: Notification;
@@ -26,27 +16,9 @@ const NotificationCard: React.FC<NotificationCardProps> = ({
   onMarkAsRead,
   onDelete,
 }) => {
-  const typeConfig = NOTIFICATION_TYPES[notification.type];
-  const timeAgo = getTimeAgo(notification.timestamp);
-
-  const getIcon = () => {
-    switch (notification.type) {
-      case "success":
-        return <CheckCircle className="h-5 w-5" />;
-      case "error":
-        return <AlertCircle className="h-5 w-5" />;
-      case "warning":
-        return <ShieldAlert className="h-5 w-5" />;
-      case "info":
-        return <Info className="h-5 w-5" />;
-      case "user":
-        return <User className="h-5 w-5" />;
-      case "system":
-        return <Bell className="h-5 w-5" />;
-      default:
-        return <Bell className="h-5 w-5" />;
-    }
-  };
+  const typeConfig = notificationConfig[notification.type];
+  const IconComponent = typeConfig?.icon || Info;
+  const timeAgo = formatTimeAgo(notification.timestamp);
 
   return (
     <div
@@ -56,8 +28,9 @@ const NotificationCard: React.FC<NotificationCardProps> = ({
     >
       <div className="flex items-start justify-between">
         <div className="flex items-start space-x-3 flex-1">
-          <div className={cn("p-2 rounded-full border ")}>
-            <div className={typeConfig.color}>{getIcon()}</div>
+          {/* Updated icon display */}
+          <div className={cn("p-2 rounded-full", typeConfig?.bgColor)}>
+            <IconComponent className={cn("h-4 w-4", typeConfig?.color)} />
           </div>
 
           <div className="flex-1 min-w-0">
@@ -128,17 +101,5 @@ const NotificationCard: React.FC<NotificationCardProps> = ({
     </div>
   );
 };
-
-function getTimeAgo(timestamp: Date): string {
-  const now = new Date();
-  const diffInSeconds = Math.floor(
-    (now.getTime() - timestamp.getTime()) / 1000
-  );
-
-  if (diffInSeconds < 60) return "Just now";
-  if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`;
-  if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h ago`;
-  return `${Math.floor(diffInSeconds / 86400)}d ago`;
-}
 
 export default NotificationCard;

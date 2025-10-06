@@ -1,0 +1,67 @@
+import {
+  AlertCircle,
+  AlertTriangle,
+  CheckCircle,
+  CreditCard,
+  Info,
+  SettingsIcon,
+  User,
+} from "lucide-react";
+
+export const notificationConfig = {
+  success: {
+    icon: CheckCircle,
+    mainColor: "#22c55e",
+    color: "text-green-500",
+    bgColor: "bg-green-50",
+    solidColor: "bg-green-500",
+    ringColor: "ring-red-500",
+    borderColor: "border-red-500",
+    label: "Success",
+  },
+  warning: {
+    icon: AlertTriangle,
+    mainColor: "#f97316",
+    color: "text-orange-300",
+    bgColor: "bg-orange-200",
+    solidColor: "bg-orange-500",
+    ringColor: "ring-orange-200",
+    borderColor: "border-orange-500",
+
+    label: "Warning",
+  },
+  info: {
+    icon: Info,
+    color: "text-blue-500",
+    bgColor: "bg-blue-200",
+    solidColor: "bg-blue-500",
+    ringColor: "ring-blue-200",
+    label: "Info",
+  },
+  error: {
+    icon: AlertCircle,
+    color: "text-red-500",
+    bgColor: "bg-red-200",
+    solidColor: "bg-red-500",
+    ringColor: "ring-red-200",
+    borderColor: "border-red-500",
+    label: "Error",
+  },
+  system: {
+    icon: SettingsIcon,
+    mainColor: "#a855f7",
+    color: "text-gray-400",
+    bgColor: "bg-gray-50",
+    solidColor: "bg-gray-500",
+    ringColor: "ring-gray-200",
+    label: "System",
+  },
+  user: {
+    icon: User,
+    color: "text-primary-color1",
+    bgColor: "bg-primary-color1/50",
+    solidColor: "bg-primary-color1",
+    ringColor: "ring-indigo-200",
+    label: "User Activity",
+  },
+};
