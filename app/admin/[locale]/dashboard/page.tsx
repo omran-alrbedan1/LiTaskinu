@@ -1,7 +1,4 @@
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Activity, Users } from "lucide-react";
-
+import { Activity } from "lucide-react";
 import {
   INITIAL_STATS,
   RECENT_ACTIVITIES,
@@ -12,8 +9,9 @@ import {
   RecentActivitiesCard,
   StatsGrid,
   UrgentAlerts,
-  UserTable,
-} from "@/components/admin/dashboard";
+  MatchSuccessRadial,
+  UserGrowthChart,
+} from "./_components";
 import { Header } from "@/components/admin/shared";
 import { Badge } from "@/components/ui/badge";
 
@@ -42,24 +40,24 @@ const AdminDashboard = () => {
           </span>
         </div>
       </div>
+
       <StatsGrid stats={statsData} />
+
+      {/* Charts Section - Line chart takes 2 cols, Radial takes 1 col */}
+      <div className="grid gap-6 lg:grid-cols-3">
+        {/* Line Chart - Takes 2 columns */}
+        <div className="md:col-span-2">
+          <UserGrowthChart />
+        </div>
+
+        {/* Radial Chart - Takes 1 column */}
+        <MatchSuccessRadial />
+      </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
         <QuickActionsCard quickActions={quickActions} />
         <RecentActivitiesCard activities={recentActivities} />
       </div>
-
-      <Card className="shadow-sm hover:shadow-lg transition-all duration-300">
-        <CardHeader className="border-b border-gray-200 dark:border-gray-700">
-          <CardTitle className="flex items-center gap-3">
-            <Users className="h-6 w-6 text-primary-color1" />
-            User Management
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-4">
-          <UserTable />
-        </CardContent>
-      </Card>
 
       <UrgentAlerts stats={statsData} />
     </div>

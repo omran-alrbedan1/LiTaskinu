@@ -1,5 +1,6 @@
 import React from "react";
 import { Users, FileText, ShieldAlert, Heart } from "lucide-react";
+import Image from "next/image";
 
 interface ActivityItemProps {
   activity: Activity;
@@ -42,9 +43,13 @@ const ActivityItem: React.FC<ActivityItemProps> = ({ activity }) => {
   return (
     <div className="flex items-center justify-between py-3 border-b last:border-0">
       <div className="flex items-center space-x-4">
-        <div className={`p-2 rounded-full ${bgColor}`}>
-          <Icon className="h-4 w-4" />
-        </div>
+        <Image
+          src={activity.avatar}
+          alt={activity.user}
+          width={48}
+          height={48}
+          className="object-cover rounded-full "
+        />
         <div>
           <p className="text-sm font-medium">{activity.user}</p>
           <p className="text-sm text-muted-foreground">{activity.action}</p>

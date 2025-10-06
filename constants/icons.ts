@@ -11,4 +11,10 @@ export const ICONS = {
   phone: "/icons/phone.svg",
   guardian: "/icons/guardian.svg",
   selected: "/icons/selected.svg",
+  users: "/icons/users.svg",
+  chats: "/icons/chat.svg",
+  marriageRequests: "/icons/marriage-request.svg",
+  verifications: "/icons/verification.svg",
+  complain: "/icons/complain.svg",
+  analytics: "/icons/analytics.svg",
 };

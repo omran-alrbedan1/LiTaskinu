@@ -9,6 +9,8 @@ import {
   Clock,
   Activity,
 } from "lucide-react";
+import { ICONS } from "./icons";
+import { images } from "./images";
 
 export const INITIAL_STATS: StatsData = {
   totalUsers: 1250,
@@ -29,6 +31,7 @@ export const RECENT_ACTIVITIES = [
     time: "5 minutes ago",
     type: "user" as const,
     urgent: false,
+    avatar: images.avatar,
   },
   {
     id: 2,
@@ -37,6 +40,7 @@ export const RECENT_ACTIVITIES = [
     time: "15 minutes ago",
     type: "verification" as const,
     urgent: true,
+    avatar: images.avatar,
   },
   {
     id: 3,
@@ -45,6 +49,7 @@ export const RECENT_ACTIVITIES = [
     time: "30 minutes ago",
     type: "complaint" as const,
     urgent: true,
+    avatar: images.avatar,
   },
   {
     id: 4,
@@ -53,12 +58,13 @@ export const RECENT_ACTIVITIES = [
     time: "45 minutes ago",
     type: "marriage" as const,
     urgent: false,
+    avatar: images.avatar,
   },
 ];
 
 export const QUICK_ACTIONS = (stats: StatsData): QuickAction[] => [
   {
-    icon: Users,
+    icon: ICONS.users,
     label: "Manage Users",
     href: "/admin/users",
     count: stats.totalUsers,
@@ -66,7 +72,7 @@ export const QUICK_ACTIONS = (stats: StatsData): QuickAction[] => [
     bgColor: "bg-blue-50 dark:bg-blue-950/20",
   },
   {
-    icon: FileText,
+    icon: ICONS.verifications,
     label: "Review Verification",
     href: "/admin/verification",
     count: stats.pendingVerifications,
@@ -74,7 +80,7 @@ export const QUICK_ACTIONS = (stats: StatsData): QuickAction[] => [
     bgColor: "bg-amber-50 dark:bg-amber-950/20",
   },
   {
-    icon: ShieldAlert,
+    icon: ICONS.complain,
     label: "Handle Complaints",
     href: "/admin/complaints",
     count: stats.newComplaints,
@@ -82,7 +88,7 @@ export const QUICK_ACTIONS = (stats: StatsData): QuickAction[] => [
     bgColor: "bg-red-50 dark:bg-red-950/20",
   },
   {
-    icon: Heart,
+    icon: ICONS.marriageRequests,
     label: "Marriage Requests",
     href: "/admin/marriage-requests",
     count: stats.marriageRequests,
@@ -90,7 +96,7 @@ export const QUICK_ACTIONS = (stats: StatsData): QuickAction[] => [
     bgColor: "bg-pink-50 dark:bg-pink-950/20",
   },
   {
-    icon: MessageSquare,
+    icon: ICONS.chats,
     label: "Active Chats",
     href: "/admin/chats",
     count: stats.activeChats,
@@ -98,7 +104,7 @@ export const QUICK_ACTIONS = (stats: StatsData): QuickAction[] => [
     bgColor: "bg-green-50 dark:bg-green-950/20",
   },
   {
-    icon: Activity,
+    icon: ICONS.analytics,
     label: "Analytics",
     href: "/admin/analytics",
     color: "text-purple-600",

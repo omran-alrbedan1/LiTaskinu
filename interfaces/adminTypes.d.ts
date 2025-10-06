@@ -4,11 +4,11 @@ interface Activity {
   action: string;
   time: string;
   type: "user" | "verification" | "complaint" | "marriage";
-  urgent: boolean;
+  avatar: any;
 }
 
 interface QuickAction {
-  icon: React.ComponentType<any>;
+  icon: any;
   label: string;
   href: string;
   count?: number;
