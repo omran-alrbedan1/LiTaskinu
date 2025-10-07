@@ -32,9 +32,11 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { images } from "@/constants/images";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 const user = {
   name: "System Admin",
@@ -408,16 +410,28 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { state } = useSidebar();
+
   return (
     <Sidebar collapsible="icon" {...props} className="hide-scrollbar">
       <SidebarHeader>
-        <Image
-          src={images.logo}
-          alt="Islamic Marriage Platform"
-          width={80}
-          height={80}
-          className="rounded-md mx-auto"
-        />
+        <div
+          className={cn(
+            "flex items-center justify-center transition-all duration-300",
+            state === "collapsed" ? "p-2" : "p-4"
+          )}
+        >
+          <Image
+            src={images.logo}
+            alt="Islamic Marriage Platform"
+            width={state === "collapsed" ? 40 : 80}
+            height={state === "collapsed" ? 40 : 80}
+            className={cn(
+              "rounded-md transition-all duration-300",
+              state === "collapsed" ? "w-10 h-10" : "w-20 h-20"
+            )}
+          />
+        </div>
       </SidebarHeader>
       <SidebarContent>
         {/* Platform Management */}

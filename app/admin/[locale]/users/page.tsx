@@ -89,7 +89,7 @@ const UserManagementPage: React.FC = () => {
       />
 
       {/* Users Table */}
-      <Card className="shadow-sm !mt-4 border-0">
+      <Card className="shadow-sm !mt-4 dark:border-1 dark:!-mt-20">
         <UserTable
           users={filteredUsers}
           loading={loading}

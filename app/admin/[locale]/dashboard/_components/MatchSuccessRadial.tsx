@@ -23,7 +23,7 @@ const chartData = [{ metric: "successRate", value: 72, fill: "#ec4899" }];
 
 const MatchSuccessRadial = () => {
   return (
-    <Card className="flex flex-col">
+    <Card className="flex flex-col dark:bg-gray-800 border-0">
       <CardHeader className="items-center pb-0">
         <CardTitle className="flex items-center gap-2">
           <Heart className="h-5 w-5 text-pink-500" />

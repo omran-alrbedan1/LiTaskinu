@@ -36,15 +36,8 @@ const chartData = [
 ];
 
 const UserGrowthChart = () => {
-  const totalGrowth = chartData.reduce((sum, month) => sum + month.newUsers, 0);
-  const growthPercentage = (
-    ((chartData[chartData.length - 1].newUsers - chartData[0].newUsers) /
-      chartData[0].newUsers) *
-    100
-  ).toFixed(1);
-
   return (
-    <Card>
+    <Card className="dark:bg-gray-800 border-0 ">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Users className="h-5 w-5 text-blue-500" />

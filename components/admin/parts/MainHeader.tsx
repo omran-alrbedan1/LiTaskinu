@@ -14,6 +14,8 @@ import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Notifications, UserMenu, SearchBar } from ".";
 import { getBreadcrumbs } from "@/utils/breadcrumbs";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import { ThemeToggler } from "@/components/ui/ThemeToggler";
 
 const MainHeader = () => {
   const pathname = usePathname();
@@ -57,6 +59,7 @@ const MainHeader = () => {
       <div className="flex items-center gap-4">
         <SearchBar />
         <Notifications />
+        <AnimatedThemeToggler />
         <UserMenu />
       </div>
     </header>

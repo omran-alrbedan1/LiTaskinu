@@ -33,7 +33,11 @@ const UserTable: React.FC<UserTableProps> = ({
     },
   });
 
-  const handleTableChange = (pagination: TablePaginationConfig) => {
+  const handleTableChange = (
+    pagination: TablePaginationConfig,
+    filters: Record<string, FilterValue | null>,
+    sorter: SorterResult<User> | SorterResult<User>[]
+  ) => {
     setTableParams({
       pagination: {
         ...pagination,
@@ -106,7 +110,7 @@ const UserTable: React.FC<UserTableProps> = ({
         <div className="flex items-center gap-2 text-sm">
           <CalendarOutlined className="text-gray-400" />
           <div>
-            <div className="font-medium text-gray-900">
+            <div className="font-medium ">
               {dayjs(date).format("MMM D, YYYY")}
             </div>
           </div>
@@ -126,7 +130,6 @@ const UserTable: React.FC<UserTableProps> = ({
     <Table
       columns={columns}
       dataSource={users}
-      loading={loading}
       onChange={handleTableChange}
       pagination={{
         ...tableParams.pagination,

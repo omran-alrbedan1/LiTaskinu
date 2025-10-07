@@ -289,7 +289,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             placeholder={placeholder}
             {...field}
             rows={5}
-            className="shad-textArea border border-dark-500 bg-dark-400"
+            className=" !border-3  dark:!border-gray-600 "
             disabled={props.disabled}
           />
         </FormControl>

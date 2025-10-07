@@ -48,22 +48,22 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
 
           {/* Main Message */}
           <div className="text-center px-4">
-            <p className="text-gray-900 font-semibold text-lg leading-tight">
+            <p className=" font-semibold text-lg leading-tight">
               Permanently delete{" "}
               <span className="text-red-600 font-bold">{userName}</span>'s
               account?
             </p>
-            <p className="text-gray-600 text-sm mt-2 leading-relaxed">
+            <p className="text-gray-600 dark:text-gray-400 text-sm mt-2 leading-relaxed">
               This is a destructive action that cannot be reversed. All user
               data will be permanently erased from our systems.
             </p>
           </div>
 
           {/* Data to be Deleted */}
-          <div className="bg-white border border-red-100 rounded-lg p-4 shadow-sm">
+          <div className="rounded-lg p-4 shadow-sm">
             <div className="flex items-center gap-2 mb-3">
               <Database className="w-4 h-4 text-red-600" />
-              <p className="text-red-900 text-sm font-semibold">
+              <p className="text-red-900 dark:text-red-500   text-sm font-semibold">
                 Data to be permanently removed:
               </p>
             </div>
@@ -73,10 +73,10 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
                   <Database className="w-3.5 h-3.5 text-red-500" />
                 </div>
                 <div>
-                  <span className="font-medium text-gray-900">
+                  <span className="font-medium dark:text-gray-300">
                     Profile & Account Data
                   </span>
-                  <p className="text-gray-500 text-xs mt-0.5">
+                  <p className="text-gray-400 text-xs mt-0.5">
                     Personal information, settings, and preferences
                   </p>
                 </div>
@@ -86,10 +86,10 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
                   <MessageSquare className="w-3.5 h-3.5 text-red-500" />
                 </div>
                 <div>
-                  <span className="font-medium text-gray-900">
+                  <span className="font-medium dark:text-gray-300">
                     Messages & Communications
                   </span>
-                  <p className="text-gray-500 text-xs mt-0.5">
+                  <p className="text-gray-400 text-xs mt-0.5">
                     Chat history, notifications, and correspondence
                   </p>
                 </div>
@@ -99,10 +99,10 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
                   <Activity className="w-3.5 h-3.5 text-red-500" />
                 </div>
                 <div>
-                  <span className="font-medium text-gray-900">
+                  <span className="font-medium dark:text-gray-300">
                     Activity & Logs
                   </span>
-                  <p className="text-gray-500 text-xs mt-0.5">
+                  <p className="text-gray-400 text-xs mt-0.5">
                     Usage history, analytics, and tracking data
                   </p>
                 </div>
@@ -112,7 +112,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
         </div>
 
         {/* Action Buttons */}
-        <div className="flex justify-end gap-3 pt-6 mt-6 border-t border-gray-200">
+        <div className="flex justify-end gap-3 pt-6 mt-6 border-t border-gray-200 dark:border-gray-500">
           <Button
             onClick={onCancel}
             size="large"

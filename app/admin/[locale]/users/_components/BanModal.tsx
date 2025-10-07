@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { Ban, Shield, Clock } from "lucide-react";
-import { Form } from "@/components/ui/form";
+import { Form, FormMessage } from "@/components/ui/form";
 import CustomFormField from "@/components/shared/CustomInput";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import { FormFieldType } from "@/enums";
@@ -82,12 +82,12 @@ const BanModal: React.FC<BanModalProps> = ({
 
           {/* Main Message */}
           <div className="text-center px-4">
-            <p className="text-gray-900 font-semibold text-lg leading-tight">
+            <p className=" font-semibold text-lg leading-tight">
               Restrict access for{" "}
               <span className="text-primary-color1 font-bold">{user.name}</span>
               ?
             </p>
-            <p className="text-gray-600 text-sm mt-2 leading-relaxed">
+            <p className="text-gray-600 dark:text-gray-400 text-sm mt-2 leading-relaxed">
               This action will temporarily or permanently restrict the user's
               access to the platform based on your selection.
             </p>
@@ -99,10 +99,10 @@ const BanModal: React.FC<BanModalProps> = ({
               className="space-y-5"
             >
               {/* Reason Field */}
-              <div className="bg-white  rounded-lg p-4 shadow-sm">
+              <div className="  rounded-lg p-4">
                 <div className="flex items-center gap-2 mb-3">
                   <Shield className="w-4 h-4 text-primary-color1" />
-                  <label className="text-sm font-semibold text-gray-900">
+                  <label className="text-sm font-semibold ">
                     Reason for Ban
                   </label>
                 </div>
@@ -115,12 +115,10 @@ const BanModal: React.FC<BanModalProps> = ({
               </div>
 
               {/* Duration Field */}
-              <div className="bg-white  rounded-lg p-4 shadow-sm">
+              <div className="   p-4 ">
                 <div className="flex items-center gap-2 mb-3">
                   <Clock className="w-4 h-4 text-primary-color1" />
-                  <label className="text-sm font-semibold text-gray-900">
-                    Ban Duration
-                  </label>
+                  <label className="text-sm font-semibold">Ban Duration</label>
                 </div>
                 <Controller
                   name="duration"
@@ -135,18 +133,14 @@ const BanModal: React.FC<BanModalProps> = ({
                         options={durationOptions}
                         status={fieldState.error ? "error" : ""}
                       />
-                      {fieldState.error && (
-                        <p className="text-red-500 text-sm mt-1.5">
-                          {fieldState.error.message}
-                        </p>
-                      )}
+                      <FormMessage />
                     </div>
                   )}
                 />
               </div>
 
               {/* Action Buttons */}
-              <div className="flex justify-end gap-3 pt-6 mt-2 border-t border-gray-200">
+              <div className="flex justify-end gap-3 pt-6 mt-2 ">
                 <Button
                   onClick={handleClose}
                   size="large"

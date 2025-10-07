@@ -50,7 +50,7 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
   const hasActiveFilters = filters.type || filters.readStatus;
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200/60 shadow-sm hover:shadow-md transition-all duration-300 p-6 mb-6">
+    <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-200/60 dark:border-gray-700/60 shadow-sm hover:shadow-md transition-all duration-300 p-6 mb-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
@@ -58,8 +58,10 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
             <SlidersHorizontal className="h-5 w-5 text-white" />
           </div>
           <div>
-            <h3 className="font-semibold text-lg text-gray-900">Filters</h3>
-            <p className="text-sm text-gray-500">
+            <h3 className="font-semibold text-lg text-gray-900 dark:text-white">
+              Filters
+            </h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               Filter notifications by type and status
             </p>
           </div>
@@ -70,7 +72,7 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
             variant="outline"
             size="sm"
             onClick={clearFilters}
-            className="border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors"
+            className="border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 hover:text-red-700 dark:hover:text-red-300 transition-colors"
           >
             <X className="h-4 w-4 mr-2" />
             Clear All
@@ -82,7 +84,7 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Type Filter */}
         <div className="space-y-3">
-          <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
             <Filter className="h-4 w-4 text-primary-color1" />
             Notification Type
           </label>
@@ -100,7 +102,7 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
                   "hover:scale-105 hover:shadow-sm",
                   filters.type === key
                     ? `${config.solidColor} border-transparent text-white shadow-md`
-                    : "border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50"
+                    : "border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800"
                 )}
                 onClick={() => handleTypeChange(key)}
               >
@@ -120,7 +122,7 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
 
         {/* Status Filter */}
         <div className="space-y-3">
-          <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
             <Bell className="h-4 w-4 text-primary-color1" />
             Notification Status
           </label>
@@ -132,14 +134,16 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
                 "hover:scale-105 hover:shadow-sm flex items-center gap-2",
                 filters.readStatus === "unread"
                   ? "bg-gradient-to-r from-amber-500 to-amber-600 text-white border-amber-500 shadow-md"
-                  : "border-gray-200 text-gray-700 hover:border-amber-200 hover:bg-amber-50"
+                  : "border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-amber-200 dark:hover:border-amber-800 hover:bg-amber-50 dark:hover:bg-amber-900/30"
               )}
               onClick={() => handleReadStatusChange("unread")}
             >
               <div
                 className={cn(
                   "w-2 h-2 rounded-full animate-pulse",
-                  filters.readStatus === "unread" ? "bg-white" : "bg-amber-500"
+                  filters.readStatus === "unread"
+                    ? "bg-white"
+                    : "bg-amber-500 dark:bg-amber-400"
                 )}
               />
               <Bell className="h-4 w-4" />
@@ -149,7 +153,7 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
                   "ml-1 px-1.5 py-0.5 rounded-full text-xs",
                   filters.readStatus === "unread"
                     ? "bg-white/20"
-                    : "bg-amber-100 text-amber-800"
+                    : "bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300"
                 )}
               >
                 {unreadCount}
@@ -163,14 +167,16 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
                 "hover:scale-105 hover:shadow-sm flex items-center gap-2",
                 filters.readStatus === "read"
                   ? "bg-gradient-to-r from-green-500 to-green-600 text-white border-green-500 shadow-md"
-                  : "border-gray-200 text-gray-700 hover:border-green-200 hover:bg-green-50"
+                  : "border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-green-200 dark:hover:border-green-800 hover:bg-green-50 dark:hover:bg-green-900/30"
               )}
               onClick={() => handleReadStatusChange("read")}
             >
               <div
                 className={cn(
                   "w-2 h-2 rounded-full",
-                  filters.readStatus === "read" ? "bg-white" : "bg-green-500"
+                  filters.readStatus === "read"
+                    ? "bg-white"
+                    : "bg-green-500 dark:bg-green-400"
                 )}
               />
               <BellOff className="h-4 w-4" />
@@ -180,7 +186,7 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
                   "ml-1 px-1.5 py-0.5 rounded-full text-xs",
                   filters.readStatus === "read"
                     ? "bg-white/20"
-                    : "bg-green-100 text-green-800"
+                    : "bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-300"
                 )}
               >
                 {totalCount - unreadCount}
@@ -192,12 +198,12 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
 
       {/* Active Filters Indicator */}
       {hasActiveFilters && (
-        <div className="mt-4 pt-4 border-t border-gray-100">
+        <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-gray-600 dark:text-gray-400">
               Active filters:
               {filters.type && (
-                <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-800 rounded-md text-xs font-medium">
+                <span className="ml-2 px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 rounded-md text-xs font-medium">
                   {notificationConfig[filters.type as NotificationType]?.label}
                 </span>
               )}
@@ -206,8 +212,8 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
                   className={cn(
                     "ml-2 px-2 py-1 rounded-md text-xs font-medium",
                     filters.readStatus === "unread"
-                      ? "bg-amber-100 text-amber-800"
-                      : "bg-green-100 text-green-800"
+                      ? "bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300"
+                      : "bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-300"
                   )}
                 >
                   {filters.readStatus === "unread"
@@ -221,7 +227,7 @@ const NotificationFiltersComponent: React.FC<NotificationFiltersProps> = ({
               variant="ghost"
               size="sm"
               onClick={clearFilters}
-              className="text-red-600 hover:text-red-700 hover:bg-red-50 text-xs"
+              className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/30 text-xs"
             >
               <X className="h-3 w-3 mr-1" />
               Clear

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Button, Dropdown, message, Form, Input, Select, Space } from "antd";
-import { ExclamationCircleOutlined, MoreOutlined } from "@ant-design/icons";
+import { Button, Dropdown, message, Form } from "antd";
+import { MoreOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import {
   EyeOutlined,
@@ -12,14 +12,7 @@ import {
   BlockOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
-import {
-  EmailModal,
-  ConfirmModal,
-  BanModal,
-  DeleteModal,
-  VerifyModal,
-  UnbanModal,
-} from ".";
+import { EmailModal, BanModal, DeleteModal, VerifyModal, UnbanModal } from ".";
 
 interface UserActionsProps {
   user: User;
@@ -124,7 +117,7 @@ const UserActions: React.FC<UserActionsProps> = ({ user }) => {
           <Button
             icon={<MoreOutlined />}
             size="small"
-            className="flex items-center justify-center border-gray-300"
+            className="flex items-center justify-center border-gray-300 dark:border-gray-600"
             style={{ width: 32, height: 32 }}
           />
         </Dropdown>

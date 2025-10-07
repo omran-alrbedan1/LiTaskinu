@@ -11,7 +11,7 @@ interface RecentActivitiesCardProps {
 const RecentActivitiesCard: React.FC<RecentActivitiesCardProps> = ({
   activities,
 }) => (
-  <Card className="shadow-md hover:shadow-lg transition-all duration-300">
+  <Card className=" transition-all duration-300 dark:bg-gray-800">
     <CardHeader className="pb-4">
       <CardTitle className="flex items-center justify-between">
         <span className="flex items-center gap-3">

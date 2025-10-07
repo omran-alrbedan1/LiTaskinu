@@ -29,18 +29,16 @@ html {
 }
 
 .sidebar-scrollbar::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: transparent; 
     border-radius: 10px;
 }
 
 .sidebar-scrollbar::-webkit-scrollbar-thumb {
-    background: var(--primary-color1, #3b82f6);
+    background: var(--primary-color1);
     border-radius: 10px;
-    border: 2px solid #f1f1f1;
-    min-height: 20px; 
+    border: 2px solid transparent; 
+    min-height: 10px; 
 }
-
-
 
 /* Hide scrollbar buttons (arrows) */
 .sidebar-scrollbar::-webkit-scrollbar-button {
@@ -57,14 +55,14 @@ html {
 
 /* For Firefox */
 .sidebar-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary-color1, #3b82f6) #f1f1f1;
+    scrollbar-width:300px;
+    scrollbar-color: var(--primary-color1) transparent;
 }
 
-/* For Firefox - make thumb smaller */
-.sidebar-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary-color1, #3b82f6) #f1f1f1;
+/* Optional: Add hover effect for better UX */
+.sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color1);
+    opacity: 0.8;
 }
 
 @layer base {
@@ -146,4 +144,31 @@ html {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+::view-transition-old(root), ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+/* Prevent white flash in Ant Design tables during theme switch */
+
+html.dark .ant-table,
+html.dark .ant-table-empty,
+html.dark .ant-card {
+  background-color: #141414 !important;
+  color: #fff !important;
+}
+
+html.dark .ant-table-thead > tr > th {
+  background-color: #1f1f1f !important;
+  color: #fff !important;
+}
+
+html.dark .ant-table-tbody > tr > td {
+  background-color: #141414 !important;
+  color: #fff !important;
+}
+
+html.dark .ant-empty-description {
+  color: #aaa !important;
 }
