@@ -424,11 +424,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <Image
             src={images.logo}
             alt="Islamic Marriage Platform"
-            width={state === "collapsed" ? 40 : 80}
-            height={state === "collapsed" ? 40 : 80}
+            width={state === "collapsed" ? 40 : 100}
+            height={state === "collapsed" ? 40 : 100}
             className={cn(
               "rounded-md transition-all duration-300",
-              state === "collapsed" ? "w-10 h-10" : "w-20 h-20"
+              state === "collapsed" ? "w-10 h-10" : "w-28 h-28 -my-6"
             )}
           />
         </div>

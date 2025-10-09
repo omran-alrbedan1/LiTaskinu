@@ -68,7 +68,7 @@ const QuickActionsCard: React.FC<QuickActionsCardProps> = ({
                 {action.count && (
                   <Badge
                     variant="secondary"
-                    className="mt-1 bg-gradient-to-r from-primary-color1 to-primary-color1/90 text-white px-3 py-1 text-xs font-semibold shadow-md group-hover/button:shadow-lg group-hover/button:scale-110 transition-all duration-300 border-0"
+                    className="mt-1 bg-gradient-to-r bg-primary-color1 text-white px-3 py-1 text-xs font-semibold shadow-md  group-hover/button:scale-110 transition-all duration-300 border-0"
                   >
                     {action.count}
                   </Badge>

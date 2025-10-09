@@ -1,3 +1,5 @@
+import { useLocale } from "next-intl";
+
 // src/utils/breadcrumbs.ts (enhanced version)
 export interface BreadcrumbItem {
   label: string;
@@ -7,6 +9,7 @@ export interface BreadcrumbItem {
 }
 
 export const getBreadcrumbs = (pathname: string): BreadcrumbItem[] => {
+  const locale = useLocale();
   const cleanPathname = pathname.split("?")[0];
   const paths = cleanPathname
     .split("/")
@@ -21,11 +24,10 @@ export const getBreadcrumbs = (pathname: string): BreadcrumbItem[] => {
   const breadcrumbs: BreadcrumbItem[] = [
     {
       label: "Dashboard",
-      href: "./dashboard",
+      href: `/admin/${locale}/dashboard`,
     },
   ];
 
-  // Detailed label mapping
   const labelMap: { [key: string]: string } = {
     dashboard: "Overview",
     notifications: "Notifications",
@@ -42,7 +44,7 @@ export const getBreadcrumbs = (pathname: string): BreadcrumbItem[] => {
     reports: "Reports",
   };
 
-  let currentPath = "/admin";
+  let currentPath = "/";
 
   paths.forEach((path, index) => {
     const isLast = index === paths.length - 1;
@@ -57,7 +59,7 @@ export const getBreadcrumbs = (pathname: string): BreadcrumbItem[] => {
 
     breadcrumbs.push({
       label,
-      href: isLast ? undefined : currentPath,
+      href: isLast ? undefined : `/admin/${locale}/${currentPath}`,
       isCurrent: isLast,
     });
   });

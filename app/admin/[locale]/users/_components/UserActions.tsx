@@ -48,14 +48,9 @@ const UserActions: React.FC<UserActionsProps> = ({ user }) => {
         key: "view",
         label: "View Profile",
         icon: <EyeOutlined className="!text-blue-500" />,
-        onClick: () => router.push("./"),
+        onClick: () => router.push(`./users/${user.id}`),
       },
-      {
-        key: "edit",
-        label: "Edit User",
-        icon: <EditOutlined className="!text-green-500" />,
-        onClick: () => router.push("./"),
-      },
+
       {
         key: "send-email",
         label: "Send Email",

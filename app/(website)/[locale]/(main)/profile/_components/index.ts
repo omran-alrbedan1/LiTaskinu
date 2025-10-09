@@ -1,5 +1,5 @@
-export { default as PhotoGallery } from "./PhotoGallery";
 export { default as ProfileHeader } from "./ProfileHeader";
+export { default as PhotoGallery } from "./PhotoGallery";
 export { default as ProfileSidebar } from "./ProfileSidebar";
 export { default as PhotoCard } from "./PhotoCard";
 export { default as EmptyGalleryState } from "./EmptyGalleryState";

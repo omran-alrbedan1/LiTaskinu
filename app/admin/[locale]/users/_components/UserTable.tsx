@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Space, message, Modal } from "antd";
+import { Table, Space, Modal } from "antd";
 import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import type { FilterValue, SorterResult } from "antd/es/table/interface";
 import dayjs from "dayjs";
@@ -58,7 +58,7 @@ const UserTable: React.FC<UserTableProps> = ({
             src={record.avatar || images.Unknown}
             height={55}
             width={55}
-            alt={record.email}
+            alt={"avatar"}
             className="rounded-full"
           />
           <div className="min-w-0 flex-1">

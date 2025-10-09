@@ -47,14 +47,24 @@ interface NotificationFilters {
 interface User {
   id: number;
   name: string;
-  email: string;
-  phone: string;
-  status: "active" | "pending" | "banned" | "inactive";
-  verification: "verified" | "pending" | "unverified";
-  registrationDate: string;
-  lastLogin: string;
-  reportsCount: number;
-  marriageRequests: number;
-  activeChats: number;
+  email?: string;
+  phone?: string;
+  status?: "active" | "pending" | "banned" | "inactive";
+  verification?: "verified" | "pending" | "unverified";
+  registrationDate?: string;
+  lastLogin?: string;
+  reportsCount?: number;
+  marriageRequests?: number;
+  activeChats?: number;
   avatar?: string;
+}
+
+interface Photo {
+  id: string;
+  url: string;
+}
+
+interface PhotoGalleryProps {
+  photos?: Photo[];
+  maxDisplayPhotos?: number;
 }

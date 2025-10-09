@@ -23,7 +23,7 @@ const config: Config = {
         border: "hsl(var(--border))",
         primary: {
           100: "#EAD8B0",
-          color1: "#A1AA8A",
+          color1: "var(--primary-color1)",
           color2: "#c77971",
           hover: "#838C6E",
           color3: "#FFFFFF",
@@ -42,9 +42,6 @@ const config: Config = {
           700: "#7e22ce",
           800: "#6b21a8",
           900: "#581c87",
-        },
-        custom: {
-          purple: "#6366f1",
         },
         darkMod: {
           100: "#666461",
@@ -164,7 +161,13 @@ function addVariablesForColors({ addBase, theme }: any) {
   );
 
   addBase({
-    ":root": newVars,
+    ":root": {
+      ...newVars,
+      "--primary-color1": "#A1AA8A",
+    },
+    ".dark": {
+      "--primary-color1": "#c77971",
+    },
   });
 }
 

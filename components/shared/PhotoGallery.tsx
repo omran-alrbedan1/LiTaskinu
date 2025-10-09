@@ -7,16 +7,6 @@ import { images } from "@/constants/images";
 import { Image, Modal } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 
-interface Photo {
-  id: string;
-  url: string;
-}
-
-interface PhotoGalleryProps {
-  photos?: Photo[];
-  maxDisplayPhotos?: number;
-}
-
 const PhotoGallery: React.FC<PhotoGalleryProps> = ({
   photos = [],
   maxDisplayPhotos = 6,

@@ -39,8 +39,8 @@ interface GalleryProps {
 
 interface PhotoGalleryProps {
   photos: Photo[];
-  onPhotoUpload: (files: File[]) => Promise<void>;
-  onPhotoDelete: (photoId: string) => void;
+  onPhotoUpload?: (files: File[]) => Promise<void>;
+  onPhotoDelete?: (photoId: string) => void;
   maxDisplayPhotos?: number;
 }
 

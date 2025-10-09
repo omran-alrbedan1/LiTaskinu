@@ -19,8 +19,8 @@ import {
 } from "react-icons/fa";
 import { mockPhotos, userData } from "@/constants/temporary";
 import { MdBlock } from "react-icons/md";
-import { DetailItem } from "@/components/shared";
-import { ChatRequestModal, PhotoGallery } from "../_components";
+import { DetailItem, PhotoGallery } from "@/components/shared";
+import { ChatRequestModal } from "../_components";
 
 const PersonDetailPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
