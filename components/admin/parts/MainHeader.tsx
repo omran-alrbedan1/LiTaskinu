@@ -16,6 +16,7 @@ import { Notifications, UserMenu, SearchBar } from ".";
 import { getBreadcrumbs } from "@/utils/breadcrumbs";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { ThemeToggler } from "@/components/ui/ThemeToggler";
+import { useEffect, useState } from "react";
 
 const MainHeader = () => {
   const pathname = usePathname();

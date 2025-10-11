@@ -307,3 +307,63 @@ export const mockComplaints: Complaint[] = [
     wasBanned: false,
   },
 ];
+
+export const MOCK_STATISTICS = {
+  overview: {
+    totalComplaints: 1247,
+    pending: 89,
+    resolved: 987,
+    rejected: 171,
+    resolutionRate: 79.2,
+    avgResolutionTime: "2.3 days",
+  },
+  byType: [
+    {
+      type: "Harassment",
+      count: 456,
+      trend: "up" as const,
+      percentage: 36.6,
+      color: "#ef4444",
+    },
+    {
+      type: "Fake Profile",
+      count: 289,
+      trend: "down" as const,
+      percentage: 23.2,
+      color: "#f59e0b",
+    },
+    {
+      type: "Inappropriate Content",
+      count: 198,
+      trend: "up" as const,
+      percentage: 15.9,
+      color: "#8b5cf6",
+    },
+    {
+      type: "Spam",
+      count: 156,
+      trend: "stable" as const,
+      percentage: 12.5,
+      color: "#06b6d4",
+    },
+    {
+      type: "Other",
+      count: 148,
+      trend: "stable" as const,
+      percentage: 11.9,
+      color: "#10b981",
+    },
+  ],
+  monthlyTrend: [
+    { month: "Jan", complaints: 98, resolved: 75 },
+    { month: "Feb", complaints: 112, resolved: 89 },
+    { month: "Mar", complaints: 105, resolved: 82 },
+    { month: "Apr", complaints: 124, resolved: 98 },
+    { month: "May", complaints: 156, resolved: 124 },
+    { month: "Jun", complaints: 143, resolved: 115 },
+    { month: "Jul", complaints: 167, resolved: 132 },
+    { month: "Aug", complaints: 189, resolved: 156 },
+    { month: "Sep", complaints: 175, resolved: 142 },
+    { month: "Oct", complaints: 198, resolved: 162 },
+  ],
+};

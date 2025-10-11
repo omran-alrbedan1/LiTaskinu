@@ -24,7 +24,7 @@ const ActionMenu = ({ onAction }: ActionMenuProps) => {
       label: (
         <div className="flex items-center  rounded cursor-pointer ">
           <Ban className="w-4 h-4 mr-2 text-red-600" />
-          <span className="font-medium">Ban User</span>
+          <span className="">Ban User</span>
         </div>
       ),
     },
@@ -33,7 +33,7 @@ const ActionMenu = ({ onAction }: ActionMenuProps) => {
       label: (
         <div className="flex items-center  rounded cursor-pointer ">
           <AlertTriangle className="w-4 h-4 mr-2 text-orange-600" />
-          <span className="font-medium">Send Warning</span>
+          <span className="">Send Warning</span>
         </div>
       ),
     },
@@ -42,7 +42,7 @@ const ActionMenu = ({ onAction }: ActionMenuProps) => {
       label: (
         <div className="flex items-center  rounded cursor-pointer ">
           <MessageCircle className="w-4 h-4 mr-2 text-blue-600" />
-          <span className="font-medium">View Full Chat</span>
+          <span className="">View Full Chat</span>
         </div>
       ),
     },
@@ -54,7 +54,7 @@ const ActionMenu = ({ onAction }: ActionMenuProps) => {
       label: (
         <div className="flex items-center  rounded cursor-pointer ">
           <Trash2 className="w-4 h-4 mr-2 text-red-600" />
-          <span className="font-medium">Delete Complaint</span>
+          <span className="">Delete Complaint</span>
         </div>
       ),
     },

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FileText, Users, Download, Calendar } from "lucide-react";
 import { Header } from "@/components/admin/shared";
 import { message } from "antd";
@@ -39,12 +39,17 @@ const MOCK_COMPLAINT: Complaint = {
   wasBanned: false,
 };
 
-const useModalState = () => {
+const ComplaintDetailsPage = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [modals, setModals] = useState<ModalState>({
     ban: false,
     delete: false,
     warning: false,
   });
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
 
   const openModal = (modal: keyof ModalState) =>
     setModals((prev) => ({ ...prev, [modal]: true }));
@@ -52,10 +57,6 @@ const useModalState = () => {
   const closeModals = () =>
     setModals({ ban: false, delete: false, warning: false });
 
-  return { modals, openModal, closeModals };
-};
-
-const useComplaintActions = () => {
   const handleSuccess = (action: string, userName?: string) => {
     const messages = {
       ban: `User ${userName} has been banned successfully`,
@@ -65,43 +66,7 @@ const useComplaintActions = () => {
     message.success(messages[action as keyof typeof messages]);
   };
 
-  return { handleSuccess };
-};
-
-const AttachmentsSection = ({ attachments }: { attachments: string[] }) => (
-  <div>
-    <label className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2 mb-3">
-      <Download className="w-4 h-4" />
-      Attachments
-    </label>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {attachments.map((attachment, index) => (
-        <ShadButton
-          key={index}
-          variant="outline"
-          className="w-full h-full flex justify-between py-3 px-4 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-400 dark:hover:border-gray-500"
-        >
-          <div className="flex items-center gap-2">
-            <FileText className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              {attachment}
-            </span>
-          </div>
-          <Download className="w-4 h-4 text-gray-400 dark:text-gray-500" />
-        </ShadButton>
-      ))}
-    </div>
-  </div>
-);
-
-// Main Component
-const ComplaintDetailsPage = () => {
-  const { modals, openModal, closeModals } = useModalState();
-  const { handleSuccess } = useComplaintActions();
-
   const handleAction = (action: string) => {
-    console.log("Action triggered:", action); // Debug log
-
     const actionMap: Record<string, keyof ModalState> = {
       warn: "warning",
       ban: "ban",
@@ -111,172 +76,213 @@ const ComplaintDetailsPage = () => {
     const modalKey = actionMap[action];
     if (modalKey) {
       openModal(modalKey);
-    } else {
-      console.error("Unknown action:", action);
     }
   };
 
-  const handleBanConfirm = () => {
+  const handleBanConfirm = (banData: any) => {
     handleSuccess("ban", MOCK_COMPLAINT.reportedUser.name);
     closeModals();
   };
 
-  const handleDeleteConfirm = () => {
+  const handleDeleteConfirm = (reason: string) => {
     handleSuccess("delete");
     closeModals();
   };
 
-  const handleWarningConfirm = () => {
+  const handleWarningConfirm = (warningData: any) => {
     handleSuccess("warning", MOCK_COMPLAINT.reportedUser.name);
     closeModals();
   };
 
-  return (
-    <div className="max-h-screen overflow-auto sidebar-scrollbar pb-32 bg-white dark:bg-gray-900 min-h-screen">
-      <div className="max-w-7xl mx-auto p-6">
-        {/* Header with Actions */}
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
-          <Header
-            title={`Complaint #${MOCK_COMPLAINT.id}`}
-            description="Review complaint details and take appropriate action"
-          />
-          <div className="flex items-center gap-3 mt-4 lg:mt-0">
-            <ActionMenu onAction={handleAction} />
+  const handleCloseModal = (): void => {
+    closeModals();
+  };
+
+  if (isLoading) {
+    return (
+      <div className="mx-auto pb-24 p-6 max-h-screen sidebar-scrollbar overflow-auto">
+        <div className="mb-6">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/3 animate-pulse mb-2"></div>
+          <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2 animate-pulse"></div>
+        </div>
+        <div className="flex justify-end mb-6">
+          <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-32 animate-pulse"></div>
+        </div>
+        {/* Loading skeleton for content */}
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+          <div className="xl:col-span-2 space-y-6">
+            <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+          </div>
+          <div className="space-y-6">
+            <div className="h-80 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
           </div>
         </div>
+      </div>
+    );
+  }
 
-        {/* Main Grid Layout */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-          {/* Left Column - Complaint Details */}
-          <div className="xl:col-span-2 space-y-6">
-            {/* Complaint Overview Card */}
-            <Card className="shadow-sm border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-              <CardHeader className="pb-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <FileText className="w-5 h-5 text-primary-color1" />
-                    <CardTitle className="text-xl text-gray-900 dark:text-white">
-                      Complaint Overview
-                    </CardTitle>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      Type:
-                    </span>
-                    <Badge
-                      variant="outline"
-                      className="bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800"
-                    >
-                      {MOCK_COMPLAINT.type}
-                    </Badge>
-                  </div>
+  const AttachmentsSection = ({ attachments }: { attachments: string[] }) => (
+    <div>
+      <label className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2 mb-3">
+        <Download className="w-4 h-4" />
+        Attachments
+      </label>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {attachments.map((attachment, index) => (
+          <ShadButton
+            key={index}
+            variant="outline"
+            className="w-full h-full flex justify-between py-3 px-4 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-400 dark:hover:border-gray-500"
+          >
+            <div className="flex items-center gap-2">
+              <FileText className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                {attachment}
+              </span>
+            </div>
+            <Download className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+          </ShadButton>
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="mx-auto pb-24 p-6 max-h-screen sidebar-scrollbar overflow-auto">
+      {/* Header */}
+      <div className="mb-6 flex items-center justify-between">
+        <Header
+          title={`Complaint #${MOCK_COMPLAINT.id}`}
+          description="Review complaint details and take appropriate action"
+        />
+        <ActionMenu onAction={handleAction} />
+      </div>
+
+      {/* Main Grid Layout */}
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+        {/* Left Column - Complaint Details */}
+        <div className="xl:col-span-2 space-y-6">
+          {/* Complaint Overview Card */}
+          <Card className="shadow-sm border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+            <CardHeader className="pb-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <FileText className="w-5 h-5 text-primary-color1" />
+                  <CardTitle className="text-xl text-gray-900 dark:text-white">
+                    Complaint Overview
+                  </CardTitle>
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-4">
-                    <div>
-                      <label className="text-sm font-medium text-gray-600 dark:text-gray-400 block mb-2">
-                        Date & Time
-                      </label>
-                      <div
-                        className={`flex items-center gap-2 text-gray-900 dark:text-gray-100 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600`}
-                      >
-                        <Calendar className="w-4 h-4 text-gray-400 dark:text-gray-500" />
-                        {MOCK_COMPLAINT.date}
-                      </div>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-gray-600 dark:text-gray-400 block mb-2">
-                        Complaint ID
-                      </label>
-                      <div
-                        className={`flex items-center gap-2 text-gray-900 dark:text-gray-100 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600`}
-                      >
-                        <Calendar className="w-4 h-4 text-gray-400 dark:text-gray-500" />
-                        {`#${MOCK_COMPLAINT.id}`}
-                      </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    Type:
+                  </span>
+                  <Badge
+                    variant="outline"
+                    className="bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800"
+                  >
+                    {MOCK_COMPLAINT.type}
+                  </Badge>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-sm font-medium text-gray-600 dark:text-gray-400 block mb-2">
+                      Date & Time
+                    </label>
+                    <div className="flex items-center gap-2 text-gray-900 dark:text-gray-100 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                      <Calendar className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+                      {MOCK_COMPLAINT.date}
                     </div>
                   </div>
                   <div>
                     <label className="text-sm font-medium text-gray-600 dark:text-gray-400 block mb-2">
-                      Description
+                      Complaint ID
                     </label>
-                    <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 min-h-[120px]">
-                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
-                        {MOCK_COMPLAINT.description}
-                      </p>
+                    <div className="flex items-center gap-2 text-gray-900 dark:text-gray-100 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                      <Calendar className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+                      {`#${MOCK_COMPLAINT.id}`}
                     </div>
                   </div>
                 </div>
-
-                {/* Attachments Section */}
-                <div className="pt-6 border-t border-gray-200 dark:border-gray-700">
-                  <AttachmentsSection
-                    attachments={MOCK_COMPLAINT.attachments}
-                  />
+                <div>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400 block mb-2">
+                    Description
+                  </label>
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 min-h-[120px]">
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+                      {MOCK_COMPLAINT.description}
+                    </p>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
 
-            <ResponseSection />
-          </div>
+              {/* Attachments Section */}
+              <div className="pt-6 border-t border-gray-200 dark:border-gray-700">
+                <AttachmentsSection attachments={MOCK_COMPLAINT.attachments} />
+              </div>
+            </CardContent>
+          </Card>
 
-          {/* Right Column - Parties Only */}
-          <div className="space-y-6">
-            <Card className="shadow-sm border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-              <CardHeader className="pb-4">
-                <div className="flex items-center gap-2">
-                  <Users className="w-5 h-5 text-primary-color1" />
-                  <CardTitle className="text-xl text-gray-900 dark:text-white">
-                    Involved Parties
-                  </CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <UserCard
-                  user={MOCK_COMPLAINT.reporter}
-                  title="Reporter"
-                  description="Filed the complaint"
-                  variant="reporter"
-                />
-                <UserCard
-                  user={MOCK_COMPLAINT.reportedUser}
-                  title="Reported User"
-                  description="Subject of complaint"
-                  variant="reported"
-                />
-              </CardContent>
-            </Card>
-          </div>
+          <ResponseSection />
         </div>
 
-        {/* Modals */}
-        <BanModal
-          open={modals.ban}
-          onCancel={closeModals}
-          user={{
-            id: MOCK_COMPLAINT.reportedUser.id,
-            name: MOCK_COMPLAINT.reportedUser.name,
-            email: MOCK_COMPLAINT.reportedUser.email,
-          }}
-          onSuccess={handleBanConfirm}
-        />
-
-        <DeleteComplaintModal
-          visible={modals.delete}
-          onCancel={closeModals}
-          onConfirm={handleDeleteConfirm}
-          complaint={MOCK_COMPLAINT}
-        />
-
-        <SendWarningModal
-          visible={modals.warning}
-          onCancel={closeModals}
-          onConfirm={handleWarningConfirm}
-          user={MOCK_COMPLAINT}
-        />
+        {/* Right Column - Parties Only */}
+        <div className="space-y-6">
+          <Card className="shadow-sm border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+            <CardHeader className="pb-4">
+              <div className="flex items-center gap-2">
+                <Users className="w-5 h-5 text-primary-color1" />
+                <CardTitle className="text-xl text-gray-900 dark:text-white">
+                  Involved Parties
+                </CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <UserCard
+                user={MOCK_COMPLAINT.reporter}
+                title="Reporter"
+                description="Filed the complaint"
+                variant="reporter"
+              />
+              <UserCard
+                user={MOCK_COMPLAINT.reportedUser}
+                title="Reported User"
+                description="Subject of complaint"
+                variant="reported"
+              />
+            </CardContent>
+          </Card>
+        </div>
       </div>
+
+      {/* Modals */}
+      <BanModal
+        open={modals.ban}
+        onCancel={handleCloseModal}
+        user={{
+          id: MOCK_COMPLAINT.reportedUser.id,
+          name: MOCK_COMPLAINT.reportedUser.name,
+          email: MOCK_COMPLAINT.reportedUser.email,
+        }}
+        onSuccess={handleBanConfirm}
+      />
+
+      <DeleteComplaintModal
+        visible={modals.delete}
+        onCancel={handleCloseModal}
+        onConfirm={handleDeleteConfirm}
+        complaint={MOCK_COMPLAINT}
+      />
+
+      <SendWarningModal
+        visible={modals.warning}
+        onCancel={handleCloseModal}
+        onConfirm={handleWarningConfirm}
+        user={MOCK_COMPLAINT}
+      />
     </div>
   );
 };

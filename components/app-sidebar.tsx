@@ -37,6 +37,7 @@ import {
 import { images } from "@/constants/images";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useLocale } from "next-intl";
 
 const user = {
   name: "System Admin",
@@ -44,382 +45,374 @@ const user = {
   avatar: "/images/logo.png",
 };
 
-const data = {
-  // Main Platform Sections
-  platform: [
-    {
-      title: "Dashboard",
-      url: "/admin/en/dashboard",
-      icon: Home,
-      isActive: true,
-    },
-    {
-      title: "User Management",
-      url: "/admin/users",
-      icon: Users,
-      items: [
-        {
-          title: "All Users",
-          url: "/admin/en/users",
-        },
-        {
-          title: "New Registrations",
-          url: "/admin/users?filter=new",
-        },
-        {
-          title: "Verified Users",
-          url: "/admin/users?filter=verified",
-        },
-        {
-          title: "Pending Verification",
-          url: "/admin/users?filter=pending",
-        },
-        {
-          title: "Banned Users",
-          url: "/admin/users?filter=banned",
-        },
-        {
-          title: "Account Activation/Deactivation",
-          url: "/admin/users/account-status",
-        },
-        {
-          title: "Document Review",
-          url: "/admin/users/documents",
-        },
-        {
-          title: "Email & Phone Bans",
-          url: "/admin/users/contact-bans",
-        },
-      ],
-    },
-    {
-      title: "Verification System",
-      url: "/admin/verification",
-      icon: UserCheck,
-      items: [
-        {
-          title: "Pending Requests",
-          url: "/admin/verification?status=pending",
-        },
-        {
-          title: "Approved Requests",
-          url: "/admin/verification?status=approved",
-        },
-        {
-          title: "Rejected Requests",
-          url: "/admin/verification?status=rejected",
-        },
-        {
-          title: "Document Review",
-          url: "/admin/verification/documents",
-        },
-        {
-          title: "Verification Settings",
-          url: "/admin/verification/settings",
-        },
-      ],
-    },
-    {
-      title: "Ad Management",
-      url: "/admin/ads",
-      icon: Eye,
-      items: [
-        {
-          title: "Active Ads",
-          url: "/admin/ads/active",
-        },
-        {
-          title: "Ad Approval",
-          url: "/admin/ads/approval",
-        },
-        {
-          title: "Ad Statistics",
-          url: "/admin/ads/statistics",
-        },
-        {
-          title: "Ad Campaigns",
-          url: "/admin/ads/campaigns",
-        },
-      ],
-    },
-  ],
-
-  // Marriage & Matching System
-  matching: [
-    {
-      title: "Marriage Requests",
-      url: "/admin/marriage-requests",
-      icon: Heart,
-      items: [
-        {
-          title: "New Requests",
-          url: "/admin/marriage-requests?status=new",
-        },
-        {
-          title: "In Progress",
-          url: "/admin/marriage-requests?status=progress",
-        },
-        {
-          title: "Approved Requests",
-          url: "/admin/marriage-requests?status=approved",
-        },
-        {
-          title: "Completed Matches",
-          url: "/admin/marriage-requests?status=completed",
-        },
-        {
-          title: "Parent Approvals",
-          url: "/admin/marriage-requests/parent-approvals",
-        },
-        {
-          title: "Track Status",
-          url: "/admin/marriage-requests/tracking",
-        },
-        {
-          title: "Chat Approvals",
-          url: "/admin/marriage-requests/chat-approvals",
-        },
-      ],
-    },
-    {
-      title: "Matching System",
-      url: "/admin/matching",
-      icon: Calendar,
-      items: [
-        {
-          title: "Manual Matching",
-          url: "/admin/matching/manual",
-        },
-        {
-          title: "Success Stories",
-          url: "/admin/matching/success-stories",
-        },
-      ],
-    },
-  ],
-
-  // Communication & Monitoring
-  communication: [
-    {
-      title: "Chat Management",
-      url: "/admin/chats",
-      icon: MessageSquare,
-      items: [
-        {
-          title: "Active Conversations",
-          url: "/admin/chats?status=active",
-        },
-        {
-          title: "Chat Monitoring",
-          url: "/admin/chats/monitoring",
-        },
-        {
-          title: "Message Logs",
-          url: "/admin/chats/logs",
-        },
-        {
-          title: "Parent Notifications",
-          url: "/admin/chats/parent-notifications",
-        },
-        {
-          title: "Chat Analytics",
-          url: "/admin/chats/analytics",
-        },
-      ],
-    },
-    {
-      title: "Reported Content",
-      url: "/admin/reported",
-      icon: Flag,
-      items: [
-        {
-          title: "Reported Chats",
-          url: "/admin/reported/chats",
-        },
-        {
-          title: "Chat Content Review",
-          url: "/admin/reported/chat-review",
-        },
-        {
-          title: "Reported Profiles",
-          url: "/admin/reported/profiles",
-        },
-      ],
-    },
-  ],
-
-  // Security & Compliance
-  security: [
-    {
-      title: "Complaints System",
-      url: "/admin/complaints",
-      icon: ShieldAlert,
-      items: [
-        {
-          title: "New Complaints",
-          url: "/admin/complaints?status=new",
-        },
-        {
-          title: "Under Investigation",
-          url: "/admin/complaints?status=investigation",
-        },
-        {
-          title: "Under Review",
-          url: "/admin/complaints?status=review",
-        },
-        {
-          title: "Resolved Complaints",
-          url: "/admin/complaints?status=resolved",
-        },
-        {
-          title: "Complaint Statistics",
-          url: "/admin/complaints/statistics",
-        },
-        {
-          title: "Complaint Tracking",
-          url: "/admin/complaints/tracking",
-        },
-      ],
-    },
-    {
-      title: "Ban Management",
-      url: "/admin/banned",
-      icon: Ban,
-      items: [
-        {
-          title: "Banned Emails",
-          url: "/admin/banned/emails",
-        },
-        {
-          title: "Banned Phone Numbers",
-          url: "/admin/banned/phones",
-        },
-        {
-          title: "IP Address Blocks",
-          url: "/admin/banned/ips",
-        },
-        {
-          title: "Ban History & Appeals",
-          url: "/admin/banned/history",
-        },
-      ],
-    },
-  ],
-
-  // Content & System Management
-  management: [
-    {
-      title: "Content Management",
-      url: "/admin/content",
-      icon: FileText,
-      items: [
-        {
-          title: "Static Pages",
-          url: "/admin/content/pages",
-        },
-        {
-          title: "About Us",
-          url: "/admin/content/about-us",
-        },
-        {
-          title: "Terms & Conditions",
-          url: "/admin/content/terms",
-        },
-        {
-          title: "Privacy Policy",
-          url: "/admin/content/privacy",
-        },
-        {
-          title: "FAQ Management",
-          url: "/admin/content/faq",
-        },
-        {
-          title: "Success Stories",
-          url: "/admin/content/success-stories",
-        },
-      ],
-    },
-    {
-      title: "Analytics & Reports",
-      url: "/admin/analytics",
-      icon: PieChart,
-      items: [
-        {
-          title: "Platform Analytics",
-          url: "/admin/analytics/platform",
-        },
-        {
-          title: "User Statistics",
-          url: "/admin/analytics/users",
-        },
-        {
-          title: "Matching Reports",
-          url: "/admin/analytics/matching",
-        },
-      ],
-    },
-    {
-      title: "Notification System",
-      url: "/admin/notifications",
-      icon: Bell,
-      items: [
-        {
-          title: "Push Notifications",
-          url: "/admin/notifications/push",
-        },
-        {
-          title: "Email Templates",
-          url: "/admin/notifications/email",
-        },
-        {
-          title: "SMS Notifications",
-          url: "/admin/notifications/sms",
-        },
-
-        {
-          title: "Notification Settings",
-          url: "/admin/notifications/settings",
-        },
-      ],
-    },
-  ],
-
-  // Settings & Support
-  settings: [
-    {
-      title: "System Settings",
-      url: "/admin/settings",
-      icon: Settings,
-      items: [
-        {
-          title: "General Settings",
-          url: "/admin/settings/general",
-        },
-        {
-          title: "Payment Settings",
-          url: "/admin/settings/payment",
-        },
-      ],
-    },
-    {
-      title: "Support Center",
-      url: "/admin/support",
-      icon: HelpCircle,
-      items: [
-        {
-          title: "System Documentation",
-          url: "/admin/support/docs",
-        },
-        {
-          title: "Contact Management",
-          url: "/admin/support/contacts",
-        },
-      ],
-    },
-  ],
-};
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { state } = useSidebar();
+  const locale = useLocale();
+  const data = {
+    // Main Platform Sections
+    platform: [
+      {
+        title: "Dashboard",
+        url: `/admin/${locale}/dashboard`,
+        icon: Home,
+        isActive: true,
+      },
+      {
+        title: "User Management",
+        url: `/admin/${locale}/users`,
+        icon: Users,
+        items: [
+          {
+            title: "All Users",
+            url: `/admin/${locale}/users`,
+          },
+          {
+            title: "New Registrations",
+            url: `/admin/${locale}/users?filter=new`,
+          },
+          {
+            title: "Verified Users",
+            url: `/admin/${locale}/users?filter=verified`,
+          },
+          {
+            title: "Pending Verification",
+            url: `/admin/${locale}/users?filter=pending`,
+          },
+          {
+            title: "Banned Users",
+            url: `/admin/${locale}/users?filter=banned`,
+          },
+          {
+            title: "Account Activation/Deactivation",
+            url: `/admin/${locale}/users/account-status`,
+          },
+          {
+            title: "Document Review",
+            url: `/admin/${locale}/users/documents`,
+          },
+          {
+            title: "Email & Phone Bans",
+            url: `/admin/${locale}/users/contact-bans`,
+          },
+        ],
+      },
+      {
+        title: "Verification System",
+        url: `/admin/${locale}/verification`,
+        icon: UserCheck,
+        items: [
+          {
+            title: "Pending Requests",
+            url: `/admin/${locale}/verification?status=pending`,
+          },
+          {
+            title: "Approved Requests",
+            url: `/admin/${locale}/verification?status=approved`,
+          },
+          {
+            title: "Rejected Requests",
+            url: `/admin/${locale}/verification?status=rejected`,
+          },
+          {
+            title: "Document Review",
+            url: `/admin/${locale}/verification/documents`,
+          },
+          {
+            title: "Verification Settings",
+            url: `/admin/${locale}/verification/settings`,
+          },
+        ],
+      },
+      {
+        title: "Ad Management",
+        url: `/admin/${locale}/ads`,
+        icon: Eye,
+        items: [
+          {
+            title: "Active Ads",
+            url: `/admin/${locale}/ads/active`,
+          },
+          {
+            title: "Ad Approval",
+            url: `/admin/${locale}/ads/approval`,
+          },
+          {
+            title: "Ad Statistics",
+            url: `/admin/${locale}/ads/statistics`,
+          },
+          {
+            title: "Ad Campaigns",
+            url: `/admin/${locale}/ads/campaigns`,
+          },
+        ],
+      },
+    ],
+
+    // Marriage & Matching System
+    matching: [
+      {
+        title: "Marriage Requests",
+        url: `/admin/${locale}/marriage-requests`,
+        icon: Heart,
+        items: [
+          {
+            title: "New Requests",
+            url: `/admin/${locale}/marriage-requests?status=new`,
+          },
+          {
+            title: "In Progress",
+            url: `/admin/${locale}/marriage-requests?status=progress`,
+          },
+          {
+            title: "Approved Requests",
+            url: `/admin/${locale}/marriage-requests?status=approved`,
+          },
+          {
+            title: "Completed Matches",
+            url: `/admin/${locale}/marriage-requests?status=completed`,
+          },
+          {
+            title: "Parent Approvals",
+            url: `/admin/${locale}/marriage-requests/parent-approvals`,
+          },
+          {
+            title: "Track Status",
+            url: `/admin/${locale}/marriage-requests/tracking`,
+          },
+          {
+            title: "Chat Approvals",
+            url: `/admin/${locale}/marriage-requests/chat-approvals`,
+          },
+        ],
+      },
+      {
+        title: "Matching System",
+        url: `/admin/${locale}/matching`,
+        icon: Calendar,
+        items: [
+          {
+            title: "Manual Matching",
+            url: `/admin/${locale}/matching/manual`,
+          },
+          {
+            title: "Success Stories",
+            url: `/admin/${locale}/matching/success-stories`,
+          },
+        ],
+      },
+    ],
+
+    // Communication & Monitoring
+    communication: [
+      {
+        title: "Chat Management",
+        url: `/admin/${locale}/chats`,
+        icon: MessageSquare,
+        items: [
+          {
+            title: "Active Conversations",
+            url: `/admin/${locale}/chats?status=active`,
+          },
+          {
+            title: "Chat Monitoring",
+            url: `/admin/${locale}/chats/monitoring`,
+          },
+          {
+            title: "Message Logs",
+            url: `/admin/${locale}/chats/logs`,
+          },
+          {
+            title: "Parent Notifications",
+            url: `/admin/${locale}/chats/parent-notifications`,
+          },
+          {
+            title: "Chat Analytics",
+            url: `/admin/${locale}/chats/analytics`,
+          },
+        ],
+      },
+      {
+        title: "Reported Content",
+        url: `/admin/${locale}/reported`,
+        icon: Flag,
+        items: [
+          {
+            title: "Reported Chats",
+            url: `/admin/${locale}/reported/chats`,
+          },
+          {
+            title: "Chat Content Review",
+            url: `/admin/${locale}/reported/chat-review`,
+          },
+          {
+            title: "Reported Profiles",
+            url: `/admin/${locale}/reported/profiles`,
+          },
+        ],
+      },
+    ],
+
+    // Security & Compliance
+    security: [
+      {
+        title: "Complaints System",
+        url: `/admin/${locale}/complaints`,
+        icon: ShieldAlert,
+        items: [
+          {
+            title: "New Complaints",
+            url: `/admin/${locale}/complaints`,
+          },
+          {
+            title: "Under Review",
+            url: `/admin/${locale}/complaints?status=review`,
+          },
+          {
+            title: "Resolved Complaints",
+            url: `/admin/${locale}/complaints?status=resolved`,
+          },
+          {
+            title: "Complaint Statistics",
+            url: `/admin/${locale}/complaints/statistics`,
+          },
+        ],
+      },
+      {
+        title: "Ban Management",
+        url: `/admin/${locale}/banned`,
+        icon: Ban,
+        items: [
+          {
+            title: "Banned Emails",
+            url: `/admin/${locale}/banned/emails`,
+          },
+          {
+            title: "Banned Phone Numbers",
+            url: `/admin/${locale}/banned/phones`,
+          },
+          {
+            title: "IP Address Blocks",
+            url: `/admin/${locale}/banned/ips`,
+          },
+          {
+            title: "Ban History & Appeals",
+            url: `/admin/${locale}/banned/history`,
+          },
+        ],
+      },
+    ],
+
+    // Content & System Management
+    management: [
+      {
+        title: "Content Management",
+        url: `/admin/${locale}/content`,
+        icon: FileText,
+        items: [
+          {
+            title: "Static Pages",
+            url: `/admin/${locale}/content/pages`,
+          },
+          {
+            title: "About Us",
+            url: `/admin/${locale}/content/about-us`,
+          },
+          {
+            title: "Terms & Conditions",
+            url: `/admin/${locale}/content/terms`,
+          },
+          {
+            title: "Privacy Policy",
+            url: `/admin/${locale}/content/privacy`,
+          },
+          {
+            title: "FAQ Management",
+            url: `/admin/${locale}/content/faq`,
+          },
+          {
+            title: "Success Stories",
+            url: `/admin/${locale}/content/success-stories`,
+          },
+        ],
+      },
+      {
+        title: "Analytics & Reports",
+        url: `/admin/${locale}/analytics`,
+        icon: PieChart,
+        items: [
+          {
+            title: "Platform Analytics",
+            url: `/admin/${locale}/analytics/platform`,
+          },
+          {
+            title: "User Statistics",
+            url: `/admin/${locale}/analytics/users`,
+          },
+          {
+            title: "Matching Reports",
+            url: `/admin/${locale}/analytics/matching`,
+          },
+        ],
+      },
+      {
+        title: "Notification System",
+        url: `/admin/${locale}/notifications`,
+        icon: Bell,
+        items: [
+          {
+            title: "Push Notifications",
+            url: `/admin/${locale}/notifications/push`,
+          },
+          {
+            title: "Email Templates",
+            url: `/admin/${locale}/notifications/email`,
+          },
+          {
+            title: "SMS Notifications",
+            url: `/admin/${locale}/notifications/sms`,
+          },
+          {
+            title: "Notification Settings",
+            url: `/admin/${locale}/notifications/settings`,
+          },
+        ],
+      },
+    ],
+
+    // Settings & Support
+    settings: [
+      {
+        title: "System Settings",
+        url: `/admin/${locale}/settings`,
+        icon: Settings,
+        items: [
+          {
+            title: "General Settings",
+            url: `/admin/${locale}/settings/general`,
+          },
+          {
+            title: "Payment Settings",
+            url: `/admin/${locale}/settings/payment`,
+          },
+        ],
+      },
+      {
+        title: "Support Center",
+        url: `/admin/${locale}/support`,
+        icon: HelpCircle,
+        items: [
+          {
+            title: "System Documentation",
+            url: `/admin/${locale}/support/docs`,
+          },
+          {
+            title: "Contact Management",
+            url: `/admin/${locale}/support/contacts`,
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <Sidebar collapsible="icon" {...props} className="hide-scrollbar">

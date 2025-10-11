@@ -74,11 +74,14 @@ const ComplaintsPage = () => {
   };
 
   return (
-    <div className="p-6 space-y-6 max-h-screen overflow-y-auto pb-32 hide-scrollbar ">
-      <Header
-        title="Complaints Management"
-        description="Manage and review user complaints and reports"
-      />
+    <div className="mx-auto pb-24 p-6  max-h-screen sidebar-scrollbar overflow-auto">
+      {/* Header */}
+      <div className="mb-6">
+        <Header
+          title="Complaints Management"
+          description="Manage and review user complaints and reports"
+        />
+      </div>
 
       <StatisticsCards />
 
