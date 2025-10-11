@@ -5,95 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/admin/shared";
 import { Save, Eye, Edit3 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import dynamic from "next/dynamic";
-
-// Dynamically import React Quill to avoid SSR issues
-const ReactQuill = dynamic(() => import("react-quill"), {
-  ssr: false,
-  loading: () => (
-    <div className="h-48 bg-gray-100 dark:bg-gray-800 rounded-lg animate-pulse"></div>
-  ),
-});
-
-import "react-quill/dist/quill.snow.css";
-
-// Memoized RichTextSection component
-const RichTextSection = React.memo(
-  ({
-    title,
-    value,
-    onChange,
-    placeholder,
-    isEditing,
-  }: {
-    title: string;
-    value: string;
-    onChange: (value: string) => void;
-    placeholder: string;
-    isEditing: boolean;
-  }) => {
-    // React Quill modules configuration
-    const modules = {
-      toolbar: [
-        [{ header: [1, 2, 3, 4, 5, 6, false] }],
-        [{ font: [] }],
-        ["bold", "italic", "underline", "strike"],
-        [{ color: [] }, { background: [] }],
-        [{ list: "ordered" }, { list: "bullet" }],
-        [{ align: [] }],
-        ["link", "image", "video"],
-        ["blockquote", "code-block"],
-        ["clean"],
-      ],
-    };
-
-    const formats = [
-      "header",
-      "font",
-      "size",
-      "bold",
-      "italic",
-      "underline",
-      "strike",
-      "color",
-      "background",
-      "list",
-      "bullet",
-      "align",
-      "link",
-      "image",
-      "video",
-      "blockquote",
-      "code-block",
-    ];
-
-    return (
-      <div className="space-y-3">
-        <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-          {title}
-        </label>
-        {isEditing ? (
-          <ReactQuill
-            value={value}
-            onChange={onChange}
-            modules={modules}
-            formats={formats}
-            placeholder={placeholder}
-            theme="snow"
-            className="bg-white dark:bg-gray-800 rounded-lg"
-          />
-        ) : (
-          <div
-            className="ql-editor p-4 border rounded-lg bg-gray-50 dark:bg-gray-800 min-h-[200px] prose dark:prose-invert max-w-none"
-            dangerouslySetInnerHTML={{ __html: value }}
-          />
-        )}
-      </div>
-    );
-  }
-);
-
-RichTextSection.displayName = "RichTextSection";
+import { RichTextSection } from "@/components/shared";
 
 const AboutUsPage = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -184,7 +96,7 @@ const AboutUsPage = () => {
               <Button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 bg-primary-color1 text-white"
               >
                 <Save className="w-4 h-4" />
                 {saving ? "Saving..." : "Save Changes"}
@@ -193,7 +105,7 @@ const AboutUsPage = () => {
           ) : (
             <Button
               onClick={() => setIsEditing(true)}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 bg-primary-color1 text-white"
             >
               <Edit3 className="w-4 h-4" />
               Edit Content
@@ -205,10 +117,10 @@ const AboutUsPage = () => {
       <div className="grid grid-cols-1 gap-6">
         {/* Main Content Editor */}
         <div className="lg:col-span-2 space-y-6">
-          <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+          <Card className="">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Edit3 className="w-5 h-5 text-primary-600" />
+                <Edit3 className="w-5 h-5 text-primary-color1" />
                 Main Content
               </CardTitle>
             </CardHeader>
@@ -242,7 +154,7 @@ const AboutUsPage = () => {
             </CardContent>
           </Card>
 
-          <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+          <Card className="">
             <CardHeader>
               <CardTitle>Additional Information</CardTitle>
             </CardHeader>

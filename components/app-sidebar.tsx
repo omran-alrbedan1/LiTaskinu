@@ -260,7 +260,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         icon: ShieldAlert,
         items: [
           {
-            title: "New Complaints",
+            title: "All Complaints",
             url: `/admin/${locale}/complaints`,
           },
           {

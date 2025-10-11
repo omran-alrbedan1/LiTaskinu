@@ -189,3 +189,77 @@ interface Complaint {
   attachments: string[];
   wasBanned: boolean;
 }
+
+// types/faq.ts
+interface FAQItem {
+  id: string;
+  question: string;
+  answer: string;
+  order: number;
+}
+
+interface FAQManagementProps {
+  initialFaqs?: FAQItem[];
+}
+
+interface FAQItemProps {
+  faq: FAQItem;
+  index: number;
+  isEditing: boolean;
+  totalFaqs: number;
+  onUpdate: (id: string, field: keyof FAQItem, value: unknown) => void;
+  onRemove: (id: string) => void;
+  onMoveUp: (index: number) => void;
+  onMoveDown: (index: number) => void;
+}
+
+interface FAQListProps {
+  faqs: FAQItem[];
+  isEditing: boolean;
+  onAddFAQ: () => void;
+  onUpdateFAQ: (id: string, field: keyof FAQItem, value: unknown) => void;
+  onRemoveFAQ: (id: string) => void;
+  onMoveFAQUp: (index: number) => void;
+  onMoveFAQDown: (index: number) => void;
+}
+
+
+
+// terms and condations : 
+
+interface TermsContent {
+  title: string;
+  lastUpdated: string;
+  introduction: string;
+  acceptance: string;
+  eligibility: string;
+  userResponsibilities: string;
+  islamicGuidelines: string;
+  platformServices: string;
+  privacyCommunication: string;
+  prohibitedActivities: string;
+  termination: string;
+  intellectualProperty: string;
+  disclaimer: string;
+  limitationLiability: string;
+  changes: string;
+  governingLaw: string;
+  contact: string;
+}
+
+
+// privacy policy : 
+
+interface PrivacyContent {
+  title: string;
+  lastUpdated: string;
+  introduction: string;
+  informationCollection: string;
+  informationUsage: string;
+  informationSharing: string;
+  dataSecurity: string;
+  userRights: string;
+  retention: string;
+  changes: string;
+  contact: string;
+}

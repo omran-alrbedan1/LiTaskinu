@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronRight, type LucideIcon } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import {
   Collapsible,
@@ -37,12 +37,33 @@ export function NavMain({
   title?: string;
 }) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const isActiveLink = (url: string) => {
-    if (pathname === url) return true;
-    const currentPathWithoutQuery = pathname.split("?")[0];
-    const urlWithoutQuery = url.split("?")[0];
-    return currentPathWithoutQuery === urlWithoutQuery;
+    const [path, query] = url.split("?");
+    const currentPath = pathname;
+
+    if (currentPath !== path) return false;
+
+    if (!query) {
+      return !searchParams.get("status");
+    }
+
+    const targetParams = new URLSearchParams(query);
+    let isMatch = true;
+
+    targetParams.forEach((value, key) => {
+      if (searchParams.get(key) !== value) {
+        isMatch = false;
+      }
+    });
+
+    return isMatch;
+  };
+
+  const hasActiveChild = (parentItem: { items?: { url: string }[] }) => {
+    if (!parentItem.items) return false;
+    return parentItem.items.some((child) => isActiveLink(child.url));
   };
 
   return (
@@ -53,31 +74,35 @@ export function NavMain({
         </SidebarGroupLabel>
       )}
       <SidebarMenu>
-        {items.map((item) => {
+        {items?.map((item) => {
           const isActive = isActiveLink(item.url);
+          const childActive = hasActiveChild(item);
 
           return (
             <SidebarMenuItem key={item.title}>
               {item.items && item.items.length > 0 ? (
                 <Collapsible
                   asChild
-                  defaultOpen={item.isActive}
-                  className=" p-1"
+                  defaultOpen={isActive || childActive}
+                  className="p-1"
                 >
                   <div>
                     <CollapsibleTrigger asChild>
                       <SidebarMenuButton
                         tooltip={item.title}
-                        className={
-                          isActive
-                            ? "hover:bg-primary-color1  bg-primary-color1 text-white"
-                            : ""
-                        }
+                        className={cn(
+                          "transition-colors duration-200",
+                          isActive || childActive
+                            ? "hover:bg-primary-color1 bg-primary-color1 text-white"
+                            : "hover:bg-muted"
+                        )}
                       >
                         {item.icon && (
                           <item.icon
                             className={
-                              isActive ? "text-white" : "text-primary-color1"
+                              isActive || childActive
+                                ? "text-white"
+                                : "text-primary-color1"
                             }
                           />
                         )}
@@ -94,11 +119,12 @@ export function NavMain({
                             <SidebarMenuSubItem key={subItem.title}>
                               <SidebarMenuSubButton
                                 asChild
-                                className={
+                                className={cn(
+                                  "transition-colors duration-200",
                                   isSubItemActive
                                     ? "bg-primary-color1 text-white"
-                                    : ""
-                                }
+                                    : "hover:bg-muted"
+                                )}
                               >
                                 <a href={subItem.url}>
                                   <span>{subItem.title}</span>
@@ -116,9 +142,10 @@ export function NavMain({
                   asChild
                   tooltip={item.title}
                   className={cn(
+                    "transition-colors duration-200",
                     isActive
-                      ? "hover:bg-primary-color1 hover:text-white  bg-primary-color1 text-white"
-                      : ""
+                      ? "hover:bg-primary-color1 bg-primary-color1 text-white"
+                      : "hover:bg-muted"
                   )}
                 >
                   <a href={item.url}>
