@@ -9,9 +9,10 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 import SubmitButton from "../../Buttons/SubmitButton";
-import CustomFormField from "../../shared/CustomInput";
-import { FormFieldType } from "@/enums";
 import { ICONS } from "@/constants/icons";
+import CustomFormField, {
+  FormFieldType,
+} from "@/components/shared/CustomInput";
 
 const RegisterFormValidation = z.object({
   username: z.string().min(1, "Username is required"),

@@ -24,7 +24,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { FormFieldType } from "@/enums";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"; // Add this import
+
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -45,6 +46,19 @@ import {
 } from "@/components/ui/command";
 import React from "react";
 
+export enum FormFieldType {
+  INPUT = "input",
+  PASSWORD = "password",
+  TEXTAREA = "textarea",
+  PHONE_INPUT = "phoneInput",
+  CHECKBOX = "checkbox",
+  DATE_PICKER = "datePicker",
+  SELECT = "select",
+  SKELETON = "skeleton",
+  COMBOBOX = "combobox",
+  RADIO = "radio",
+}
+
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   const {
     fieldType,
@@ -56,6 +70,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     renderSkeleton,
     required,
     options = [],
+    orientation = "vertical",
   } = props;
 
   const [dropdown, setDropdown] =
@@ -159,13 +174,19 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
       return renderSkeleton ? renderSkeleton(field) : null;
     case FormFieldType.SELECT:
       return (
-        <Select onValueChange={field.onChange} defaultValue={field.value}>
+        <Select
+          onValueChange={(value) => {
+            field.onChange(value);
+            props.onValueChange?.(value);
+          }}
+          defaultValue={field.value}
+        >
           <FormControl>
             <SelectTrigger className="w-full border border-dark-500 pl-3 rounded-lg h-10 bg-dark-400">
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
           </FormControl>
-          <SelectContent className="bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600">
+          <SelectContent className="bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 z-[9999]">
             {options.map((option) => (
               <SelectItem
                 key={option.value}
@@ -309,6 +330,34 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           </div>
         </FormControl>
       );
+    case FormFieldType.RADIO: // Add this case
+      return (
+        <FormControl>
+          <RadioGroup
+            onValueChange={field.onChange}
+            defaultValue={field.value}
+            value={field.value}
+            className={`flex ${
+              orientation === "horizontal" ? "flex-row gap-6" : "flex-col gap-3"
+            }`}
+          >
+            {options.map((option) => (
+              <div key={option.value} className="flex items-center space-x-2">
+                <RadioGroupItem
+                  value={option.value}
+                  id={`${props.name}-${option.value}`}
+                />
+                <Label
+                  htmlFor={`${props.name}-${option.value}`}
+                  className="cursor-pointer text-sm"
+                >
+                  {option.label}
+                </Label>
+              </div>
+            ))}
+          </RadioGroup>
+        </FormControl>
+      );
     default:
       return null;
   }
@@ -316,6 +365,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
 
 const CustomFormField = (props: CustomProps) => {
   const { control, fieldType, name, label, required } = props;
+
   return (
     <FormField
       control={control}
@@ -323,6 +373,7 @@ const CustomFormField = (props: CustomProps) => {
       render={({ field }) => (
         <FormItem className="flex-1 flex flex-col">
           {fieldType !== FormFieldType.CHECKBOX &&
+            fieldType !== FormFieldType.RADIO &&
             label &&
             (required ? (
               <p className="flex items-center gap-1">
@@ -332,6 +383,31 @@ const CustomFormField = (props: CustomProps) => {
             ) : (
               <FormLabel className="mb-2">{label}</FormLabel>
             ))}
+
+          {/* For RADIO type, show label above the radio group */}
+          {fieldType === FormFieldType.RADIO &&
+            label &&
+            (required ? (
+              <p className="flex items-center gap-1 mb-3">
+                <FormLabel>{label}</FormLabel>
+                <span className="text-red-400 text-xl -mt-1">*</span>
+              </p>
+            ) : (
+              <FormLabel className="mb-3">{label}</FormLabel>
+            ))}
+
+          {/* For CHECKBOX type, label is handled inside the component */}
+          {fieldType === FormFieldType.CHECKBOX && (
+            <div className="mb-2">
+              {required && label && (
+                <p className="flex items-center gap-1 mb-2">
+                  <span className="text-sm font-medium">{label}</span>
+                  <span className="text-red-400 text-xl -mt-1">*</span>
+                </p>
+              )}
+            </div>
+          )}
+
           <FormControl>
             <RenderField field={field} props={props} />
           </FormControl>

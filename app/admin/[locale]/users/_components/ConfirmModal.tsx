@@ -10,7 +10,7 @@ interface ConfirmModalProps {
   title: string;
   confirmText: string;
   content: React.ReactNode;
-  confirmButtonColor?: string; // Color parameter
+  confirmButtonColor?: string;
   icon?: React.ReactNode;
 }
 

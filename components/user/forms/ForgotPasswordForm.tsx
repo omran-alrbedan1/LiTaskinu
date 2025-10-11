@@ -8,8 +8,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import SubmitButton from "@/components/Buttons/SubmitButton";
-import CustomFormField from "@/components/shared/CustomInput";
-import { FormFieldType } from "@/enums";
+import CustomFormField, {
+  FormFieldType,
+} from "@/components/shared/CustomInput";
 import { ICONS } from "@/constants/icons";
 
 const ForgotPasswordValidation = z.object({

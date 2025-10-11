@@ -78,6 +78,18 @@ const data = {
           title: "Banned Users",
           url: "/admin/users?filter=banned",
         },
+        {
+          title: "Account Activation/Deactivation",
+          url: "/admin/users/account-status",
+        },
+        {
+          title: "Document Review",
+          url: "/admin/users/documents",
+        },
+        {
+          title: "Email & Phone Bans",
+          url: "/admin/users/contact-bans",
+        },
       ],
     },
     {
@@ -100,6 +112,33 @@ const data = {
         {
           title: "Document Review",
           url: "/admin/verification/documents",
+        },
+        {
+          title: "Verification Settings",
+          url: "/admin/verification/settings",
+        },
+      ],
+    },
+    {
+      title: "Ad Management",
+      url: "/admin/ads",
+      icon: Eye,
+      items: [
+        {
+          title: "Active Ads",
+          url: "/admin/ads/active",
+        },
+        {
+          title: "Ad Approval",
+          url: "/admin/ads/approval",
+        },
+        {
+          title: "Ad Statistics",
+          url: "/admin/ads/statistics",
+        },
+        {
+          title: "Ad Campaigns",
+          url: "/admin/ads/campaigns",
         },
       ],
     },
@@ -132,6 +171,14 @@ const data = {
           title: "Parent Approvals",
           url: "/admin/marriage-requests/parent-approvals",
         },
+        {
+          title: "Track Status",
+          url: "/admin/marriage-requests/tracking",
+        },
+        {
+          title: "Chat Approvals",
+          url: "/admin/marriage-requests/chat-approvals",
+        },
       ],
     },
     {
@@ -139,14 +186,6 @@ const data = {
       url: "/admin/matching",
       icon: Calendar,
       items: [
-        {
-          title: "Algorithm Settings",
-          url: "/admin/matching/algorithm",
-        },
-        {
-          title: "Compatibility Scores",
-          url: "/admin/matching/compatibility",
-        },
         {
           title: "Manual Matching",
           url: "/admin/matching/manual",
@@ -182,6 +221,10 @@ const data = {
           title: "Parent Notifications",
           url: "/admin/chats/parent-notifications",
         },
+        {
+          title: "Chat Analytics",
+          url: "/admin/chats/analytics",
+        },
       ],
     },
     {
@@ -194,21 +237,18 @@ const data = {
           url: "/admin/reported/chats",
         },
         {
+          title: "Chat Content Review",
+          url: "/admin/reported/chat-review",
+        },
+        {
           title: "Reported Profiles",
           url: "/admin/reported/profiles",
-        },
-        {
-          title: "Reported Messages",
-          url: "/admin/reported/messages",
-        },
-        {
-          title: "Abuse Reports",
-          url: "/admin/reported/abuse",
         },
       ],
     },
   ],
 
+  // Security & Compliance
   security: [
     {
       title: "Complaints System",
@@ -224,12 +264,20 @@ const data = {
           url: "/admin/complaints?status=investigation",
         },
         {
+          title: "Under Review",
+          url: "/admin/complaints?status=review",
+        },
+        {
           title: "Resolved Complaints",
           url: "/admin/complaints?status=resolved",
         },
         {
           title: "Complaint Statistics",
           url: "/admin/complaints/statistics",
+        },
+        {
+          title: "Complaint Tracking",
+          url: "/admin/complaints/tracking",
         },
       ],
     },
@@ -256,29 +304,6 @@ const data = {
         },
       ],
     },
-    {
-      title: "Security Monitoring",
-      url: "/admin/security",
-      icon: Shield,
-      items: [
-        {
-          title: "Suspicious Activity",
-          url: "/admin/security/activity",
-        },
-        {
-          title: "Login Attempts",
-          url: "/admin/security/logins",
-        },
-        {
-          title: "Security Logs",
-          url: "/admin/security/logs",
-        },
-        {
-          title: "Data Export Requests",
-          url: "/admin/security/data-export",
-        },
-      ],
-    },
   ],
 
   // Content & System Management
@@ -291,6 +316,10 @@ const data = {
         {
           title: "Static Pages",
           url: "/admin/content/pages",
+        },
+        {
+          title: "About Us",
+          url: "/admin/content/about-us",
         },
         {
           title: "Terms & Conditions",
@@ -327,10 +356,6 @@ const data = {
           title: "Matching Reports",
           url: "/admin/analytics/matching",
         },
-        {
-          title: "Revenue Reports",
-          url: "/admin/analytics/revenue",
-        },
       ],
     },
     {
@@ -350,9 +375,10 @@ const data = {
           title: "SMS Notifications",
           url: "/admin/notifications/sms",
         },
+
         {
-          title: "Notification Logs",
-          url: "/admin/notifications/logs",
+          title: "Notification Settings",
+          url: "/admin/notifications/settings",
         },
       ],
     },
@@ -373,14 +399,6 @@ const data = {
           title: "Payment Settings",
           url: "/admin/settings/payment",
         },
-        {
-          title: "Language Settings",
-          url: "/admin/settings/language",
-        },
-        {
-          title: "API Configuration",
-          url: "/admin/settings/api",
-        },
       ],
     },
     {
@@ -388,14 +406,6 @@ const data = {
       url: "/admin/support",
       icon: HelpCircle,
       items: [
-        {
-          title: "Help Desk",
-          url: "/admin/support/help-desk",
-        },
-        {
-          title: "User Guides",
-          url: "/admin/support/guides",
-        },
         {
           title: "System Documentation",
           url: "/admin/support/docs",
@@ -408,7 +418,6 @@ const data = {
     },
   ],
 };
-
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { state } = useSidebar();
 

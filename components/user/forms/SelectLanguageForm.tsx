@@ -9,8 +9,7 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 import SubmitButton from "../../Buttons/SubmitButton";
-import CustomFormField from "../../shared/CustomInput";
-import { FormFieldType } from "@/enums";
+import CustomFormField, { FormFieldType } from "../../shared/CustomInput";
 import Image from "next/image";
 import { images } from "@/constants/images";
 import { languageOptions } from "@/constants/options";

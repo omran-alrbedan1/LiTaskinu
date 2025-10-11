@@ -7,10 +7,12 @@ import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { Ban, Shield, Clock } from "lucide-react";
 import { Form, FormMessage } from "@/components/ui/form";
-import CustomFormField from "@/components/shared/CustomInput";
 import SubmitButton from "@/components/Buttons/SubmitButton";
-import { FormFieldType } from "@/enums";
+
 import { durationOptions } from "@/constants/options";
+import CustomFormField, {
+  FormFieldType,
+} from "@/components/shared/CustomInput";
 
 interface BanModalProps {
   open: boolean;
@@ -82,7 +84,7 @@ const BanModal: React.FC<BanModalProps> = ({
 
           {/* Main Message */}
           <div className="text-center px-4">
-            <p className=" font-semibold text-lg leading-tight">
+            <p className="   font-semibold text-lg leading-tight">
               Restrict access for{" "}
               <span className="text-primary-color1 font-bold">{user.name}</span>
               ?

@@ -36,7 +36,7 @@ const ActivityStats: React.FC<ActivityStatsProps> = ({ user }) => {
       </div>
 
       {/* Reports Count */}
-      {user.reportsCount > 0 && (
+      {user?.reportsCount! > 0 && (
         <div className="flex items-center gap-2 px-3 py-1.5 bg-orange-50 dark:bg-orange-900/20 rounded-full border border-orange-200 dark:border-orange-800">
           <FlagOutlined className="text-orange-600 dark:text-orange-400 text-xs" />
           <span className="text-sm font-semibold text-orange-700 dark:text-orange-300">

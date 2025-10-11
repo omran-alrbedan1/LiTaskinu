@@ -36,7 +36,7 @@ const StatsGrid = ({ stats }: StatsGridProps) => {
         const colorClass = colorMap[stat.color as keyof typeof colorMap];
 
         return (
-          <Card key={index} className="dark:shadow-darkMod-300">
+          <Card key={index} className="">
             <CardContent className="p-4 text-center">
               <div className={`flex justify-center mb-2 ${colorClass}`}>
                 <IconComponent className="w-5 h-5" />

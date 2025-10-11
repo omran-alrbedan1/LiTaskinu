@@ -10,13 +10,14 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import SubmitButton from "../../Buttons/SubmitButton";
 import { LoginFormValidation } from "@/validation";
-import CustomFormField from "../../shared/CustomInput";
-import { FormFieldType } from "@/enums";
 import { ICONS } from "@/constants/icons";
 import Image from "next/image";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import { images } from "@/constants/images";
 import Link from "next/link";
+import CustomFormField, {
+  FormFieldType,
+} from "@/components/shared/CustomInput";
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);

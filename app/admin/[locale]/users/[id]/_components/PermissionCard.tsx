@@ -6,11 +6,7 @@ interface PermissionCardProps {
   isActive: boolean;
 }
 
-export const PermissionCard = ({
-  icon,
-  title,
-  isActive,
-}: PermissionCardProps) => (
+const PermissionCard = ({ icon, title, isActive }: PermissionCardProps) => (
   <Card
     className={`text-center p-4 ${
       isActive ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"
@@ -27,3 +23,5 @@ export const PermissionCard = ({
     </CardContent>
   </Card>
 );
+
+export default PermissionCard;

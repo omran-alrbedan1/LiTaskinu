@@ -69,7 +69,7 @@ const PreferencesSection = ({ preferences }: PreferencesSectionProps) => {
         <SectionHeader
           title="Partner Preferences"
           description="Desired characteristics in a potential partner"
-          icon={<FaUserShield className="w-8 h-8 text-primary-color1" />}
+          icon={<RiUserSearchFill className="w-8 h-8 text-primary-color1" />}
         />
 
         {/* Split Layout: Unknown Person + Preferences */}

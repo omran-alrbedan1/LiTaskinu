@@ -1,4 +1,3 @@
-"use client";
 import LoginForm from "@/components/user/forms/loginForm";
 import { images } from "@/constants/images";
 import Image from "next/image";

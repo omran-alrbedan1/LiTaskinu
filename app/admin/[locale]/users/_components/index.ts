@@ -7,7 +7,6 @@ export { default as VerificationBadge } from "./VerificationBadge";
 export { default as ActivityStats } from "./ActivityStats";
 export { default as EmailModal } from "./EmailModal";
 export { default as ConfirmModal } from "./ConfirmModal";
-export { default as BanModal } from "./BanModal";
 export { default as DeleteModal } from "./DeleteModal";
 export { default as VerifyModal } from "./VerifyModal";
 export { default as UnbanModal } from "./UnbanModal";

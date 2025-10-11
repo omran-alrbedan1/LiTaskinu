@@ -12,8 +12,8 @@ import {
   BlockOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
-import { EmailModal, BanModal, DeleteModal, VerifyModal, UnbanModal } from ".";
-
+import { EmailModal, DeleteModal, VerifyModal, UnbanModal } from ".";
+import { BanModal } from "@/components/admin/shared";
 interface UserActionsProps {
   user: User;
 }

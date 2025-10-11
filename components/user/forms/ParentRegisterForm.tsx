@@ -9,8 +9,7 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 import SubmitButton from "../../Buttons/SubmitButton";
-import CustomFormField from "../../shared/CustomInput";
-import { FormFieldType } from "@/enums";
+import CustomFormField, { FormFieldType } from "../../shared/CustomInput";
 import { ICONS } from "@/constants/icons";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import { countryOptions, kinshipOptions } from "@/constants/options";
