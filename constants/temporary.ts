@@ -668,3 +668,220 @@ export const initialPrivacyContent = {
     </ul>
   `,
 };
+
+export const initialSuccessStories = [
+  {
+    id: "1",
+    title: "A Blessed Union Through Faith",
+    coupleNames: "Ahmed & Aisha",
+    marriageDate: "March 15, 2024",
+    location: "Dubai, UAE",
+    story: `
+      <h3>Our Journey to Marriage</h3>
+      <p>Ahmed and Aisha connected through our platform in early 2023. Both were seeking a partner who shared their commitment to Islamic values and family life.</p>
+      
+      <h3>How They Connected</h3>
+      <p>After careful consideration and involving their families from the beginning, they found common ground in their faith, life goals, and vision for marriage.</p>
+      
+      <h3>The Proposal</h3>
+      <p>With proper Islamic etiquette and family involvement, Ahmed proposed to Aisha in the presence of both families, following all Islamic guidelines.</p>
+      
+      <h3>Marriage Blessings</h3>
+      <p>Their marriage was solemnized in a beautiful Islamic ceremony, surrounded by family and friends who witnessed their commitment to building a Muslim household.</p>
+    `,
+    testimonial:
+      "This platform helped us find each other while maintaining Islamic principles. The guidance and structure made our journey blessed and halal.",
+    order: 1,
+  },
+  {
+    id: "2",
+    title: "From Platform to Lifelong Partners",
+    coupleNames: "Mohammed & Fatima",
+    marriageDate: "January 20, 2024",
+    location: "Riyadh, Saudi Arabia",
+    story: `
+      <h3>Finding Compatibility</h3>
+      <p>Mohammed and Fatima appreciated the platform's emphasis on Islamic compatibility and family involvement in the process.</p>
+      
+      <h3>Family Involvement</h3>
+      <p>Both families were involved from the early stages, ensuring the relationship developed according to Islamic guidelines with proper supervision.</p>
+      
+      <h3>Building Trust</h3>
+      <p>Through the platform's secure communication channels, they built trust and understanding while maintaining Islamic boundaries.</p>
+      
+      <h3>Blessed Union</h3>
+      <p>Their marriage has been a source of barakah in their lives, and they continue to grow together in faith and love.</p>
+    `,
+    testimonial:
+      "The Islamic framework of this platform gave us confidence throughout our journey. Alhamdulillah for this blessed means of finding a righteous spouse.",
+    order: 2,
+  },
+  {
+    id: "3",
+    title: "A Story of Patience and Faith",
+    coupleNames: "Omar & Khadija",
+    marriageDate: "December 5, 2023",
+    location: "Cairo, Egypt",
+    story: `
+      <h3>Trusting in Allah's Plan</h3>
+      <p>Omar and Khadija both turned to the platform after making du'a for righteous spouses. They trusted that Allah would guide them to the right person.</p>
+      
+      <h3>Islamic Values First</h3>
+      <p>Their connection was built on shared Islamic values, mutual respect, and a commitment to following the Sunnah in their relationship.</p>
+      
+      <h3>Proper Procedures</h3>
+      <p>They followed all Islamic protocols, involving guardians and maintaining proper boundaries until their marriage was formalized.</p>
+      
+      <h3>Continuing the Journey</h3>
+      <p>Now married, they continue to support each other in their deen and strive to build a household that pleases Allah.</p>
+    `,
+    testimonial:
+      "This platform respects Islamic boundaries while helping Muslims find compatible partners. We are grateful for this halal means of marriage.",
+    order: 3,
+  },
+];
+
+export const initialRequiredDocuments: RequiredDocument[] = [
+  {
+    id: "1",
+    title: "National ID Card",
+    description: "Government-issued national identification card",
+    fileTypes: ["jpg", "jpeg", "png", "pdf"],
+    isRequired: true,
+    forUserType: "all",
+    instructions:
+      "Upload clear photos of both front and back sides of your national ID card. Ensure all details are readable.",
+  },
+  {
+    id: "2",
+    title: "Passport",
+    description: "Valid passport with photo and personal details",
+    fileTypes: ["jpg", "jpeg", "png", "pdf"],
+    isRequired: true,
+    forUserType: "all",
+    instructions:
+      "Upload the photo page of your passport. Make sure the photo and all text are clearly visible.",
+  },
+  {
+    id: "3",
+    title: "Proof of Income",
+    description: "Document proving source of income or employment",
+    fileTypes: ["pdf", "jpg", "jpeg", "png"],
+    isRequired: false,
+    forUserType: "all",
+    instructions:
+      "Upload salary certificate, bank statements, or business registration documents.",
+  },
+  {
+    id: "4",
+    title: "Guardian Approval Document",
+    description: "Document proving guardian approval for marriage",
+    fileTypes: ["pdf", "jpg", "jpeg", "png"],
+    isRequired: true,
+    forUserType: "female",
+    instructions:
+      "Upload signed guardian approval document or Wali consent form.",
+  },
+  {
+    id: "5",
+    title: "Educational Certificates",
+    description: "Academic qualifications and degrees",
+    fileTypes: ["pdf", "jpg", "jpeg", "png"],
+    isRequired: false,
+    forUserType: "all",
+    instructions: "Upload your highest educational certificates or degrees.",
+  },
+];
+
+export const initialVerificationRequests: VerificationRequest[] = [
+  {
+    id: "1",
+    user: {
+      id: 1,
+      name: "Ahmed Al-Mansoori",
+      email: "ahmed.mansoori@email.com",
+      phone: "+966501234567",
+      avatar: "/images/userTest.jpg",
+    },
+    submittedAt: "2024-01-15T10:30:00Z",
+    status: "pending",
+    documents: [
+      {
+        id: "doc_1",
+        type: "national_id",
+        name: "National_ID_Front.jpg",
+        uploadedAt: "2024-01-15T10:25:00Z",
+        status: "pending",
+      },
+      {
+        id: "doc_2",
+        type: "national_id",
+        name: "National_ID_Back.jpg",
+        uploadedAt: "2024-01-15T10:25:00Z",
+        status: "pending",
+      },
+    ],
+  },
+  {
+    id: "2",
+    user: {
+      id: 2,
+      name: "Fatima Al-Rashid",
+      email: "fatima.rashid@email.com",
+      phone: "+966502345678",
+    },
+    submittedAt: "2024-01-14T14:20:00Z",
+    status: "under_review",
+    documents: [
+      {
+        id: "doc_4",
+        type: "national_id",
+        name: "ID_Card.pdf",
+        uploadedAt: "2024-01-14T14:15:00Z",
+        status: "verified",
+      },
+    ],
+  },
+  {
+    id: "3",
+    user: {
+      id: 3,
+      name: "Mohammed Hassan",
+      email: "mohammed.hassan@email.com",
+      phone: "+966503456789",
+    },
+    submittedAt: "2024-01-13T09:15:00Z",
+    status: "approved",
+    documents: [
+      {
+        id: "doc_6",
+        type: "passport",
+        name: "Passport_Scan.pdf",
+        uploadedAt: "2024-01-13T09:10:00Z",
+        status: "verified",
+      },
+    ],
+  },
+  {
+    id: "4",
+    user: {
+      id: 4,
+      name: "Sarah Abdullah",
+      email: "sarah.abdullah@email.com",
+      phone: "+966504567890",
+      avatar: "/images/userTest.jpg",
+    },
+    submittedAt: "2024-01-12T16:45:00Z",
+    status: "rejected",
+    notes: "Documents are blurry and unreadable",
+    documents: [
+      {
+        id: "doc_8",
+        type: "national_id",
+        name: "ID_Front.jpg",
+        uploadedAt: "2024-01-12T16:40:00Z",
+        status: "rejected",
+      },
+    ],
+  },
+];

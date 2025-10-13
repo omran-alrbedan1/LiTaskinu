@@ -11,6 +11,7 @@ import logo2 from "../public/images/logo2.png";
 import request from "../public/images/request.png";
 import chatTest from "../public/images/snow-mountain.jpg";
 import emptyResultSearch from "../public/images/search_result.png";
+import emptyDocument from "../public/images/EmptyDocument.png";
 
 export const images = {
   couple,
@@ -26,4 +27,5 @@ export const images = {
   request,
   chatTest,
   emptyResultSearch,
+  emptyDocument,
 };

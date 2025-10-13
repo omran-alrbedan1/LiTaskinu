@@ -21,7 +21,7 @@ const AdminDashboard = () => {
   const quickActions = QUICK_ACTIONS(statsData);
 
   return (
-    <div className="p-6 space-y-6 max-h-screen overflow-y-auto pb-32 hide-scrollbar ">
+    <div className="p-6 space-y-6 max-h-screen overflow-y-auto pb-32 sidebar-scrollbar ">
       <div className="flex justify-between items-center mb-8">
         <Header
           title="Dashboard"

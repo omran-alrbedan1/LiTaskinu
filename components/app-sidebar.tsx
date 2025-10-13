@@ -113,13 +113,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             title: "Rejected Requests",
             url: `/admin/${locale}/verification?status=rejected`,
           },
+
           {
-            title: "Document Review",
-            url: `/admin/${locale}/verification/documents`,
-          },
-          {
-            title: "Verification Settings",
-            url: `/admin/${locale}/verification/settings`,
+            title: "Required Documents",
+            url: `/admin/${locale}/verification/required-documents`,
           },
         ],
       },

@@ -223,9 +223,7 @@ interface FAQListProps {
   onMoveFAQDown: (index: number) => void;
 }
 
-
-
-// terms and condations : 
+// terms and condations :
 
 interface TermsContent {
   title: string;
@@ -247,8 +245,7 @@ interface TermsContent {
   contact: string;
 }
 
-
-// privacy policy : 
+// privacy policy :
 
 interface PrivacyContent {
   title: string;
@@ -262,4 +259,55 @@ interface PrivacyContent {
   retention: string;
   changes: string;
   contact: string;
+}
+
+// success story :
+interface SuccessStory {
+  id: string;
+  title: string;
+  coupleNames: string;
+  marriageDate: string;
+  location: string;
+  story: string;
+  testimonial: string;
+  order: number;
+}
+
+interface RequiredDocument {
+  id: string;
+  title: string;
+  description: string;
+  fileTypes: string[];
+  isRequired: boolean;
+  forUserType: "all" | "male" | "female";
+  instructions: string;
+}
+
+type VerificationStatus = "pending" | "approved" | "rejected" | "under_review";
+type DocumentStatus = "pending" | "verified" | "rejected";
+
+// types/verification.ts
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  avatar?: string;
+}
+
+interface VerificationDocument {
+  id: string;
+  type: string;
+  name: string;
+  uploadedAt: string;
+  status: DocumentStatus;
+}
+
+interface VerificationRequest {
+  id: string;
+  user: User;
+  submittedAt: string;
+  status: VerificationStatus;
+  documents: VerificationDocument[];
+  notes?: string;
 }
