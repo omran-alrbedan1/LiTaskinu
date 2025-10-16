@@ -22,6 +22,9 @@ import {
   Eye,
   Mail,
   Phone,
+  UserCog, // إضافة أيقونة جديدة لإدارة أولياء الأمور
+  UserPlus,
+  Contact,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -82,17 +85,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             title: "Banned Users",
             url: `/admin/${locale}/users?filter=banned`,
           },
+        ],
+      },
+      {
+        title: "Parent Management", // قسم جديد
+        url: `/admin/${locale}/parents`,
+        icon: UserCog,
+        items: [
           {
-            title: "Account Activation/Deactivation",
-            url: `/admin/${locale}/users/account-status`,
+            title: "All Parents",
+            url: `/admin/${locale}/parents`,
           },
           {
-            title: "Document Review",
-            url: `/admin/${locale}/users/documents`,
-          },
-          {
-            title: "Email & Phone Bans",
-            url: `/admin/${locale}/users/contact-bans`,
+            title: "Parent Messages",
+            url: `/admin/${locale}/parents/messages`,
           },
         ],
       },
@@ -102,16 +108,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         icon: UserCheck,
         items: [
           {
-            title: "Pending Requests",
+            title: "verification Requests",
             url: `/admin/${locale}/verification?status=pending`,
-          },
-          {
-            title: "Approved Requests",
-            url: `/admin/${locale}/verification?status=approved`,
-          },
-          {
-            title: "Rejected Requests",
-            url: `/admin/${locale}/verification?status=rejected`,
           },
 
           {
@@ -136,10 +134,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           {
             title: "Ad Statistics",
             url: `/admin/${locale}/ads/statistics`,
-          },
-          {
-            title: "Ad Campaigns",
-            url: `/admin/${locale}/ads/campaigns`,
           },
         ],
       },
@@ -207,43 +201,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         icon: MessageSquare,
         items: [
           {
-            title: "Active Conversations",
+            title: " Conversations",
             url: `/admin/${locale}/chats?status=active`,
-          },
-          {
-            title: "Chat Monitoring",
-            url: `/admin/${locale}/chats/monitoring`,
-          },
-          {
-            title: "Message Logs",
-            url: `/admin/${locale}/chats/logs`,
-          },
-          {
-            title: "Parent Notifications",
-            url: `/admin/${locale}/chats/parent-notifications`,
-          },
-          {
-            title: "Chat Analytics",
-            url: `/admin/${locale}/chats/analytics`,
-          },
-        ],
-      },
-      {
-        title: "Reported Content",
-        url: `/admin/${locale}/reported`,
-        icon: Flag,
-        items: [
-          {
-            title: "Reported Chats",
-            url: `/admin/${locale}/reported/chats`,
-          },
-          {
-            title: "Chat Content Review",
-            url: `/admin/${locale}/reported/chat-review`,
-          },
-          {
-            title: "Reported Profiles",
-            url: `/admin/${locale}/reported/profiles`,
           },
         ],
       },
@@ -307,10 +266,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         icon: FileText,
         items: [
           {
-            title: "Static Pages",
-            url: `/admin/${locale}/content/pages`,
-          },
-          {
             title: "About Us",
             url: `/admin/${locale}/content/about-us`,
           },
@@ -349,6 +304,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             title: "Matching Reports",
             url: `/admin/${locale}/analytics/matching`,
           },
+          {
+            title: "Parent Engagement", // إضافة جديدة
+            url: `/admin/${locale}/analytics/parent-engagement`,
+          },
         ],
       },
       {
@@ -367,6 +326,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           {
             title: "SMS Notifications",
             url: `/admin/${locale}/notifications/sms`,
+          },
+          {
+            title: "Parent Notifications", // إضافة جديدة
+            url: `/admin/${locale}/notifications/parent`,
           },
           {
             title: "Notification Settings",
@@ -391,6 +354,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             title: "Payment Settings",
             url: `/admin/${locale}/settings/payment`,
           },
+          {
+            title: "Parent Settings", // إضافة جديدة
+            url: `/admin/${locale}/settings/parent`,
+          },
         ],
       },
       {
@@ -405,6 +372,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           {
             title: "Contact Management",
             url: `/admin/${locale}/support/contacts`,
+          },
+          {
+            title: "Parent Support", // إضافة جديدة
+            url: `/admin/${locale}/support/parent`,
           },
         ],
       },
@@ -440,10 +411,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.matching} title="Marriage & Matching" />
 
         {/* Communication & Monitoring */}
-        <NavMain
-          items={data.communication}
-          title="Communication & Monitoring"
-        />
+        <NavMain items={data.communication} title="Communication " />
         {/* Security & Compliance */}
         <NavMain items={data.security} title="Security & Compliance" />
 

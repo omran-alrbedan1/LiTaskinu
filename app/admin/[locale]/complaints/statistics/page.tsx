@@ -22,7 +22,7 @@ const ComplaintStatisticsPage = () => {
   };
 
   return (
-    <div className="mx-auto pb-32 p-6 max-h-screen sidebar-scrollbar overflow-auto">
+    <div className="mx-auto pb-32 p-6 max-h-[90vh] sidebar-scrollbar overflow-auto">
       {/* Header */}
       <div className="mb-6 flex items-center justify-between">
         <Header
@@ -32,7 +32,7 @@ const ComplaintStatisticsPage = () => {
         <Button
           onClick={handleExport}
           disabled={exportLoading}
-          className="flex items-center  bg-primary-color1 text-white gap-2"
+          className="flex items-center  bg-primary-color1 text-white     gap-2"
         >
           <Download className="w-4 h-4" />
           {exportLoading ? "Exporting..." : "Export Report"}

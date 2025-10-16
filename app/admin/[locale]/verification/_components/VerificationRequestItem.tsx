@@ -37,11 +37,11 @@ interface VerificationRequestItemProps {
     total: number;
   };
   onUpdateStatus: (
-    id: string,
+    id: number,
     status: VerificationStatus,
     note?: string
   ) => void;
-  onReview: (id: string) => void;
+  onReview: (id: number) => void;
 }
 
 const VerificationRequestItem: React.FC<VerificationRequestItemProps> = ({
@@ -163,13 +163,6 @@ const VerificationRequestItem: React.FC<VerificationRequestItemProps> = ({
                 >
                   <XCircle className="w-4 h-4 mr-2" />
                   Reject
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => onUpdateStatus(request.id, "under_review")}
-                  disabled={request.status === "under_review"}
-                >
-                  <Eye className="w-4 h-4 mr-2" />
-                  Mark Under Review
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

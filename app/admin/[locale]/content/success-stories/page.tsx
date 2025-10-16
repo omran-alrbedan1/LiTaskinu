@@ -25,7 +25,7 @@ const SuccessStoriesPage = () => {
   } = useSuccessStories();
 
   return (
-    <div className="mx-auto pb-32 p-6 max-h-screen sidebar-scrollbar overflow-auto">
+    <div className="mx-auto pb-32 p-6 max-h-[90vh] sidebar-scrollbar overflow-auto">
       <div className="mb-6 flex items-center justify-between">
         <Header
           title="Manage Success Stories"

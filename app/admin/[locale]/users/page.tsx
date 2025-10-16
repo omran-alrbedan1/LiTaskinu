@@ -65,7 +65,7 @@ const UserManagementPage: React.FC = () => {
   });
 
   return (
-    <div className="mx-auto pb-24 p-2  max-h-screen sidebar-scrollbar overflow-auto">
+    <div className="mx-auto pb-24 p-8  max-h-[90vh] md:overflow-x-clip sidebar-scrollbar overflow-auto">
       {/* Header */}
       <div className="mb-6">
         <Header

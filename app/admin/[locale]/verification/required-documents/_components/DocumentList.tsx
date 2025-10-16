@@ -14,8 +14,6 @@ interface DocumentsListProps {
     value: unknown
   ) => void;
   onRemoveDocument: (id: string) => void;
-  onAddFileType: (id: string, fileType: string) => void;
-  onRemoveFileType: (id: string, fileType: string) => void;
 }
 
 export const DocumentsList: React.FC<DocumentsListProps> = ({
@@ -24,9 +22,6 @@ export const DocumentsList: React.FC<DocumentsListProps> = ({
   onAddDocument,
   onUpdateDocument,
   onRemoveDocument,
-
-  onAddFileType,
-  onRemoveFileType,
 }) => (
   <Card>
     <CardHeader>
@@ -48,8 +43,6 @@ export const DocumentsList: React.FC<DocumentsListProps> = ({
           totalDocuments={documents.length}
           onUpdate={onUpdateDocument}
           onRemove={onRemoveDocument}
-          onAddFileType={onAddFileType}
-          onRemoveFileType={onRemoveFileType}
         />
       ))}
 

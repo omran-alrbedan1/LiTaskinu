@@ -26,6 +26,8 @@ html {
 .sidebar-scrollbar::-webkit-scrollbar {
     width: 6px;
     height: 6px; 
+    margin-right: -20px;
+    position: absolute;
 }
 
 .sidebar-scrollbar::-webkit-scrollbar-track {

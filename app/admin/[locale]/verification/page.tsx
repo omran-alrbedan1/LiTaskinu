@@ -62,14 +62,14 @@ const VerificationPage = () => {
     getDocumentStats,
   } = useVerificationRequests();
 
-  const handleReview = (requestId: string) => {
+  const handleReview = (requestId: number) => {
     window.location.href = `/admin/en/verification/${requestId}`;
   };
 
   const hasActiveFilters = searchTerm || statusFilter !== "all";
 
   return (
-    <div className="mx-auto pb-32 p-6 max-h-screen sidebar-scrollbar overflow-auto">
+    <div className="mx-auto pb-32 p-6 max-h-[90vh] sidebar-scrollbar overflow-auto">
       {/* Header */}
       <Header
         title="Document Verification Requests"

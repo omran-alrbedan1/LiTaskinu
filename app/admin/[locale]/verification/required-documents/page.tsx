@@ -1,12 +1,8 @@
 "use client";
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/admin/shared";
-import { Save, Edit3, Plus, FileText } from "lucide-react";
+import { Save, Edit3 } from "lucide-react";
 import { useRequiredDocuments } from "@/hooks/useRequiredDocuments";
-import { Badge } from "@/components/ui/badge";
-import { DocumentItem } from "./_components/DocumentItem";
 import { DocumentsList } from "./_components/DocumentList";
 
 // Header Component
@@ -67,16 +63,13 @@ const RequiredDocumentsPage = () => {
       addNewDocument,
       removeDocument,
       updateDocument,
-
-      addFileType,
-      removeFileType,
       saveDocuments,
       cancelEditing,
     },
   } = useRequiredDocuments();
 
   return (
-    <div className="mx-auto pb-32 p-6 max-h-screen sidebar-scrollbar overflow-auto">
+    <div className="mx-auto pb-32 p-6 max-h-[90vh] sidebar-scrollbar overflow-auto">
       <HeaderSection
         isEditing={isEditing}
         saving={saving}
@@ -92,8 +85,6 @@ const RequiredDocumentsPage = () => {
           onAddDocument={addNewDocument}
           onUpdateDocument={updateDocument}
           onRemoveDocument={removeDocument}
-          onAddFileType={addFileType}
-          onRemoveFileType={removeFileType}
         />
       </div>
     </div>

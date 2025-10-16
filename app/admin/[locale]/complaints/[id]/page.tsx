@@ -1,10 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import { FileText, Users, Download, Calendar } from "lucide-react";
-import { Header } from "@/components/admin/shared";
+import { Header, SendWarningModal } from "@/components/admin/shared";
 import { message } from "antd";
 import { BanModal } from "@/components/admin/shared";
-import { DeleteComplaintModal, SendWarningModal } from "../_components";
+import { DeleteComplaintModal } from "../_components";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button as ShadButton } from "@/components/ui/button";
@@ -148,7 +148,7 @@ const ComplaintDetailsPage = () => {
   );
 
   return (
-    <div className="mx-auto pb-24 p-6 max-h-screen sidebar-scrollbar overflow-auto">
+    <div className="mx-auto pb-24 p-6 max-h-[90vh] sidebar-scrollbar overflow-auto">
       {/* Header */}
       <div className="mb-6 flex items-center justify-between">
         <Header

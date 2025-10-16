@@ -12,8 +12,6 @@ interface DocumentItemProps {
   totalDocuments: number;
   onUpdate: (id: string, field: keyof RequiredDocument, value: unknown) => void;
   onRemove: (id: string) => void;
-  onAddFileType: (id: string, fileType: string) => void;
-  onRemoveFileType: (id: string, fileType: string) => void;
 }
 
 export const DocumentItem: React.FC<DocumentItemProps> = ({
@@ -23,9 +21,6 @@ export const DocumentItem: React.FC<DocumentItemProps> = ({
   totalDocuments,
   onUpdate,
   onRemove,
-
-  onAddFileType,
-  onRemoveFileType,
 }) => {
   return (
     <div className="p-6 border border-gray-200 dark:border-gray-600 rounded-lg space-y-4">
@@ -80,56 +75,6 @@ export const DocumentItem: React.FC<DocumentItemProps> = ({
 
           {/* Document Specifications */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                File Types
-              </label>
-              {isEditing ? (
-                <div className="space-y-2">
-                  <div className="flex flex-wrap gap-2">
-                    {doc.fileTypes.map((type) => (
-                      <Badge
-                        key={type}
-                        variant="secondary"
-                        className="flex items-center gap-1"
-                      >
-                        .{type}
-                        <button
-                          onClick={() => onRemoveFileType(doc.id, type)}
-                          className="text-red-500 hover:text-red-700"
-                        >
-                          ×
-                        </button>
-                      </Badge>
-                    ))}
-                  </div>
-                  <div className="flex gap-2">
-                    <Input
-                      placeholder="Add file type (e.g., pdf)"
-                      onKeyPress={(e) => {
-                        if (e.key === "Enter") {
-                          onAddFileType(
-                            doc.id,
-                            (e.target as HTMLInputElement).value
-                          );
-                          (e.target as HTMLInputElement).value = "";
-                        }
-                      }}
-                      className="flex-1"
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div className="flex flex-wrap gap-2">
-                  {doc.fileTypes.map((type) => (
-                    <Badge key={type} variant="secondary">
-                      .{type}
-                    </Badge>
-                  ))}
-                </div>
-              )}
-            </div>
-
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Applicable To

@@ -29,7 +29,7 @@ import {
 import { IoChatbubbles } from "react-icons/io5";
 import { mockPhotos, userData } from "@/constants/temporary";
 import { DetailItem } from "@/components/shared";
-import { Header } from "@/components/admin/shared";
+import { BanModal, Header } from "@/components/admin/shared";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -62,7 +62,6 @@ import {
 
 import {
   EmailModal,
-  BanModal,
   DeleteModal,
   VerifyModal,
   UnbanModal,
@@ -437,7 +436,7 @@ const PersonDetailPage = () => {
 
   return (
     <>
-      <div className="p-6 space-y-6 max-h-screen overflow-y-auto pb-32 hide-scrollbar">
+      <div className="p-6 space-y-6 max-h-[90vh] overflow-y-auto pb-32 hide-scrollbar">
         <div className="flex justify-between items-center mb-8">
           <Header
             title={`${userData.name}'s Profile`}

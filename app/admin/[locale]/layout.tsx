@@ -1,4 +1,4 @@
-// src/app/admin/[locale]/layout.tsx (Recommended structure)
+// src/app/admin/[locale]/layout.tsx
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Metadata } from "next";
@@ -27,10 +27,14 @@ export default async function AdminLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <Sidebar>
-        <MainHeader />
-        <main className="p-6">{children}</main>
-      </Sidebar>
+      <div className="flex h-screen hide-scrollbar">
+        <Sidebar>
+          <div className="flex-1 flex flex-col overflow-hidden ">
+            <MainHeader />
+            <main className="p-2 ">{children}</main>
+          </div>
+        </Sidebar>
+      </div>
     </NextIntlClientProvider>
   );
 }

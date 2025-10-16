@@ -7,16 +7,24 @@ import {
   BlockOutlined,
   WarningOutlined,
   DeleteOutlined,
-  ExclamationCircleOutlined,
-  FileTextOutlined,
-  UserOutlined,
-  MessageOutlined,
 } from "@ant-design/icons";
+import { complaintTypeConfig, getComplaintConfig } from "@/configs/complaints";
 
-interface ComplaintsTableProps {
-  data: Complaint[];
-  loading?: boolean;
-  actionHandlers: ActionHandlers;
+// Define types to match your data structure
+interface User {
+  name: string;
+  email: string;
+}
+
+interface Complaint {
+  id: string;
+  reporter: User;
+  reportedUser: User;
+  type: keyof typeof complaintTypeConfig;
+  date: string;
+  status: "pending" | "resolved" | "rejected";
+  chatId?: string;
+  messages?: any[];
 }
 
 interface ActionHandlers {
@@ -25,27 +33,18 @@ interface ActionHandlers {
   onWarn: (complaint: Complaint) => void;
   onDelete: (complaint: Complaint) => void;
 }
+
+interface ComplaintsTableProps {
+  data: Complaint[];
+  loading?: boolean;
+  actionHandlers: ActionHandlers;
+}
+
 const ComplaintsTable: React.FC<ComplaintsTableProps> = ({
   data,
   loading = false,
   actionHandlers,
 }) => {
-  const typeConfig = {
-    harassment: {
-      color: "red",
-      text: "Harassment",
-      icon: <ExclamationCircleOutlined />,
-    },
-    inappropriate: {
-      color: "orange",
-      text: "Inappropriate Content",
-      icon: <FileTextOutlined />,
-    },
-    fake: { color: "purple", text: "Fake Profile", icon: <UserOutlined /> },
-    spam: { color: "blue", text: "Spam", icon: <MessageOutlined /> },
-    other: { color: "gray", text: "Other", icon: <MoreOutlined /> },
-  };
-
   const statusConfig = {
     pending: { color: "orange", text: "Under Review" },
     resolved: { color: "green", text: "Resolved" },
@@ -88,10 +87,16 @@ const ComplaintsTable: React.FC<ComplaintsTableProps> = ({
       title: "Type",
       dataIndex: "type",
       key: "type",
-      render: (type: keyof typeof typeConfig) => {
-        const config = typeConfig[type];
+      render: (type: keyof typeof complaintTypeConfig) => {
+        const config = complaintTypeConfig[type];
+        const IconComponent = config.icon;
         return (
-          <Tag color={config.color} icon={config.icon}>
+          <Tag
+            color={config.color}
+            style={{ color: config.textColor }}
+            icon={<IconComponent />}
+            className="flex items-center gap-1"
+          >
             {config.text}
           </Tag>
         );
@@ -197,4 +202,5 @@ const ComplaintsTable: React.FC<ComplaintsTableProps> = ({
     />
   );
 };
+
 export default ComplaintsTable;

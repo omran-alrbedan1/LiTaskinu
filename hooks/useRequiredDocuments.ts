@@ -34,33 +34,6 @@ export const useRequiredDocuments = () => {
     []
   );
 
-  const addFileType = useCallback((id: string, fileType: string) => {
-    if (!fileType.trim()) return;
-    setDocuments((prev) =>
-      prev.map((doc) =>
-        doc.id === id
-          ? {
-              ...doc,
-              fileTypes: [...doc.fileTypes, fileType.trim().toLowerCase()],
-            }
-          : doc
-      )
-    );
-  }, []);
-
-  const removeFileType = useCallback((id: string, fileType: string) => {
-    setDocuments((prev) =>
-      prev.map((doc) =>
-        doc.id === id
-          ? {
-              ...doc,
-              fileTypes: doc.fileTypes.filter((type) => type !== fileType),
-            }
-          : doc
-      )
-    );
-  }, []);
-
   const saveDocuments = async () => {
     setSaving(true);
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -81,8 +54,6 @@ export const useRequiredDocuments = () => {
       addNewDocument,
       removeDocument,
       updateDocument,
-      addFileType,
-      removeFileType,
       saveDocuments,
       cancelEditing,
     },

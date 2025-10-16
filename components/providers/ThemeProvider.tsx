@@ -30,7 +30,7 @@ function AntDesignThemeProvider({ children }: { children: React.ReactNode }) {
         algorithm:
           appTheme === "dark" ? theme.darkAlgorithm : theme.defaultAlgorithm,
         token: {
-          colorPrimary: "#A1AA8A",
+          colorPrimary: appTheme === "dark" ? "#c77971" : "#A1AA8A",
         },
       }}
     >

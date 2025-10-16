@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Button } from "antd";
 import { CheckCircleOutlined } from "@ant-design/icons";
-import { CheckCircle, UserCheck, ShieldCheck, BadgeCheck } from "lucide-react";
+import { CheckCircle, BadgeCheck } from "lucide-react";
 import { FaUserCheck } from "react-icons/fa6";
 
 interface ApproveVerificationModalProps {

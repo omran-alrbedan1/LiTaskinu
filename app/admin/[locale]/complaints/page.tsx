@@ -3,13 +3,12 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Card, Tag, message } from "antd";
 import { FileTextOutlined } from "@ant-design/icons";
-import { BanModal, Header } from "@/components/admin/shared";
+import { BanModal, Header, SendWarningModal } from "@/components/admin/shared";
 import { mockComplaints } from "@/constants/temporary";
 import {
   ComplaintsTable,
   DeleteComplaintModal,
   SearchFilters,
-  SendWarningModal,
   StatisticsCards,
 } from "./_components";
 
@@ -74,7 +73,7 @@ const ComplaintsPage = () => {
   };
 
   return (
-    <div className="mx-auto pb-24 p-6  max-h-screen sidebar-scrollbar overflow-auto">
+    <div className="mx-auto pb-24 p-6  max-h-[90vh] sidebar-scrollbar overflow-auto">
       {/* Header */}
       <div className="mb-6">
         <Header

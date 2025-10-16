@@ -885,3 +885,124 @@ export const initialVerificationRequests: VerificationRequest[] = [
     ],
   },
 ];
+
+export const MOCK_PARENTS: ParentType[] = [
+  {
+    key: "1",
+    parent: {
+      name: "أحمد محمد",
+      email: "ahmed@example.com",
+      phone: "+966500000001",
+      avatar: "/images/userTest.jpg",
+      relationship: "أب",
+    },
+    member: {
+      name: "سارة أحمد",
+      age: 25,
+      gender: "أنثى",
+      avatar: "/images/userTest.jpg",
+      maritalStatus: "عزباء",
+      education: "بكالوريوس إدارة أعمال",
+    },
+    contact: {
+      primaryPhone: "+966500000001",
+      secondaryPhone: "+966511111111",
+      city: "الرياض",
+    },
+    registrationDate: "2024-01-15",
+  },
+  {
+    key: "2",
+    parent: {
+      name: "فاطمة علي",
+      email: "fatima@example.com",
+      phone: "+966500000002",
+      avatar: "/images/userTest.jpg",
+      relationship: "أم",
+    },
+    member: {
+      name: "محمد فاطمة",
+      age: 28,
+      gender: "ذكر",
+      avatar: "/images/userTest.jpg",
+      maritalStatus: "أعزب",
+      education: "ماجستير هندسة كمبيوتر",
+    },
+    contact: {
+      primaryPhone: "+966500000002",
+      city: "جدة",
+    },
+    registrationDate: "2024-01-10",
+  },
+  {
+    key: "3",
+    parent: {
+      name: "خالد حسن",
+      email: "khaled@example.com",
+      phone: "+966500000003",
+      avatar: "/images/userTest.jpg",
+      relationship: "أخ",
+    },
+    member: {
+      name: "ليلى خالد",
+      age: 22,
+      gender: "أنثى",
+      avatar: "/images/userTest.jpg",
+      maritalStatus: "عزباء",
+      education: "بكالوريوس طب",
+    },
+    contact: {
+      primaryPhone: "+966500000003",
+      secondaryPhone: "+966522222222",
+      city: "الرياض",
+    },
+    registrationDate: "2024-01-18",
+  },
+  {
+    key: "4",
+    parent: {
+      name: "سعيد عبدالله",
+      email: "saed@example.com",
+      phone: "+966500000004",
+      avatar: "/images/userTest.jpg",
+      relationship: "أب",
+    },
+    member: {
+      name: "نورة سعيد",
+      age: 30,
+      gender: "أنثى",
+      avatar: "/images/userTest.jpg",
+      maritalStatus: "مطلقة",
+      education: "دبلوم محاسبة",
+    },
+    contact: {
+      primaryPhone: "+966500000004",
+      city: "الرياض",
+    },
+    registrationDate: "2024-01-05",
+  },
+  {
+    key: "5",
+    parent: {
+      name: "منى إبراهيم",
+      email: "mona@example.com",
+      phone: "+966500000005",
+      avatar: "/images/userTest.jpg",
+      relationship: "أم",
+    },
+    member: {
+      name: "يوسف منى",
+      age: 26,
+      gender: "ذكر",
+      avatar: "/images/userTest.jpg",
+      maritalStatus: "أعزب",
+      education: "بكالوريوس قانون",
+    },
+    contact: {
+      primaryPhone: "+966500000005",
+      secondaryPhone: "+966533333333",
+      city: "الدمام",
+    },
+    registrationDate: "2024-01-08",
+  },
+];

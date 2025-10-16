@@ -55,7 +55,7 @@ interface NotificationFilters {
 }
 
 interface User {
-  id: number;
+  id: number | string;
   name: string;
   email?: string;
   phone?: string;
@@ -282,32 +282,98 @@ interface RequiredDocument {
   forUserType: "all" | "male" | "female";
   instructions: string;
 }
-
 type VerificationStatus = "pending" | "approved" | "rejected" | "under_review";
 type DocumentStatus = "pending" | "verified" | "rejected";
 
-// types/verification.ts
 interface User {
-  id: string;
+  id: string | number;
   name: string;
   email: string;
   phone: string;
   avatar?: string;
+  address?: string;
+  dateOfBirth?: string;
 }
 
+// Renamed from Document to VerificationDocument to avoid conflict
 interface VerificationDocument {
-  id: string;
+  id: number;
   type: string;
   name: string;
+  url: string;
   uploadedAt: string;
   status: DocumentStatus;
+  previewUrl?: string;
+  notes?: string;
+  fileType?: "image" | "pdf";
 }
 
 interface VerificationRequest {
-  id: string;
+  id: number;
   user: User;
   submittedAt: string;
   status: VerificationStatus;
   documents: VerificationDocument[];
   notes?: string;
+}
+
+interface RequiredDocument {
+  id: string;
+  title: string;
+  description: string;
+  fileTypes: string[];
+  isRequired: boolean;
+  forUserType: "all" | "male" | "female";
+  instructions: string;
+}
+
+interface TermsSectionType {
+  id: string;
+  order: number;
+  title: string;
+  content: string;
+}
+
+interface UserType {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+}
+
+interface BlockedChatType {
+  id: string;
+  user1: UserType;
+  user2: UserType;
+  complainant: UserType;
+  reportedUser: UserType;
+  reason: string;
+  date: string;
+  blockedBy: string;
+  blockDuration: string;
+  blockExpiry: string;
+}
+interface ParentType {
+  key: string;
+  parent: {
+    name: string;
+    email: string;
+    phone: string;
+    avatar: string;
+    relationship: "أب" | "أم" | "أخ" | "وصي" | "قريب";
+  };
+  member: {
+    name: string;
+    age: number;
+    gender: "ذكر" | "أنثى";
+    avatar: string;
+    maritalStatus: "أعزب" | "عزباء" | "مطلق" | "مطلقة" | "أرمل" | "أرملة";
+    education: string;
+  };
+  contact: {
+    primaryPhone: string;
+    secondaryPhone?: string;
+    city: string;
+  };
+  registrationDate: string;
 }
