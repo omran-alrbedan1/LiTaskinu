@@ -92,28 +92,13 @@ const VerifyResetCodeForm = () => {
 
   return (
     <div className="w-full max-w-md mx-auto p-6 rounded-lg shadow-sm">
-      <div className="text-center mb-6">
-        <Image
-          src={images.logo2}
-          width={80}
-          height={80}
-          alt="logo"
-          className="mx-auto mb-4"
-        />
-        <h2 className="text-2xl font-bold text-gray-900">Verify Reset Code</h2>
-        <p className="mt-2 text-sm text-gray-600">
-          Enter the 6-digit code sent to your email address
-        </p>
-      </div>
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          {/* Code Input using shadcn InputOTP */}
           <div className="space-y-3">
-            <label className="text-sm font-medium text-gray-700">
+            <label className="text-sm font-medium text-gray-400">
               Verification Code
             </label>
-            <div className="flex justify-center">
+            <div className="flex justify-center text-white">
               <InputOTP
                 maxLength={6}
                 value={form.watch("code")}

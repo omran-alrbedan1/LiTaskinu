@@ -39,14 +39,11 @@ const LoginForm = () => {
     try {
       const userData = { name, email };
       console.log("Login data:", userData);
-      //   const user = await createUser(userData);
-      //   console.log(user);
-      //   if (user) {
-      //     router.push(`/patients/${user.$id}/register`);
-      //   }
       router.push("./home");
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -63,8 +60,9 @@ const LoginForm = () => {
       }
     }
   };
+
   return (
-    <div className="w-full max-w-md mx-auto p-6 rounded-lg shadow-sm">
+    <div className="w-full p-6 rounded-lg shadow-sm bg-transparent">
       <div className="text-center mb-4">
         <Image
           src={images.logo}
@@ -73,14 +71,17 @@ const LoginForm = () => {
           alt="logo"
           className="mx-auto mb-2 md:hidden"
         />
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-          Welcome Back
+        <h2 className="text:2xl md:text-3xl font-bold text-white     ">
+          Sign up Account
         </h2>
-        <p className="mt-2 text-sm text-gray-600">Sign in to your account</p>
+        <p className="mt-2 text-sm text-gray-400">Sign in to your Account</p>
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-4 text-white"
+        >
           <CustomFormField
             fieldType={FormFieldType.INPUT}
             control={form.control}
@@ -104,7 +105,7 @@ const LoginForm = () => {
           <div className="text-right">
             <Link
               href="./forgot-password"
-              className="text-sm text-primary hover:text-primary/90 transition-colors"
+              className="text-sm text-white hover:text-gray-300 transition-colors"
             >
               Forgot your password?
             </Link>
@@ -116,29 +117,35 @@ const LoginForm = () => {
         </form>
       </Form>
 
+      {/* Divider */}
       <div className="relative my-6">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-gray-300" />
+          <div className="w-full border-t border-gray-400" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="px-2 bg-white text-gray-500">Or continue with</span>
+          <span className="px-2 bg-black text-gray-300">Or continue with</span>
         </div>
       </div>
 
-      <GoogleLogin
-        onSuccess={handleGoogleSuccess}
-        useOneTap
-        text="signup_with"
-        shape="rectangular"
-        size="large"
-        width={"100%"}
-      />
+      {/* Google Login */}
+      <div className="bg-white rounded-lg overflow-hidden">
+        <GoogleLogin
+          onSuccess={handleGoogleSuccess}
+          useOneTap
+          text="signup_with"
+          shape="rectangular"
+          size="large"
+          width={"100%"}
+        />
+      </div>
+
+      {/* Sign Up Link */}
       <div className="mt-6 text-center">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-gray-300">
           Don't have an account?{" "}
           <button
             onClick={() => router.push("./sign-up")}
-            className="font-medium text-primary hover:text-primary/90 transition-colors"
+            className="font-medium text-white hover:text-gray-300 transition-colors"
           >
             Sign up
           </button>

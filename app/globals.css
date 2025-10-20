@@ -1,11 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body,
 html {
   height: 100%;
   overflow: hidden;
-   font-size: 17px;
+  font-size: 17px;
 }
 
 @layer utilities {
@@ -16,55 +17,55 @@ html {
 
 .hide-scrollbar {
   scrollbar-width: none;
-  -ms-overflow-style: none; 
+  -ms-overflow-style: none;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }
 
 .sidebar-scrollbar::-webkit-scrollbar {
-    width: 6px;
-    height: 6px; 
-    margin-right: -20px;
-    position: absolute;
+  width: 6px;
+  height: 6px;
+  margin-right: -20px;
+  position: absolute;
 }
 
 .sidebar-scrollbar::-webkit-scrollbar-track {
-    background: transparent; 
-    border-radius: 10px;
+  background: transparent;
+  border-radius: 10px;
 }
 
 .sidebar-scrollbar::-webkit-scrollbar-thumb {
-    background: var(--primary-color1);
-    border-radius: 10px;
-    border: 2px solid transparent; 
-    min-height: 10px; 
+  background: var(--primary-color1);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  min-height: 10px;
 }
 
 /* Hide scrollbar buttons (arrows) */
 .sidebar-scrollbar::-webkit-scrollbar-button {
-    display: none;
-    width: 0;
-    height: 0;
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 /* Hide scrollbar corner */
 .sidebar-scrollbar::-webkit-scrollbar-corner {
-    display: none;
-    background: transparent;
+  display: none;
+  background: transparent;
 }
 
 /* For Firefox */
 .sidebar-scrollbar {
-    scrollbar-width:300px;
-    scrollbar-color: var(--primary-color1) transparent;
+  scrollbar-width: 300px;
+  scrollbar-color: var(--primary-color1) transparent;
 }
 
 /* Optional: Add hover effect for better UX */
 .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-color1);
-    opacity: 0.8;
+  background: var(--primary-color1);
+  opacity: 0.8;
 }
 
 @layer base {
@@ -75,7 +76,7 @@ html {
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 75 14% 62%; /* #A1AA8A in HSL */
+    --primary: 75 14% 62%; /* #A1AA8A in HSL - Light mode */
     --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
@@ -87,7 +88,7 @@ html {
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
-    --ring: 75 14% 62%; 
+    --ring: 75 14% 62%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -102,7 +103,9 @@ html {
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --primary-color1: #A1AA8A; /* Light mode primary */
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -110,7 +113,7 @@ html {
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 75 14% 62%; /* #A1AA8A in HSL */
+    --primary: 7 47% 62%; /* #c77971 in HSL - Dark mode */
     --primary-foreground: 0 0% 9%;
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
@@ -122,7 +125,7 @@ html {
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
-    --ring: 75 14% 62%; /* Updated to match primary */
+    --ring: 7 47% 62%; /* Updated to match dark mode primary */
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -130,12 +133,13 @@ html {
     --chart-5: 340 75% 55%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 7 47% 62%; /* Updated to dark mode primary */
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 7 47% 62%; /* Updated to dark mode primary */
+    --primary-color1: #c77971; /* Dark mode primary */
   }
 }
 
@@ -148,12 +152,52 @@ html {
   }
 }
 
-::view-transition-old(root), ::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
+/* Force primary color updates for all shadcn components */
+.bg-primary {
+  background-color: hsl(var(--primary));
 }
-/* Prevent white flash in Ant Design tables during theme switch */
 
+.text-primary {
+  color: hsl(var(--primary));
+}
+
+.border-primary {
+  border-color: hsl(var(--primary));
+}
+
+.ring-primary {
+  --ring: hsl(var(--primary));
+}
+
+.hover\:bg-primary:hover {
+  background-color: hsl(var(--primary));
+}
+
+.hover\:text-primary:hover {
+  color: hsl(var(--primary));
+}
+
+.focus\:ring-primary:focus {
+  --ring: hsl(var(--primary));
+}
+
+/* Ensure buttons use the correct primary color */
+.btn-primary {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.btn-primary:hover {
+  background-color: hsl(var(--primary) / 0.9);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Prevent white flash in Ant Design tables during theme switch */
 html.dark .ant-table,
 html.dark .ant-table-empty,
 html.dark .ant-card {

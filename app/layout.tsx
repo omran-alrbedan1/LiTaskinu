@@ -17,7 +17,7 @@ export default async function Layout({
 }) {
   return (
     <html>
-      <body className="font-sans text-base">
+      <body className=" text-base">
         {" "}
         <AppProvider>{children}</AppProvider>
       </body>

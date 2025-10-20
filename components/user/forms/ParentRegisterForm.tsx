@@ -67,25 +67,21 @@ const ParentRegisterForm = () => {
   };
 
   return (
-    <div className="w-full overflow-y-scroll max-h-svh hide-scrollbar pb-20 md:p-6 md:pb-20 rounded-lg shadow-sm">
-      <div className="text-center mb-4">
-        <Image
-          src={images.logo}
-          width={100}
-          height={100}
-          alt="logo"
-          className="mx-auto mb-2 md:hidden"
-        />
-        <h2 className="text:2xl md:text-3xl font-bold text-gray-900">
+    <div className="w-full overflow-y-scroll max-h-svh hide-scrollbar pb-20 md:p-6 md:pb-20 rounded-lg shadow-sm ">
+      <div className="text-center mb-4 hidden md:block">
+        <h2 className="text:2xl md:text-3xl font-bold text-white">
           Parent Information
         </h2>
-        <p className="mt-2 text-sm text-gray-600">
+        <p className="mt-2 text-sm text-gray-300">
           Please provide parent details
         </p>
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-4 text-white"
+        >
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <CustomFormField
@@ -148,10 +144,12 @@ const ParentRegisterForm = () => {
 
       <div className="relative my-6">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-gray-300" />
+          <div className="w-full border-t border-gray-300 dark:border-gray-600" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="px-2 bg-white text-gray-500">Or continue with</span>
+          <span className="px-2 bg-gray-900 text-gray-500 dark:text-gray-400">
+            Or continue with
+          </span>
         </div>
       </div>
 

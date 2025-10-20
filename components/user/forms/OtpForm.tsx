@@ -60,9 +60,9 @@ const OtpForm = () => {
   return (
     <div className="flex flex-col max-w-lg mx-auto items-center  justify-center min-h-screen  p-4">
       <div className="w-full  p-8  rounded-xl  ">
-        <div className=" mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Enter code</h1>
-          <p className="text-gray-600 text-sm">
+        <div className=" mb-8 text-center">
+          <h1 className="text-3xl font-bold  text-white mb-2">Enter code</h1>
+          <p className="text-gray-400 text-sm">
             We've sent an SMS with an activation code to your phone{" "}
             <span className="font-medium">+33 2 94 27 84 11</span>
           </p>

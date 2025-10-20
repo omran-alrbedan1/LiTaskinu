@@ -17,4 +17,9 @@ export const ICONS = {
   verifications: "/icons/verification.svg",
   complain: "/icons/complain.svg",
   analytics: "/icons/analytics.svg",
+  facebook: "/icons/facebook.svg",
+  twitter: "/icons/twitter.svg",
+  linkedin: "/icons/linkedin.svg",
+  youtube: "/icons/youtube.svg",
+  instagram: "/icons/instagram.svg",
 };

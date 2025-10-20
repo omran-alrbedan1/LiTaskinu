@@ -45,23 +45,15 @@ const SelectLanguageForm = () => {
   }
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-sm">
-      <div className="text-center mb-6">
-        <Image
-          src={images.logo}
-          width={120}
-          height={120}
-          alt="logo"
-          className="mx-auto mb-4 lg:hidden"
-        />
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">
-          Choose the language
-        </h2>
-        <p className="text-sm text-gray-600">
-          Don't worry! It happens. Please select your preferred language.
-        </p>
-      </div>
+    <div className="w-full  mx-auto p-6  rounded-lg shadow-sm">
+      {/* Header */}
 
+      <h2 className="text-lg text-center sm:text-xl lg:text-2xl font-semibold text-white mb-2">
+        Select Your Language
+      </h2>
+      <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-gray-400">
+        <span>Choose your preferred language</span>
+      </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <CustomFormField

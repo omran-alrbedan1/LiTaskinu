@@ -58,14 +58,19 @@ const ResetPasswordForm = () => {
 
   return (
     <div className="w-full max-w-md mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-6">Create New Password</h2>
+      <h2 className="text-2xl text-center font-bold text-white mb-6">
+        Create New Password
+      </h2>
 
-      <p className="text-muted-foreground mb-6">
+      <p className="text-gray-400 text-center mb-6">
         Please enter your new password below.
       </p>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-4 text-white"
+        >
           <CustomFormField
             fieldType={FormFieldType.PASSWORD}
             control={form.control}

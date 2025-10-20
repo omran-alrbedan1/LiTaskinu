@@ -46,7 +46,7 @@ const PhotoUploadCard: React.FC<PhotoUploadCardProps> = ({
   };
 
   return (
-    <div className="border border-gray-300 rounded-lg p-4 bg-white hover:border-gray-400 transition-colors duration-200">
+    <div className="border border-gray-600 rounded-lg p-4 bg-gray-800 hover:border-gray-500 transition-colors duration-200">
       <div
         className={`flex items-center space-x-4 cursor-pointer ${
           isDragOver ? "opacity-70" : ""
@@ -57,7 +57,7 @@ const PhotoUploadCard: React.FC<PhotoUploadCardProps> = ({
         onDrop={handleDrop}
       >
         {previewUrl ? (
-          <div className="relative w-20 h-20 rounded-full overflow-hidden border border-primary-color1 flex items-center justify-center flex-shrink-0">
+          <div className="relative w-8 h-8 rounded-full overflow-hidden border border-primary-color1 flex items-center justify-center flex-shrink-0">
             <Image
               src={previewUrl}
               alt="Preview"
@@ -67,16 +67,16 @@ const PhotoUploadCard: React.FC<PhotoUploadCardProps> = ({
             />
           </div>
         ) : (
-          <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center border border-gray-300 flex-shrink-0">
+          <div className="w-16 md:w-20 h-16 md:h-20 rounded-full bg-gray-700 flex items-center justify-center border border-gray-600 flex-shrink-0">
             <Plus className="text-primary-color1" />
           </div>
         )}
 
         <div className="flex-1 min-w-0">
-          <h3 className="font-medium text-gray-900 text-base mb-1 leading-tight">
+          <h3 className="font-medium text-white text-base mb-1 leading-tight">
             {title}
           </h3>
-          <p className="text-gray-600 text-sm">{description}</p>
+          <p className="text-gray-300 text-sm">{description}</p>
           <p className="text-primary-color1 text-sm mt-1 font-medium">
             {previewUrl ? "Change photo" : "Click to upload"}
           </p>
@@ -155,20 +155,11 @@ const UserPhotoForm = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-md mx-auto p-4 bg-white">
+    <div className="w-full max-w-md mx-auto p-4 min-h-screen">
       {/* Header - More compact */}
-      <div className="text-center mb-6">
-        <Image
-          src={images.logo2}
-          width={60}
-          height={60}
-          alt="logo"
-          className="mx-auto mb-3"
-        />
-        <h1 className="text-xl font-bold text-gray-900 mb-1">
-          Face Verification
-        </h1>
-        <p className="text-gray-600 text-sm">
+      <div className="text-center mb-6 mt-12">
+        <h1 className="text-xl font-bold text-white mb-1">Face Verification</h1>
+        <p className="text-gray-400 text-sm">
           Upload clear photos from different angles
         </p>
       </div>
@@ -208,7 +199,7 @@ const UserPhotoForm = () => {
       </SubmitButton>
 
       {/* Help Text - Smaller */}
-      <p className="text-center text-sm text-gray-500 mt-3">
+      <p className="text-center text-sm text-gray-400 mt-3">
         Ensure photos are clear and well-lit
       </p>
     </div>

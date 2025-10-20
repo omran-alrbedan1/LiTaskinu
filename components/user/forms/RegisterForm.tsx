@@ -80,7 +80,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="w-full pb-20 px-4 md:p-6 md:pb-20 rounded-lg shadow-sm">
+    <div className="w-full pb-20 mt-32 px-4 md:p-6 md:pb-20 rounded-lg shadow-sm">
       <div className="text-center mb-4">
         <Image
           src={images.logo}
@@ -89,14 +89,17 @@ const RegisterForm = () => {
           alt="logo"
           className="mx-auto mb-2 md:hidden"
         />
-        <h2 className="text:2xl md:text-3xl font-bold text-gray-900">
+        <h2 className="text:2xl md:text-3xl font-bold text-white     ">
           Create Account
         </h2>
-        <p className="mt-2 text-sm text-gray-600">Sign up for a new account</p>
+        <p className="mt-2 text-sm text-gray-400">Sign up for a new account</p>
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 ">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-4 text-white "
+        >
           <>
             <div className="grid grid-cols-1  md:grid-cols-2 gap-4">
               <CustomFormField
@@ -153,13 +156,14 @@ const RegisterForm = () => {
               iconSrc={ICONS.email}
               iconAlt="email"
             />
-
-            <CustomFormField
-              fieldType={FormFieldType.PHONE_INPUT}
-              control={form.control}
-              name="phone"
-              label="Phone Number"
-            />
+            <div className="text-black">
+              <CustomFormField
+                fieldType={FormFieldType.PHONE_INPUT}
+                control={form.control}
+                name="phone"
+                label="Phone Number"
+              />
+            </div>
 
             <CustomFormField
               control={form.control}
@@ -188,7 +192,7 @@ const RegisterForm = () => {
           <div className="w-full border-t border-gray-300" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="px-2 bg-white text-gray-500">Or continue with</span>
+          <span className="px-2 bg-black text-white">Or continue with</span>
         </div>
       </div>
 
@@ -202,7 +206,7 @@ const RegisterForm = () => {
       />
 
       <div className="mt-6 text-sm text-center">
-        <p className="text-gray-600">
+        <p className="text-white">
           Already have an account?{" "}
           <button
             onClick={() => router.push("./sign-in")}

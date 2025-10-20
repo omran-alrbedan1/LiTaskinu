@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { images } from "@/constants/images";
 import { ICONS } from "@/constants/icons";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 
@@ -27,24 +26,28 @@ const UserTypeCard: React.FC<UserTypeCardProps> = ({
       className={`border-2 rounded-lg p-6 cursor-pointer transition-all duration-200 ${
         isSelected
           ? "border-primary-color1 bg-primary-color1/20 shadow-md"
-          : "border-gray-200 bg-white hover:border-gray-300"
+          : "border-gray-700 bg-gray-800 hover:border-gray-600"
       }`}
       onClick={onClick}
     >
       <div className="flex items-start space-x-4">
         <div
           className={`w-12 h-12 rounded-full flex items-center justify-center ${
-            isSelected ? "bg-primary-color1/20" : "bg-gray-100"
+            isSelected ? "bg-primary-color1/20" : "bg-gray-700"
           }`}
         >
           <Image src={icon} alt={title} width={24} height={24} />
         </div>
         <div className="flex-1">
-          <h3 className="font-semibold text-gray-900 text-lg mb-2">{title}</h3>
-          <p className="text-gray-600 text-sm">{description}</p>
+          <h3 className="font-semibold text-white text-lg mb-2">{title}</h3>
+          <p className="text-gray-300 text-sm">{description}</p>
         </div>
         <div
-          className={`w-6 h-6 rounded-full border-2 flex items-center justify-center `}
+          className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+            isSelected
+              ? "border-primary-color1"
+              : "border-gray-300 dark:border-gray-600"
+          }`}
         >
           {isSelected && (
             <Image src={ICONS.selected} height={33} width={33} alt="selected" />
@@ -82,20 +85,11 @@ const SelectUserTypeForm = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-sm">
+    <div className="w-full max-w-md mx-auto p-6bg-gray-900 rounded-lg shadow-sm -mt-28 md:-mt-0">
       {/* Header */}
       <div className="text-center mb-8">
-        <Image
-          src={images.logo2}
-          width={80}
-          height={80}
-          alt="logo"
-          className="mx-auto mb-4"
-        />
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">
-          Select user type
-        </h1>
-        <p className="text-gray-600 text-sm">
+        <h1 className="text-2xl font-bold text-white mb-2">Select user type</h1>
+        <p className="text-gray-300 text-sm">
           Please select the user type you want to complete the process
           correctly.
         </p>

@@ -118,25 +118,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           },
         ],
       },
-      {
-        title: "Ad Management",
-        url: `/admin/${locale}/ads`,
-        icon: Eye,
-        items: [
-          {
-            title: "Active Ads",
-            url: `/admin/${locale}/ads/active`,
-          },
-          {
-            title: "Ad Approval",
-            url: `/admin/${locale}/ads/approval`,
-          },
-          {
-            title: "Ad Statistics",
-            url: `/admin/${locale}/ads/statistics`,
-          },
-        ],
-      },
     ],
 
     // Marriage & Matching System
@@ -233,29 +214,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           },
         ],
       },
-      {
-        title: "Ban Management",
-        url: `/admin/${locale}/banned`,
-        icon: Ban,
-        items: [
-          {
-            title: "Banned Emails",
-            url: `/admin/${locale}/banned/emails`,
-          },
-          {
-            title: "Banned Phone Numbers",
-            url: `/admin/${locale}/banned/phones`,
-          },
-          {
-            title: "IP Address Blocks",
-            url: `/admin/${locale}/banned/ips`,
-          },
-          {
-            title: "Ban History & Appeals",
-            url: `/admin/${locale}/banned/history`,
-          },
-        ],
-      },
     ],
 
     // Content & System Management
@@ -268,6 +226,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           {
             title: "About Us",
             url: `/admin/${locale}/content/about-us`,
+          },
+          {
+            title: "Social Media Links",
+            url: `/admin/${locale}/content/social-media`,
           },
           {
             title: "Terms & Conditions",
@@ -284,6 +246,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           {
             title: "Success Stories",
             url: `/admin/${locale}/content/success-stories`,
+          },
+          {
+            title: "Advertisements",
+            url: `/admin/${locale}/ads`,
           },
         ],
       },
