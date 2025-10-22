@@ -30,7 +30,7 @@ interface SocialMediaPlatform {
   color?: string;
 }
 
-// API Service Functions
+// API Service Function
 const socialMediaApi = {
   async getSocialLinks(): Promise<SocialLinks> {
     const response = await fetch("/api/admin/social-media");
