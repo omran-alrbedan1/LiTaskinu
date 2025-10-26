@@ -97,6 +97,8 @@ interface CustomProps {
   searchPlaceholder?: string;
   onValueChange?: (value: string) => void;
   orientation?: "horizontal" | "vertical";
+  className?: string;
+  inputClassName?: string;
 }
 
 interface SelectOption {
@@ -359,15 +361,15 @@ interface ParentType {
     name: string;
     email: string;
     phone: string;
-    avatar: string;
-    relationship: "أب" | "أم" | "أخ" | "وصي" | "قريب";
+    avatar?: string;
+    relationship: string;
   };
   member: {
     name: string;
     age: number;
-    gender: "ذكر" | "أنثى";
+    gender: string;
     avatar: string;
-    maritalStatus: "أعزب" | "عزباء" | "مطلق" | "مطلقة" | "أرمل" | "أرملة";
+    maritalStatus: string;
     education: string;
   };
   contact: {

@@ -6,14 +6,43 @@ import {
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import SubmitButton from "../../Buttons/SubmitButton";
+import { useSearchParams } from "next/navigation";
+import usePostData from "@/hooks/usePostData";
 
 const OtpForm = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
+
   const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [countdown, setCountdown] = useState(20);
   const [canResend, setCanResend] = useState(false);
+
+  // OTP Verification Hook
+  const {
+    postData: verifyOtp,
+    loading: isVerifying,
+    error: verifyError,
+  } = usePostData("/api/website/verify-email", {
+    showNotifications: true,
+    successMessage: "Email verified successfully!",
+    errorMessage: "Verification failed.",
+    onSuccess: (data) => {
+      console.log("OTP verified successfully!");
+      router.push("./user-photos");
+    },
+  });
+
+  // Resend OTP Hook
+  const { postData: resendOtp, loading: isResending } = usePostData(
+    "/api/website/resend-otp",
+    {
+      showNotifications: true,
+      successMessage: "New code sent to your email!",
+      errorMessage: "Failed to resend code.",
+    }
+  );
 
   // Countdown timer effect
   useEffect(() => {
@@ -25,21 +54,21 @@ const OtpForm = () => {
     }
   }, [countdown]);
 
-  const validateOtp = (e: React.FormEvent) => {
+  const validateOtp = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     setError("");
 
-    // Simulate API call delay
-    setTimeout(() => {
-      if (otp === "12345") {
-        console.log("OTP verified successfully!");
-        router.push("./user-photos");
-      } else {
-        setError("Invalid code. Please try again.");
-      }
-      setIsLoading(false);
-    }, 1000);
+    if (!email) {
+      setError("Email is required");
+      return;
+    }
+
+    if (otp.length !== 6) {
+      setError("Please enter the complete 6-digit code");
+      return;
+    }
+
+    await verifyOtp({ email, otp });
   };
 
   const handleOtpChange = (value: string) => {
@@ -47,65 +76,57 @@ const OtpForm = () => {
     if (error) setError("");
   };
 
-  const handleResendCode = () => {
-    if (canResend) {
+  const handleResendCode = async () => {
+    if (canResend && email) {
+      await resendOtp({ email });
       setCountdown(20);
       setCanResend(false);
       setOtp("");
       setError("");
-      console.log("New code sent!");
     }
   };
 
   return (
-    <div className="flex flex-col max-w-lg mx-auto items-center  justify-center min-h-screen  p-4">
-      <div className="w-full  p-8  rounded-xl  ">
-        <div className=" mb-8 text-center">
-          <h1 className="text-3xl font-bold  text-white mb-2">Enter code</h1>
+    <div className="flex flex-col max-w-lg mx-auto items-center justify-center min-h-screen p-4">
+      <div className="w-full p-8 rounded-xl">
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold text-white mb-2">
+            Enter verification code
+          </h1>
           <p className="text-gray-400 text-sm">
-            We've sent an SMS with an activation code to your phone{" "}
-            <span className="font-medium">+33 2 94 27 84 11</span>
+            We've sent a verification code to your email{" "}
+            <span className="font-medium text-primary-color1">{email}</span>
           </p>
         </div>
 
-        <form className="space-y-6" onSubmit={validateOtp}>
+        <form className="space-y-6 text-white" onSubmit={validateOtp}>
           <div className="flex justify-center">
             <InputOTP
-              maxLength={5}
+              maxLength={6}
               value={otp}
               onChange={handleOtpChange}
-              disabled={isLoading}
+              disabled={isVerifying}
             >
               <InputOTPGroup className="gap-2">
-                <InputOTPSlot
-                  index={0}
-                  className="w-14 h-14 text-lg border-2 rounded-lg border-primary-color1"
-                />
-                <InputOTPSlot
-                  index={1}
-                  className="w-14 h-14 text-lg border-2 rounded-lg border-primary-color1"
-                />
-                <InputOTPSlot
-                  index={2}
-                  className="w-14 h-14 text-lg border-2 rounded-lg border-primary-color1"
-                />
-                <InputOTPSlot
-                  index={3}
-                  className="w-14 h-14 text-lg border-2 border-primary-color1 rounded-lg"
-                />
-                <InputOTPSlot
-                  index={4}
-                  className="w-14 h-14 text-lg border-2 border-primary-color1 rounded-lg"
-                />
+                {[...Array(6)].map((_, index) => (
+                  <InputOTPSlot
+                    key={index}
+                    index={index}
+                    className="w-14 h-14 text-lg border-2 rounded-lg border-primary-color1"
+                  />
+                ))}
               </InputOTPGroup>
             </InputOTP>
           </div>
 
           {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+          {verifyError && (
+            <p className="text-red-500 text-sm text-center">{verifyError}</p>
+          )}
 
           <SubmitButton
-            isLoading={isLoading}
-            loadingText="Verifying.."
+            isLoading={isVerifying}
+            loadingText="Verifying..."
             className="w-full"
           >
             Verify
@@ -115,14 +136,16 @@ const OtpForm = () => {
         <div className="text-center mt-6">
           <button
             onClick={handleResendCode}
-            disabled={!canResend}
+            disabled={!canResend || isResending}
             className={`text-sm ${
-              canResend ? "text-primary-color2" : "text-gray-400"
-            }`}
+              canResend
+                ? "text-primary-color2 hover:text-primary-color1"
+                : "text-gray-400"
+            } transition-colors`}
           >
-            Send code again{" "}
-            {!canResend && (
-              <span className=" text-primary-color1 font-bold">
+            {isResending ? "Sending..." : "Send code again"}{" "}
+            {!canResend && !isResending && (
+              <span className="text-primary-color1 font-bold">
                 {String(Math.floor(countdown / 60)).padStart(2, "0")}:
                 {String(countdown % 60).padStart(2, "0")}
               </span>

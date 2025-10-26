@@ -1,6 +1,6 @@
-// hooks/usePostData.ts (enhanced)
 import { useState, useCallback } from "react";
 import axios, { AxiosRequestConfig, AxiosError } from "axios";
+import { notification } from "antd";
 
 interface UsePostDataOptions {
   showNotifications?: boolean;
@@ -53,9 +53,12 @@ const usePostData = <T = any>(
 
         setSuccess(true);
 
-        if (showNotifications) {
-          // Replace with your notification system
-          console.log(successMessage);
+        if (showNotifications && successMessage) {
+          notification.success({
+            message: "Success",
+            description: successMessage,
+            placement: "topRight",
+          });
         }
 
         onSuccess?.(response.data);
@@ -77,7 +80,11 @@ const usePostData = <T = any>(
         setError(backendError);
 
         if (showNotifications) {
-          console.error(backendError);
+          notification.error({
+            message: "Error",
+            description: backendError,
+            placement: "topRight",
+          });
         }
 
         onError?.(backendError);

@@ -70,6 +70,8 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     renderSkeleton,
     required,
     options = [],
+    inputClassName,
+
     orientation = "vertical",
   } = props;
 
@@ -118,9 +120,8 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           <FormControl>
             <Input
               {...field}
-              type={"password"}
               placeholder={placeholder}
-              className=" border-0 placeholder: focus:outline-none focus-within:border-none focus-within:ring-0 bg-transparent"
+              className=" border-0 placeholder: focus:outline-none focus-within:border-none dark:text-white focus-within:ring-0 bg-transparent"
             />
           </FormControl>
         </div>
@@ -132,9 +133,12 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             country={"us"}
             value={field.value}
             onChange={field.onChange}
-            buttonClass=" !h-10 !border-slate-300 dark:!border-slate-600 !bg-white/50 dark:!bg-slate-700/50  !rounded-l-[1px] rtl:!rounded-r-[1px] rtl:!rounded-l-none rtl:!pr-2 dark:hover:bg-gray-900"
-            dropdownClass="!bg-white text-black  dark:!bg-slate-800 !border-slate-300 dark:!border-slate-600 !shadow-xl  !rounded-lg"
-            inputClass="!h-10  !w-full  rtl:pr-16 !rounded-[4px] !border-slate-300 dark:!border-slate-600 !bg-white/50 dark:!bg-slate-700/50 !shadow-sm focus:!ring-2 focus:!ring-primary-color1 focus:!border-primary-color1 !transition-all !duration-200"
+            buttonClass="!h-10 !border-slate-300 dark:!border-slate-600 !bg-white/50 dark:!bg-slate-700/50 !rounded-l-[1px] rtl:!rounded-r-[1px] rtl:!rounded-l-none rtl:!pr-2 dark:hover:bg-gray-900"
+            dropdownClass="!bg-white dark:text-white text-black dark:!bg-slate-800 !border-slate-300 dark:!border-slate-600 !shadow-xl !rounded-lg !hover:bg-red-300"
+            inputClass={cn(
+              "!h-10 !w-full rtl:pr-16 !rounded-[4px] !border-slate-300 dark:!border-slate-600 !bg-white/50 dark:!bg-slate-700/50 !shadow-sm focus:!ring-2 focus:!ring-primary-color1 focus:!border-primary-color1 !transition-all !duration-200",
+              inputClassName
+            )}
           />
         </FormControl>
       );
@@ -364,7 +368,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
 };
 
 const CustomFormField = (props: CustomProps) => {
-  const { control, fieldType, name, label, required } = props;
+  const { control, fieldType, name, label, required, className } = props;
 
   return (
     <FormField

@@ -3,10 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Form } from "@/components/ui/form";
-import { useState } from "react";
-
 import { useRouter } from "next/navigation";
 import SubmitButton from "../../Buttons/SubmitButton";
 import CustomFormField, { FormFieldType } from "../../shared/CustomInput";
@@ -15,54 +12,58 @@ import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import { countryOptions, genderOptions } from "@/constants/options";
 import Image from "next/image";
 import { images } from "@/constants/images";
-
-const RegisterFormValidation = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  gender: z.string().min(1, "Gender is required"),
-  dateOfBirth: z.union([z.string(), z.date()]).refine(
-    (val) => {
-      if (val instanceof Date) return !isNaN(val.getTime());
-      return val.length > 0;
-    },
-    { message: "Date of birth is required" }
-  ),
-  country: z.string().min(1, "Country is required"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(1, "Phone number is required"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-});
+import usePostData from "@/hooks/usePostData";
+import { RegisterFormValidation } from "@/validation";
 
 const RegisterForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
-
   const router = useRouter();
+
+  const {
+    postData,
+    loading: isLoading,
+    error,
+    success,
+  } = usePostData("/api/website/signup", {
+    showNotifications: true,
+    successMessage: "Registration successful! Please verify your email.",
+    errorMessage: "Registration failed. Please try again.",
+    onSuccess: (data) => {
+      router.push(
+        `./otp-verification?email=${encodeURIComponent(
+          form.getValues("email")
+        )}`
+      );
+    },
+  });
 
   const form = useForm<z.infer<typeof RegisterFormValidation>>({
     resolver: zodResolver(RegisterFormValidation),
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       gender: "",
-      dateOfBirth: "",
+      birath_day: "",
       country: "",
       email: "",
       phone: "",
       password: "",
+      password_confirmation: "",
+      role: "guardian",
     },
   });
 
+  // Handle form submission
   async function onSubmit(values: z.infer<typeof RegisterFormValidation>) {
-    setIsLoading(true);
-    try {
-      console.log("Registration data:", values);
+    // Format date if it's a string
+    const formattedValues = {
+      ...values,
+      birath_day:
+        values.birath_day instanceof Date
+          ? values.birath_day.toISOString().split("T")[0]
+          : values.birath_day,
+    };
 
-      router.push("./otp-verification");
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+    await postData(formattedValues);
   }
 
   const handleGoogleSuccess = async (
@@ -72,7 +73,11 @@ const RegisterForm = () => {
 
     if (credential) {
       try {
-        console.log("Google registration successful:", credential);
+        // Use the same hook for Google registration
+        await postData({
+          googleCredential: credential,
+          loginType: "google",
+        });
       } catch (error) {
         console.error("Google registration error:", error);
       }
@@ -80,7 +85,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="w-full pb-20 mt-32 px-4 md:p-6 md:pb-20 rounded-lg shadow-sm">
+    <div className="w-full py-20 mt-56 px-4 md:p-6 md:pb-20 rounded-lg shadow-sm bg-transparent">
       <div className="text-center mb-4">
         <Image
           src={images.logo}
@@ -89,7 +94,7 @@ const RegisterForm = () => {
           alt="logo"
           className="mx-auto mb-2 md:hidden"
         />
-        <h2 className="text:2xl md:text-3xl font-bold text-white     ">
+        <h2 className="text:2xl md:text-3xl font-bold text-white">
           Create Account
         </h2>
         <p className="mt-2 text-sm text-gray-400">Sign up for a new account</p>
@@ -98,119 +103,140 @@ const RegisterForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4 text-white "
+          className="space-y-4 text-white"
         >
-          <>
-            <div className="grid grid-cols-1  md:grid-cols-2 gap-4">
-              <CustomFormField
-                fieldType={FormFieldType.INPUT}
-                control={form.control}
-                name="firstName"
-                label="First Name"
-                placeholder="John"
-                iconSrc={ICONS.userInput}
-              />
-
-              <CustomFormField
-                fieldType={FormFieldType.INPUT}
-                control={form.control}
-                name="lastName"
-                label="Last Name"
-                placeholder="Doe"
-                iconSrc={ICONS.userInput}
-              />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <CustomFormField
-                fieldType={FormFieldType.SELECT}
-                control={form.control}
-                name="gender"
-                label="Gender"
-                placeholder="Select gender"
-                options={genderOptions}
-              />
-
-              <CustomFormField
-                fieldType={FormFieldType.SELECT}
-                control={form.control}
-                name="country"
-                label="Country"
-                placeholder="Select your country"
-                options={countryOptions}
-              />
-            </div>
+          {/* Name Fields */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <CustomFormField
-              fieldType={FormFieldType.DATE_PICKER}
+              fieldType={FormFieldType.INPUT}
               control={form.control}
-              name="dateOfBirth"
-              label="Date of Birth"
-              placeholder="Select your birth date"
+              name="first_name"
+              label="First Name"
+              placeholder="John"
+              iconSrc={ICONS.userInput}
+              iconAlt="first name"
             />
 
             <CustomFormField
               fieldType={FormFieldType.INPUT}
               control={form.control}
-              name="email"
-              label="Email Address"
-              placeholder="john@gmail.com"
-              iconSrc={ICONS.email}
-              iconAlt="email"
+              name="last_name"
+              label="Last Name"
+              placeholder="Doe"
+              iconSrc={ICONS.userInput}
+              iconAlt="last name"
             />
-            <div className="text-black">
-              <CustomFormField
-                fieldType={FormFieldType.PHONE_INPUT}
-                control={form.control}
-                name="phone"
-                label="Phone Number"
-              />
-            </div>
+          </div>
+
+          {/* Gender and Country Fields */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <CustomFormField
+              fieldType={FormFieldType.SELECT}
+              control={form.control}
+              name="gender"
+              label="Gender"
+              placeholder="Select gender"
+              options={genderOptions}
+            />
 
             <CustomFormField
+              fieldType={FormFieldType.SELECT}
               control={form.control}
-              fieldType={FormFieldType.PASSWORD}
-              name="password"
-              label="Password"
-              placeholder="Enter your password"
-              iconSrc={ICONS.lock}
+              name="country"
+              label="Country"
+              placeholder="Select your country"
+              options={countryOptions}
             />
+          </div>
 
-            <SubmitButton
-              isLoading={isLoading}
-              loadingText="Submitting..."
-              className="w-full"
-              type="submit"
-              onClick={() => console.log("Submit button clicked")}
-            >
-              Submit
-            </SubmitButton>
-          </>
+          {/* Date of Birth Field */}
+          <CustomFormField
+            fieldType={FormFieldType.DATE_PICKER}
+            control={form.control}
+            name="birath_day"
+            label="Date of Birth"
+            placeholder="Select your birth date"
+          />
+
+          {/* Email Field */}
+          <CustomFormField
+            fieldType={FormFieldType.INPUT}
+            control={form.control}
+            name="email"
+            label="Email Address"
+            placeholder="john@gmail.com"
+            iconSrc={ICONS.email}
+            iconAlt="email"
+          />
+
+          {/* Phone Field */}
+          <div className="tex">
+            <CustomFormField
+              fieldType={FormFieldType.PHONE_INPUT}
+              control={form.control}
+              name="phone"
+              label="Phone Number"
+              placeholder="Enter your phone number"
+              inputClassName="!bg-blue-50 !border-blue-300 text-white dark:!bg-blue-900/20" // Only affects the phone input
+            />
+          </div>
+
+          {/* Password Field */}
+          <CustomFormField
+            control={form.control}
+            fieldType={FormFieldType.PASSWORD}
+            name="password"
+            label="Password"
+            placeholder="Enter your password"
+            iconSrc={ICONS.lock}
+            iconAlt="password"
+          />
+
+          <CustomFormField
+            control={form.control}
+            fieldType={FormFieldType.PASSWORD}
+            name="password_confirmation"
+            label="Password confirmation"
+            placeholder="Enter your password again"
+            iconSrc={ICONS.lock}
+            iconAlt="password"
+          />
+
+          <SubmitButton isLoading={isLoading} className="w-full">
+            {isLoading ? "Creating Account..." : "Create Account"}
+          </SubmitButton>
         </form>
       </Form>
 
+      {/* Divider */}
       <div className="relative my-6">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-gray-300" />
+          <div className="w-full border-t border-gray-400" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="px-2 bg-black text-white">Or continue with</span>
+          <span className="px-2 bg-black text-gray-300">Or continue with</span>
         </div>
       </div>
 
-      <GoogleLogin
-        onSuccess={handleGoogleSuccess}
-        useOneTap
-        text="signup_with"
-        shape="rectangular"
-        size="large"
-        width={"100%"}
-      />
+      {/* Google Registration */}
+      <div className="bg-white rounded-lg overflow-hidden">
+        <GoogleLogin
+          onSuccess={handleGoogleSuccess}
+          useOneTap
+          text="signup_with"
+          shape="rectangular"
+          size="large"
+          width={"100%"}
+        />
+      </div>
 
-      <div className="mt-6 text-sm text-center">
-        <p className="text-white">
+      {/* Sign In Link */}
+      <div className="mt-6 text-center">
+        <p className="text-sm text-gray-300">
           Already have an account?{" "}
           <button
             onClick={() => router.push("./sign-in")}
-            className="text-primary hover:text-primary/90 transition-colors"
+            className="font-medium text-white hover:text-gray-300 transition-colors"
           >
             Sign in
           </button>

@@ -4,56 +4,58 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import CustomFormField, {
   FormFieldType,
 } from "@/components/shared/CustomInput";
 import { ICONS } from "@/constants/icons";
-
-const ResetPasswordValidation = z
-  .object({
-    password: z.string().min(8, "Password must be at least 8 characters"),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-  });
+import usePostData from "@/hooks/usePostData";
+import { ResetPasswordValidation } from "@/validation";
 
 const ResetPasswordForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const reset_token = searchParams.get("token");
 
-  const form = useForm({
-    resolver: zodResolver(ResetPasswordValidation),
-    defaultValues: {
-      password: "",
-      confirmPassword: "",
+  const {
+    postData,
+    loading: isLoading,
+    error,
+    success,
+  } = usePostData("/api/website/reset-password", {
+    showNotifications: true,
+    successMessage: "Password reset successfully!",
+    errorMessage: "Failed to reset password.",
+    onSuccess: (data) => {
+      router.push("./sign-in");
     },
   });
 
-  const onSubmit = async (data: {
-    password: string;
-    confirmPassword: string;
-  }) => {
-    setIsLoading(true);
-    try {
-      console.log("Reset password with:", data.password);
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+  const form = useForm<z.infer<typeof ResetPasswordValidation>>({
+    resolver: zodResolver(ResetPasswordValidation),
+    defaultValues: {
+      password: "",
+      password_confirmation: "",
+    },
+  });
 
-      // Redirect to login or success page
-      router.push("/login");
-      setIsSubmitted(true);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
+  const onSubmit = async (values: z.infer<typeof ResetPasswordValidation>) => {
+    if (!reset_token) {
+      form.setError("root", {
+        message: "Reset token is missing. Please request a new reset link.",
+      });
+      return;
     }
+
+    const requestData = {
+      reset_token,
+      password: values.password,
+      password_confirmation: values.password_confirmation,
+    };
+
+    await postData(requestData);
   };
 
   return (
@@ -65,6 +67,15 @@ const ResetPasswordForm = () => {
       <p className="text-gray-400 text-center mb-6">
         Please enter your new password below.
       </p>
+
+      {!reset_token && (
+        <div className="bg-red-500/20 border border-red-500 rounded-lg p-4 mb-4">
+          <p className="text-red-400 text-sm">
+            Invalid or missing reset token. Please request a new password reset
+            link.
+          </p>
+        </div>
+      )}
 
       <Form {...form}>
         <form
@@ -84,7 +95,7 @@ const ResetPasswordForm = () => {
           <CustomFormField
             fieldType={FormFieldType.PASSWORD}
             control={form.control}
-            name="confirmPassword"
+            name="password_confirmation"
             label="Confirm Password"
             placeholder="Confirm your new password"
             iconSrc={ICONS.lock}
@@ -92,14 +103,17 @@ const ResetPasswordForm = () => {
           />
 
           <SubmitButton isLoading={isLoading} className="w-full">
-            Reset Password
+            {isLoading ? "Resetting Password..." : "Reset Password"}
           </SubmitButton>
         </form>
       </Form>
 
       <div className="mt-4 text-center">
-        <Link href="./sign-in" className="text-primary hover:underline">
-          Back to Login
+        <Link
+          href="./sign-in"
+          className="text-primary-color2 hover:text-primary-color1 transition-colors"
+        >
+          Back to Sign In
         </Link>
       </div>
     </div>

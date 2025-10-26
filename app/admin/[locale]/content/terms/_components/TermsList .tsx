@@ -23,8 +23,6 @@ const TermsList: React.FC<TermsListProps> = ({
   onAddSection,
   onUpdateSection,
   onRemoveSection,
-  onMoveSectionUp,
-  onMoveSectionDown,
 }) => (
   <div className="space-y-6">
     <Card>
@@ -47,8 +45,6 @@ const TermsList: React.FC<TermsListProps> = ({
             totalSections={sections.length}
             onUpdate={onUpdateSection}
             onRemove={onRemoveSection}
-            onMoveUp={onMoveSectionUp}
-            onMoveDown={onMoveSectionDown}
           />
         ))}
 

@@ -3,10 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Form } from "@/components/ui/form";
-import { useState } from "react";
-
 import { useRouter } from "next/navigation";
 import SubmitButton from "../../Buttons/SubmitButton";
 import { LoginFormValidation } from "@/validation";
@@ -18,33 +15,40 @@ import Link from "next/link";
 import CustomFormField, {
   FormFieldType,
 } from "@/components/shared/CustomInput";
+import usePostData from "@/hooks/usePostData";
+import { useLocale } from "next-intl";
 
 const LoginForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const locale = useLocale();
+  const {
+    postData,
+    loading: isLoading,
+    error,
+    success,
+  } = usePostData("/api/website/signin", {
+    showNotifications: true,
+    successMessage: "Login successfully",
+    errorMessage: "Login failed. Please try again.",
+    onSuccess: (data) => {
+      router.push(`./home`);
+    },
+  });
 
   const form = useForm<z.infer<typeof LoginFormValidation>>({
     resolver: zodResolver(LoginFormValidation),
     defaultValues: {
-      name: "",
       email: "",
+      password: "",
     },
   });
 
+  // Handle form submission
   async function onSubmit({
-    name,
     email,
+    password,
   }: z.infer<typeof LoginFormValidation>) {
-    setIsLoading(true);
-    try {
-      const userData = { name, email };
-      console.log("Login data:", userData);
-      router.push("./home");
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+    await postData({ email, password });
   }
 
   const handleGoogleSuccess = async (
@@ -54,7 +58,11 @@ const LoginForm = () => {
 
     if (credential) {
       try {
-        console.log("Google login successful:", credential);
+        // You can also use the hook for Google login
+        await postData({
+          googleCredential: credential,
+          loginType: "google",
+        });
       } catch (error) {
         console.error("Google login error:", error);
       }
@@ -71,8 +79,8 @@ const LoginForm = () => {
           alt="logo"
           className="mx-auto mb-2 md:hidden"
         />
-        <h2 className="text:2xl md:text-3xl font-bold text-white     ">
-          Sign up Account
+        <h2 className="text:2xl md:text-3xl font-bold text-white">
+          Sign In to Your Account
         </h2>
         <p className="mt-2 text-sm text-gray-400">Sign in to your Account</p>
       </div>
@@ -82,23 +90,26 @@ const LoginForm = () => {
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-4 text-white"
         >
-          <CustomFormField
-            fieldType={FormFieldType.INPUT}
-            control={form.control}
-            name="name"
-            label="Full name"
-            placeholder="John Doe"
-            iconSrc={ICONS.user}
-            iconAlt="user"
-          />
+          {/* Email Field */}
           <CustomFormField
             fieldType={FormFieldType.INPUT}
             control={form.control}
             name="email"
             label="Email"
-            placeholder="John@gmail.com"
+            placeholder="john@gmail.com"
             iconSrc={ICONS.email}
             iconAlt="email"
+          />
+
+          {/* Password Field */}
+          <CustomFormField
+            fieldType={FormFieldType.PASSWORD}
+            control={form.control}
+            name="password"
+            label="Password"
+            placeholder="Enter your password"
+            iconSrc={ICONS.lock}
+            iconAlt="password"
           />
 
           {/* Forgot Password Link */}
@@ -112,7 +123,7 @@ const LoginForm = () => {
           </div>
 
           <SubmitButton isLoading={isLoading} className="w-full">
-            Sign In
+            {isLoading ? "Signing In..." : "Sign In"}
           </SubmitButton>
         </form>
       </Form>

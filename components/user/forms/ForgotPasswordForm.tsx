@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import SubmitButton from "@/components/Buttons/SubmitButton";
@@ -12,33 +11,37 @@ import CustomFormField, {
   FormFieldType,
 } from "@/components/shared/CustomInput";
 import { ICONS } from "@/constants/icons";
-
-const ForgotPasswordValidation = z.object({
-  email: z.string().email("Please enter a valid email address"),
-});
+import usePostData from "@/hooks/usePostData";
+import { ForgotPasswordValidation } from "@/validation";
 
 const ForgotPasswordForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const router = useRouter();
 
-  const form = useForm({
+  const {
+    postData,
+    loading: isLoading,
+    error,
+    success,
+  } = usePostData("/api/website/forgot-password", {
+    showNotifications: true,
+    successMessage: "Reset code sent to your email!",
+    errorMessage: "Failed to send reset code. Please try again.",
+    onSuccess: (data) => {
+      router.push(
+        `./verify-reset-code?email=${encodeURIComponent(
+          form.getValues("email")
+        )}`
+      );
+    },
+  });
+
+  const form = useForm<z.infer<typeof ForgotPasswordValidation>>({
     resolver: zodResolver(ForgotPasswordValidation),
     defaultValues: { email: "" },
   });
 
-  const onSubmit = async (data: { email: string }) => {
-    setIsLoading(true);
-    try {
-      console.log("Reset password for:", data.email);
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      router.push("./verify-reset-code");
-      setIsSubmitted(true);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
+  const onSubmit = async (values: z.infer<typeof ForgotPasswordValidation>) => {
+    await postData(values);
   };
 
   return (
@@ -60,14 +63,17 @@ const ForgotPasswordForm = () => {
           />
 
           <SubmitButton isLoading={isLoading} className="w-full">
-            Send Reset Link
+            {isLoading ? "Sending Code..." : "Send Reset Code"}
           </SubmitButton>
         </form>
       </Form>
 
-      <div className="mt-4 text-center">
-        <Link href="/login" className="text-primary hover:underline">
-          Back to Login
+      <div className="mt-6 text-center">
+        <Link
+          href="./sign-in"
+          className="text-primary-color2 hover:text-primary-color1 transition-colors"
+        >
+          Back to Sign In
         </Link>
       </div>
     </div>

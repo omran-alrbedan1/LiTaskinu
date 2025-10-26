@@ -4,6 +4,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+    publicRuntimeConfig: {
+    NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
+  },
   typescript: {
     ignoreBuildErrors: true,
   },

@@ -7,23 +7,6 @@ import { Save, Edit3, Plus, HelpCircle } from "lucide-react";
 import { useFAQManagement } from "@/hooks/useFAQManagement";
 import { FAQItem } from "./FAQItem";
 
-interface FAQItem {
-  id: string;
-  question: string;
-  answer: string;
-  order: number;
-  isActive: boolean;
-}
-
-interface FAQListProps {
-  faqs: FAQItem[];
-  isEditing: boolean;
-  onAddFAQ: () => void;
-  onUpdateFAQ: (id: string, field: keyof FAQItem, value: unknown) => void;
-  onRemoveFAQ: (id: string) => void;
-  onMoveFAQUp: (index: number) => void;
-  onMoveFAQDown: (index: number) => void;
-}
 
 const FAQList: React.FC<FAQListProps> = ({
   faqs,
