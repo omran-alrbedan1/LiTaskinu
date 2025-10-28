@@ -15,6 +15,8 @@ import emptyDocument from "../public/images/EmptyDocument.png";
 import emptyAds from "../public/images/ads.png";
 import authBackground from "../public/images/auth.png";
 import socialMedia from "../public/images/Social media.png";
+import landingPage from "../public/images/landing page.jpg";
+import landingPage2 from "../public/images/landing page2.png";
 
 export const images = {
   couple,
@@ -34,4 +36,6 @@ export const images = {
   emptyAds,
   authBackground,
   socialMedia,
+  landingPage,
+  landingPage2,
 };

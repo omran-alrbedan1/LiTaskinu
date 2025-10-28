@@ -22,4 +22,8 @@ export const ICONS = {
   linkedin: "/icons/linkedin.svg",
   youtube: "/icons/youtube.svg",
   instagram: "/icons/instagram.svg",
+  userHeart: "/icons/user-heart.svg",
+  loveLetter: "/icons/love-letter.svg",
+  loveLetterHeart: "/icons/love-letter-hearts.svg",
+  key: "/icons/key.svg",
 };

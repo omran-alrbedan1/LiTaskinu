@@ -59,7 +59,7 @@ const ResetPasswordForm = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-6">
+    <div className="w-full max-w-md md:mt-44 mx-auto p-6">
       <h2 className="text-2xl text-center font-bold text-white mb-6">
         Create New Password
       </h2>
