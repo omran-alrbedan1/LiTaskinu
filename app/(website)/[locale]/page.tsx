@@ -1,8 +1,10 @@
+//@ts-nocheck
+"use client";
+
 import React from "react";
-import { Heart, MessageCircle, Sparkles, Key } from "lucide-react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { images } from "@/constants/images";
-import { IconBaseProps } from "react-icons/lib";
 import { ICONS } from "@/constants/icons";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Link from "next/link";
@@ -23,7 +25,6 @@ export default function LandingPage() {
     },
     {
       icon: ICONS.loveLetterHeart,
-
       title: "Everything At A Glance",
       description:
         "Quickly view profiles, interests, and compatibility scores. Make informed decisions with comprehensive profiles.",
@@ -36,85 +37,212 @@ export default function LandingPage() {
     },
   ];
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+    hover: {
+      scale: 1.05,
+      y: -10,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut",
+      },
+    },
+  };
+
+  const slideInLeft = {
+    hidden: { opacity: 0, x: -100 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const slideInRight = {
+    hidden: { opacity: 0, x: 100 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 60 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const pulseAnimation = {
+    initial: { scale: 1 },
+    animate: {
+      scale: [1, 1.05, 1],
+      transition: {
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
     <div className="min-h-screen overflow-y-auto">
-      {/* Header */}
-
       {/* Hero Section with Background Image */}
-      <div className="relative h-[90vh] w-full">
-        <Image src={images.landingPage} alt="Happy couple" fill priority />
-        <header className="absolute top-0 left-0 right-0 z-50 bg-transparent">
+      <div className="relative ">
+        <Image
+          src={images.landingPage}
+          className="h-[90vh] w-full"
+          alt="Happy couple"
+        />
+
+        <motion.header
+          className="absolute top-0 left-0 right-0 z-50 bg-transparent"
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               {/* Logo */}
-              <div className="flex items-center">
+              <motion.div
+                className="flex items-center"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <Image
                   src={images.logo2}
-                  alt="Happy couple"
+                  alt="Litaskunu Logo"
                   height={94}
                   width={94}
                   priority
                 />
-              </div>
+              </motion.div>
 
               {/* Login Button */}
-              <Link
-                href={"/en/sign-in"}
-                className="bg-[#A1AA8A] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#8f9978] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Login
-              </Link>
+                <Link
+                  href={"/en/sign-in"}
+                  className="bg-[#A1AA8A] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#8f9978] transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  Login
+                </Link>
+              </motion.div>
             </div>
           </div>
-        </header>
+        </motion.header>
       </div>
 
       {/* Features Section */}
-      <div className=" py-10 mt-10">
+      <motion.section
+        className="py-10 mt-10"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={containerVariants}
+      >
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center max-w-7xl mx-auto">
             {/* Left Features */}
             <div className="space-y-16">
               {features.slice(0, 2).map((feature, index) => (
-                <FeatureCard
-                  key={index}
-                  icon={feature.icon}
-                  title={feature.title}
-                  description={feature.description}
-                  align="right"
-                />
+                <motion.div key={index} variants={slideInLeft}>
+                  <FeatureCard
+                    icon={feature.icon}
+                    title={feature.title}
+                    description={feature.description}
+                    align="right"
+                  />
+                </motion.div>
               ))}
             </div>
 
             {/* Center Phone Mockup */}
-            <div className="flex justify-center items-center px-4 order-first lg:order-none">
+            <motion.div
+              className="flex justify-center items-center px-4 order-first lg:order-none"
+              variants={pulseAnimation}
+              initial="initial"
+              animate="animate"
+            >
               <Image
                 src={images.landingPage2}
                 height={300}
                 width={400}
-                alt="landing page 2"
+                alt="App preview"
+                className="rounded-2xl"
               />
-            </div>
+            </motion.div>
 
             {/* Right Features */}
             <div className="space-y-16">
               {features.slice(2, 4).map((feature, index) => (
-                <FeatureCard
-                  key={index + 2}
-                  icon={feature.icon}
-                  title={feature.title}
-                  description={feature.description}
-                  align="left"
-                />
+                <motion.div key={index + 2} variants={slideInRight}>
+                  <FeatureCard
+                    icon={feature.icon}
+                    title={feature.title}
+                    description={feature.description}
+                    align="left"
+                  />
+                </motion.div>
               ))}
             </div>
           </div>
         </div>
-      </div>
+      </motion.section>
 
       <div className="min-h-screen relative">
         {/* Wave Transition */}
-        <div className="relative -mt-1">
+        <motion.div
+          className="relative -mt-1"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+        >
           <svg
             viewBox="0 0 1440 120"
             fill="none"
@@ -127,23 +255,36 @@ export default function LandingPage() {
               fill="#e8ebe4"
             />
           </svg>
-        </div>
+        </motion.div>
 
         {/* Why Litaskunu Section */}
-        <div className="py-20 px-4 bg-[#e8ebe4]">
+        <section className="py-20 px-4 bg-[#e8ebe4]">
           <div className="max-w-6xl mx-auto">
             {/* Section Title */}
-            <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-16">
+            <motion.h1
+              className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-16"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
               WHY LITASKUNU
-            </h1>
+            </motion.h1>
 
             {/* Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Card 1 - Unique user experience */}
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <motion.div
+                className="bg-white rounded-2xl p-8 shadow-lg"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.05, y: -10 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
                 <div className="w-16 h-16 bg-[#e8ebe4] rounded-2xl flex items-center justify-center mb-6 mx-auto">
                   <svg
-                    className="w-8 h-8 text-primary-color1"
+                    className="w-8 h-8 text-[#A1AA8A]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -163,13 +304,20 @@ export default function LandingPage() {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Cursus imperdiet sed id elementum.
                 </p>
-              </div>
+              </motion.div>
 
               {/* Card 2 - Data integrity */}
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <motion.div
+                className="bg-white rounded-2xl p-8 shadow-lg"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.05, y: -10 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true }}
+              >
                 <div className="w-16 h-16 bg-[#e8ebe4] rounded-2xl flex items-center justify-center mb-6 mx-auto">
                   <svg
-                    className="w-8 h-8 text-primary-color1"
+                    className="w-8 h-8 text-[#A1AA8A]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -189,13 +337,20 @@ export default function LandingPage() {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Cursus imperdiet sed id elementum.
                 </p>
-              </div>
+              </motion.div>
 
               {/* Card 3 - Isimic vibes */}
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <motion.div
+                className="bg-white rounded-2xl p-8 shadow-lg"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.05, y: -10 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
                 <div className="w-16 h-16 bg-[#e8ebe4] rounded-2xl flex items-center justify-center mb-6 mx-auto">
                   <svg
-                    className="w-8 h-8 text-primary-color1"
+                    className="w-8 h-8 text-[#A1AA8A]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -215,31 +370,56 @@ export default function LandingPage() {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Cursus imperdiet sed id elementum.
                 </p>
-              </div>
+              </motion.div>
             </div>
           </div>
-        </div>
-
-        {/* Bottom Wave Shape Transition */}
+        </section>
 
         {/* CTA Section */}
-        <div className=" py-20 px-4 -mt-1">
+        <motion.section
+          className="py-20 px-4 -mt-1"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+            <motion.h2
+              className="text-3xl md:text-4xl font-bold text-gray-800 mb-6"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+            >
               Ready to Find Your Perfect Match?
-            </h2>
-            <p className="text-gray-600 text-lg mb-8 max-w-xl mx-auto">
+            </motion.h2>
+            <motion.p
+              className="text-gray-600 text-lg mb-8 max-w-xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
               Join thousands of singles who found their life partners through
               our platform
-            </p>
-            <Link
-              href={"/en/sign-in"}
-              className="bg-[#A1AA8A] text-white px-14 py-4 rounded-full text-lg font-semibold hover:bg-[#8f9978] transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
             >
-              Get Started Free
-            </Link>
+              <Link
+                href={"/en/sign-in"}
+                className="bg-[#A1AA8A] text-white px-14 py-4 rounded-full text-lg font-semibold hover:bg-[#8f9978] transition-all duration-300 shadow-xl hover:shadow-2xl inline-block"
+              >
+                Get Started Free
+              </Link>
+            </motion.div>
           </div>
-        </div>
+        </motion.section>
       </div>
     </div>
   );
@@ -257,18 +437,33 @@ function FeatureCard({
   align: string;
 }) {
   return (
-    <div
-      className={`flex flex-col  items-center text-center lg:text-start space-y-4 group`}
+    <motion.div
+      className={`flex flex-col items-center text-center lg:text-start space-y-4 group`}
+      whileHover={{ y: -5 }}
+      transition={{ type: "spring", stiffness: 300 }}
     >
-      <div className="w-16 h-16 rounded-2xl bg-white shadow-lg flex items-center justify-center mb-2 group-hover:scale-110 group-hover:shadow-xl transition-all duration-300 border border-pink-100">
-        <Image src={icon} height={44} width={44} alt={"icon"} />
-      </div>
-      <h3 className="text-xl font-semibold text-gray-800 max-w-xs leading-tight">
+      <motion.div
+        className="w-16 h-16 rounded-2xl bg-white shadow-lg flex items-center justify-center mb-2 group-hover:shadow-xl transition-all duration-300 border border-pink-100"
+        whileHover={{
+          scale: 1.1,
+          rotate: 5,
+        }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
+        <Image src={icon} height={44} width={44} alt={"feature icon"} />
+      </motion.div>
+      <motion.h3
+        className="text-xl font-semibold text-gray-800 max-w-xs leading-tight"
+        whileHover={{ color: "#A1AA8A" }}
+      >
         {title}
-      </h3>
-      <p className="text-gray-600 text-sm leading-relaxed max-w-xs">
+      </motion.h3>
+      <motion.p
+        className="text-gray-600 text-sm leading-relaxed max-w-xs"
+        whileHover={{ scale: 1.02 }}
+      >
         {description}
-      </p>
-    </div>
+      </motion.p>
+    </motion.div>
   );
 }
