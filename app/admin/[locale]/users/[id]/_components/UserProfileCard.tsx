@@ -98,7 +98,7 @@ const UserProfileCard = ({ userData, photos }: UserProfileCardProps) => {
           </div>
 
           {/* Photo Gallery */}
-          <div className="w-full lg:w-80">
+          <div className="w-full lg:w-56">
             <div className="flex items-center gap-2 mb-3">
               <FaCamera className="text-primary-color1 w-4 h-4" />
               <span className="text-sm font-medium text-gray-700">

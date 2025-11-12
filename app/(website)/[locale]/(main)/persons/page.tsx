@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Search, ArrowUpRight, ChevronDown } from "lucide-react";
-import PersonCard from "../home/_components/PersonCard";
 import { people } from "@/constants/temporary";
 import { EmptyResult } from "./_components";
 import { Button } from "antd";
@@ -380,16 +379,6 @@ export default function PersonFilterPage() {
                 Search Results ({filteredPeople.length})
               </h2>
             </div>
-
-            {filteredPeople.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-                {filteredPeople.map((person) => (
-                  <PersonCard key={person.id} person={person} />
-                ))}
-              </div>
-            ) : (
-              <EmptyResult />
-            )}
           </div>
         ) : (
           <div className="mt-8">

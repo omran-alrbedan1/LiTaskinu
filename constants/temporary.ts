@@ -37,22 +37,6 @@ export const mockPhotos: Photo[] = [
     id: "4",
     url: "/images/userTest.jpg",
   },
-  {
-    id: "5",
-    url: "/images/userTest.jpg",
-  },
-  {
-    id: "6",
-    url: "/images/userTest.jpg",
-  },
-  {
-    id: "7",
-    url: "/images/userTest.jpg",
-  },
-  {
-    id: "8",
-    url: "/images/userTest.jpg",
-  },
 ];
 
 export const mockNotifications = [
@@ -793,7 +777,7 @@ export const initialRequiredDocuments: RequiredDocument[] = [
   },
 ];
 
-export const initialVerificationRequests: VerificationRequest[] = [
+export const initialVerificationRequests = [
   {
     id: "1",
     user: {
@@ -1006,3 +990,126 @@ export const MOCK_PARENTS: ParentType[] = [
     registrationDate: "2024-01-08",
   },
 ];
+
+export const mockUserData = {
+  basicInfo: {
+    gender: "Male",
+    age: "28",
+    livesIn: "Roubaix, Hauts-de-France, France",
+    relocate: "Yes, within France",
+  },
+  seekingBasic: {
+    lookingFor: "Female",
+  },
+  appearance: {
+    hairColor: "Brown",
+    eyeColor: "Hazel",
+    height: "178 cm",
+    weight: "75 kg",
+    bodyStyle: "Athletic",
+    ethnicity: "Middle Eastern",
+    appearance: "Well-groomed",
+  },
+  lifestyle: {
+    occupation: "Software Engineer",
+    smoke: "Non-smoker",
+    eatingHabits: "Halal only",
+    maritalStatus: "Never Married",
+    haveChildren: "No",
+    numberOfChildren: "0",
+    oldestChild: "N/A",
+    youngestChild: "N/A",
+    wantMoreChildren: "Yes, within 3-5 years",
+    employmentStatus: "Employed Full-time",
+    annualIncome: "$75,000",
+    livingSituation: "Renting apartment",
+  },
+  education: {
+    education: "Master's Degree",
+  },
+  religious: {
+    religion: "Islam - Sunni",
+    nationality: "French-Moroccan",
+    education: "Master's Degree",
+    languagesSpoken: "French, Arabic, English",
+    bornReverted: "Born Muslim",
+    religiousValues: "Moderate",
+    attendReligiousServices: "Weekly",
+    wearNiqab: "N/A",
+    wearHijab: "N/A",
+    readQuran: "Daily",
+    polygamy: "Not interested",
+    familyValues: "Traditional",
+    profileCreator: "Self",
+  },
+};
+
+export const seekingPreferences = {
+  basic: {
+    ageRange: "25 - 32",
+    locationPreference: "Within 50km",
+  },
+  appearance: {
+    hairColor: "Brown or Black",
+    eyeColor: "Any except Blue",
+    height: "160 - 175 cm",
+    weight: "Proportional to height",
+    bodyStyle: "Slim or Athletic",
+    ethnicity: "Middle Eastern or Asian",
+  },
+  lifestyle: {
+    smoke: "Non-smoker only",
+    maritalStatus: "Never Married",
+    wantChildren: "Yes",
+    eatingHabits: "Halal",
+  },
+  religious: {
+    religion: "Islam - Sunni or Shia",
+    nationality: "Any",
+    education: "Bachelor's or higher",
+    languages: "French required",
+    hijab: "Prefer not",
+    niqab: "Prefer not",
+  },
+};
+
+export const INITIAL_PERSONAL_DATA = {
+  basicInfo: {
+    gender: "Male",
+    age: "28",
+    livesIn: "Roubaix, Hauts-de-France, France",
+    relocate: "Yes, within France",
+  },
+  appearance: {
+    hairColor: "Brown",
+    eyeColor: "Hazel",
+    height: "178 cm",
+    weight: "75 kg",
+    bodyStyle: "Athletic",
+    ethnicity: "Middle Eastern",
+  },
+  lifestyle: {
+    occupation: "Software Engineer",
+    smoke: "Non-smoker",
+    eatingHabits: "Halal only",
+    maritalStatus: "Never Married",
+    haveChildren: "No",
+    wantMoreChildren: "Yes, within 3-5 years",
+    employmentStatus: "Full Time",
+    annualIncome: "$75,000",
+    livingSituation: "Live Alone",
+  },
+  education: {
+    education: "Master's Degree",
+  },
+  religious: {
+    religion: "Islam - Sunni",
+    nationality: "French-Moroccan",
+    languagesSpoken: ["French", "Arabic", "English"],
+    bornReverted: "Born Muslim",
+    religiousValues: "Moderate",
+    attendReligiousServices: "Weekly",
+    readQuran: "Daily",
+    familyValues: "Traditional",
+  },
+};

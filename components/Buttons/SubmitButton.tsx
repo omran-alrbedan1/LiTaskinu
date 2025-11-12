@@ -6,7 +6,7 @@ interface ButtonProps {
   isLoading?: boolean;
   loadingText?: string;
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   variant?:
     | "default"
     | "destructive"

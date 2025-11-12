@@ -48,7 +48,7 @@ const RegisterForm = () => {
       phone: "",
       password: "",
       password_confirmation: "",
-      role: "guardian",
+      role: "children",
     },
   });
 
@@ -177,7 +177,7 @@ const RegisterForm = () => {
               name="phone"
               label="Phone Number"
               placeholder="Enter your phone number"
-              inputClassName="!bg-blue-50 !border-blue-300 text-white dark:!bg-blue-900/20" // Only affects the phone input
+              inputClassName="!bg-blue-50 !border-blue-300 text-white dark:!bg-blue-900/20"
             />
           </div>
 
@@ -192,6 +192,7 @@ const RegisterForm = () => {
             iconAlt="password"
           />
 
+          {/* Password confirmation Field */}
           <CustomFormField
             control={form.control}
             fieldType={FormFieldType.PASSWORD}

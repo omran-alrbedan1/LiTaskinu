@@ -1,225 +1,125 @@
 "use client";
-import React, { useState } from "react";
-import { Heart, MessageCircle, Camera, User } from "lucide-react";
+import { useState, useMemo, useEffect } from "react";
+import { FilterState } from "./_components/FilterSection";
+import FilterSection from "./_components/FilterSection";
+import { motion } from "framer-motion";
+import { SAMPLE_PROFILES } from "@/constants/userTemporary";
+import { EmptyState } from "@/components/shared";
+import { images } from "@/constants/images";
+import ProfileCard from "./_components/ProfileCard";
 
-const DatingAppPage = () => {
-  const [filters, setFilters] = useState({
-    seeking: "Male",
+const HomePage = () => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const [filters, setFilters] = useState<FilterState>({
+    seeking: "Both",
     ageFrom: "",
     ageTo: "",
-    country: "Jordan",
-    city: "Amman",
+    country: "",
+    city: "",
   });
 
-  // Sample profile data
-  const profiles = [
-    {
-      id: 1,
-      gender: "male",
-      age: 30,
-      location: "Amman, Jordan",
-      seeking: "Female 18 - 24",
-      time: "2 weeks ago",
-    },
-    {
-      id: 2,
-      gender: "male",
-      age: 30,
-      location: "Amman, Jordan",
-      seeking: "Female 18 - 24",
-      time: "2 weeks ago",
-    },
-    {
-      id: 3,
-      gender: "male",
-      age: 30,
-      location: "Amman, Jordan",
-      seeking: "Female 18 - 24",
-      time: "2 weeks ago",
-    },
-    {
-      id: 4,
-      gender: "male",
-      age: 30,
-      location: "Amman, Jordan",
-      seeking: "Female 18 - 24",
-      time: "2 weeks ago",
-    },
-    {
-      id: 5,
-      gender: "female",
-      age: 30,
-      location: "Amman, Jordan",
-      seeking: "male 18 - 24",
-      time: "Now",
-    },
-    {
-      id: 6,
-      gender: "female",
-      age: 30,
-      location: "Amman, Jordan",
-      seeking: "male 18 - 24",
-      time: "Now",
-    },
-    {
-      id: 7,
-      gender: "female",
-      age: 30,
-      location: "Amman, Jordan",
-      seeking: "male 18 - 24",
-      time: "Now",
-    },
-    {
-      id: 8,
-      gender: "female",
-      age: 30,
-      location: "Amman, Jordan",
-      seeking: "male 18 - 24",
-      time: "Now",
-    },
-  ];
+  const resetFilter = () =>
+    setFilters({
+      seeking: "Both",
+      ageFrom: "",
+      ageTo: "",
+      country: "",
+      city: "",
+    });
+
+  const filteredProfiles = useMemo(() => {
+    return SAMPLE_PROFILES.filter((profile) => {
+      // Gender filter
+      if (filters.seeking !== "Both" && profile.gender !== filters.seeking) {
+        return false;
+      }
+
+      // Age filter
+      const profileAge = profile.age;
+      if (filters.ageFrom && profileAge < parseInt(filters.ageFrom)) {
+        return false;
+      }
+      if (filters.ageTo && profileAge > parseInt(filters.ageTo)) {
+        return false;
+      }
+
+      // Location filter - extract city and country from location string
+      const [profileCity, profileCountry] = profile.location
+        .split(", ")
+        .map((part) => part.trim());
+
+      if (filters.country && profileCountry !== filters.country) {
+        return false;
+      }
+
+      if (filters.city && profileCity !== filters.city) {
+        return false;
+      }
+
+      return true;
+    });
+  }, [filters]);
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* User Info Bar */}
-
-      {/* Main Content */}
+    <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-6">
-        {/* Filters */}
-        <div className="bg-primary-color1 rounded-2xl p-6 mb-6">
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <div>
-              <label className="block text-gray-700 text-sm font-medium mb-2">
-                Seeking
-              </label>
-              <select
-                className="w-full px-4 py-2 rounded-lg bg-white border border-gray-300 text-sm"
-                value={filters.seeking}
-                onChange={(e) =>
-                  setFilters({ ...filters, seeking: e.target.value })
-                }
-              >
-                <option>Male</option>
-                <option>Female</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-gray-700 text-sm font-medium mb-2">
-                Age
-              </label>
-              <div className="flex gap-2">
-                <select className="w-full px-4 py-2 rounded-lg bg-white border border-gray-300 text-sm">
-                  <option>From</option>
-                  {[...Array(63)].map((_, i) => (
-                    <option key={i}>{18 + i}</option>
-                  ))}
-                </select>
-                <select className="w-full px-4 py-2 rounded-lg bg-white border border-gray-300 text-sm">
-                  <option>To</option>
-                  {[...Array(63)].map((_, i) => (
-                    <option key={i}>{18 + i}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div>
-              <label className="block text-gray-700 text-sm font-medium mb-2">
-                Country
-              </label>
-              <select
-                className="w-full px-4 py-2 rounded-lg bg-white border border-gray-300 text-sm"
-                value={filters.country}
-                onChange={(e) =>
-                  setFilters({ ...filters, country: e.target.value })
-                }
-              >
-                <option>Jordan</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-gray-700 text-sm font-medium mb-2">
-                City
-              </label>
-              <select
-                className="w-full px-4 py-2 rounded-lg bg-white border border-gray-300 text-sm"
-                value={filters.city}
-                onChange={(e) =>
-                  setFilters({ ...filters, city: e.target.value })
-                }
-              >
-                <option>Amman</option>
-              </select>
-            </div>
-          </div>
-        </div>
+        <FilterSection filters={filters} onFiltersChange={setFilters} />
 
         {/* Profile Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {profiles.map((profile) => (
-            <div
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 xl:grid-cols-6 gap-6 mt-6">
+          {filteredProfiles.map((profile, index) => (
+            <motion.div
               key={profile.id}
-              className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+              initial={isMounted ? { opacity: 0, y: 20 } : false}
+              animate={isMounted ? { opacity: 1, y: 0 } : false}
+              transition={{
+                duration: 0.4,
+                delay: isMounted ? index * 0.1 : 0,
+                ease: "easeOut",
+              }}
+              whileHover={{
+                scale: 1.03,
+                transition: { duration: 0.2 },
+              }}
             >
-              <div className="relative aspect-square bg-gray-200">
-                {profile.gender === "male" ? (
-                  <img
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop"
-                    alt="Profile"
-                    className="w-full h-full "
-                  />
-                ) : (
-                  <img
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop"
-                    alt="Profile"
-                    className="w-full h-full object-cover"
-                  />
-                )}
-                <div className="absolute top-2 left-2">
-                  <div
-                    className={`w-3 h-3 rounded-full ${
-                      profile.time === "Now" ? "bg-green-500" : "bg-gray-400"
-                    }`}
-                  ></div>
-                </div>
-              </div>
-              <div className="p-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <div
-                    className={`w-2 h-2 rounded-full ${
-                      profile.gender === "male" ? "bg-blue-500" : "bg-pink-500"
-                    }`}
-                  ></div>
-                  <span className="font-medium text-gray-800 text-sm">
-                    user name
-                  </span>
-                </div>
-                <p className="text-xs text-gray-600 mb-1">
-                  age: {profile.age} · {profile.location}
-                </p>
-                <p className="text-xs text-gray-600 mb-1">
-                  Seeking: {profile.seeking}
-                </p>
-                <p className="text-xs text-gray-500 mb-3">{profile.time}</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex gap-2">
-                    <button className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                      <MessageCircle className="w-4 h-4 text-gray-600" />
-                    </button>
-                    <button className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                      <Heart className="w-4 h-4 text-gray-600" />
-                    </button>
-                  </div>
-                  <button className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                    <Camera className="w-4 h-4 text-gray-600" />
-                  </button>
-                </div>
-              </div>
-            </div>
+              <ProfileCard profile={profile} />
+            </motion.div>
           ))}
         </div>
+
+        {/* No Results */}
+        {filteredProfiles.length === 0 && (
+          <motion.div
+            initial={isMounted ? { opacity: 0 } : false}
+            animate={isMounted ? { opacity: 1 } : false}
+            transition={{ duration: 0.5 }}
+            className="-mt-24"
+          >
+            <EmptyState
+              title="No profiles found"
+              description="Try adjusting your search or filters to find more matches"
+              hasFilters={true}
+              action={
+                <motion.button
+                  className="mt-4 px-6 py-2 bg-primary-color1 text-white rounded-md"
+                  onClick={resetFilter}
+                >
+                  Reset Filters
+                </motion.button>
+              }
+              image={images.emptyProfileResults}
+              imageClassName="h-80 w-80"
+            />
+          </motion.div>
+        )}
       </div>
     </div>
   );
 };
 
-export default DatingAppPage;
+export default HomePage;

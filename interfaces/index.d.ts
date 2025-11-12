@@ -379,3 +379,166 @@ interface ParentType {
   };
   registrationDate: string;
 }
+
+/// profile page :
+
+interface Profile {
+  id: number;
+  name: string;
+  gender: string;
+  age: number;
+  location: string;
+  seeking: string;
+  time: string;
+  occupation: string;
+  interests: string[];
+  image: string;
+}
+
+interface FormData {
+  basicInfo: BasicInfo;
+  appearance: Appearance;
+  lifestyle: Lifestyle;
+  education: Education;
+  religious: Religious;
+}
+
+interface BasicInfo {
+  gender: string;
+  age: string;
+  livesIn: string;
+  relocate: string;
+}
+
+interface Appearance {
+  hairColor: string;
+  eyeColor: string;
+  height: string;
+  weight: string;
+  bodyStyle: string;
+  ethnicity: string;
+}
+
+interface Lifestyle {
+  occupation: string;
+  smoke: string;
+  eatingHabits: string;
+  maritalStatus: string;
+  haveChildren: string;
+  wantMoreChildren: string;
+  employmentStatus: string;
+  annualIncome: string;
+  livingSituation: string;
+}
+
+interface Education {
+  education: string;
+}
+
+interface Religious {
+  religion: string;
+  nationality: string;
+  languagesSpoken: string[];
+  bornReverted: string;
+  religiousValues: string;
+  attendReligiousServices: string;
+  readQuran: string;
+  familyValues: string;
+}
+
+interface FieldConfig {
+  key: string;
+  label: string;
+  type: string;
+  options?: string[];
+  value?: any;
+}
+
+// types/profile.ts
+interface UserData {
+  basicInfo: {
+    gender: string;
+    age: string;
+    livesIn: string;
+    relocate: string;
+  };
+  appearance: {
+    hairColor: string;
+    eyeColor: string;
+    height: string;
+    weight: string;
+    bodyStyle: string;
+    ethnicity: string;
+  };
+  lifestyle: {
+    occupation: string;
+    smoke: string;
+    eatingHabits: string;
+    maritalStatus: string;
+    haveChildren: string;
+    wantMoreChildren: string;
+    employmentStatus: string;
+    livingSituation: string;
+  };
+  education: {
+    education: string;
+  };
+  religious: {
+    religion: string;
+    nationality: string;
+    education: string;
+    languagesSpoken: string;
+    bornReverted: string;
+    religiousValues: string;
+    attendReligiousServices: string;
+    readQuran: string;
+    familyValues: string;
+  };
+}
+
+interface SeekingPreferences {
+  basic: {
+    lookingFor: string;
+    ageRange: string;
+    locationPreference: string;
+  };
+  appearance: {
+    hairColor: string;
+    eyeColor: string;
+    height: string;
+    weight: string;
+    bodyStyle: string;
+    ethnicity: string;
+  };
+  lifestyle: {
+    smoke: string;
+    maritalStatus: string;
+    wantChildren: string;
+    eatingHabits: string;
+  };
+  religious: {
+    education: string;
+    religion: string;
+    nationality: string;
+    languages: string;
+    hijab: string;
+    niqab: string;
+  };
+}
+
+interface SectionConfig {
+  id: string;
+  title: string;
+  icon: React.ComponentType<any>;
+  description: string;
+  personalData?: string;
+  seekingData?: string;
+  fields: FieldConfig[];
+}
+
+interface FieldConfig {
+  key: string;
+  label: string;
+  icon?: React.ReactNode;
+  section?: "personal" | "seeking";
+}

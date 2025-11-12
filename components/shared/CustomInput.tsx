@@ -24,7 +24,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"; // Add this import
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -120,6 +120,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           <FormControl>
             <Input
               {...field}
+              type={"password"}
               placeholder={placeholder}
               className=" border-0 placeholder: focus:outline-none focus-within:border-none dark:text-white focus-within:ring-0 bg-transparent"
             />

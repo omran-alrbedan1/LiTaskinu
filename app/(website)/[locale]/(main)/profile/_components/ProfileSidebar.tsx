@@ -1,30 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
-import {
-  Bell,
-  HelpCircle,
-  Info,
-  Shield,
-  LogOut,
-  Trash2,
-  Globe,
-  User,
-  Trash,
-} from "lucide-react";
+import { useState } from "react";
+import { Bell, HelpCircle, LogOut, Globe, User, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { IoSettingsOutline } from "react-icons/io5";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { images } from "@/constants/images";
-import {
-  MdSwitchAccount,
-  MdOutlinePrivacyTip,
-  MdSettings,
-} from "react-icons/md";
+import { MdOutlinePrivacyTip } from "react-icons/md";
 import { cn } from "@/lib/utils";
-import { useLocale } from "next-intl";
 import LogoutModal from "./LogoutModal";
 
 const ProfileSidebar = () => {
@@ -36,6 +20,11 @@ const ProfileSidebar = () => {
   const pathname = usePathname();
 
   const menuItems = [
+    {
+      id: "overview",
+      label: "Overview",
+      icon: Home,
+    },
     {
       id: "account",
       label: "Profile Information",
@@ -78,18 +67,45 @@ const ProfileSidebar = () => {
     avatar: images.avatar,
   };
 
-  // Handle logout confirmation
+  const isActiveRoute = (itemId: string) => {
+    // Split the current pathname into segments
+    const pathSegments = pathname.split("/").filter((segment) => segment);
+
+    // Get the base profile segment (e.g., "overview", "account", etc.)
+    const profileSegmentIndex = pathSegments.findIndex((segment) =>
+      [
+        "overview",
+        "account",
+        "notifications",
+        "technical-support",
+        "privacy-policy",
+      ].includes(segment)
+    );
+
+    if (profileSegmentIndex !== -1) {
+      const currentProfileSection = pathSegments[profileSegmentIndex];
+      return currentProfileSection === itemId;
+    }
+
+    // Fallback: check if the itemId is included in pathname but with proper boundaries
+    const regex = new RegExp(`/${itemId}(/|$)`);
+    return regex.test(pathname);
+  };
+
+  const navigateTo = (itemId: string) => {
+    const pathSegments = pathname.split("/").filter((segment) => segment);
+    const locale = pathSegments[0];
+    router.push(`/${locale}/profile/${itemId}`);
+  };
+
   const handleLogout = async () => {
     setIsLoggingOut(true);
 
     try {
-      // Simulate API call for logout
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      // Your actual logout logic here
       console.log("Logging out...");
 
-      // Redirect to login page or home page after logout
       router.push("/login");
     } catch (error) {
       console.error("Logout failed:", error);
@@ -104,7 +120,9 @@ const ProfileSidebar = () => {
     if (actionId === "logout") {
       setIsLogoutModalOpen(true);
     } else if (actionId === "language") {
-      router.push("./change-language");
+      const pathSegments = pathname.split("/").filter((segment) => segment);
+      const locale = pathSegments[0];
+      router.push(`/${locale}/profile/change-language`);
     }
   };
 
@@ -129,7 +147,7 @@ const ProfileSidebar = () => {
         <nav className="space-y-1 mb-6 -mt-8">
           {menuItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname.includes(item.id);
+            const isActive = isActiveRoute(item.id);
 
             return (
               <Button
@@ -142,14 +160,14 @@ const ProfileSidebar = () => {
                 }`}
                 onClick={() => {
                   setActiveSection(item.id);
-                  router.push(`./${item.id}`);
+                  navigateTo(item.id);
                 }}
               >
                 <div className="flex items-center gap-3">
                   <Icon
                     className={cn(
-                      "h-4 w-4 text-primary-color1",
-                      isActive ? "text-white" : ""
+                      "h-4 w-4",
+                      isActive ? "text-white" : "text-primary-color1"
                     )}
                   />
                   <span className="text-sm font-medium">{item.label}</span>

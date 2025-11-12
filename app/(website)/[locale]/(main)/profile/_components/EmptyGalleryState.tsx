@@ -5,9 +5,7 @@ import { UploadOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import { images } from "@/constants/images";
 
-const EmptyGalleryState: React.FC<{
-  onAddPhoto: () => void;
-}> = ({ onAddPhoto }) => (
+const EmptyGalleryState: React.FC<{}> = () => (
   <Card className="border-2 border-dashed border-gray-300 hover:border-primary-color1 transition-colors">
     <div className="flex flex-col items-center justify-center p-8 text-center">
       <Image
@@ -23,9 +21,6 @@ const EmptyGalleryState: React.FC<{
       <p className="text-gray-500 text-sm mb-4">
         Add photos to showcase your personality and interests
       </p>
-      <Button type="primary" icon={<UploadOutlined />} onClick={onAddPhoto}>
-        Upload Your First Photo
-      </Button>
     </div>
   </Card>
 );

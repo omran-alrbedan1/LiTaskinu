@@ -1,17 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { Grid, Button } from "antd";
+import { Grid } from "antd";
 import { GrGallery } from "react-icons/gr";
-import { PlusOutlined } from "@ant-design/icons";
-import { usePhotoUpload } from "@/hooks/usePhotoUpload";
 import { EmptyGalleryState, PhotoCard, PhotoModal, DeletePhotoModal } from ".";
 
 const { useBreakpoint } = Grid;
 
 const PhotoGallery: React.FC<PhotoGalleryProps> = ({
   photos = [],
-  onPhotoUpload,
   onPhotoDelete,
   maxDisplayPhotos = 6,
 }) => {
@@ -20,11 +17,7 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
   const [selectedPhotoId, setSelectedPhotoId] = useState<string | null>(null);
   const screens = useBreakpoint();
 
-  const { isUploading, fileInputRef, handleFileSelect, handleAddPhotoClick } =
-    usePhotoUpload({ onPhotoUpload });
-
   const displayPhotos = photos.slice(0, maxDisplayPhotos);
-
   const hasMorePhotos = photos.length > maxDisplayPhotos;
 
   const handleDeleteClick = (photoId: string) => {
@@ -34,6 +27,7 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
 
   const handleConfirmDelete = () => {
     if (selectedPhotoId) {
+      //@ts-ignore
       onPhotoDelete(selectedPhotoId);
       setSelectedPhotoId(null);
     }
@@ -54,29 +48,10 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
             <p className="text-sm text-gray-600">{photos.length} photos</p>
           </div>
         </div>
-
-        <Button
-          type="primary"
-          icon={<PlusOutlined />}
-          onClick={handleAddPhotoClick}
-          disabled={isUploading}
-          loading={isUploading}
-        >
-          Add Photos
-        </Button>
       </div>
 
-      <input
-        ref={fileInputRef}
-        type="file"
-        multiple
-        accept="image/*"
-        onChange={handleFileSelect}
-        className="hidden"
-      />
-
       {photos.length === 0 ? (
-        <EmptyGalleryState onAddPhoto={handleAddPhotoClick} />
+        <EmptyGalleryState />
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {displayPhotos.map((photo, index) => (

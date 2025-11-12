@@ -17,6 +17,8 @@ import authBackground from "../public/images/auth.png";
 import socialMedia from "../public/images/Social media.png";
 import landingPage from "../public/images/landing page.jpg";
 import landingPage2 from "../public/images/landing page2.png";
+import emptyProfileResults from "../public/images/profle not found.png";
+import changePassword from "../public/images/change-password.png";
 
 export const images = {
   couple,
@@ -38,4 +40,6 @@ export const images = {
   socialMedia,
   landingPage,
   landingPage2,
+  emptyProfileResults,
+  changePassword,
 };

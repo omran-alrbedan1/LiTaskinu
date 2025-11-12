@@ -1,25 +1,22 @@
-import React from "react";
+import React, { PropsWithChildren, ReactNode } from "react";
 import { ProfileSidebar } from "./_components";
 
-interface ProfileLayoutProps {
-  children: React.ReactNode;
-}
-
-const ProfileLayout: React.FC<ProfileLayoutProps> = ({ children }) => {
+type Props = {
+  children: ReactNode;
+};
+const layout = ({ children }: Props) => {
   return (
-    <div className="min-h-screen -mb-32 bg-gradient-to-br from-gray-50 to-blue-50/30 dark:from-gray-900 dark:to-blue-950/20">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <ProfileSidebar />
-          </div>
-
-          <div className="lg:col-span-3">{children}</div>
+    <div className="max-h-[90vh]">
+      <div className="grid grid-cols-4 gap-4 mt-4 mx-16">
+        <div className="col-span-1">
+          <ProfileSidebar />
+        </div>
+        <div className="col-span-3 max-h-[90vh] overflow-auto pr-8 sidebar-scrollbar  px-2 pb-8">
+          {children}
         </div>
       </div>
     </div>
   );
 };
 
-export default ProfileLayout;
+export default layout;

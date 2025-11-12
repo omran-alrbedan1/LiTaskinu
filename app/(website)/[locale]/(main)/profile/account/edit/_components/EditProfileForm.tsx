@@ -1,4 +1,3 @@
-// components/forms/EditProfileForm.tsx
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,17 +8,17 @@ import { Form } from "@/components/ui/form";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ICONS } from "@/constants/icons";
-import {
-  countryOptions,
-  genderOptions,
-  religionOptions,
-} from "@/constants/options";
+import { countryOptions, genderOptions } from "@/constants/options";
 import CustomFormField, {
   FormFieldType,
 } from "@/components/shared/CustomInput";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import useGetData from "@/hooks/useGetData";
 import usePostData from "@/hooks/usePostData";
+import { Calendar, Key, Shield } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import ChangePasswordModal from "./ChangePasswordModal";
+import ImageUploader from "./ImageUploader";
 
 const EditProfileValidation = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -35,18 +34,12 @@ const EditProfileValidation = z.object({
   country: z.string().min(1, "Country is required"),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(1, "Phone number is required"),
-  religion: z.string().optional(),
-  jobTitle: z.string().optional(),
-  occupation: z.string().optional(),
   place: z.string().optional(),
-  weight: z.string().optional(),
-  height: z.string().optional(),
   introduction: z.string().optional(),
-  password: z
-    .string()
-    .min(6, "Password must be at least 6 characters")
-    .optional()
-    .or(z.literal("")),
+  images: z
+    .array(z.string())
+    .max(4, "You can upload up to 4 images")
+    .optional(),
 });
 
 interface EditProfileFormProps {
@@ -55,6 +48,7 @@ interface EditProfileFormProps {
 
 const EditProfileForm = ({ initialData }: EditProfileFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const router = useRouter();
 
   const {
@@ -95,14 +89,9 @@ const EditProfileForm = ({ initialData }: EditProfileFormProps) => {
       country: "",
       email: "",
       phone: "",
-      religion: "",
-      jobTitle: "",
-      occupation: "",
       place: "",
-      weight: "",
-      height: "",
       introduction: "",
-      password: "",
+      images: [],
     },
   });
 
@@ -118,9 +107,6 @@ const EditProfileForm = ({ initialData }: EditProfileFormProps) => {
 
   async function onSubmit(values: z.infer<typeof EditProfileValidation>) {
     const updateData = { ...values };
-    if (!updateData.password) {
-      delete updateData.password;
-    }
 
     await postData(updateData);
   }
@@ -130,7 +116,7 @@ const EditProfileForm = ({ initialData }: EditProfileFormProps) => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           {/* Basic Information Section */}
-          <div className="bg-gray-50 p-4 rounded-lg">
+          <div className=" p-4 rounded-lg">
             <h3 className="text-xl   font-semibold text-gray-800 mb-4">
               Basic Information
             </h3>
@@ -185,7 +171,7 @@ const EditProfileForm = ({ initialData }: EditProfileFormProps) => {
           </div>
 
           {/* Contact Information Section */}
-          <div className="bg-gray-50 p-4 rounded-lg">
+          <div className=" p-4 rounded-lg">
             <h3 className="text-xl font-semibold text-gray-800 mb-4">
               Contact Information
             </h3>
@@ -207,128 +193,83 @@ const EditProfileForm = ({ initialData }: EditProfileFormProps) => {
                 label="Phone Number"
               />
             </div>
-          </div>
+            {/* Profile Images Section */}
 
-          {/* Professional Information Section */}
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
-              Professional Information
-            </h3>
+            <div className="p-4 rounded-lg">
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                Profile Images
+              </h3>
 
-            <div className="grid grid-cols-1 my-4 md:grid-cols-2 gap-4">
-              <CustomFormField
-                fieldType={FormFieldType.INPUT}
-                control={form.control}
-                name="jobTitle"
-                label="Your Job Title"
-                placeholder="Software Engineer"
-                iconSrc={ICONS.userInput}
-              />
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Upload up to 4 images
+              </label>
 
-              <CustomFormField
-                fieldType={FormFieldType.INPUT}
-                control={form.control}
-                name="occupation"
-                label="Your Occupation"
-                placeholder="Technology"
-                iconSrc={ICONS.userInput}
+              <ImageUploader
+                value={form.watch("images") || []}
+                onChange={(newImages) => form.setValue("images", newImages)}
+                maxImages={4}
               />
             </div>
-
-            <CustomFormField
-              fieldType={FormFieldType.INPUT}
-              control={form.control}
-              name="place"
-              label="Your Place"
-              placeholder="New York, USA"
-              iconSrc={ICONS.userInput}
-            />
-          </div>
-
-          {/* Personal Details Section */}
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
-              Personal Details
-            </h3>
-
-            <div className="grid grid-cols-1 my-4 md:grid-cols-2 gap-4">
-              <CustomFormField
-                fieldType={FormFieldType.SELECT}
-                control={form.control}
-                name="religion"
-                label="Your Religion"
-                placeholder="Select religion"
-                options={religionOptions}
-              />
-
-              <CustomFormField
-                fieldType={FormFieldType.INPUT}
-                control={form.control}
-                name="weight"
-                label="Your Weight"
-                placeholder="70 kg"
-                iconSrc={ICONS.userInput}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 my-4 md:grid-cols-2 gap-4">
-              <CustomFormField
-                fieldType={FormFieldType.INPUT}
-                control={form.control}
-                name="height"
-                label="Your Height"
-                placeholder="175 cm"
-                iconSrc={ICONS.userInput}
-              />
-            </div>
-
-            <CustomFormField
-              fieldType={FormFieldType.TEXTAREA}
-              control={form.control}
-              name="introduction"
-              label="Your Introduction"
-              placeholder="Tell us about yourself..."
-            />
           </div>
 
           {/* Security Section */}
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
-              Security
+          <div className="p-6 rounded-lg border border-gray-200 bg-gray-50/30">
+            <h3 className="text-xl font-semibold text-gray-800 mb-6 flex items-center gap-3">
+              <Shield className="w-5 h-5 text-primary-color1" />
+              Account Security
             </h3>
 
-            <CustomFormField
-              control={form.control}
-              fieldType={FormFieldType.PASSWORD}
-              name="password"
-              label="Change Password (optional)"
-              placeholder="Enter new password"
-              iconSrc={ICONS.lock}
-            />
-            <p className="text-sm text-gray-500 mt-1">
-              Leave blank to keep current password
-            </p>
+            <div className="space-y-4">
+              {/* Password Change Card */}
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-4 bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <Key className="w-4 h-4 text-gray-600" />
+                    <h4 className="font-semibold text-gray-900">Password</h4>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <Calendar className="w-3 h-3" />
+                    <span>Last changed 3 months ago</span>
+                  </div>
+                </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setIsPasswordModalOpen(true)}
+                  className="flex items-center gap-2 whitespace-nowrap border-primary-color1 text-primary-color1 hover:bg-primary-color1 hover:text-white transition-colors"
+                >
+                  Change Password
+                </Button>
+              </div>
+
+              <ChangePasswordModal
+                open={isPasswordModalOpen}
+                onClose={() => setIsPasswordModalOpen(false)}
+              />
+            </div>
           </div>
 
-          <SubmitButton
-            isLoading={isLoading}
-            loadingText="Updating Profile..."
-            className="w-full"
-            type="submit"
-          >
-            Update Profile
-          </SubmitButton>
+          {/* Action Buttons */}
+          <div className="flex justify-end items-center gap-3 pt-6">
+            <button
+              type="button"
+              onClick={() => router.back()}
+              className="px-5 py-1.5 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition-all duration-200 flex items-center gap-2"
+            >
+              Cancel
+            </button>
+
+            <SubmitButton
+              isLoading={isLoading}
+              loadingText="Updating Profile..."
+              type="submit"
+              className="px-6 py-2.5 bg-primary-color1 text-white rounded-lg shadow-md hover:bg-primary-color2 transition-all duration-200"
+            >
+              Save Changes
+            </SubmitButton>
+          </div>
         </form>
       </Form>
-
-      <div className="mt-6 text-sm text-center">
-        <button
-          onClick={() => router.back()}
-          className="text-gray-600 hover:text-gray-800 transition-colors"
-        >
-          ← Back to Profile
-        </button>
-      </div>
     </div>
   );
 };
