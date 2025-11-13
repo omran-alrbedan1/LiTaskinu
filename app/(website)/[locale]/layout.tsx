@@ -32,7 +32,7 @@ export default async function WebsiteLayout({
       <body className=" text-base">
         {" "}
         <NextIntlClientProvider messages={messages}>
-          <div className="max-h-screen overflow-y-auto  hide-scrollbar">
+          <div className="min-h-screen overflow-y-auto  hide-scrollbar">
             {children}
           </div>
         </NextIntlClientProvider>

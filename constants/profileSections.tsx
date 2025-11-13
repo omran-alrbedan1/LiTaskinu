@@ -71,7 +71,7 @@ export const profileSectionsConfig = [
         section: "seeking",
       },
     ],
-  },
+  },  
   {
     title: "Appearance",
     icon: <Eye className="w-5 h-5 text-primary-color1" />,

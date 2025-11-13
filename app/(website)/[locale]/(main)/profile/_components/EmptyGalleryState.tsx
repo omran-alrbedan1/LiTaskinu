@@ -1,7 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Button } from "antd";
 import React from "react";
-import { UploadOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import { images } from "@/constants/images";
 

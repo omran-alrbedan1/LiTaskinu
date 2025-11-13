@@ -15,10 +15,13 @@ import emptyDocument from "../public/images/EmptyDocument.png";
 import emptyAds from "../public/images/ads.png";
 import authBackground from "../public/images/auth.png";
 import socialMedia from "../public/images/Social media.png";
-import landingPage from "../public/images/landing page.jpg";
+import landingPage from "../public/images/landing_page.jpg";
 import landingPage2 from "../public/images/landing page2.png";
 import emptyProfileResults from "../public/images/profle not found.png";
 import changePassword from "../public/images/change-password.png";
+import litaskunuLogo from "../public/images/Litaskunu_logo.png";
+import litaskunuLogoWhite from "../public/images/Litaskunu_logo_light.png";
+import landingCouple from "../public/images/landing_couple.png";
 
 export const images = {
   couple,
@@ -42,4 +45,7 @@ export const images = {
   landingPage2,
   emptyProfileResults,
   changePassword,
+  litaskunuLogo,
+  landingCouple,
+  litaskunuLogoWhite,
 };

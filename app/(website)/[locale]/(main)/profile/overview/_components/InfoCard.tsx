@@ -8,7 +8,7 @@ interface InfoCardProps {
   variant: "personal" | "seeking";
 }
 
-export const InfoCard: React.FC<InfoCardProps> = ({
+export const  InfoCard: React.FC<InfoCardProps> = ({
   title,
   icon,
   data,

@@ -30,7 +30,7 @@ export const ProfileSection: React.FC<ProfileSectionProps> = ({
           title="My Information"
           icon={<User className="w-4 h-4 text-gray-600" />}
           data={personalData}
-          fields={personalFields}
+          fields={personalFields}   
           variant="personal"
         />
         <InfoCard
