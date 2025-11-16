@@ -16,7 +16,7 @@ import emptyAds from "../public/images/ads.png";
 import authBackground from "../public/images/auth.png";
 import socialMedia from "../public/images/Social media.png";
 import landingPage from "../public/images/landing_page.jpg";
-import landingPage2 from "../public/images/landing page2.png";
+import landingPage2 from "../public/images/landing_page2.jpg";
 import emptyProfileResults from "../public/images/profle not found.png";
 import changePassword from "../public/images/change-password.png";
 import litaskunuLogo from "../public/images/Litaskunu_logo.png";

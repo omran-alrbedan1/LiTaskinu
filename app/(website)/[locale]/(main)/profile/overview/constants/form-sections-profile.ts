@@ -7,6 +7,16 @@ export const PROFILE_SECTIONS = BASE_SECTIONS.map((section) => {
       fields: [
         ...section.fields,
         { key: "occupation", label: "Occupation", type: "text" },
+        {
+          key: "healthCondation",
+          label: "If you have a health condation , please write it down",
+          type: "text",
+        },
+        {
+          key: "numberOfChildren",
+          label: "Number Of Children",
+          type: "number",
+        },
       ],
     };
   }

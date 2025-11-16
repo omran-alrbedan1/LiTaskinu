@@ -23,9 +23,7 @@ export const SectionContent: React.FC<SectionContentProps> = ({
   <div className="grid grid-cols-1 gap-6">
     {section.fields.map((field) => (
       <div key={field.key} className="space-y-3">
-        <Label className="text-sm font-medium text-gray-700">
-          {field.label}
-        </Label>
+        <Label className=" text-base ">{field.label}</Label>
         <FieldRenderer
           section={section.id}
           field={field}
