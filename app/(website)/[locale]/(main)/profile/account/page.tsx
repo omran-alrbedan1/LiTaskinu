@@ -12,7 +12,6 @@ import { FaBook } from "react-icons/fa";
 
 const ProfilePage = () => {
   const router = useRouter();
-
   const [photos, setPhotos] = useState<Photo[]>(mockPhotos);
 
   const handlePhotoDelete = (photoId: string) => {
@@ -20,22 +19,19 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="space-y-6 max-h-[88vh] hide-scrollbar overflow-clip ">
+    <div className="space-y-6 max-h-[88vh] hide-scrollbar  overflow-clip p-4">
       {/* Header */}
       <ProfileHeader
         title="Personal information"
         description="manage your personal information and preferences"
-      >
-        <Button
-          type="primary"
-          icon={<EditOutlined />}
-          onClick={() => router.push("../profile/account/edit")}
-        >
-          Edit Profile
-        </Button>
-      </ProfileHeader>
+        action={{
+          label: "Edit Profile",
+          href: "../profile/account/edit",
+          icon: EditOutlined,
+        }}
+      />
 
-      <div className="bg-white max-h-[80vh]   pb-4 rounded-xl shadow-sm border border-gray-200/60 p-6">
+      <div className="bg-white max-h-[80vh] pb-4 rounded-xl shadow-sm border border-gray-200/60 p-6">
         {/* Basic Information and photos */}
         <div className="flex flex-col lg:flex-row gap-6">
           {/* User Info Card */}

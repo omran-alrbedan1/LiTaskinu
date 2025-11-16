@@ -31,15 +31,10 @@ const EditPreferencePage = () => {
   return (
     <div className="space-y-6 ">
       <div className="flex items-center gap-4 mt-3">
-        <Link
-          href="../overview"
-          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-        >
-          <ArrowLeft className="w-5 h-5 text-primary-color1" />
-        </Link>
         <ProfileHeader
           title="Edit Preference Information"
           description="Customize your preferences and manage your account settings"
+          backLink="../overview"
         />
       </div>
 

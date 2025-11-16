@@ -22,6 +22,7 @@ import changePassword from "../public/images/change-password.png";
 import litaskunuLogo from "../public/images/Litaskunu_logo.png";
 import litaskunuLogoWhite from "../public/images/Litaskunu_logo_light.png";
 import landingCouple from "../public/images/landing_couple.png";
+import interest from "../public/images/interest.png";
 
 export const images = {
   couple,
@@ -48,4 +49,5 @@ export const images = {
   litaskunuLogo,
   landingCouple,
   litaskunuLogoWhite,
+  interest,
 };

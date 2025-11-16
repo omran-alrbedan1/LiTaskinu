@@ -32,15 +32,10 @@ const EditPersonalDataPage = () => {
   return (
     <div className="space-y-6 ">
       <div className="flex items-center gap-4 mt-3">
-        <Link
-          href="../overview"
-          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-        >
-          <ArrowLeft className="w-5 h-5 text-primary-color1" />
-        </Link>
         <ProfileHeader
           title="Edit Personal Information"
           description="Update your personal details and information"
+          backLink="../overview"
         />
       </div>
 
@@ -54,8 +49,8 @@ const EditPersonalDataPage = () => {
         <Accordion type="multiple" className="space-y-4">
           {PROFILE_SECTIONS.map((section) => (
             <AccordionItem
-              key={section.id}
-              value={section.id}
+              key={section?.id}
+              value={section?.id ?? ""}
               className="bg-white rounded-lg border border-gray-200 overflow-hidden"
             >
               <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-gray-50 transition-colors">
@@ -63,10 +58,10 @@ const EditPersonalDataPage = () => {
                   <section.icon className="w-5 h-5 text-primary-color1 flex-shrink-0" />
                   <div>
                     <h3 className="text-lg font-semibold text-gray-800">
-                      {section.title}
+                      {section?.title}
                     </h3>
                     <p className="text-sm text-gray-600 mt-1">
-                      {section.description}
+                      {section?.description}
                     </p>
                   </div>
                 </div>

@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Bell, HelpCircle, LogOut, Globe, User, Home } from "lucide-react";
+import { HelpCircle, LogOut, Globe, User, Home } from "lucide-react";
+import { FaPersonBurst } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { images } from "@/constants/images";
-import { MdOutlinePrivacyTip } from "react-icons/md";
+import { MdOutlineInterests } from "react-icons/md";
 import { cn } from "@/lib/utils";
 import LogoutModal from "./LogoutModal";
 
@@ -31,20 +31,19 @@ const ProfileSidebar = () => {
       icon: User,
     },
     {
-      id: "notifications",
-      label: "Notifications",
-      icon: Bell,
-      badge: 3,
+      id: "interest",
+      label: "Interest",
+      icon: MdOutlineInterests,
+    },
+    {
+      id: "personality",
+      label: "Personality",
+      icon: FaPersonBurst,
     },
     {
       id: "technical-support",
       label: "Technical Support",
       icon: HelpCircle,
-    },
-    {
-      id: "privacy-policy",
-      label: "Privacy Policy",
-      icon: MdOutlinePrivacyTip,
     },
   ];
 
@@ -171,13 +170,6 @@ const ProfileSidebar = () => {
                     )}
                   />
                   <span className="text-sm font-medium">{item.label}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  {item.badge && (
-                    <Badge className="bg-primary-color2/30 text-primary-color2 text-xs">
-                      {item.badge}
-                    </Badge>
-                  )}
                 </div>
               </Button>
             );
