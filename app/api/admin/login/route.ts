@@ -1,0 +1,110 @@
+// app/api/admin/login/route.ts
+import { NextRequest, NextResponse } from "next/server";
+import { createSession } from "@/lib/session";
+import axios from "axios";
+
+export async function POST(request: NextRequest) {
+  try {
+    const { email, password } = await request.json();
+
+    // Validate input
+    if (!email || !password) {
+      return NextResponse.json(
+        { error: "Email and password are required" },
+        { status: 400 }
+      );
+    }
+
+    const API_BASE_URL = process.env.API_BASE_URL;
+
+    if (!API_BASE_URL) {
+      throw new Error("API_BASE_URL is not configured");
+    }
+
+    // Call your external API for authentication
+    const response = await axios.post(
+      `${API_BASE_URL}/login`,
+      {
+        email,
+        password,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+
+    const responseData = response.data;
+
+    // Check if login was successful
+    if (!responseData.status || !responseData.data) {
+      return NextResponse.json(
+        { error: responseData.message || "Authentication failed" },
+        { status: 401 }
+      );
+    }
+
+    const { user, roles, token } = responseData.data;
+
+    // Check if user has admin role
+    if (!roles.includes("admin")) {
+      return NextResponse.json(
+        { error: "Access denied. Admin privileges required." },
+        { status: 403 }
+      );
+    }
+
+    // Create session payload with the API response data
+    const sessionPayload = {
+      user: {
+        id: user.id.toString(),
+        name: `${user.first_name} ${user.last_name}`,
+        email: user.email,
+        role: "admin",
+        avatar: user.avatar || "/avatars/admin.png",
+        first_name: user.first_name,
+        last_name: user.last_name,
+        gender: user.gender,
+        is_verified: user.is_verified,
+        phone: user.phone,
+        // Add any other user fields you need
+      },
+      accessToken: token.access_token,
+      refreshToken: token.refresh_token,
+      apiUserData: user, // Store the complete user data from API if needed
+    };
+
+    // Create the session - this sets the secure HTTP-only cookie
+    await createSession(sessionPayload);
+
+    return NextResponse.json(
+      {
+        message: "Admin login successful",
+        user: sessionPayload.user,
+        token: {
+          access_token: token.access_token,
+          // Don't send refresh token in response if it's stored in session
+        },
+      },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error("Admin login error:", error);
+
+    // Handle axios errors
+    if (axios.isAxiosError(error)) {
+      const errorMessage =
+        error.response?.data?.message || "Authentication failed";
+      const statusCode = error.response?.status || 401;
+
+      return NextResponse.json({ error: errorMessage }, { status: statusCode });
+    }
+
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}

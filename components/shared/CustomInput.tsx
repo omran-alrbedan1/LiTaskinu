@@ -182,21 +182,21 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
         <Select
           onValueChange={(value) => {
             field.onChange(value);
-            props.onValueChange?.(value);
           }}
-          defaultValue={field.value}
+          value={field.value?.toString()}
+          defaultValue={field.value?.toString()}
         >
           <FormControl>
-            <SelectTrigger className="w-full border border-dark-500 pl-3 rounded-lg h-10 bg-dark-400">
+            <SelectTrigger className="w-full border border-gray-300 pl-3 rounded-lg h-10 bg-white focus:ring-2 focus:ring-primary-color1 focus:border-primary-color1">
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
           </FormControl>
-          <SelectContent className="bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 z-[9999]">
+          <SelectContent className="bg-white border-gray-300 z-[9999] max-h-60">
             {options.map((option) => (
               <SelectItem
                 key={option.value}
-                value={option.value}
-                className="flex items-center gap-2"
+                value={option.value.toString()} // Convert to string
+                className="flex items-center gap-2 py-2"
               >
                 <div className="flex items-center gap-2">
                   {option.code && (
@@ -219,7 +219,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                       className="w-5 h-5"
                     />
                   )}
-                  <span>{option.label}</span>
+                  <span className="text-gray-900">{option.label}</span>
                 </div>
               </SelectItem>
             ))}

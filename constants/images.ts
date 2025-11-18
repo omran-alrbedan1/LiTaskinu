@@ -23,6 +23,7 @@ import litaskunuLogo from "../public/images/Litaskunu_logo.png";
 import litaskunuLogoWhite from "../public/images/Litaskunu_logo_light.png";
 import landingCouple from "../public/images/landing_couple.png";
 import interest from "../public/images/interest.png";
+import adminLogin from "../public/images/admin-login.jpg";
 
 export const images = {
   couple,
@@ -50,4 +51,5 @@ export const images = {
   landingCouple,
   litaskunuLogoWhite,
   interest,
+  adminLogin,
 };

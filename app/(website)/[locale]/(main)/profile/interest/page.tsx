@@ -87,8 +87,8 @@ const InterestsPage = () => {
     sports.length === 0;
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className=" mx-auto p-4 space-y-8">
+    <div className="min-h-screen">
+      <div className="   space-y-8">
         {/* Header Section */}
         <ProfileHeader
           title="My Interests"

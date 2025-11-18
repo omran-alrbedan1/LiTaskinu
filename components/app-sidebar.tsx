@@ -25,6 +25,7 @@ import {
   UserCog, // إضافة أيقونة جديدة لإدارة أولياء الأمور
   UserPlus,
   Contact,
+  Globe,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -88,7 +89,23 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         ],
       },
       {
-        title: "Parent Management", // قسم جديد
+        title: "Countries Management",
+        url: `/admin/${locale}/countries`,
+        icon: Globe,
+        items: [
+          {
+            title: " Countries",
+            url: `/admin/${locale}/countries`,
+          },
+
+          {
+            title: "Regions/Cities",
+            url: `/admin/${locale}/cities`,
+          },
+        ],
+      },
+      {
+        title: "Parent Management",
         url: `/admin/${locale}/parents`,
         icon: UserCog,
         items: [
