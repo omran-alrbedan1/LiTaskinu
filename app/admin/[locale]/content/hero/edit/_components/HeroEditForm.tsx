@@ -187,7 +187,6 @@ const HeroEditForm: React.FC<HeroEditFormProps> = ({
               <h3 className="font-medium">
                 {editingButtonId ? "Edit Button" : "Add New Button"}
               </h3>
-
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="buttonText">Button Text *</Label>
@@ -210,7 +209,6 @@ const HeroEditForm: React.FC<HeroEditFormProps> = ({
                   />
                 </div>
               </div>
-
               <div className="flex justify-end gap-3">
                 {editingButtonId && (
                   <Button variant="outline" onClick={onCancelEdit}>
