@@ -236,7 +236,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     // Content & System Management
     management: [
       {
-        title: "Content Management",
+        title: "Website Management",
         url: `/admin/${locale}/content`,
         icon: FileText,
         items: [
@@ -248,6 +248,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             title: "Social Media Links",
             url: `/admin/${locale}/content/social-media`,
           },
+
           {
             title: "Terms & Conditions",
             url: `/admin/${locale}/content/terms`,
@@ -267,6 +268,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           {
             title: "Advertisements",
             url: `/admin/${locale}/ads`,
+          },
+          {
+            title: "How It Works",
+            url: `/admin/${locale}/content/how-it-works`,
+          },
+          {
+            title: "Landing Page Hero",
+            url: `/admin/${locale}/content/hero`,
           },
         ],
       },

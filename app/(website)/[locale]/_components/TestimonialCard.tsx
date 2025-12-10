@@ -10,19 +10,20 @@ interface TestimonialCardProps {
 export default function TestimonialCard({ index }: TestimonialCardProps) {
   return (
     <motion.div
-      className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-500 group"
+      className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-md sm:shadow-lg border border-gray-100 hover:shadow-lg sm:hover:shadow-xl transition-all duration-500 group"
       variants={animationVariants.item}
       whileHover={{
-        y: -8,
-        scale: 1.02,
+        y: -4,
+        scale: 1.01,
         transition: { duration: 0.3 },
       }}
     >
-      <div className="flex justify-center mb-4">
+      {/* النجوم - أصغر على الموبايل */}
+      <div className="flex justify-center mb-3 sm:mb-4">
         {[...Array(5)].map((_, i) => (
           <svg
             key={i}
-            className="w-5 h-5 text-yellow-400"
+            className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400"
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -31,17 +32,19 @@ export default function TestimonialCard({ index }: TestimonialCardProps) {
         ))}
       </div>
 
-      <blockquote className="text-gray-600 text-center mb-6 italic">
+      <blockquote className="text-gray-600 text-center mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed italic">
         "We loved the idea of having a parent or guardian in control every step
         of the way."
       </blockquote>
 
       <div className="text-center">
-        <p className="font-semibold text-[#8B9475]">Ahmed & Fatima</p>
-        <p className="text-sm text-gray-500">London, UK</p>
+        <p className="font-semibold text-[#8B9475] text-sm sm:text-base">
+          Ahmed & Fatima
+        </p>
+        <p className="text-xs sm:text-sm text-gray-500">London, UK</p>
       </div>
 
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#A1AA8A] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute top-0 left-0 w-full h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-[#A1AA8A] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     </motion.div>
   );
 }

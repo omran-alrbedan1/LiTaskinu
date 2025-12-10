@@ -1,119 +1,46 @@
 "use client";
-import { useState } from "react";
-import { Dropdown, MenuProps, Table, Button, Card, Space, Spin } from "antd";
+import { Dropdown, MenuProps, Table, Button, Card, Spin } from "antd";
 import { Plus, Edit, Trash2 } from "lucide-react";
 import { AddCountryModal } from "./_components/AddCountryModal";
 import { EditCountryModal } from "./_components/EditCountryModal";
-import usePostData from "@/hooks/usePostData";
-import useGetData from "@/hooks/useGetData";
-import usePutData from "@/hooks/usePutData";
-import useDeleteData from "@/hooks/useDeleteData";
 import { Header } from "@/components/admin/shared";
 import DeleteModal from "@/components/admin/shared/DeleteModal";
-import { MoreHorizontal, Settings } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
+import { useCrudOperations } from "@/hooks/useCrudOperations";
 
 const CountriesPage = () => {
-  const [isAddModalVisible, setIsAddModalVisible] = useState(false);
-  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-  const [editingCountry, setEditingCountry] = useState<Country | null>(null);
-  const [deletingCountry, setDeletingCountry] = useState<Country | null>(null);
-
   const {
     data: countriesData,
     loading: isFetchingCountries,
     error: fetchError,
+    createItem: handleAddCountry,
+    updateItem: handleEditCountry,
     refetch: refetchCountries,
-  } = useGetData<Country[]>({
-    url: "/api/admin/countries",
-    enabled: true,
+    isCreating: isAddingCountry,
+    isUpdating: isUpdatingCountry,
+    isDeleting: isDeletingCountry,
+
+    // Modal states and functions
+    isAddModalOpen,
+    isEditModalOpen,
+    isDeleteModalOpen,
+    openAddModal,
+    closeAddModal,
+    openEditModal,
+    closeEditModal,
+    openDeleteModal,
+    closeDeleteModal,
+    handleDelete,
+
+    // Selected item
+    selectedItem: editingCountry,
+    selectedItemName,
+  } = useCrudOperations<Country>({
+    endpoint: "/api/admin/countries",
+    itemName: "Country",
   });
-
-  const {
-    postData,
-    loading: isAddingCountry,
-    error: addError,
-    success: addSuccess,
-  } = usePostData("/api/admin/countries", {
-    showNotifications: true,
-    successMessage: "Country added successfully!",
-    errorMessage: "Failed to add country",
-    onSuccess: () => {
-      refetchCountries();
-      setIsAddModalVisible(false);
-    },
-  });
-
-  const {
-    putData,
-    loading: isUpdatingCountry,
-    error: updateError,
-    success: updateSuccess,
-  } = usePutData("/api/admin/countries", {
-    showNotifications: true,
-    successMessage: "Country updated successfully!",
-    errorMessage: "Failed to update country",
-    onSuccess: () => {
-      refetchCountries();
-      setIsEditModalVisible(false);
-    },
-  });
-
-  const {
-    deleteData,
-    loading: isDeletingCountry,
-    error: deleteError,
-    success: deleteSuccess,
-  } = useDeleteData("/api/admin/countries", {
-    showNotifications: true,
-    successMessage: "Country deleted successfully!",
-    errorMessage: "Failed to delete country",
-    onSuccess: () => {
-      refetchCountries();
-      setIsDeleteModalVisible(false);
-    },
-  });
-
-  const handleAddCountry = async (formData: Country) => {
-    await postData(formData);
-  };
-
-  const handleEditCountry = async (formData: Country, id: number) => {
-    await putData(formData, id);
-  };
-
-  const handleDeleteCountry = async () => {
-    if (deletingCountry?.id) {
-      await deleteData(deletingCountry.id);
-    }
-  };
-
-  // Open edit modal
-  const handleEditClick = (country: Country) => {
-    setEditingCountry(country);
-    setIsEditModalVisible(true);
-  };
-
-  // Open delete modal
-  const handleDeleteClick = (country: Country) => {
-    setDeletingCountry(country);
-    setIsDeleteModalVisible(true);
-  };
-
-  // Close edit modal
-  const handleCloseEditModal = () => {
-    setIsEditModalVisible(false);
-    setEditingCountry(null);
-  };
-
-  // Close delete modal
-  const handleCloseDeleteModal = () => {
-    setIsDeleteModalVisible(false);
-    setDeletingCountry(null);
-  };
 
   // Columns configuration
-
   const columns = [
     {
       title: "Code",
@@ -186,9 +113,8 @@ const CountriesPage = () => {
                 <span className="text-blue-600">Edit</span>
               </div>
             ),
-            onClick: () => handleEditClick(record),
+            onClick: () => openEditModal(record),
           },
-
           {
             key: "delete",
             label: (
@@ -197,7 +123,7 @@ const CountriesPage = () => {
                 <span>Delete</span>
               </div>
             ),
-            onClick: () => handleDeleteClick(record),
+            onClick: () => openDeleteModal(record),
           },
         ];
 
@@ -231,7 +157,7 @@ const CountriesPage = () => {
           type="primary"
           icon={<Plus className="w-4 h-4" />}
           size="large"
-          onClick={() => setIsAddModalVisible(true)}
+          onClick={openAddModal}
         >
           Add Country
         </Button>
@@ -271,27 +197,28 @@ const CountriesPage = () => {
 
       {/* Add Country Modal */}
       <AddCountryModal
-        open={isAddModalVisible}
-        onClose={() => setIsAddModalVisible(false)}
+        open={isAddModalOpen}
+        onClose={closeAddModal}
         onAddCountry={handleAddCountry}
         isLoading={isAddingCountry}
       />
 
       {/* Edit Country Modal */}
       <EditCountryModal
-        open={isEditModalVisible}
-        onClose={handleCloseEditModal}
+        open={isEditModalOpen}
+        onClose={closeEditModal}
         onEditCountry={handleEditCountry}
         isLoading={isUpdatingCountry}
         editingCountry={editingCountry}
       />
 
+      {/* Delete Confirmation Modal */}
       <DeleteModal
-        isOpen={isDeleteModalVisible}
-        onClose={handleCloseDeleteModal}
-        onConfirm={handleDeleteCountry}
+        isOpen={isDeleteModalOpen}
+        onClose={closeDeleteModal}
+        onConfirm={handleDelete}
         isLoading={isDeletingCountry}
-        itemName={deletingCountry?.name?.en || "this country"}
+        itemName={selectedItemName}
         description="This will permanently remove the country and all associated data from the system."
       />
     </div>

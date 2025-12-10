@@ -1,42 +1,46 @@
-// app/admin/en/cities/page.tsx
 "use client";
-import { useState } from "react";
-import { Dropdown, MenuProps, Table, Button, Card, Space, Spin } from "antd";
+import { Dropdown, MenuProps, Table, Button, Card, Spin } from "antd";
 import { Plus, Edit, Trash2 } from "lucide-react";
 import { AddCityModal } from "./_components/AddCityModal";
 import { EditCityModal } from "./_components/EditCityModal";
-import usePostData from "@/hooks/usePostData";
 import useGetData from "@/hooks/useGetData";
-import usePutData from "@/hooks/usePutData";
-import useDeleteData from "@/hooks/useDeleteData";
 import { Header } from "@/components/admin/shared";
 import DeleteModal from "@/components/admin/shared/DeleteModal";
 import { MoreHorizontal } from "lucide-react";
+import { useCrudOperations } from "@/hooks/useCrudOperations";
 
 const CitiesPage = () => {
-  const [isAddModalVisible, setIsAddModalVisible] = useState(false);
-  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-  const [editingCity, setEditingCity] = useState<City | null>(null);
-  const [deletingCity, setDeletingCity] = useState<City | null>(null);
-
-  // Fetch cities data
   const {
     data: citiesData,
     loading: isFetchingCities,
     error: fetchError,
+    createItem: handleAddCity,
+    updateItem: handleEditCity,
     refetch: refetchCities,
-  } = useGetData<City[]>({
-    url: "/api/admin/cities",
-    enabled: true,
+    isCreating: isAddingCity,
+    isUpdating: isUpdatingCity,
+    isDeleting: isDeletingCity,
+
+    // Modal states and functions
+    isAddModalOpen,
+    isEditModalOpen,
+    isDeleteModalOpen,
+    openAddModal,
+    closeAddModal,
+    openEditModal,
+    closeEditModal,
+    openDeleteModal,
+    closeDeleteModal,
+    handleDelete,
+
+    // Selected item
+    selectedItem: editingCity,
+    selectedItemName,
+  } = useCrudOperations<City>({
+    endpoint: "/api/admin/cities",
+    itemName: "City",
   });
 
-  const getCountryName = (countryId: number) => {
-    const country = countriesData?.find((c: Country) => c.id === countryId);
-    return country ? `${country.name.en} ` : `Country ID: ${countryId}`;
-  };
-
-  // Fetch countries for dropdowns
   const { data: countriesData, loading: isFetchingCountries } = useGetData<
     Country[]
   >({
@@ -44,90 +48,9 @@ const CitiesPage = () => {
     enabled: true,
   });
 
-  // Add city
-  const {
-    postData,
-    loading: isAddingCity,
-    error: addError,
-    success: addSuccess,
-  } = usePostData("/api/admin/cities", {
-    showNotifications: true,
-    successMessage: "City added successfully!",
-    errorMessage: "Failed to add city",
-    onSuccess: () => {
-      refetchCities();
-      setIsAddModalVisible(false);
-    },
-  });
-
-  // Update city
-  const {
-    putData,
-    loading: isUpdatingCity,
-    error: updateError,
-    success: updateSuccess,
-  } = usePutData("/api/admin/cities", {
-    showNotifications: true,
-    successMessage: "City updated successfully!",
-    errorMessage: "Failed to update city",
-    onSuccess: () => {
-      refetchCities();
-      setIsEditModalVisible(false);
-    },
-  });
-
-  // Delete city
-  const {
-    deleteData,
-    loading: isDeletingCity,
-    error: deleteError,
-    success: deleteSuccess,
-  } = useDeleteData("/api/admin/cities", {
-    showNotifications: true,
-    successMessage: "City deleted successfully!",
-    errorMessage: "Failed to delete city",
-    onSuccess: () => {
-      refetchCities();
-      setIsDeleteModalVisible(false);
-    },
-  });
-
-  const handleAddCity = async (formData: Omit<City, "id">) => {
-    await postData(formData);
-  };
-
-  const handleEditCity = async (formData: Omit<City, "id">, id: number) => {
-    await putData(formData, id);
-  };
-
-  const handleDeleteCity = async () => {
-    if (deletingCity?.id) {
-      await deleteData(deletingCity.id);
-    }
-  };
-
-  // Open edit modal
-  const handleEditClick = (city: City) => {
-    setEditingCity(city);
-    setIsEditModalVisible(true);
-  };
-
-  // Open delete modal
-  const handleDeleteClick = (city: City) => {
-    setDeletingCity(city);
-    setIsDeleteModalVisible(true);
-  };
-
-  // Close edit modal
-  const handleCloseEditModal = () => {
-    setIsEditModalVisible(false);
-    setEditingCity(null);
-  };
-
-  // Close delete modal
-  const handleCloseDeleteModal = () => {
-    setIsDeleteModalVisible(false);
-    setDeletingCity(null);
+  const getCountryName = (countryId: number) => {
+    const country = countriesData?.find((c: Country) => c.id === countryId);
+    return country ? `${country.name.en} ` : `Country ID: ${countryId}`;
   };
 
   // Columns configuration
@@ -199,7 +122,6 @@ const CitiesPage = () => {
         </span>
       ),
     },
-
     {
       title: "Actions",
       key: "actions",
@@ -214,7 +136,7 @@ const CitiesPage = () => {
                 <span className="text-blue-600">Edit</span>
               </div>
             ),
-            onClick: () => handleEditClick(record),
+            onClick: () => openEditModal(record),
           },
           {
             key: "delete",
@@ -224,7 +146,7 @@ const CitiesPage = () => {
                 <span>Delete</span>
               </div>
             ),
-            onClick: () => handleDeleteClick(record),
+            onClick: () => openDeleteModal(record),
           },
         ];
 
@@ -258,7 +180,7 @@ const CitiesPage = () => {
           type="primary"
           icon={<Plus className="w-4 h-4" />}
           size="large"
-          onClick={() => setIsAddModalVisible(true)}
+          onClick={openAddModal}
         >
           Add City
         </Button>
@@ -298,8 +220,8 @@ const CitiesPage = () => {
 
       {/* Add City Modal */}
       <AddCityModal
-        open={isAddModalVisible}
-        onClose={() => setIsAddModalVisible(false)}
+        open={isAddModalOpen}
+        onClose={closeAddModal}
         onAddCity={handleAddCity}
         isLoading={isAddingCity}
         countries={countriesData || []}
@@ -308,8 +230,8 @@ const CitiesPage = () => {
 
       {/* Edit City Modal */}
       <EditCityModal
-        open={isEditModalVisible}
-        onClose={handleCloseEditModal}
+        open={isEditModalOpen}
+        onClose={closeEditModal}
         onEditCity={handleEditCity}
         isLoading={isUpdatingCity}
         editingCity={editingCity}
@@ -319,11 +241,11 @@ const CitiesPage = () => {
 
       {/* Delete Confirmation Modal */}
       <DeleteModal
-        isOpen={isDeleteModalVisible}
-        onClose={handleCloseDeleteModal}
-        onConfirm={handleDeleteCity}
+        isOpen={isDeleteModalOpen}
+        onClose={closeDeleteModal}
+        onConfirm={handleDelete}
         isLoading={isDeletingCity}
-        itemName={deletingCity?.name?.en || "this city"}
+        itemName={selectedItemName}
         description="This will permanently remove the city and all associated data from the system."
       />
     </div>

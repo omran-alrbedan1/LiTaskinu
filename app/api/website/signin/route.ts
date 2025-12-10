@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { createSession } from "@/lib/session";
 import axios from "axios";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const { email, password } = await request.json();
 
-    // تحقق من البيانات
     if (!email || !password) {
       return NextResponse.json(
         { error: "Email and password are required" },
@@ -21,26 +21,82 @@ export async function POST(request: Request) {
 
     const response = await axios.post(
       `${API_BASE_URL}/login`,
-      { email, password },
+      {
+        email,
+        password,
+      },
       {
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
       }
     );
 
-    const data = response.data?.data || response.data;
-    return NextResponse.json(data, { status: 200 });
-  } catch (error: any) {
-    console.error("Login API error:", error);
+    const responseData = response.data;
 
-    if (axios.isAxiosError(error)) {
+    // Check if login was successful
+    if (!responseData.status || !responseData.data) {
       return NextResponse.json(
-        {
-          error: error.response?.data?.message || "Authentication failed",
-        },
-        { status: error.response?.status || 500 }
+        { error: responseData.message || "Authentication failed" },
+        { status: 401 }
       );
+    }
+
+    const { user, roles, token } = responseData.data;
+
+    // Create session payload with the API response data
+    const sessionPayload = {
+      user: {
+        id: user.id.toString(),
+        name: `${user.first_name} ${user.last_name}`,
+        email: user.email,
+        role: roles[0],
+        avatar: user.avatar || "/avatars/default.png",
+        first_name: user.first_name,
+        last_name: user.last_name,
+        gender: user.gender,
+        is_verified: user.is_verified,
+        phone: user.phone,
+      },
+      accessToken: token.access_token,
+      refreshToken: token.refresh_token,
+      apiUserData: user,
+      isAdmin: roles.includes("admin"),
+    };
+
+    // Create the session - this sets the secure HTTP-only cookie
+    await createSession(sessionPayload);
+
+    return NextResponse.json(
+      {
+        message: "User login successful",
+        user: {
+          id: sessionPayload.user.id,
+          name: sessionPayload.user.name,
+          email: sessionPayload.user.email,
+          role: sessionPayload.user.role,
+          first_name: sessionPayload.user.first_name,
+          last_name: sessionPayload.user.last_name,
+          avatar: sessionPayload.user.avatar,
+          isAdmin: sessionPayload.isAdmin,
+        },
+        token: {
+          access_token: token.access_token,
+        },
+      },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error("User login error:", error);
+
+    // Handle axios errors
+    if (axios.isAxiosError(error)) {
+      const errorMessage =
+        error.response?.data?.message || "Authentication failed";
+      const statusCode = error.response?.status || 401;
+
+      return NextResponse.json({ error: errorMessage }, { status: statusCode });
     }
 
     return NextResponse.json(

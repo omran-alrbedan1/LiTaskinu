@@ -1,11 +1,12 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Edit, Settings, Plus } from "lucide-react";
+import { ArrowLeft, Edit } from "lucide-react";
 import Link from "next/link";
 
 interface ActionType {
   label: string;
   href: string;
+
   icon?: React.ComponentType<any>;
   variant?:
     | "default"
@@ -18,7 +19,7 @@ interface ActionType {
   disabled?: boolean;
 }
 
-interface ProfileHeaderProps {
+interface CustomHeaderProps {
   title?: string;
   description?: string;
   children?: React.ReactNode;
@@ -28,7 +29,7 @@ interface ProfileHeaderProps {
   condition?: boolean;
 }
 
-const ProfileHeader: React.FC<ProfileHeaderProps> = ({
+const CustomHeader: React.FC<CustomHeaderProps> = ({
   title,
   description,
   children,
@@ -46,7 +47,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   );
 
   return (
-    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 w-full">
+    <div className="flex mb-8 px-4 flex-col sm:flex-row justify-between items-start sm:items-center gap-4 w-full">
       {/* Left side - Title and back button */}
       <div className="flex items-start gap-4 flex-1">
         {showBackButton && backLink && (
@@ -60,9 +61,15 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
 
         <div className="flex-1">
           {title && (
-            <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              {title}
+            </h1>
           )}
-          {description && <p className="text-gray-600 mt-1">{description}</p>}
+          {description && (
+            <p className="text-gray-600 dark:text-gray-300 mt-1">
+              {description}
+            </p>
+          )}
         </div>
       </div>
 
@@ -90,4 +97,4 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   );
 };
 
-export default ProfileHeader;
+export default CustomHeader;

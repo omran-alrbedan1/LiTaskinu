@@ -1,10 +1,9 @@
-import React from "react";
-import { ProfileHeader } from "../_components";
+import CustomHeader from "@/components/shared/CustomHeader";
 
 const PersonalityPage = () => {
   return (
     <div className="space-y-6">
-      <ProfileHeader
+      <CustomHeader
         title="Personality Profile"
         description="Discover my personality, interests, and what makes me unique"
         backLink="/profile"

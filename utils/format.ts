@@ -55,6 +55,17 @@ export const formatDateTime = (
   return date.toLocaleDateString("en-US", defaultOptions);
 };
 
+export const formatDateForSubmission = (dateString: any): string => {
+  if (!dateString) return "";
+
+  try {
+    const date = new Date(dateString);
+    return date.toISOString().split("T")[0];
+  } catch (error) {
+    return dateString;
+  }
+};
+
 /**
  * Format number with commas (e.g., 1000 -> 1,000)
  */

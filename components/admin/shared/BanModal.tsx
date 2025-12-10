@@ -86,7 +86,9 @@ const BanModal: React.FC<BanModalProps> = ({
           <div className="text-center px-4">
             <p className="   font-semibold text-lg leading-tight">
               Restrict access for{" "}
-              <span className="text-primary-color1 font-bold">{user.name}</span>
+              <span className="text-primary-color1 font-bold">
+                {user?.first_name}
+              </span>
               ?
             </p>
             <p className="text-gray-600 dark:text-gray-400 text-sm mt-2 leading-relaxed">

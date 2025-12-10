@@ -1,14 +1,10 @@
-// hooks/useGetData.ts
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import axios, { AxiosRequestConfig, AxiosError } from "axios";
 
 interface UseGetDataProps {
   url: string;
-  dependencies?: any[];
   initialData?: any;
   enabled?: boolean;
-  showNotifications?: boolean;
-  successMessage?: string;
 }
 
 interface UseGetDataReturn<T> {
@@ -20,19 +16,22 @@ interface UseGetDataReturn<T> {
 
 const useGetData = <T = any>({
   url,
-  dependencies = [],
   initialData = null,
   enabled = true,
-  showNotifications = false,
-  successMessage,
   ...axiosConfig
 }: UseGetDataProps & AxiosRequestConfig): UseGetDataReturn<T> => {
   const [data, setData] = useState<T | null>(initialData);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchData = useCallback(async (): Promise<void> => {
+  const lastUrlRef = useRef<string>("");
+
+  const fetchData = useCallback(async () => {
     if (!enabled || !url) return;
+
+    // prevent double fetch if URL not changed
+    if (lastUrlRef.current === url) return;
+    lastUrlRef.current = url;
 
     setLoading(true);
     setError(null);
@@ -46,28 +45,28 @@ const useGetData = <T = any>({
 
       setData(response.data);
     } catch (err) {
-      const axiosError = err as AxiosError<{
-        message?: string;
-        error?: string;
-      }>;
+      const axiosError = err as AxiosError<any>;
       const backendError =
         axiosError.response?.data?.message ||
         axiosError.response?.data?.error ||
         axiosError.message ||
         "An error occurred";
+
       setError(backendError);
     } finally {
       setLoading(false);
     }
-  }, [url, enabled, JSON.stringify(axiosConfig)]);
+  }, [url, enabled]);
 
   useEffect(() => {
     fetchData();
-  }, [fetchData, ...dependencies]);
+  }, [fetchData]);
 
-  const refetch = (): void => {
+  const refetch = useCallback(() => {
+    // allow refetch even if URL didn’t change
+    lastUrlRef.current = "";
     fetchData();
-  };
+  }, [fetchData]);
 
   return { data, loading, error, refetch };
 };

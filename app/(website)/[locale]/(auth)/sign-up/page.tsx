@@ -2,8 +2,8 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import RegisterForm from "@/components/user/forms/RegisterForm";
 import AuthLayout from "@/components/user/layouts/AuthLayout";
+import RegisterForm from "./_components/RegisterForm";
 
 const SignUpPage = () => {
   return (

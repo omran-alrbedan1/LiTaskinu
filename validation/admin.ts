@@ -14,7 +14,6 @@ export const CountryFormValidation = z.object({
   }),
 });
 
-// validation/admin.ts
 export const CityFormValidation = z.object({
   country_id: z.string().min(1, "Please select a country"),
   name: z.object({
@@ -24,4 +23,15 @@ export const CityFormValidation = z.object({
     es: z.string().optional(),
     ru: z.string().optional(),
   }),
+});
+
+export const stepSchema = z.object({
+  title: z
+    .string()
+    .min(1, "Title is required")
+    .max(100, "Title cannot exceed 100 characters"),
+  description: z
+    .string()
+    .min(1, "Description is required")
+    .max(500, "Description cannot exceed 500 characters"),
 });

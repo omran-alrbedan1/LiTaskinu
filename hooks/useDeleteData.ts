@@ -9,14 +9,27 @@ interface UseDeleteDataOptions {
   onSuccess?: (data: any) => void;
   onError?: (error: string) => void;
   onFinally?: () => void;
+  onDeleteSuccess?: () => void;
+  autoRefetch?: boolean;
 }
 
 interface UseDeleteDataReturn<T> {
+  // Delete functions
   deleteData: (id?: string | number) => Promise<T | null>;
+  handleDelete: (item: T, id?: string | number) => void;
+  confirmDelete: () => Promise<void>;
+  cancelDelete: () => void;
+
+  // State
   loading: boolean;
   error: string | null;
   success: boolean;
+  isDeleteModalOpen: boolean;
+  selectedItem: T | null;
+
+  // Utility functions
   reset: () => void;
+  setRefetch: (refetchFn: () => void) => void;
 }
 
 const useDeleteData = <T = any>(
@@ -27,6 +40,12 @@ const useDeleteData = <T = any>(
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
+  const [refetchFn, setRefetchFn] = useState<(() => void) | null>(null);
+
+  // Modal state
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<T | null>(null);
+  const [pendingId, setPendingId] = useState<string | number | undefined>();
 
   const {
     showNotifications = false,
@@ -35,8 +54,11 @@ const useDeleteData = <T = any>(
     onSuccess,
     onError,
     onFinally,
+    onDeleteSuccess,
+    autoRefetch = false,
   } = options;
 
+  // Main delete function
   const deleteData = useCallback(
     async (id?: string | number): Promise<T | null> => {
       setLoading(true);
@@ -45,7 +67,7 @@ const useDeleteData = <T = any>(
 
       try {
         // Construct the final URL with ID
-        const finalUrl = id ? `${baseUrl}?id=${id}` : baseUrl;
+        const finalUrl = id ? `${baseUrl}/${id}` : baseUrl;
 
         const response = await axios<T>({
           url: finalUrl,
@@ -64,6 +86,15 @@ const useDeleteData = <T = any>(
         }
 
         onSuccess?.(response.data);
+
+        // Call onDeleteSuccess callback
+        onDeleteSuccess?.();
+
+        // Auto refetch if enabled and refetch function is set
+        if (autoRefetch && refetchFn) {
+          refetchFn();
+        }
+
         return response.data;
       } catch (err) {
         const axiosError = err as AxiosError<{
@@ -104,17 +135,76 @@ const useDeleteData = <T = any>(
       onSuccess,
       onError,
       onFinally,
+      onDeleteSuccess,
+      autoRefetch,
+      refetchFn,
       JSON.stringify(axiosConfig),
     ]
   );
+
+  const handleDelete = useCallback((item: T, id?: string | number) => {
+    setSelectedItem(item);
+    setPendingId(id || (item as any)?.id);
+    setIsDeleteModalOpen(true);
+  }, []);
+
+  // Confirm deletion (called from modal)
+  const confirmDelete = useCallback(async (): Promise<void> => {
+    if (!pendingId && !(selectedItem as any)?.id) {
+      console.error("No ID provided for deletion");
+      return;
+    }
+
+    const idToDelete = pendingId || (selectedItem as any)?.id;
+    await deleteData(idToDelete);
+
+    // Close modal after deletion (success or failure)
+    setIsDeleteModalOpen(false);
+    setSelectedItem(null);
+    setPendingId(undefined);
+  }, [deleteData, pendingId, selectedItem]);
+
+  // Cancel deletion
+  const cancelDelete = useCallback(() => {
+    setIsDeleteModalOpen(false);
+    setSelectedItem(null);
+    setPendingId(undefined);
+    setError(null);
+  }, []);
+
+  // Set refetch function
+  const setRefetch = useCallback((refetchFunction: () => void) => {
+    setRefetchFn(() => refetchFunction);
+  }, []);
 
   const reset = useCallback(() => {
     setError(null);
     setSuccess(false);
     setLoading(false);
+    setIsDeleteModalOpen(false);
+    setSelectedItem(null);
+    setPendingId(undefined);
+    setRefetchFn(null);
   }, []);
 
-  return { deleteData, loading, error, success, reset };
+  return {
+    // Delete functions
+    deleteData,
+    handleDelete,
+    confirmDelete,
+    cancelDelete,
+
+    // State
+    loading,
+    error,
+    success,
+    isDeleteModalOpen,
+    selectedItem,
+
+    // Utility functions
+    reset,
+    setRefetch,
+  };
 };
 
 export default useDeleteData;

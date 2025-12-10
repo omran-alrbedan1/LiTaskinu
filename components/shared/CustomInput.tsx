@@ -33,7 +33,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { CalendarIcon, CheckIcon, ChevronsUpDownIcon } from "lucide-react";
+import { CalendarIcon, CheckIcon, ChevronsUpDownIcon, X } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import {
@@ -45,6 +45,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import React from "react";
+import { Badge } from "@/components/ui/badge";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -57,6 +58,37 @@ export enum FormFieldType {
   SKELETON = "skeleton",
   COMBOBOX = "combobox",
   RADIO = "radio",
+  MULTI_SELECT = "multiSelect", // Add MULTI_SELECT type
+}
+
+// Define the Option type
+interface Option {
+  value: string;
+  label: string;
+  code?: string;
+  icon?: string;
+}
+
+// Define the props interface
+interface CustomProps {
+  fieldType: FormFieldType;
+  control: any;
+  name: string;
+  label?: string;
+  placeholder?: string;
+  iconSrc?: string;
+  iconAlt?: string;
+  required?: boolean;
+  options?: Option[];
+  inputClassName?: string;
+  orientation?: "vertical" | "horizontal";
+  showTimeSelect?: boolean;
+  dateFormat?: string;
+  renderSkeleton?: (field: any) => React.ReactNode;
+  disabled?: boolean;
+  searchPlaceholder?: string;
+  className?: string;
+  children?: React.ReactNode;
 }
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
@@ -71,7 +103,6 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     required,
     options = [],
     inputClassName,
-
     orientation = "vertical",
   } = props;
 
@@ -82,6 +113,25 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   const [date, setDate] = React.useState<Date | undefined>(
     new Date(2025, 5, 12)
   );
+
+  // For MULTI_SELECT
+  const selectedValues = field.value || [];
+
+  const handleMultiSelectChange = (value: string) => {
+    const currentValues = field.value || [];
+    if (currentValues.includes(value)) {
+      // Remove if already selected
+      field.onChange(currentValues.filter((v: string) => v !== value));
+    } else {
+      // Add if not selected
+      field.onChange([...currentValues, value]);
+    }
+  };
+
+  const removeSelected = (value: string) => {
+    const currentValues = field.value || [];
+    field.onChange(currentValues.filter((v: string) => v !== value));
+  };
 
   switch (fieldType) {
     case FormFieldType.INPUT:
@@ -227,6 +277,148 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           </SelectContent>
         </Select>
       );
+    case FormFieldType.MULTI_SELECT:
+      return (
+        <FormControl>
+          <div className="space-y-3">
+            {/* Selected badges */}
+            {selectedValues.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-2">
+                {selectedValues.map((value: string) => {
+                  const option = options.find((opt) => opt.value === value);
+                  return (
+                    <Badge
+                      key={value}
+                      variant="secondary"
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-primary-light3 text-primary-color1 border-primary-color1"
+                    >
+                      {option?.icon && (
+                        <Image
+                          src={option.icon}
+                          alt={option.label}
+                          width={16}
+                          height={16}
+                          className="w-4 h-4"
+                        />
+                      )}
+                      {option?.code && (
+                        <ReactCountryFlag
+                          countryCode={option.code}
+                          svg
+                          style={{
+                            width: "1em",
+                            height: "1em",
+                          }}
+                          title={option.code}
+                        />
+                      )}
+                      <span>{option?.label || value}</span>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removeSelected(value);
+                        }}
+                        className="ml-1 hover:text-red-600"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </Badge>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Multi-select dropdown */}
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  className={cn(
+                    "w-full justify-between border border-gray-300 bg-white hover:bg-gray-50 h-10",
+                    !field.value && "text-muted-foreground"
+                  )}
+                >
+                  <span>
+                    {selectedValues.length === 0
+                      ? placeholder || "Select options..."
+                      : `${selectedValues.length} selected`}
+                  </span>
+                  <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-full p-0" align="start">
+                <Command className="bg-white border border-gray-300 rounded-md shadow-lg">
+                  <CommandInput
+                    placeholder={props.searchPlaceholder || "Search options..."}
+                    className="h-12 text-base border-b border-gray-200 rounded-t-md"
+                  />
+                  <CommandList className="max-h-60 overflow-auto hide-scrollbar">
+                    <CommandEmpty className="py-6 text-center text-gray-500">
+                      No options found.
+                    </CommandEmpty>
+                    <CommandGroup className="!hide-scrollbar">
+                      {options.map((option) => {
+                        const isSelected = selectedValues.includes(
+                          option.value
+                        );
+                        return (
+                          <CommandItem
+                            key={option.value}
+                            value={option.value}
+                            onSelect={() => {
+                              handleMultiSelectChange(option.value);
+                            }}
+                            className="flex items-center px-4 py-3 cursor-pointer hover:bg-gray-100 aria-selected:!bg-gray-100"
+                          >
+                            <div
+                              className={cn(
+                                "w-5 h-5 border border-gray-300 rounded flex items-center justify-center mr-3",
+                                isSelected
+                                  ? "bg-primary-color1 border-primary-color1"
+                                  : "bg-white"
+                              )}
+                            >
+                              {isSelected && (
+                                <CheckIcon className="w-3 h-3 text-white" />
+                              )}
+                            </div>
+                            {option.icon && (
+                              <Image
+                                src={option.icon}
+                                alt={option.label}
+                                width={20}
+                                height={20}
+                                className="mr-3"
+                              />
+                            )}
+                            {option.code && (
+                              <ReactCountryFlag
+                                countryCode={option.code}
+                                svg
+                                style={{
+                                  width: "1.2em",
+                                  height: "1.2em",
+                                  marginRight: "0.75rem",
+                                }}
+                                title={option.code}
+                              />
+                            )}
+                            <span className="text-gray-900">
+                              {option.label}
+                            </span>
+                          </CommandItem>
+                        );
+                      })}
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              </PopoverContent>
+            </Popover>
+          </div>
+        </FormControl>
+      );
     case FormFieldType.COMBOBOX:
       return (
         <FormControl>
@@ -335,7 +527,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           </div>
         </FormControl>
       );
-    case FormFieldType.RADIO: // Add this case
+    case FormFieldType.RADIO:
       return (
         <FormControl>
           <RadioGroup
@@ -379,6 +571,7 @@ const CustomFormField = (props: CustomProps) => {
         <FormItem className="flex-1 flex flex-col">
           {fieldType !== FormFieldType.CHECKBOX &&
             fieldType !== FormFieldType.RADIO &&
+            fieldType !== FormFieldType.MULTI_SELECT &&
             label &&
             (required ? (
               <p className="flex items-center gap-1">
@@ -387,6 +580,18 @@ const CustomFormField = (props: CustomProps) => {
               </p>
             ) : (
               <FormLabel className="mb-2">{label}</FormLabel>
+            ))}
+
+          {/* For MULTI_SELECT type, show label above the component */}
+          {fieldType === FormFieldType.MULTI_SELECT &&
+            label &&
+            (required ? (
+              <p className="flex items-center gap-1 mb-3">
+                <FormLabel>{label}</FormLabel>
+                <span className="text-red-400 text-xl -mt-1">*</span>
+              </p>
+            ) : (
+              <FormLabel className="mb-3">{label}</FormLabel>
             ))}
 
           {/* For RADIO type, show label above the radio group */}

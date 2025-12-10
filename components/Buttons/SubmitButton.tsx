@@ -19,6 +19,7 @@ interface ButtonProps {
   onClick?: () => void;
   icon?: any;
   iconPosition?: "left" | "right";
+  disabled?: boolean;
 }
 
 const SubmitButton = ({
@@ -30,8 +31,9 @@ const SubmitButton = ({
   size = "default",
   type = "submit",
   onClick,
-  icon: Icon, // Destructure with alias
-  iconPosition = "left", // Default icon position
+  icon: Icon,
+  iconPosition = "left",
+  disabled = false, // Default value
 }: ButtonProps) => {
   const renderContent = () => {
     if (isLoading) {
@@ -64,8 +66,8 @@ const SubmitButton = ({
       type={type}
       variant={variant}
       size={size}
-      disabled={isLoading}
-      className={className ?? "w-full"}
+      disabled={isLoading || disabled}
+      className={className ?? "w-fit"}
       onClick={onClick}
     >
       {renderContent()}

@@ -18,7 +18,7 @@ import { TiHeartFullOutline } from "react-icons/ti";
 export default function Footer() {
   return (
     <motion.footer
-      className="bg-gradient-to-br from-[#8B9475] to-[#6B7355] text-white pt-16 pb-8 relative overflow-hidden"
+      className="bg-gradient-to-br from-[#8B9475] to-[#6B7355] text-white p-4 pt-16 pb-24 md:pb-8 relative overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
@@ -48,13 +48,13 @@ export default function Footer() {
                 </div>
               </div>
 
-              <p className="text-white/90 leading-relaxed mb-6 text-lg">
+              <p className="text-white/90 leading-relaxed mb-6 text-lg text-center lg:text-left">
                 Making halal marriages accessible worldwide through modern
                 technology while honoring Islamic traditions.
               </p>
 
               {/* Social Media */}
-              <div className="flex gap-4">
+              <div className="flex gap-4 w-fit mx-auto md:w-full">
                 {[
                   {
                     icon: FaInstagram,

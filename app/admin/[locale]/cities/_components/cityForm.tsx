@@ -30,11 +30,7 @@ export function CityForm({
   initialData,
   isEdit = false,
   countries = [],
-  isFetchingCountries = false,
 }: CityFormProps) {
-  const [debugInfo, setDebugInfo] = useState<string>("");
-  const [isFormReady, setIsFormReady] = useState(false);
-
   const form = useForm<z.infer<typeof CityFormValidation>>({
     resolver: zodResolver(CityFormValidation),
     defaultValues: {
@@ -49,10 +45,8 @@ export function CityForm({
     },
   });
 
-  // Fix: Use a more reliable way to reset the form
   useEffect(() => {
     if (initialData && isEdit && countries.length > 0) {
-      // Ensure country_id is properly converted to string
       const countryIdString = initialData.country_id
         ? initialData.country_id.toString()
         : "";
@@ -70,15 +64,8 @@ export function CityForm({
         });
 
         const currentValues = form.getValues();
-
-        const selectedCountry = countries.find(
-          (country) => country.id.toString() === currentValues.country_id
-        );
-
-        setIsFormReady(true);
       }, 100);
     } else {
-      // Reset form when not in edit mode
       if (!isEdit) {
         form.reset({
           country_id: "",
@@ -132,7 +119,8 @@ export function CityForm({
                 fieldType={FormFieldType.SELECT}
                 control={form.control}
                 name="country_id"
-                label="Country *"
+                label="Country "
+                required
                 placeholder="Select a country"
                 options={countryOptions}
                 searchPlaceholder="Search countries..."
@@ -144,7 +132,8 @@ export function CityForm({
                 fieldType={FormFieldType.INPUT}
                 control={form.control}
                 name="name.en"
-                label="English Name *"
+                label="English Name "
+                required
                 placeholder="Enter city name in English"
                 inputClassName="w-full border-gray-300 focus:border-blue-500 h-9 text-sm"
               />
@@ -172,7 +161,8 @@ export function CityForm({
                 fieldType={FormFieldType.INPUT}
                 control={form.control}
                 name="name.ar"
-                label="Arabic Name *"
+                label="Arabic Name "
+                required
                 placeholder="اسم المدينة"
                 inputClassName="w-full text-right font-arabic text-sm border-gray-300 focus:border-blue-500 h-9"
               />
