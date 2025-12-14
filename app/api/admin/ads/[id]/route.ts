@@ -7,7 +7,8 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await getSession();
+    // Get admin session since this is an admin route
+    const session = await getSession("admin");
 
     if (!session) {
       return NextResponse.json(
@@ -61,7 +62,8 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await getSession();
+    // Get admin session since this is an admin route
+    const session = await getSession("admin");
 
     if (!session) {
       return NextResponse.json(
@@ -115,7 +117,8 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await getSession();
+    // Get admin session since this is an admin route
+    const session = await getSession("admin");
 
     if (!session) {
       return NextResponse.json(

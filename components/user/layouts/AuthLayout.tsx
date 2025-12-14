@@ -255,7 +255,7 @@ const AuthLayout = ({
   );
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen  z-50 relative overflow-hidden">
       {/* Full Screen Background Image with Blur */}
       <div className="absolute inset-0">
         <Image

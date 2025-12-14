@@ -1,3 +1,4 @@
+// lib/session.ts
 import { jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -25,39 +26,40 @@ export type Session = {
   isAdmin?: boolean;
 };
 
-/**
- * === إعدادات المفتاح السري (Secret Key Setup) ===
- */
-
-// الحصول على المفتاح السري من متغيرات البيئة
 const secretKey = process.env.SESSION_SECRET_KEY!;
-
-// ترميز المفتاح السري إلى Uint8Array لأن مكتبة jose تتطلب هذا التنسيق
 const encodedKey = new TextEncoder().encode(secretKey);
 
-/**
- * === دوال إدارة الجلسات (Session Management Functions) ===
- */
+// Separate cookie names for admin and user
+export const SESSION_COOKIES = {
+  ADMIN: "admin_session",
+  USER: "user_session",
+} as const;
+
+type SessionType = "admin" | "user";
 
 /**
- * دالة إنشاء جلسة جديدة
- * @param payload - بيانات الجلسة التي نريد تخزينها
- * @returns وعد (Promise) لا يرجع قيمة مباشرة ولكن ينشئ كوكيز الجلسة
+ * Create session for specific user type
  */
-export async function createSession(payload: Session) {
+export async function createSession(
+  payload: Session,
+  type: SessionType = "user"
+) {
+  const cookieName =
+    type === "admin" ? SESSION_COOKIES.ADMIN : SESSION_COOKIES.USER;
+
   const session = await new SignJWT(payload)
-    .setProtectedHeader({
-      alg: "HS256",
-    })
+    .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("7d")
+    .setExpirationTime(type === "admin" ? "2h" : "7d")
     .sign(encodedKey);
 
-  const expiredAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+  const expiredAt = new Date(
+    Date.now() + (type === "admin" ? 2 : 7 * 24) * 60 * 60 * 1000
+  );
 
-  (await cookies()).set("session", session, {
+  (await cookies()).set(cookieName, session, {
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === "production",
     expires: expiredAt,
     sameSite: "lax",
     path: "/",
@@ -65,10 +67,12 @@ export async function createSession(payload: Session) {
 }
 
 /**
- * دالة استرجاع الجلسة الحالية
+ * Get session based on type
  */
-export async function getSession() {
-  const cookie = (await cookies()).get("session")?.value;
+export async function getSession(type: SessionType): Promise<Session | null> {
+  const cookieName =
+    type === "admin" ? SESSION_COOKIES.ADMIN : SESSION_COOKIES.USER;
+  const cookie = (await cookies()).get(cookieName)?.value;
 
   if (!cookie) return null;
 
@@ -76,19 +80,30 @@ export async function getSession() {
     const { payload } = await jwtVerify(cookie, encodedKey, {
       algorithms: ["HS256"],
     });
-
     return payload as Session;
   } catch (error) {
-    console.log("فشل في التحقق من صحة الجلسة", error);
-    redirect("/auth/signin");
+    console.log(`Failed to verify ${type} session`, error);
+    return null;
   }
 }
 
 /**
- * دالة التحقق من صلاحيات المستخدم
+ * Get active session (checks admin first, then user)
+ */
+export async function getActiveSession(): Promise<Session | null> {
+  // Check admin session first
+  const adminSession = await getSession("admin");
+  if (adminSession) return adminSession;
+
+  // Fallback to user session
+  return await getSession("user");
+}
+
+/**
+ * Get user session (for regular users)
  */
 export async function getUserSession() {
-  const session = await getSession();
+  const session = await getSession("user");
 
   if (!session) {
     return null;
@@ -97,57 +112,86 @@ export async function getUserSession() {
   return {
     user: session.user,
     isAuthenticated: true,
-    isAdmin: session.isAdmin || false,
+    isAdmin: false,
   };
 }
 
 /**
- * دالة التحقق إذا كان المستخدم مسؤول
+ * Get admin session
+ */
+export async function getAdminSession() {
+  const session = await getSession("admin");
+
+  if (!session) {
+    return null;
+  }
+
+  return {
+    user: session.user,
+    isAuthenticated: true,
+    isAdmin: true,
+  };
+}
+
+/**
+ * Check if user is authenticated as admin
  */
 export async function isAdmin() {
-  const session = await getSession();
-  return session?.isAdmin || false;
+  const session = await getSession("admin");
+  return !!session;
 }
 
 /**
- * دالة التحقق إذا كان المستيف مسجل دخول
+ * Require authentication for regular users
  */
 export async function requireAuth() {
-  const session = await getSession();
+  const session = await getSession("user");
 
   if (!session) {
-    redirect("/auth/signin");
+    redirect("/en/login");
   }
 
   return session;
 }
 
 /**
- * دالة التحقق إذا كان المستخدم مسؤول مع إعادة التوجيه
+ * Require admin authentication
  */
 export async function requireAdmin() {
-  const session = await getSession();
+  const session = await getSession("admin");
 
   if (!session) {
-    redirect("/auth/signin");
-  }
-
-  if (!session.isAdmin) {
-    redirect("/unauthorized");
+    redirect("/admin/en/login");
   }
 
   return session;
 }
 
-export async function deleteSession() {
-  (await cookies()).delete("session");
+/**
+ * Delete specific or all sessions
+ */
+export async function deleteSession(type?: SessionType) {
+  const cookieStore = await cookies();
+
+  if (type === "admin") {
+    cookieStore.delete(SESSION_COOKIES.ADMIN);
+  } else if (type === "user") {
+    cookieStore.delete(SESSION_COOKIES.USER);
+  } else {
+    // Delete both
+    cookieStore.delete(SESSION_COOKIES.ADMIN);
+    cookieStore.delete(SESSION_COOKIES.USER);
+  }
 }
 
 /**
- * دالة لتحديث بيانات المستخدم في الجلسة
+ * Update specific session
  */
-export async function updateSession(updates: Partial<Session>) {
-  const currentSession = await getSession();
+export async function updateSession(
+  updates: Partial<Session>,
+  type: SessionType
+) {
+  const currentSession = await getSession(type);
 
   if (!currentSession) {
     return null;
@@ -158,6 +202,13 @@ export async function updateSession(updates: Partial<Session>) {
     ...updates,
   };
 
-  await createSession(updatedSession);
+  await createSession(updatedSession, type);
   return updatedSession;
+}
+
+/**
+ * Helper to get the appropriate session cookie name based on path
+ */
+export function getSessionCookieName(pathname: string): SessionType {
+  return pathname.startsWith("/admin") ? "admin" : "user";
 }

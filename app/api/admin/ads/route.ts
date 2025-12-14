@@ -4,7 +4,8 @@ import { getSession } from "@/lib/session";
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getSession();
+    // Get admin session since this is an admin route
+    const session = await getSession("admin");
 
     if (!session) {
       return NextResponse.json(
@@ -49,7 +50,8 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getSession();
+    // Get admin session since this is an admin route
+    const session = await getSession("admin");
 
     if (!session) {
       return NextResponse.json(

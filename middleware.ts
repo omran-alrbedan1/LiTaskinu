@@ -1,38 +1,152 @@
-// middleware.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { jwtVerify } from "jose";
+import { SESSION_COOKIES } from "@/lib/session";
 
-export function middleware(request: NextRequest) {
+const secretKey = process.env.SESSION_SECRET_KEY!;
+const encodedKey = new TextEncoder().encode(secretKey);
+
+async function verifySession(cookieValue: string) {
+  try {
+    const { payload } = await jwtVerify(cookieValue, encodedKey, {
+      algorithms: ["HS256"],
+    });
+    return payload;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const sessionToken = request.cookies.get("session")?.value;
+  const publicRoutes = [
+    "/forgot-password",
+    "/otp-verification",
+    "/parent-info",
+    "/reset-password",
+    "/sign-in",
+    "/sign-up",
+    "/verify-reset-code",
+    "/login",
+    "/api/website/signin",
+    "/api/website/signup",
+    "/api/website/forgot-password",
+    "/api/website/reset-password",
+    "/api/website/verify-email",
+    "/api/website/verify-otp",
+    "/api/admin/login",
+  ];
 
-  if (pathname.startsWith("/admin/en/") && !pathname.endsWith("/login")) {
-    if (!sessionToken) {
-      console.log(
-        "Redirecting to login - accessing admin route without session"
-      );
+  // Helper function to check if path is public
+  const isPublicRoute = (path: string) => {
+    // Check exact matches
+    if (publicRoutes.includes(path)) {
+      return true;
+    }
+
+    // Check with any locale prefix
+    for (const route of publicRoutes) {
+      // For user routes
+      if (path === `/en${route}` || path.startsWith(`/en${route}/`)) {
+        return true;
+      }
+      // For admin routes
+      if (
+        path === `/admin/en${route}` ||
+        path.startsWith(`/admin/en${route}/`)
+      ) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  // Check if current path is public
+  if (isPublicRoute(pathname)) {
+    return NextResponse.next();
+  }
+
+  // === ADMIN ROUTES PROTECTION ===
+  if (pathname.startsWith("/admin/")) {
+    const adminSessionToken = request.cookies.get(SESSION_COOKIES.ADMIN)?.value;
+
+    // If no admin session and trying to access admin routes
+    if (!adminSessionToken) {
+      console.log("Redirecting to admin login - no admin session");
       const loginUrl = new URL("/admin/en/login", request.url);
+      loginUrl.searchParams.set("from", pathname);
       return NextResponse.redirect(loginUrl);
     }
-  }
 
-  if (pathname.startsWith("/admin/api/")) {
-    if (!sessionToken) {
-      console.log("Blocking API access - no session");
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    // Verify admin session
+    const session = await verifySession(adminSessionToken);
+    if (!session) {
+      console.log("Invalid admin session, redirecting to login");
+      const response = NextResponse.redirect(
+        new URL("/admin/en/login", request.url)
+      );
+      response.cookies.delete(SESSION_COOKIES.ADMIN);
+      return response;
     }
+
+    if (!session.isAdmin) {
+      console.log("User doesn't have admin role, redirecting");
+      const response = NextResponse.redirect(new URL("/en", request.url));
+      response.cookies.delete(SESSION_COOKIES.ADMIN);
+      return response;
+    }
+
+    // If trying to access admin login while already logged in
+    if (pathname === "/admin/en/login" || pathname === "/admin/login") {
+      console.log("Already logged in as admin, redirecting to dashboard");
+      return NextResponse.redirect(new URL("/admin/en/dashboard", request.url));
+    }
+
+    return NextResponse.next();
   }
 
-  if (pathname.endsWith("/admin/en/login") && sessionToken) {
-    console.log("Redirecting to dashboard - already logged in");
-    const dashboardUrl = new URL("/admin/en/dashboard", request.url);
-    return NextResponse.redirect(dashboardUrl);
+  // === USER ROUTES PROTECTION ===
+  if (pathname.startsWith("/en/") && !pathname.startsWith("/en/sign-in")) {
+    const userSessionToken = request.cookies.get(SESSION_COOKIES.USER)?.value;
+
+    // Skip protection for login page itself
+    if (pathname === "/en/sign-in") {
+      return NextResponse.next();
+    }
+
+    // If no user session and trying to access protected user routes
+    if (!userSessionToken) {
+      console.log("Redirecting to user login - no user session");
+      const loginUrl = new URL("/en/sign-in", request.url);
+      loginUrl.searchParams.set("from", pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+
+    // Verify user session
+    const session = await verifySession(userSessionToken);
+    if (!session) {
+      console.log("Invalid user session, redirecting to login");
+      const response = NextResponse.redirect(new URL("/en/login", request.url));
+      response.cookies.delete(SESSION_COOKIES.USER);
+      return response;
+    }
+
+    return NextResponse.next();
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/admin/en/:path*", "/admin/api/:path*"],
+  matcher: [
+    "/admin/:path*",
+    "/en/:path*",
+    "/api/admin/:path*",
+    "/api/user/:path*",
+    "/api/ads/:path*",
+    // Exclude static files and API routes
+    "/((?!_next/static|_next/image|favicon.ico|public|api/auth).*)",
+  ],
 };

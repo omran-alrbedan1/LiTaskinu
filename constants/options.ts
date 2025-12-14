@@ -41,6 +41,16 @@ export const languageOptions = [
   { value: "zh", label: "Chinese", code: "CN", native: "中文" },
 ];
 
+export const LANGUAGE_OPTIONS = [
+  { value: "en", label: "English", code: "US", native: "English" },
+  { value: "ar", label: "العربية", code: "JO", native: "العربية" },
+  { value: "fr", label: "Français", code: "FR", native: "Français" },
+  { value: "es", label: "Español", code: "ES", native: "Español" },
+  { value: "de", label: "Deutsch", code: "DE", native: "Deutsch" },
+  { value: "zh", label: "中文", code: "CN", native: "中文" },
+  { value: "ja", label: "日本語", code: "JP", native: "日本語" },
+] as const;
+
 export const kinshipOptions = [
   { value: "mother", label: "Mother" },
   { value: "father", label: "Father" },

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
 import { Metadata } from "next";
+import Header from "@/components/user/elements/Header";
 
 export const metadata: Metadata = {
   title: "LITASKUNU",

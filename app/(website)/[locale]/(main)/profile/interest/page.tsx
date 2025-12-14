@@ -11,7 +11,6 @@ import {
   Plus,
 } from "lucide-react";
 import Link from "next/link";
-import { ProfileHeader } from "../_components";
 import { EmptyState } from "@/components/shared";
 import { images } from "@/constants/images";
 import CustomHeader from "@/components/shared/CustomHeader";

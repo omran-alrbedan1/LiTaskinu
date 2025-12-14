@@ -30,7 +30,7 @@ const OtpForm = () => {
     errorMessage: "Verification failed.",
     onSuccess: (data) => {
       console.log("OTP verified successfully!");
-      router.push("./user-photos");
+      router.push("./home");
     },
   });
 

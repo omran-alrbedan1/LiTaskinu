@@ -15,13 +15,11 @@ export interface FilterState {
 interface FilterSectionProps {
   filters: FilterState;
   onFiltersChange: (filters: FilterState) => void;
-  logoUrl?: string; // Optional logo URL prop
 }
 
 const FilterSection: React.FC<FilterSectionProps> = ({
   filters,
   onFiltersChange,
-  logoUrl = "/logo.png", // Default logo path
 }) => {
   const handleFilterChange = (key: keyof FilterState, value: string) => {
     onFiltersChange({
@@ -54,24 +52,8 @@ const FilterSection: React.FC<FilterSectionProps> = ({
   return (
     <div className="bg-primary-light rounded-lg shadow-md p-6 mb-6 relative">
       {/* Company Logo - Top Right Corner */}
-      <div className="absolute top-4 right-4 z-10">
-        <Image
-          src={images.logo2}
-          alt="Company Logo"
-          className="h-16 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-200"
-        />
-      </div>
 
-      <div className="flex justify-between items-center mb-4 pr-20">
-        <Button
-          onClick={handleResetFilters}
-          className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors bg-white"
-        >
-          Reset Filters
-        </Button>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
         {/* Seeking Filter */}
         <div>
           <label className="block text-sm font-medium text-white mb-2">
@@ -160,6 +142,15 @@ const FilterSection: React.FC<FilterSectionProps> = ({
               { value: "Madaba", label: "Madaba" },
             ]}
           />
+        </div>
+
+        <div className="flex justify-between items-center mt-7">
+          <Button
+            onClick={handleResetFilters}
+            className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors bg-white"
+          >
+            Reset Filters
+          </Button>
         </div>
       </div>
     </div>

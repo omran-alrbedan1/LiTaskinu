@@ -11,7 +11,7 @@ interface Params {
 // GET user by ID
 export async function GET(request: NextRequest, { params }: Params) {
   try {
-    const session = await getSession();
+    const session = await getSession("admin");
 
     if (!session) {
       return NextResponse.json(
@@ -83,7 +83,7 @@ export async function GET(request: NextRequest, { params }: Params) {
 // DELETE user by ID
 export async function DELETE(request: NextRequest, { params }: Params) {
   try {
-    const session = await getSession();
+    const session = await getSession("admin");
 
     if (!session) {
       return NextResponse.json(
