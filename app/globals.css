@@ -221,8 +221,8 @@ html.dark .ant-empty-description {
 
 
 .loader {
-  width: 48px;
-  height: 48px;
+  width: 68px;
+  height: 68px;
   display: inline-block;
   position: relative;
 }
@@ -230,16 +230,16 @@ html.dark .ant-empty-description {
 .loader::before {
   content: '';  
   box-sizing: border-box;
-  width: 48px;
-  height: 48px;
-  border: 2px solid gray;
+  width: 68px;
+  height: 68px;
+  border: 2px solid #A1AA8A;
   position: absolute;
   left: 0;
   top: 0;
   animation: rotationBreak 3s ease-in-out infinite alternate;
 }
 .loader::after {
-  border-color: var(--primary);
+  border-color: #c77971;
   animation-direction: alternate-reverse;
 }
 
@@ -261,3 +261,93 @@ html.dark .ant-empty-description {
   }
 }
     
+
+/* Add to your globals.css or tailwind.config.js animations */
+@layer utilities {
+  @keyframes glow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+  }
+  
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+  
+  @keyframes bounce-slow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+  
+  @keyframes sparkle {
+    0%, 100% { 
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% { 
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+  }
+  
+  @keyframes ping-slow {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.5;
+    }
+    80%, 100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce-slow 3s ease-in-out infinite;
+  }
+  
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
+  
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  .animate-sparkle {
+    animation: sparkle 2s ease-in-out infinite;
+  }
+  
+  .animate-ping-slow {
+    animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+} 

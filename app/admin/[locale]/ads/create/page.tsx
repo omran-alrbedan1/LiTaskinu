@@ -76,7 +76,6 @@ export default function CreateAdPage() {
           mode="create"
           onSubmit={handleSubmit}
           isLoading={isLoading}
-          error={error ?? ""}
         />
       </div>
     </div>

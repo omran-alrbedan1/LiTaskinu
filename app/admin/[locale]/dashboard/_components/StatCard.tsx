@@ -41,7 +41,7 @@ const StatCard: React.FC<StatCardProps> = ({
             </h3>
           </div>
           {description && (
-            <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
+            <p className="text-xs text-red-300 dark:text-gray-500 mt-2">
               {description}
             </p>
           )}

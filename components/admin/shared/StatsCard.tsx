@@ -18,10 +18,9 @@ const StatsCard: React.FC<StatsCardProps> = ({
   iconBgColor = "from-blue-500 to-blue-600",
   borderColor = "border-gray-200 dark:border-gray-700",
   description,
-  color,
 }) => (
   <div
-    className={`group relative overflow-hidden py-2 rounded-2xl bg-white dark:bg-gray-800 border-2 ${borderColor} shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 cursor-pointer dark:shadow-gray-900/20`}
+    className={`group relative overflow-hidden py-2 rounded-2xl bg-white dark:!bg-gray-800 border-2 ${borderColor} shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 cursor-pointer dark:shadow-gray-900/20`}
   >
     {/* Animated background gradient */}
     <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-gray-50 dark:to-gray-800/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

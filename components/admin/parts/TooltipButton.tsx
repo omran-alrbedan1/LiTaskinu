@@ -25,6 +25,7 @@ export default function TooltipButton({
           {...buttonProps}
           onClick={onClick}
           className="rounded-full h-10 relative w-10"
+          asChild={false} 
         >
           {children}
         </Button>

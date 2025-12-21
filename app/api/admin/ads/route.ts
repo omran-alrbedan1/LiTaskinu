@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import { getSession } from "@/lib/session";
+import { handleAxiosError } from "@/lib/api-error-handler";
 
 export async function GET(request: NextRequest) {
   try {
-    // Get admin session since this is an admin route
     const session = await getSession("admin");
 
     if (!session) {
@@ -15,10 +15,6 @@ export async function GET(request: NextRequest) {
     }
 
     const API_BASE_URL = process.env.API_BASE_URL;
-
-    if (!API_BASE_URL) {
-      throw new Error("API_BASE_URL is not configured");
-    }
 
     const response = await axios.get(`${API_BASE_URL}/ads`, {
       headers: {
@@ -31,26 +27,12 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(data, { status: 200 });
   } catch (error: any) {
     console.error("Fetch ads API error:", error);
-
-    if (axios.isAxiosError(error)) {
-      return NextResponse.json(
-        {
-          error: error.response?.data?.message || "Failed to fetch ads",
-        },
-        { status: error.response?.status || 500 }
-      );
-    }
-
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return handleAxiosError(error);
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    // Get admin session since this is an admin route
     const session = await getSession("admin");
 
     if (!session) {
@@ -62,7 +44,10 @@ export async function POST(request: NextRequest) {
 
     const API_BASE_URL = process.env.API_BASE_URL;
     if (!API_BASE_URL) {
-      throw new Error("API_BASE_URL is not configured");
+      return NextResponse.json(
+        { error: "API_BASE_URL is not configured" },
+        { status: 500 }
+      );
     }
 
     const contentType = request.headers.get("content-type") || "";
@@ -75,20 +60,7 @@ export async function POST(request: NextRequest) {
     }
   } catch (error: any) {
     console.error("Create ad API error:", error);
-
-    if (axios.isAxiosError(error)) {
-      return NextResponse.json(
-        {
-          error: error.response?.data?.message || "Failed to create ad",
-        },
-        { status: error.response?.status || 500 }
-      );
-    }
-
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return handleAxiosError(error);
   }
 }
 
@@ -97,70 +69,131 @@ async function handleFormDataRequest(
   request: NextRequest,
   session: any,
   API_BASE_URL: string
-) {
-  const formData = await request.formData();
+): Promise<NextResponse> {
+  try {
+    const formData = await request.formData();
+    
+    // Validate that image exists and is a valid file
+    const image = formData.get("image");
+    if (!image || !(image instanceof File) || image.size === 0) {
+      return NextResponse.json(
+        {
+          status: false,
+          message: "Validation errors",
+          errors: {
+            image: ["The image field is required."]
+          },
+          data: null
+        },
+        { status: 422 }
+      );
+    }
 
-  // Extract and validate required fields
-  const titleEn = formData.get("title[en]") as string;
-  const titleAr = formData.get("title[ar]") as string;
-  const contentEn = formData.get("content[en]") as string;
-  const contentAr = formData.get("content[ar]") as string;
+    // Validate required text fields
+    const requiredFields = ["title[en]", "title[ar]", "content[en]", "content[ar]"];
+    const missingFields: string[] = [];
+    
+    for (const field of requiredFields) {
+      const value = formData.get(field);
+      if (!value || (typeof value === "string" && value.trim() === "")) {
+        missingFields.push(field);
+      }
+    }
 
-  // Create FormData for external API
-  const externalFormData = new FormData();
+    if (missingFields.length > 0) {
+      const errors: Record<string, string[]> = {};
+      missingFields.forEach(field => {
+        errors[field] = [`The ${field} field is required.`];
+      });
+      
+      return NextResponse.json(
+        {
+          status: false,
+          message: "Validation errors",
+          errors: errors,
+          data: null
+        },
+        { status: 422 }
+      );
+    }
+    
+    // Create FormData for external API - forward ALL fields exactly as received
+    const externalFormData = new FormData();
 
-  // Append required fields
-  externalFormData.append("title[en]", titleEn.trim());
-  externalFormData.append("title[ar]", titleAr.trim());
-  externalFormData.append("content[en]", contentEn.trim());
-  externalFormData.append("content[ar]", contentAr.trim());
-  // Append optional fields
-  const optionalFields = [
-    "start_date",
-    "end_date",
-    "status",
-    "target_audience",
-  ];
-  optionalFields.forEach((field) => {
-    const value = formData.get(field);
-    if (value) externalFormData.append(field, value as string);
-  });
+    // Append ALL fields from the original request to external FormData
+    for (const [key, value] of formData.entries()) {
+      if (value instanceof File) {
+        externalFormData.append(key, value);
+      } else {
+        externalFormData.append(key, value as string);
+      }
+    }
 
-  // Handle image file
-  const image = formData.get("image");
-  if (image instanceof File && image.size > 0) {
-    externalFormData.append("image", image);
+    const response = await axios.post(`${API_BASE_URL}/ads`, externalFormData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${session.accessToken}`,
+      },
+      timeout: 30000,
+      maxBodyLength: Infinity,
+      maxContentLength: Infinity,
+    });
+
+    const data = response.data?.data || response.data;
+    return NextResponse.json(data, { status: 200 });
+  } catch (error: any) {
+    console.error("FormData request error:", error);
+    return handleAxiosError(error);
   }
-
-  const response = await axios.post(`${API_BASE_URL}/ads`, externalFormData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${session.accessToken}`,
-    },
-    // Add timeout and larger maxBodyLength for file uploads
-    timeout: 30000,
-    maxBodyLength: Infinity,
-    maxContentLength: Infinity,
-  });
-
-  const data = response.data?.data || response.data;
-  return NextResponse.json(data, { status: 200 });
 }
 
 async function handleJsonRequest(
   request: NextRequest,
   session: any,
   API_BASE_URL: string
-) {
-  const body = await request.json();
+): Promise<NextResponse> {
+  try {
+    const body = await request.json();
 
-  const response = await axios.post(`${API_BASE_URL}/ads`, body, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${session.accessToken}`,
-    },
-  });
+    // For JSON requests (if your backend accepts JSON for ads with image as base64 or URL)
+    // Validate required fields
+    const requiredFields = ["title", "content", "image"];
+    const missingFields: string[] = [];
+    
+    for (const field of requiredFields) {
+      if (!body[field] || (typeof body[field] === "string" && body[field].trim() === "")) {
+        missingFields.push(field);
+      }
+    }
 
-  const data = response.data?.data || response.data;
-  return NextResponse.json(data, { status: 200 });
+    if (missingFields.length > 0) {
+      const errors: Record<string, string[]> = {};
+      missingFields.forEach(field => {
+        errors[field] = [`The ${field} field is required.`];
+      });
+      
+      return NextResponse.json(
+        {
+          status: false,
+          message: "Validation errors",
+          errors: errors,
+          data: null
+        },
+        { status: 422 }
+      );
+    }
+
+    const response = await axios.post(`${API_BASE_URL}/ads`, body, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session.accessToken}`,
+      },
+    });
+
+    const data = response.data?.data || response.data;
+    return NextResponse.json(data, { status: 200 });
+  } catch (error: any) {
+    console.error("JSON request error:", error);
+    return handleAxiosError(error);
+  }
 }

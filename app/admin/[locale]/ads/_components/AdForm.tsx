@@ -86,7 +86,6 @@ interface AdFormProps {
   };
   onSubmit: (data: AdFormSubmitData) => Promise<void>;
   isLoading?: boolean;
-  error?: string;
 }
 
 export const AdForm: React.FC<AdFormProps> = ({
@@ -94,7 +93,6 @@ export const AdForm: React.FC<AdFormProps> = ({
   initialData,
   onSubmit,
   isLoading = false,
-  error,
 }) => {
   const [imageFile, setImageFile] = React.useState<File | null>(null);
   const [imagePreview, setImagePreview] = React.useState<string>(
@@ -486,29 +484,7 @@ export const AdForm: React.FC<AdFormProps> = ({
           </CardContent>
         </Card>
 
-        {/* Form Validation Errors */}
-        {Object.keys(form.formState.errors).length > 0 && (
-          <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-            <h4 className="font-semibold text-yellow-800 mb-2">
-              Please fix the following errors:
-            </h4>
-            <ul className="list-disc list-inside space-y-1">
-              {Object.entries(form.formState.errors).map(([key, error]) => (
-                <li key={key} className="text-yellow-700 text-sm">
-                  {error?.message as string}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {/* API Error Display */}
-        {error && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-red-700 text-sm">{error}</p>
-          </div>
-        )}
-
+    
         {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-3 justify-end">
           <Link href={`/admin/${locale}/ads`}>

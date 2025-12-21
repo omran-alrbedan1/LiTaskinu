@@ -9,7 +9,6 @@ import CustomHeader from "@/components/shared/CustomHeader";
 import EmptyState from "@/components/shared/EmptyState";
 
 const HowItWorksPreviewPage = () => {
-  // Check if there are steps
   const hasSteps = howItWorks && howItWorks.length > 0;
 
   return (

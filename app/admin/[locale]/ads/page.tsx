@@ -1,9 +1,7 @@
 "use client";
 import * as React from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Eye, Plus, Search, Pause, Play } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Eye, Plus, Pause, Play } from "lucide-react";
 import { Header, StatsCard } from "@/components/admin/shared";
 import Link from "next/link";
 import { EmptyState } from "@/components/shared";
@@ -13,10 +11,9 @@ import useDeleteData from "@/hooks/useDeleteData";
 import DeleteModal from "@/components/admin/shared/DeleteModal";
 import { AdsCard, AdsCardSkeleton } from "./_components";
 import StatsCardSkeleton from "@/components/shared/StatsCardSkeleton";
+import useToggleStatus from "@/hooks/useToggleStatus";
 
 export default function AdsManagementPage() {
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const [statusFilter, setStatusFilter] = React.useState("all");
 
   const {
     data: ads,
@@ -46,10 +43,24 @@ export default function AdsManagementPage() {
     },
   });
 
-  const toggleAdStatus = (adId: number) => {
-    console.log("Toggle ad status:", adId);
-    // Implement your status toggle logic here
+  // toggle status  functionality: 
+  const { 
+    toggleStatus, 
+    loading: isToggling 
+  } = useToggleStatus("/api/admin/ads/change-status", {
+    showNotifications: true,
+    successMessage: "Ad status updated successfully",
+    errorMessage: "Failed to update ad status",
+    onSuccess: () => {
+      refetchAds();
+    },
+  });
+
+  const handleToggleStatus = async (adId: number, currentStatus: string) => {
+    await toggleStatus(currentStatus, adId.toString());
   };
+
+
 
   // Statistics
   const totalAds = ads?.length || 0;
@@ -58,8 +69,6 @@ export default function AdsManagementPage() {
   const pausedAdsCount =
     ads?.filter((ad) => ad.status === "inactive").length || 0;
 
-  // Check if there are filters applied
-  const hasFilters = searchTerm || statusFilter !== "all";
 
   return (
     <div className="space-y-6 p-8 max-h-[90vh] overflow-auto sidebar-scrollbar">
@@ -134,8 +143,9 @@ export default function AdsManagementPage() {
               <AdsCard
                 key={ad.id}
                 ad={ad}
-                onToggleStatus={toggleAdStatus}
+                onToggleStatus={() => handleToggleStatus(ad.id, ad.status)}
                 onDelete={handleDelete}
+                isToggling={isToggling}
               />
             ))}
       </div>
@@ -143,14 +153,11 @@ export default function AdsManagementPage() {
       {/* Empty State - Only show when not loading and no ads */}
       {!isFetchingAds && ads?.length === 0 && (
         <EmptyState
-          title={hasFilters ? "No ads found" : "No advertisements yet"}
+          title={ "No advertisements yet"}
           description={
-            hasFilters
-              ? "Try adjusting your search or filters to find what you're looking for."
-              : "Get started by creating your first advertisement to reach your audience."
+            "Get started by creating your first advertisement to reach your audience."
           }
           image={images.emptyAds}
-          hasFilters={hasFilters}
           action={
             <Link href="./ads/create">
               <Button>

@@ -133,12 +133,19 @@ const CountriesPage = () => {
             trigger={["click"]}
             placement="bottomRight"
           >
-            <Button
-              type="text"
-              icon={<MoreHorizontal className="w-4 h-4" />}
-              className="text-gray-500 hover:text-gray-700 hover:bg-gray-100"
-              title="Actions"
-            />
+             <span
+    className="inline-flex items-center justify-center w-8 h-8 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded cursor-pointer"
+    title="Actions"
+    role="button"
+    tabIndex={0}
+    onKeyDown={(e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.currentTarget.click();
+      }
+    }}
+  >
+    <MoreHorizontal className="w-4 h-4" />
+  </span>
           </Dropdown>
         );
       },

@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,7 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar } from "@/components/ui/avatar";
 import Image from "next/image";
 import { images } from "@/constants/images";
 import { useRouter } from "next/navigation";
@@ -28,19 +27,17 @@ export default function UserMenu() {
         <TooltipButton
           variant="ghost"
           size="icon"
-          className="relative"
+          className="relative h-8 w-8 rounded-full"
           tooltipContent="profile"
         >
-          <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-            <Avatar className="h-8 w-8">
-              <Image
-                src={user.avatar || images.Unknown}
-                alt="@username"
-                height={120}
-                width={120}
-              />
-            </Avatar>
-          </Button>
+          <Avatar className="h-8 w-8">
+            <Image
+              src={user.avatar || images.Unknown}
+              alt="@username"
+              height={120}
+              width={120}
+            />
+          </Avatar>
         </TooltipButton>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>

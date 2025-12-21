@@ -26,4 +26,5 @@ export const ICONS = {
   loveLetter: "/icons/love-letter.svg",
   loveLetterHeart: "/icons/love-letter-hearts.svg",
   key: "/icons/key.svg",
+  premium: "/icons/premium.svg",
 };
