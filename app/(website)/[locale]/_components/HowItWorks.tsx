@@ -73,7 +73,7 @@ const imageVariants: Variants = {
 export default function HowItWorks() {
   return (
     <motion.section
-      className="py-8 sm:py-16 md:pb-20 bg-primary-light2"
+      className="py-8 sm:py-16 pb-40 md:pb-20 bg-primary-light2"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}

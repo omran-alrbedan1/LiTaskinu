@@ -1,8 +1,6 @@
-// app/login/page.tsx
-"use client";
-import LoginForm from "@/components/user/forms/loginForm";
 import AuthLayout from "@/components/user/layouts/AuthLayout";
 import React from "react";
+import LoginForm from "./_components/LoginForm";
 
 const LoginPage = () => {
   return (

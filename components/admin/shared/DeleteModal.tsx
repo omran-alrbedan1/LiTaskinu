@@ -1,4 +1,3 @@
-// components/admin/shared/DeleteModal.tsx
 "use client";
 import React from "react";
 import { Button, Modal } from "antd";
@@ -7,7 +6,7 @@ import { Trash2, AlertTriangle } from "lucide-react";
 interface DeleteModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: () => void;
+  onConfirm: (id?: number) => void;
   isLoading?: boolean;
   title?: string;
   itemName?: string;
@@ -23,6 +22,10 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
   itemName = "this item",
   description = "This action cannot be undone. All associated data will be permanently removed from the system.",
 }) => {
+  const handleConfirm = () => {
+    onConfirm(); // Call without any arguments
+  };
+
   return (
     <Modal
       open={isOpen}
@@ -91,7 +94,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
 
             {/* Delete Button */}
             <Button
-              onClick={onConfirm}
+              onClick={handleConfirm}
               size="large"
               type="primary"
               danger

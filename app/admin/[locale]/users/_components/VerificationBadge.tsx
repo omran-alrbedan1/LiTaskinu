@@ -7,12 +7,27 @@ import {
 } from "@ant-design/icons";
 
 interface VerificationBadgeProps {
-  verification: string;
+  is_verified: number;
 }
 
 const VerificationBadge: React.FC<VerificationBadgeProps> = ({
-  verification,
+  is_verified,
 }) => {
+  const getVerificationStatus = (status: number): string => {
+    switch (status) {
+      case 1:
+        return "verified";
+      case 0:
+        return "unverified";
+      case 2:
+        return "pending";
+      default:
+        return "unknown";
+    }
+  };
+
+  const verificationStatus = getVerificationStatus(is_verified);
+
   const verificationConfig = {
     verified: {
       color: "green",
@@ -29,10 +44,15 @@ const VerificationBadge: React.FC<VerificationBadgeProps> = ({
       icon: <CloseCircleOutlined />,
       text: "Unverified",
     },
+    unknown: {
+      color: "default",
+      icon: <CloseCircleOutlined />,
+      text: "Unknown",
+    },
   };
 
   const config =
-    verificationConfig[verification as keyof typeof verificationConfig];
+    verificationConfig[verificationStatus as keyof typeof verificationConfig];
 
   return (
     <Tag

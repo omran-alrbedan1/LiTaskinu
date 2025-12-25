@@ -5,7 +5,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-    publicRuntimeConfig: {
+  publicRuntimeConfig: {
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
   },
   typescript: {
@@ -20,9 +20,18 @@ const nextConfig = {
         port: "7099",
         pathname: "/storage/**",
       },
+      {
+        protocol: "https",
+        hostname: "api.litaskunu.com",
+        pathname: "/storage/**",
+      },
+      {
+        protocol: "http",
+        hostname: "api.litaskunu.com",
+        pathname: "/storage/**",
+      },
     ],
   },
- 
 };
 
 const withNextIntl = createNextIntlPlugin();

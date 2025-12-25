@@ -8,7 +8,7 @@ import { ReactNode } from "react";
 
 interface TooltipButtonProps extends ButtonProps {
   tooltipContent: ReactNode;
-  onClick?: () => void;
+  onClick?: () => void; 
   children: ReactNode;
 }
 
@@ -25,6 +25,7 @@ export default function TooltipButton({
           {...buttonProps}
           onClick={onClick}
           className="rounded-full h-10 relative w-10"
+          asChild={false} 
         >
           {children}
         </Button>

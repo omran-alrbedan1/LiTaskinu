@@ -65,6 +65,7 @@ export function LoginForm() {
             placeholder="admin@example.com"
             iconSrc={ICONS.email}
             iconAlt="email"
+            className="text-white"
           />
 
           {/* Password Field */}

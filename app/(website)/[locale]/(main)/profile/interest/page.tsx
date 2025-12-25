@@ -11,9 +11,9 @@ import {
   Plus,
 } from "lucide-react";
 import Link from "next/link";
-import { ProfileHeader } from "../_components";
 import { EmptyState } from "@/components/shared";
 import { images } from "@/constants/images";
+import CustomHeader from "@/components/shared/CustomHeader";
 
 const mockUserInterests = {
   interests: ["Reading", "Traveling", "Photography", "Cooking"],
@@ -90,7 +90,7 @@ const InterestsPage = () => {
     <div className="min-h-screen">
       <div className="   space-y-8">
         {/* Header Section */}
-        <ProfileHeader
+        <CustomHeader
           title="My Interests"
           description="Discover my hobbies, preferences, and passions"
           action={{

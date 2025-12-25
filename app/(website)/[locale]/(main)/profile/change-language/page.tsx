@@ -1,11 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import { Check, Globe2 } from "lucide-react";
-import { ProfileHeader } from "../_components";
 import { languageOptions } from "@/constants/options";
 import { Button } from "antd";
 import { useRouter } from "next/navigation";
+import CustomHeader from "@/components/shared/CustomHeader";
 
 const LanguagePage = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("en");
@@ -24,7 +24,7 @@ const LanguagePage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
       <div className="max-w-5xl mx-auto px-4 py-8">
-        <ProfileHeader
+        <CustomHeader
           title="Choose Language"
           description="Select your preferred language"
         />

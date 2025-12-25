@@ -1,13 +1,15 @@
 import Header from "@/components/user/elements/Header";
 import React from "react";
+import Footer from "../_components/Footer";
 
-const MainLayout = ({ children }: { children: React.ReactNode }) => {
+const layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <div className="max-h-screen overflow-auto sidebar-scrollbar ">
       <Header />
       {children}
+      <Footer/>
     </div>
   );
 };
 
-export default MainLayout;
+export default layout;

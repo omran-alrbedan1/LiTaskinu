@@ -8,7 +8,7 @@ import { images } from "@/constants/images";
 export default function Header() {
   return (
     <motion.header
-      className="bg-transparent fixed -top-6 flex bg-white w-full shadow-sm shadow-primary-light -left-3.5 z-50"
+      className="bg-transparent fixed -top-6 flex bg-white w-full shadow-sm shadow-primary-light md:-left-3.5 z-50"
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.2 }}
@@ -24,7 +24,7 @@ export default function Header() {
             alt="Litaskunu Logo"
             height={50}
             width={80}
-            className="w-16 h-16 sm:w-20 sm:h-20 md:w-36 md:h-16 mt-2"
+            className="w-24 h-14 sm:w-20 sm:h-20 md:w-36 md:h-16 mt-2"
             priority
           />
         </motion.div>

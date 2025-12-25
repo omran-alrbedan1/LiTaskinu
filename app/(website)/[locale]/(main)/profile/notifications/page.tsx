@@ -2,11 +2,11 @@
 import { useState } from "react";
 import { Card, Divider, Modal } from "antd";
 import { BellOutlined } from "@ant-design/icons";
-import { ProfileHeader } from "../_components";
 import { mockNotifications } from "@/constants/temporary";
 import NotificationItem from "../_components/NotificationItem";
 import { images } from "@/constants/images";
 import Image from "next/image";
+import CustomHeader from "@/components/shared/CustomHeader";
 
 const NotificationsPage = () => {
   const [notifications, setNotifications] = useState(mockNotifications);
@@ -82,7 +82,7 @@ const NotificationsPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <ProfileHeader
+      <CustomHeader
         title="Notifications"
         description="Manage your notifications and stay updated"
       />

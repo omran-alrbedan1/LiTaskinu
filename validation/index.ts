@@ -17,7 +17,8 @@ export const RegisterFormValidation = z
       },
       { message: "Date of birth is required" }
     ),
-    country: z.string().min(1, "Country is required"),
+    country_id: z.string().min(1, "Country is required"),
+    city_id: z.string().min(1, "City is required"),
     role: z.string().optional(),
     email: z.string().email("Invalid email address"),
     phone: z.string().min(1, "Phone number is required"),

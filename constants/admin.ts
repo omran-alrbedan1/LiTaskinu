@@ -1,14 +1,3 @@
-import {
-  Users,
-  CheckCircle,
-  AlertTriangle,
-  MessageSquare,
-  Heart,
-  FileText,
-  ShieldAlert,
-  Clock,
-  Activity,
-} from "lucide-react";
 import { ICONS } from "./icons";
 import { images } from "./images";
 
@@ -489,5 +478,69 @@ export const SAMPLE_NOTIFICATIONS = [
     priority: "low",
     userId: "456",
     userName: "Mohammed Khaled",
+  },
+];
+
+export const HeroContent: HeroContent = {
+  title: "Find Your Perfect Match",
+  subtitle:
+    "Join thousands of successful marriages through our trusted platform",
+  backgroundImage: "../images/landing_page.jpg",
+  overlayOpacity: 40,
+  textColor: "light",
+  buttons: [
+    {
+      id: "1",
+      text: "Get Started",
+      link: "/signup",
+      variant: "default",
+      order: 1,
+    },
+    {
+      id: "2",
+      text: "Learn More",
+      link: "/how-it-works",
+      variant: "outline",
+      order: 2,
+    },
+  ],
+};
+
+export const howItWorks: Step[] = [
+  {
+    id: "1",
+    title: "Create Account",
+    description: "Sign up and create your personal account",
+    order: 1,
+  },
+  {
+    id: "2",
+    title: "Complete Profile",
+    description: "Fill in your details and preferences",
+    order: 2,
+  },
+  {
+    id: "3",
+    title: "Find Matches",
+    description: "Browse compatible profiles based on your criteria",
+    order: 3,
+  },
+  {
+    id: "4",
+    title: "Start Conversation",
+    description: "Connect and chat with potential matches",
+    order: 4,
+  },
+  {
+    id: "5",
+    title: "Parent Approval",
+    description: "Get family approval for your match",
+    order: 5,
+  },
+  {
+    id: "6",
+    title: "Finalize Marriage",
+    description: "Complete the marriage process",
+    order: 6,
   },
 ];

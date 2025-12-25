@@ -10,10 +10,8 @@ import {
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import ReactCountryFlag from "react-country-flag";
-
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-
 import {
   Select,
   SelectContent,
@@ -25,7 +23,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -33,7 +30,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { CalendarIcon, CheckIcon, ChevronsUpDownIcon } from "lucide-react";
+import { CalendarIcon, CheckIcon, ChevronsUpDownIcon, X } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import {
@@ -45,6 +42,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import React from "react";
+import { Badge } from "@/components/ui/badge";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -57,6 +55,35 @@ export enum FormFieldType {
   SKELETON = "skeleton",
   COMBOBOX = "combobox",
   RADIO = "radio",
+  MULTI_SELECT = "multiSelect",
+}
+
+interface Option {
+  value: string;
+  label: string;
+  code?: string;
+  icon?: string;
+}
+
+interface CustomProps {
+  fieldType: FormFieldType;
+  control: any;
+  name: string;
+  label?: string;
+  placeholder?: string;
+  iconSrc?: string;
+  iconAlt?: string;
+  required?: boolean;
+  options?: Option[];
+  inputClassName?: string;
+  orientation?: "vertical" | "horizontal";
+  showTimeSelect?: boolean;
+  dateFormat?: string;
+  renderSkeleton?: (field: any) => React.ReactNode;
+  disabled?: boolean;
+  searchPlaceholder?: string;
+  className?: string;
+  children?: React.ReactNode;
 }
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
@@ -65,148 +92,206 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     iconSrc,
     iconAlt,
     placeholder,
-    showTimeSelect,
-    dateFormat,
-    renderSkeleton,
-    required,
     options = [],
     inputClassName,
-
     orientation = "vertical",
   } = props;
 
-  const [dropdown, setDropdown] =
-    React.useState<React.ComponentProps<typeof Calendar>["captionLayout"]>(
-      "dropdown"
-    );
-  const [date, setDate] = React.useState<Date | undefined>(
-    new Date(2025, 5, 12)
-  );
+  const selectedValues = field.value || [];
+
+  const handleMultiSelectChange = (value: string) => {
+    const currentValues = field.value || [];
+    if (currentValues.includes(value)) {
+      field.onChange(currentValues.filter((v: string) => v !== value));
+    } else {
+      field.onChange([...currentValues, value]);
+    }
+  };
+
+  const removeSelected = (value: string) => {
+    const currentValues = field.value || [];
+    field.onChange(currentValues.filter((v: string) => v !== value));
+  };
 
   switch (fieldType) {
     case FormFieldType.INPUT:
       return (
-        <div className="flex rounded-md border border-dark-500 bg-dark-400 focus-within:ring-2 ring-primary-color1">
+        <div className="flex rounded-md border border-input bg-background focus-within:ring-2 ring-ring">
           {iconSrc && (
             <Image
               src={iconSrc}
               alt={iconAlt || "icon"}
               width={24}
               height={24}
-              className="ml-2 "
+              className="ml-2"
             />
           )}
           <FormControl>
             <Input
               {...field}
               placeholder={placeholder}
-              className=" border-0 placeholder: focus:outline-none focus-within:border-none focus-within:ring-0 bg-transparent"
+              className="border-0 placeholder:text-muted-foreground focus:outline-none focus-within:border-none focus-within:ring-0 bg-transparent text-foreground"
             />
           </FormControl>
         </div>
       );
-    case FormFieldType.PASSWORD:
-      return (
-        <div className="flex rounded-md border border-dark-500 bg-dark-400 focus-within:ring-2 ring-primary-color1">
-          {iconSrc && (
-            <Image
-              src={iconSrc}
-              alt={iconAlt || "icon"}
-              width={20}
-              height={20}
-              className="ml-2 "
-            />
-          )}
-          <FormControl>
-            <Input
-              {...field}
-              type={"password"}
-              placeholder={placeholder}
-              className=" border-0 placeholder: focus:outline-none focus-within:border-none dark:text-white focus-within:ring-0 bg-transparent"
-            />
-          </FormControl>
-        </div>
-      );
-    case FormFieldType.PHONE_INPUT:
-      return (
-        <FormControl>
-          <PhoneInput
-            country={"us"}
-            value={field.value}
-            onChange={field.onChange}
-            buttonClass="!h-10 !border-slate-300 dark:!border-slate-600 !bg-white/50 dark:!bg-slate-700/50 !rounded-l-[1px] rtl:!rounded-r-[1px] rtl:!rounded-l-none rtl:!pr-2 dark:hover:bg-gray-900"
-            dropdownClass="!bg-white dark:text-white text-black dark:!bg-slate-800 !border-slate-300 dark:!border-slate-600 !shadow-xl !rounded-lg !hover:bg-red-300"
-            inputClass={cn(
-              "!h-10 !w-full rtl:pr-16 !rounded-[4px] !border-slate-300 dark:!border-slate-600 !bg-white/50 dark:!bg-slate-700/50 !shadow-sm focus:!ring-2 focus:!ring-primary-color1 focus:!border-primary-color1 !transition-all !duration-200",
-              inputClassName
-            )}
-          />
-        </FormControl>
-      );
-    case FormFieldType.DATE_PICKER:
+case FormFieldType.PASSWORD:
+  const [showPassword, setShowPassword] = React.useState(false);
+  
+  return (
+    <div className="flex rounded-md border border-input bg-background focus-within:ring-2 ring-ring">
+      {iconSrc && (
+        <Image
+          src={iconSrc}
+          alt={iconAlt || "icon"}
+          width={20}
+          height={20}
+          className="ml-2"
+        />
+      )}
+      <FormControl>
+        <Input
+          {...field}
+          type={showPassword ? "text" : "password"}
+          placeholder={placeholder}
+          className="border-0 placeholder:text-muted-foreground focus:outline-none focus-within:border-none focus-within:ring-0 bg-transparent text-foreground pr-10"
+        />
+      </FormControl>
+      <button
+        type="button"
+        onClick={() => setShowPassword(!showPassword)}
+        className="px-3 text-muted-foreground hover:text-foreground"
+      >
+        {showPassword ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
+            <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
+            <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
+            <line x1="2" x2="22" y1="2" y2="22" />
+          </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        )}
+      </button>
+    </div>
+  );
+      case FormFieldType.PHONE_INPUT:
+  return (
+    <FormControl>
+      <PhoneInput
+        country={"us"}
+        value={field.value}
+        onChange={field.onChange}
+        buttonStyle={{
+          backgroundColor: 'rgb(17 24 39)', // bg-gray-900
+          borderColor: 'rgb(75 85 99)', // border-gray-600
+          color: 'rgb(249 250 251)', // text-gray-50
+        }}
+        dropdownStyle={{
+          backgroundColor: 'rgb(17 24 39)', // bg-gray-900
+          borderColor: 'rgb(75 85 99)', // border-gray-600
+          color: 'rgb(249 250 251)', // text-gray-50
+        }}
+        inputStyle={{
+          backgroundColor: 'rgb(17 24 39)', // bg-gray-900
+          borderColor: 'rgb(75 85 99)', // border-gray-600
+          color: 'rgb(249 250 251)', // text-gray-50
+          width: '100%',
+          height: '40px',
+        }}
+        buttonClass="!h-10 !rounded-l-md"
+        dropdownClass="!shadow-lg"
+        inputClass={cn(
+          "!h-10 !w-full !rounded-md focus:!ring-2 focus:!ring-primary-color1",
+          inputClassName
+        )}
+      />
+    </FormControl>
+  );
+    
+  case FormFieldType.DATE_PICKER:
       return (
         <FormControl>
           <Popover>
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className="w-full flex justify-between font-normal border border-dark-500 bg-dark-400 hover:bg-dark-400"
+                className="w-full flex justify-between font-normal border border-input bg-background hover:bg-accent text-foreground"
               >
                 <span>
                   {field.value ? (
                     format(field.value, "PPP")
                   ) : (
-                    <span className="text-muted-foreground">{placeholder}</span>
+                    <span className="text-muted-foreground">
+                      {placeholder}
+                    </span>
                   )}
                 </span>
-                <CalendarIcon className="h-4 w-4 opacity-50 text-primary-color1" />
+                <CalendarIcon className="h-4 w-4 opacity-50" />
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
                 mode="single"
-                defaultMonth={date}
                 selected={field.value}
                 onSelect={field.onChange}
-                captionLayout={dropdown}
-                className="rounded-lg border shadow-sm"
+                className="rounded-lg border shadow-sm bg-background"
+                classNames={{
+                  day_selected: "bg-primary text-primary-foreground",
+                  day_today: "border border-primary",
+                }}
               />
             </PopoverContent>
           </Popover>
         </FormControl>
       );
-    case FormFieldType.SKELETON:
-      return renderSkeleton ? renderSkeleton(field) : null;
     case FormFieldType.SELECT:
       return (
-        <Select
-          onValueChange={(value) => {
-            field.onChange(value);
-          }}
-          value={field.value?.toString()}
-          defaultValue={field.value?.toString()}
-        >
+     <Select
+  onValueChange={field.onChange}
+  value={field.value}
+>
           <FormControl>
-            <SelectTrigger className="w-full border border-gray-300 pl-3 rounded-lg h-10 bg-white focus:ring-2 focus:ring-primary-color1 focus:border-primary-color1">
+            <SelectTrigger className="w-full border border-input pl-3 rounded-lg h-10 bg-background focus:ring-2 focus:ring-ring focus:border-ring text-foreground">
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
           </FormControl>
-          <SelectContent className="bg-white border-gray-300 z-[9999] max-h-60">
+          <SelectContent className="bg-background border-input text-foreground z-[9999] max-h-60">
             {options.map((option) => (
               <SelectItem
                 key={option.value}
-                value={option.value.toString()} // Convert to string
-                className="flex items-center gap-2 py-2"
+                value={option.value.toString()}
+                className="flex items-center gap-2 py-2 hover:bg-accent focus:bg-accent"
               >
                 <div className="flex items-center gap-2">
                   {option.code && (
                     <ReactCountryFlag
                       countryCode={option.code}
                       svg
-                      style={{
-                        width: "1.3em",
-                        height: "1.3em",
-                      }}
+                      style={{ width: "1.3em", height: "1.3em" }}
                       title={option.code}
                     />
                   )}
@@ -219,13 +304,148 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                       className="w-5 h-5"
                     />
                   )}
-                  <span className="text-gray-900">{option.label}</span>
+                  <span>{option.label}</span>
                 </div>
               </SelectItem>
             ))}
             {props.children}
           </SelectContent>
         </Select>
+      );
+    case FormFieldType.MULTI_SELECT:
+      return (
+        <FormControl>
+          <div className="space-y-3">
+            {selectedValues.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-2">
+                {selectedValues.map((value: string) => {
+                  const option = options.find((opt) => opt.value === value);
+                  return (
+                    <Badge
+                      key={value}
+                      variant="secondary"
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-full"
+                    >
+                      {option?.icon && (
+                        <Image
+                          src={option.icon}
+                          alt={option.label}
+                          width={16}
+                          height={16}
+                          className="w-4 h-4"
+                        />
+                      )}
+                      {option?.code && (
+                        <ReactCountryFlag
+                          countryCode={option.code}
+                          svg
+                          style={{ width: "1em", height: "1em" }}
+                          title={option.code}
+                        />
+                      )}
+                      <span>{option?.label || value}</span>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removeSelected(value);
+                        }}
+                        className="ml-1 hover:text-destructive"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </Badge>
+                  );
+                })}
+              </div>
+            )}
+
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  className={cn(
+                    "w-full justify-between border border-input bg-background hover:bg-accent h-10 text-foreground",
+                    !field.value && "text-muted-foreground"
+                  )}
+                >
+                  <span>
+                    {selectedValues.length === 0
+                      ? placeholder || "Select options..."
+                      : `${selectedValues.length} selected`}
+                  </span>
+                  <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-full p-0" align="start">
+                <Command className="bg-background border border-input rounded-md shadow-lg">
+                  <CommandInput
+                    placeholder={props.searchPlaceholder || "Search options..."}
+                    className="h-12 text-base border-b border-border rounded-t-md bg-background text-foreground"
+                  />
+                  <CommandList className="max-h-60 overflow-auto">
+                    <CommandEmpty className="py-6 text-center text-muted-foreground">
+                      No options found.
+                    </CommandEmpty>
+                    <CommandGroup>
+                      {options.map((option) => {
+                        const isSelected = selectedValues.includes(
+                          option.value
+                        );
+                        return (
+                          <CommandItem
+                            key={option.value}
+                            value={option.value}
+                            onSelect={() =>
+                              handleMultiSelectChange(option.value)
+                            }
+                            className="flex items-center px-4 py-3 cursor-pointer hover:bg-accent aria-selected:bg-accent text-foreground"
+                          >
+                            <div
+                              className={cn(
+                                "w-5 h-5 border border-input rounded flex items-center justify-center mr-3",
+                                isSelected
+                                  ? "bg-primary border-primary"
+                                  : "bg-background"
+                              )}
+                            >
+                              {isSelected && (
+                                <CheckIcon className="w-3 h-3 text-primary-foreground" />
+                              )}
+                            </div>
+                            {option.icon && (
+                              <Image
+                                src={option.icon}
+                                alt={option.label}
+                                width={20}
+                                height={20}
+                                className="mr-3"
+                              />
+                            )}
+                            {option.code && (
+                              <ReactCountryFlag
+                                countryCode={option.code}
+                                svg
+                                style={{
+                                  width: "1.2em",
+                                  height: "1.2em",
+                                  marginRight: "0.75rem",
+                                }}
+                                title={option.code}
+                              />
+                            )}
+                            <span>{option.label}</span>
+                          </CommandItem>
+                        );
+                      })}
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              </PopoverContent>
+            </Popover>
+          </div>
+        </FormControl>
       );
     case FormFieldType.COMBOBOX:
       return (
@@ -236,7 +456,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                 variant="outline"
                 role="combobox"
                 className={cn(
-                  "w-full justify-between border border-gray-300 bg-white hover:bg-gray-50",
+                  "w-full justify-between border border-input bg-background hover:bg-accent text-foreground",
                   !field.value && "text-muted-foreground"
                 )}
               >
@@ -248,16 +468,16 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-full p-0" align="start">
-              <Command className="bg-white border border-gray-300 rounded-md shadow-lg">
+              <Command className="bg-background border border-input rounded-md shadow-lg">
                 <CommandInput
                   placeholder={props.searchPlaceholder || "Search..."}
-                  className="h-12 text-base border-b border-gray-200 rounded-t-md"
+                  className="h-12 text-base border-b border-border rounded-t-md bg-background text-foreground"
                 />
-                <CommandList className="max-h-60 overflow-auto hide-scrollbar">
-                  <CommandEmpty className="py-6 text-center text-gray-500">
+                <CommandList className="max-h-60 overflow-auto">
+                  <CommandEmpty className="py-6 text-center text-muted-foreground">
                     No results found.
                   </CommandEmpty>
-                  <CommandGroup className="!hide-scrollbar">
+                  <CommandGroup>
                     {options.map((option) => (
                       <CommandItem
                         key={option.value}
@@ -267,11 +487,11 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                             option.value === field.value ? "" : option.value
                           );
                         }}
-                        className="flex items-center px-4 py-3 cursor-pointer hover:bg-gray-100 aria-selected:!bg-primary-color1"
+                        className="flex items-center px-4 py-3 cursor-pointer hover:bg-accent aria-selected:bg-primary aria-selected:text-primary-foreground text-foreground"
                       >
                         <CheckIcon
                           className={cn(
-                            "mr-3 h-5 w-5 text-primary-color1 bg-white rounded-full",
+                            "mr-3 h-5 w-5",
                             field.value === option.value
                               ? "opacity-100"
                               : "opacity-0"
@@ -298,7 +518,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                             title={option.code}
                           />
                         )}
-                        <span className="text-gray-900">{option.label}</span>
+                        <span>{option.label}</span>
                       </CommandItem>
                     ))}
                   </CommandGroup>
@@ -315,7 +535,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             placeholder={placeholder}
             {...field}
             rows={5}
-            className=" !border-3  dark:!border-gray-600 "
+            className="border border-input bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
             disabled={props.disabled}
           />
         </FormControl>
@@ -328,14 +548,18 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
               id={props.name}
               checked={field.value}
               onCheckedChange={field.onChange}
+              className="border-input data-[state=checked]:bg-primary"
             />
-            <Label htmlFor={props.name} className="checkbox-label">
+            <Label
+              htmlFor={props.name}
+              className="checkbox-label text-foreground"
+            >
               {props.label}
             </Label>
           </div>
         </FormControl>
       );
-    case FormFieldType.RADIO: // Add this case
+    case FormFieldType.RADIO:
       return (
         <FormControl>
           <RadioGroup
@@ -351,10 +575,11 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                 <RadioGroupItem
                   value={option.value}
                   id={`${props.name}-${option.value}`}
+                  className="border-input text-primary"
                 />
                 <Label
                   htmlFor={`${props.name}-${option.value}`}
-                  className="cursor-pointer text-sm"
+                  className="cursor-pointer text-sm text-foreground"
                 >
                   {option.label}
                 </Label>
@@ -376,38 +601,62 @@ const CustomFormField = (props: CustomProps) => {
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className="flex-1 flex flex-col">
+        <FormItem className={cn("flex-1 flex flex-col", className)}>
           {fieldType !== FormFieldType.CHECKBOX &&
             fieldType !== FormFieldType.RADIO &&
+            fieldType !== FormFieldType.MULTI_SELECT &&
             label &&
             (required ? (
               <p className="flex items-center gap-1">
-                <FormLabel className="mb-2 ">{label}</FormLabel>
-                <span className="text-red-400 text-xl -mt-1 ">*</span>
+                <FormLabel className="mb-2 text-foreground">
+                  {label}
+                </FormLabel>
+                <span className="text-destructive text-xl -mt-1">*</span>
               </p>
             ) : (
-              <FormLabel className="mb-2">{label}</FormLabel>
+              <FormLabel className="mb-2 text-foreground">
+                {label}
+              </FormLabel>
             ))}
 
-          {/* For RADIO type, show label above the radio group */}
+          {fieldType === FormFieldType.MULTI_SELECT &&
+            label &&
+            (required ? (
+              <p className="flex items-center gap-1 mb-3">
+                <FormLabel className="text-foreground">
+                  {label}
+                </FormLabel>
+                <span className="text-destructive text-xl -mt-1">*</span>
+              </p>
+            ) : (
+              <FormLabel className="mb-3 text-foreground">
+                {label}
+              </FormLabel>
+            ))}
+
           {fieldType === FormFieldType.RADIO &&
             label &&
             (required ? (
               <p className="flex items-center gap-1 mb-3">
-                <FormLabel>{label}</FormLabel>
-                <span className="text-red-400 text-xl -mt-1">*</span>
+                <FormLabel className="text-foreground">
+                  {label}
+                </FormLabel>
+                <span className="text-destructive text-xl -mt-1">*</span>
               </p>
             ) : (
-              <FormLabel className="mb-3">{label}</FormLabel>
+              <FormLabel className="mb-3 text-foreground">
+                {label}
+              </FormLabel>
             ))}
 
-          {/* For CHECKBOX type, label is handled inside the component */}
           {fieldType === FormFieldType.CHECKBOX && (
             <div className="mb-2">
               {required && label && (
                 <p className="flex items-center gap-1 mb-2">
-                  <span className="text-sm font-medium">{label}</span>
-                  <span className="text-red-400 text-xl -mt-1">*</span>
+                  <span className="text-sm font-medium text-foreground">
+                    {label}
+                  </span>
+                  <span className="text-destructive text-xl -mt-1">*</span>
                 </p>
               )}
             </div>
@@ -416,7 +665,7 @@ const CustomFormField = (props: CustomProps) => {
           <FormControl>
             <RenderField field={field} props={props} />
           </FormControl>
-          <FormMessage className="shad-error " />
+          <FormMessage className="text-destructive mt-1" />
         </FormItem>
       )}
     />

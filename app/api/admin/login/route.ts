@@ -7,7 +7,6 @@ export async function POST(request: NextRequest) {
   try {
     const { email, password } = await request.json();
 
-    // Validate input
     if (!email || !password) {
       return NextResponse.json(
         { error: "Email and password are required" },
@@ -16,18 +15,13 @@ export async function POST(request: NextRequest) {
     }
 
     const API_BASE_URL = process.env.API_BASE_URL;
-
     if (!API_BASE_URL) {
       throw new Error("API_BASE_URL is not configured");
     }
 
-    // Call your external API for authentication
     const response = await axios.post(
       `${API_BASE_URL}/login`,
-      {
-        email,
-        password,
-      },
+      { email, password },
       {
         headers: {
           "Content-Type": "application/json",
@@ -38,7 +32,6 @@ export async function POST(request: NextRequest) {
 
     const responseData = response.data;
 
-    // Check if login was successful
     if (!responseData.status || !responseData.data) {
       return NextResponse.json(
         { error: responseData.message || "Authentication failed" },
@@ -56,36 +49,42 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create session payload with the API response data
+    // Create admin session
     const sessionPayload = {
       user: {
         id: user.id.toString(),
         name: `${user.first_name} ${user.last_name}`,
         email: user.email,
         role: "admin",
+        roles: roles,
         avatar: user.avatar || "/avatars/admin.png",
         first_name: user.first_name,
         last_name: user.last_name,
         gender: user.gender,
         is_verified: user.is_verified,
         phone: user.phone,
-        // Add any other user fields you need
       },
       accessToken: token.access_token,
       refreshToken: token.refresh_token,
-      apiUserData: user, // Store the complete user data from API if needed
+      apiUserData: user,
+      isAdmin: true,
     };
 
-    // Create the session - this sets the secure HTTP-only cookie
-    await createSession(sessionPayload);
+    await createSession(sessionPayload, "admin");
 
     return NextResponse.json(
       {
         message: "Admin login successful",
-        user: sessionPayload.user,
+        user: {
+          id: sessionPayload.user.id,
+          name: sessionPayload.user.name,
+          email: sessionPayload.user.email,
+          role: sessionPayload.user.role,
+          avatar: sessionPayload.user.avatar,
+          isAdmin: true,
+        },
         token: {
           access_token: token.access_token,
-          // Don't send refresh token in response if it's stored in session
         },
       },
       { status: 200 }
@@ -93,12 +92,10 @@ export async function POST(request: NextRequest) {
   } catch (error: any) {
     console.error("Admin login error:", error);
 
-    // Handle axios errors
     if (axios.isAxiosError(error)) {
       const errorMessage =
         error.response?.data?.message || "Authentication failed";
       const statusCode = error.response?.status || 401;
-
       return NextResponse.json({ error: errorMessage }, { status: statusCode });
     }
 

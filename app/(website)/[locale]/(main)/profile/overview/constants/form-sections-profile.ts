@@ -20,5 +20,4 @@ export const PROFILE_SECTIONS = BASE_SECTIONS.map((section) => {
       ],
     };
   }
-  return section;
 });

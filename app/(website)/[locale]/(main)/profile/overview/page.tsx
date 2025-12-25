@@ -1,14 +1,13 @@
-import React from "react";
-import { ProfileHeader } from "../_components";
 import { mockUserData, seekingPreferences } from "@/constants/temporary";
 import { profileSectionsConfig } from "@/constants/profileSections";
 import { ProfileSection } from "./_components/ProfileSection";
 import { User, Heart } from "lucide-react";
+import CustomHeader from "@/components/shared/CustomHeader";
 
 const OverviewPage = () => {
   return (
     <div className="space-y-6">
-      <ProfileHeader
+      <CustomHeader
         title="Personal Overview"
         description="Manage your profile information and partner preferences"
         action={[
@@ -16,13 +15,13 @@ const OverviewPage = () => {
             label: "Edit Profile",
             href: "./overview/edit",
             icon: User,
-            variant: "outline", // Optional: makes it a secondary button
+            variant: "outline",
           },
           {
             label: "Update Preferences",
             href: "./overview/preferenceEdit",
             icon: Heart,
-            variant: "default", // Primary button
+            variant: "default",
           },
         ]}
       />

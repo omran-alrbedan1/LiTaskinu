@@ -1,8 +1,8 @@
 import ContactUsForm from "@/components/user/forms/ContactUsForm";
-import { ProfileHeader } from "../_components";
 import Image from "next/image";
 import { ICONS } from "@/constants/icons";
 import WhatsAppFloatingButton from "@/components/shared/WhatsappFloatingButton";
+import CustomHeader from "@/components/shared/CustomHeader";
 
 const SupportPage = () => {
   const contactInfo = [
@@ -25,7 +25,7 @@ const SupportPage = () => {
 
   return (
     <div>
-      <ProfileHeader
+      <CustomHeader
         title="Technical Support"
         description="This Terms of Use contains the rules and guideline  for using our electronic platform"
       />

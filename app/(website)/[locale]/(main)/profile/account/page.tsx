@@ -5,10 +5,11 @@ import { Button } from "antd";
 import { EditOutlined, MailOutlined, PhoneOutlined } from "@ant-design/icons";
 import { images } from "@/constants/images";
 import Image from "next/image";
-import { PhotoGallery, ProfileHeader } from "../_components";
+import { PhotoGallery } from "../_components";
 import { useRouter } from "next/navigation";
 import { mockPhotos, userData } from "@/constants/temporary";
 import { FaBook } from "react-icons/fa";
+import CustomHeader from "@/components/shared/CustomHeader";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -21,7 +22,7 @@ const ProfilePage = () => {
   return (
     <div className="space-y-6 max-h-[88vh] hide-scrollbar  overflow-clip p-4">
       {/* Header */}
-      <ProfileHeader
+      <CustomHeader
         title="Personal information"
         description="manage your personal information and preferences"
         action={{

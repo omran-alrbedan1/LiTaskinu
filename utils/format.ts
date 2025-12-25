@@ -55,6 +55,17 @@ export const formatDateTime = (
   return date.toLocaleDateString("en-US", defaultOptions);
 };
 
+export const formatDateForSubmission = (dateString: any): string => {
+  if (!dateString) return "";
+
+  try {
+    const date = new Date(dateString);
+    return date.toISOString().split("T")[0];
+  } catch (error) {
+    return dateString;
+  }
+};
+
 /**
  * Format number with commas (e.g., 1000 -> 1,000)
  */
@@ -142,4 +153,29 @@ export const formatSocialNumber = (num: number): string => {
     return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
   }
   return num.toString();
+};
+
+
+
+// Replace the calculateDaysRemaining function with a utility-based approach
+export const calculateDaysRemaining = (endDate: string) => {
+  const end = new Date(endDate);
+  const now = new Date();
+  const diffTime = end.getTime() - now.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays;
+};
+
+// You can simplify this using a more modular approach
+export const formatRemainingTime = (endDate: string) => {
+  const end = new Date(endDate);
+  const now = new Date();
+  const diffInMs = end.getTime() - now.getTime();
+  const diffInSeconds = Math.floor(diffInMs / 1000);
+  
+  // Use your formatDuration utility for consistent formatting
+  if (diffInSeconds < 60) return "Less than a minute";
+  if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes`;
+  if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours`;
+  return `${Math.floor(diffInSeconds / 86400)} days`;
 };

@@ -1,9 +1,7 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
-import { ProfileHeader } from "../../_components";
-import { ArrowLeft, Save } from "lucide-react";
+import { Save } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -18,6 +16,7 @@ import { useProfileForm } from "@/hooks/useProfileForm";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import { SectionContent } from "../_components";
 import { PROFILE_SECTIONS } from "../constants/form-sections-profile";
+import CustomHeader from "@/components/shared/CustomHeader";
 
 const EditPersonalDataPage = () => {
   const {
@@ -32,7 +31,7 @@ const EditPersonalDataPage = () => {
   return (
     <div className="space-y-6 ">
       <div className="flex items-center gap-4 mt-3">
-        <ProfileHeader
+        <CustomHeader
           title="Edit Personal Information"
           description="Update your personal details and information"
           backLink="../overview"

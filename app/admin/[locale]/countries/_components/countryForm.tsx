@@ -85,7 +85,8 @@ export function CountryForm({
                 fieldType={FormFieldType.INPUT}
                 control={form.control}
                 name="code"
-                label="Country Code *"
+                label="Country Code "
+                required
                 placeholder="e.g., US, UK, SA"
                 inputClassName="w-full pl-8 font-mono text-xs uppercase tracking-wide h-9 border-gray-300 focus:border-blue-500"
               />
@@ -95,7 +96,8 @@ export function CountryForm({
                 fieldType={FormFieldType.INPUT}
                 control={form.control}
                 name="name.en"
-                label="English Name *"
+                label="English Name "
+                required
                 placeholder="Enter country name in English"
                 inputClassName="w-full border-gray-300 focus:border-blue-500 h-9 text-sm"
               />
@@ -123,7 +125,8 @@ export function CountryForm({
                 fieldType={FormFieldType.INPUT}
                 control={form.control}
                 name="name.ar"
-                label="Arabic Name *"
+                label="Arabic Name "
+                required
                 placeholder="اسم الدولة"
                 inputClassName="w-full text-right font-arabic text-sm border-gray-300 focus:border-blue-500 h-9"
               />

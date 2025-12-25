@@ -60,28 +60,33 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 
-import {
-  EmailModal,
-  DeleteModal,
-  VerifyModal,
-  UnbanModal,
-} from "../_components";
+import { EmailModal, VerifyModal, UnbanModal } from "../_components";
+import DeleteModal from "@/components/admin/shared/DeleteModal";
+import { useParams } from "next/navigation";
+import useGetData from "@/hooks/useGetData";
 
 type ModalType = "email" | "verify" | "ban" | "unban" | "delete";
 
 const PersonDetailPage = () => {
+  const params = useParams();
+  const userId = params.id as string;
   const [activeModal, setActiveModal] = useState<ModalType | null>(null);
 
-  const user: User = {
+  const { data: userT } = useGetData({
+    url: `/api/admin/users/${userId}`,
+    enabled: !!userId,
+  });
+  const userData2 = userT?.data;
+
+  const user = {
     id: 1,
-    name: userData.name,
-    email: userData.email || "user@example.com",
-    phone: userData.phone || "+966500000000",
-    // @ts-ignore
-    avatar: images.Unknown,
-    status: "active",
-    verification: "verified",
-    registrationDate: new Date().toISOString(),
+    name: `${userData2?.first_name} ${userData2?.last_name}`,
+    email: userData2?.email,
+    phone: userData2?.phone,
+    avatar: userData2?.image ?? images.Unknown,
+    status: userData2?.account_status,
+    verification: userData2?.is_verified === 1 ? "verified" : "unverified",
+    registrationDate: new Date(userData2?.created_at).toDateString(),
   };
 
   // Modal handlers
@@ -439,7 +444,7 @@ const PersonDetailPage = () => {
       <div className="p-6 space-y-6 max-h-[90vh] overflow-y-auto pb-32 hide-scrollbar">
         <div className="flex justify-between items-center mb-8">
           <Header
-            title={`${userData.name}'s Profile`}
+            title={`${user.name}'s Profile`}
             description="View all user information and activity"
           />
 

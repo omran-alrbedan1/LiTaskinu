@@ -1,9 +1,7 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
-import { ProfileHeader } from "../../_components";
-import { ArrowLeft, Save } from "lucide-react";
+import { Save } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -17,6 +15,7 @@ import { useProfileForm } from "@/hooks/useProfileForm";
 import { SectionContent } from "../_components";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import { PREFERENCE_SECTIONS } from "../constants/form-sections-preferences";
+import CustomHeader from "@/components/shared/CustomHeader";
 
 const EditPreferencePage = () => {
   const {
@@ -31,7 +30,7 @@ const EditPreferencePage = () => {
   return (
     <div className="space-y-6 ">
       <div className="flex items-center gap-4 mt-3">
-        <ProfileHeader
+        <CustomHeader
           title="Edit Preference Information"
           description="Customize your preferences and manage your account settings"
           backLink="../overview"

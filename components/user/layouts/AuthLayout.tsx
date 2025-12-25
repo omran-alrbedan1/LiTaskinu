@@ -36,9 +36,6 @@ const AuthLayout = ({
 }: AuthLayoutProps) => {
   const router = useRouter();
 
-  const handleLanguageSwitch = () => {
-    router.push("./select-language");
-  };
 
   // Common content for both sides
   const welcomeContent = (
@@ -77,7 +74,7 @@ const AuthLayout = ({
           initial="hidden"
           animate="visible"
           transition={{ delay: 0.6 }}
-          className="text-2xl lg:text-3xl xl:text-4xl font-bold text-yellow-400 mb-4 lg:mb-6"
+          className="text-2xl lg:text-3xl xl:text-4xl font-bold text-primary-color3 mb-4 lg:mb-6"
         >
           {title}
         </motion.h1>
@@ -86,7 +83,7 @@ const AuthLayout = ({
           initial="hidden"
           animate="visible"
           transition={{ delay: 0.8 }}
-          className="text-yellow-400 text-sm lg:text-base leading-relaxed"
+          className="text-primary-color3 text-sm lg:text-base leading-relaxed"
         >
           {description}
         </motion.p>
@@ -155,10 +152,10 @@ const AuthLayout = ({
         variants={mobileItemVariants}
         className="text-center mb-4 sm:mb-6 px-2"
       >
-        <h1 className="text-lg sm:text-xl font-bold text-yellow-400 mb-2 sm:mb-3">
+        <h1 className="text-lg sm:text-xl font-bold text-primary-color3 mb-2 sm:mb-3">
           {title}
         </h1>
-        <p className="text-yellow-400 text-xs sm:text-sm leading-relaxed max-w-xs sm:max-w-md">
+        <p className="text-primary-color3 text-xs sm:text-sm leading-relaxed max-w-xs sm:max-w-md">
           {description}
         </p>
       </motion.div>
@@ -178,26 +175,7 @@ const AuthLayout = ({
         transition={{ duration: 0.6, delay: 0.4 }}
         className="w-full max-w-xs sm:max-w-sm lg:max-w-md lg:w-[400px] xl:w-[450px] space-y-4 sm:space-y-5 lg:space-y-6"
       >
-        {/* Language Selector */}
-        {showLanguageSwitch && (
-          <motion.div
-            variants={fadeInUpVariants}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.6 }}
-            className="flex justify-end"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleLanguageSwitch}
-              className="flex items-center gap-2 text-white text-xs sm:text-sm hover:text-gray-300 transition bg-white/10 rounded-full px-3 py-1.5 sm:px-3 sm:py-2 backdrop-blur-sm"
-            >
-              <Globe className="text-primary-color1 size-3 sm:size-4" />
-              <span className="text-xs sm:text-sm">EN</span>
-            </motion.button>
-          </motion.div>
-        )}
+
 
         {/* Form Content */}
         <motion.div
@@ -255,7 +233,7 @@ const AuthLayout = ({
   );
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen  z-50 relative overflow-hidden">
       {/* Full Screen Background Image with Blur */}
       <div className="absolute inset-0">
         <Image

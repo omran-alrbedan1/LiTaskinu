@@ -14,7 +14,6 @@ export const CountryFormValidation = z.object({
   }),
 });
 
-// validation/admin.ts
 export const CityFormValidation = z.object({
   country_id: z.string().min(1, "Please select a country"),
   name: z.object({
@@ -25,3 +24,35 @@ export const CityFormValidation = z.object({
     ru: z.string().optional(),
   }),
 });
+
+export const stepSchema = z.object({
+  title: z
+    .string()
+    .min(1, "Title is required")
+    .max(100, "Title cannot exceed 100 characters"),
+  description: z
+    .string()
+    .min(1, "Description is required")
+    .max(500, "Description cannot exceed 500 characters"),
+});
+
+export const SocialMediaFormValidation = z.object({
+  name: z.string().min(2).max(50),
+  type: z.enum(["social", "contact"]),
+  value: z.string(),
+  icon: z.string().min(1),
+  is_active: z.boolean(), 
+});
+
+export type SocialMediaFormValues = z.infer<
+  typeof SocialMediaFormValidation
+>;
+
+
+export const FAQFormValidation = z.object({
+  question: z.string().min(5, "Question must be at least 5 characters"),
+  answer: z.string().min(10, "Answer must be at least 10 characters"),
+  is_active: z.boolean().default(true),
+});
+
+export type FAQFormValues = z.infer<typeof FAQFormValidation>;
