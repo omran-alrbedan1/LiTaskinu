@@ -107,32 +107,39 @@ const SearchBar: React.FC<{
   </div>
 );
 
-const DesktopNav: React.FC<{
+const DesktopNav = React.memo(({ 
+  links, 
+  isActiveLink 
+}: {
   links: Array<{ title: string; link: string }>;
   isActiveLink: (link: string) => boolean;
-}> = ({ links, isActiveLink }) => (
-  <nav className="hidden md:flex items-center space-x-6">
-    {links.map((link) => {
-      const isActive = isActiveLink(link.link);
-      return (
-        <a
-          key={link.link}
-          href={link.link}
-          className={`transition-colors duration-300 font-medium relative group ${
-            isActive ? "text-primary-color1" : "hover:text-primary-color1"
-          }`}
-        >
-          {link.title}
-          <span
-            className={`absolute bottom-0 left-0 h-0.5 bg-primary-color1 transition-all duration-300 ${
-              isActive ? "w-full" : "w-0 group-hover:w-full"
+}) => {
+  return (
+    <nav className="hidden md:flex items-center space-x-6">
+      {links.map((link) => {
+        const isActive = isActiveLink(link.link);
+        return (
+          <a
+            key={link.link}
+            href={link.link}
+            className={`transition-colors duration-300 font-medium relative group ${
+              isActive ? "text-primary-color1" : "hover:text-primary-color1"
             }`}
-          />
-        </a>
-      );
-    })}
-  </nav>
-);
+          >
+            {link.title}
+            <span
+              className={`absolute bottom-0 left-0 h-0.5 bg-primary-color1 transition-all duration-300 ${
+                isActive ? "w-full" : "w-0 group-hover:w-full"
+              }`}
+            />
+          </a>
+        );
+      })}
+    </nav>
+  );
+});
+
+DesktopNav.displayName = 'DesktopNav';
 
 const LanguageDropdown: React.FC<{
   currentLocale: string;
@@ -391,9 +398,9 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center -my-6 space-x-2">
             <Image
-              src={images.logo2}
-              height={60}
-              width={60}
+              src={images.litaskunuLogo}
+              height={130}
+              width={130}
               alt="logo"
               priority
             />

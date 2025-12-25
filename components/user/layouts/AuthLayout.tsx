@@ -21,7 +21,6 @@ interface AuthLayoutProps {
   children: React.ReactNode;
   title: string;
   description: string;
-  showLanguageSwitch?: boolean;
   customFormClasses?: string;
   showSocialMedia?: boolean;
 }
@@ -30,7 +29,6 @@ const AuthLayout = ({
   children,
   title,
   description,
-  showLanguageSwitch = true,
   customFormClasses = "",
   showSocialMedia = true,
 }: AuthLayoutProps) => {
@@ -51,12 +49,13 @@ const AuthLayout = ({
         className="flex-1 flex lg:ml-16 xl:ml-24 2xl:ml-32 flex-col lg:-mt-16 xl:-mt-24 2xl:-mt-32 items-start justify-center text-start w-full max-w-md"
       >
         {/* Logo */}
-        <motion.div
+        <motion.a
           variants={scaleVariants}
           initial="hidden"
           animate="visible"
           transition={{ delay: 0.4 }}
           className="mb-6 lg:mb-8"
+          href="./"
         >
           <Image
             src={images.logo2}
@@ -66,7 +65,7 @@ const AuthLayout = ({
             className="object-cover lg:w-[180px] lg:h-[180px] xl:w-[200px] xl:h-[200px]"
             quality={100}
           />
-        </motion.div>
+        </motion.a>
 
         {/* Welcome Text */}
         <motion.h1

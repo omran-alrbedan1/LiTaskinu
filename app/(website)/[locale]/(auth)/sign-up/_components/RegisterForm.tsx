@@ -129,21 +129,14 @@ const RegisterForm = () => {
   };
 
   return (
-    // Add dark class to root div
-    <div className="w-full py-12 sm:py-16 lg:py-20 mt-40 sm:mt-48 lg:mt-56 px-4 sm:px-6 lg:px-8 rounded-lg shadow-sm bg-transparent dark">
-      <div className="text-center mb-6 sm:mb-8">
-        <Image
-          src={images.logo}
-          width={80}
-          height={80}
-          alt="logo"
-          className="mx-auto mb-3 sm:mb-4 md:hidden"
-        />
+    <div className="w-full  py-44   sm:py-16 lg:py-20 mt-56 sm:mt-48 lg:mt-56 px-4 sm:px-6 lg:px-8 rounded-lg shadow-sm bg-transparent dark">
+      <div className="text-center mt-14 mb-6 sm:mb-8">
+    
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
           Create Account
         </h2>
         <p className="mt-2 text-xs sm:text-sm text-gray-400">
-          Sign up for a new account
+          Sign up for a new account  
         </p>
       </div>
 
