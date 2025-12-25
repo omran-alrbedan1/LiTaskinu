@@ -1,9 +1,5 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
 import { images } from "@/constants/images";
-import { animationVariants } from "@/constants/landingData";
 import {
   FaEnvelope,
   FaPhone,
@@ -15,24 +11,16 @@ import {
   FaFacebookF,
 } from "react-icons/fa";
 import { TiHeartFullOutline } from "react-icons/ti";
+
 export default function Footer() {
   return (
-    <motion.footer
-      className="bg-gradient-to-br from-[#8B9475] to-[#6B7355] text-white p-4 pt-16 pb-24 md:pb-8 relative overflow-hidden"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      variants={animationVariants.container}
-    >
+    <footer className="bg-gradient-to-br from-[#8B9475] to-[#6B7355] text-white p-4 pt-16 pb-24 md:pb-8 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Main Footer Content */}
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-12">
             {/* Brand Section */}
-            <motion.div
-              className="lg:col-span-2"
-              variants={animationVariants.item}
-            >
+            <div className="lg:col-span-2">
               <div className="flex items-center mb-6">
                 <Image
                   src={images.logo2}
@@ -68,95 +56,92 @@ export default function Footer() {
                     color: "hover:text-blue-600",
                   },
                 ].map((social, index) => (
-                  <motion.a
+                  <a
                     key={index}
                     href={social.href}
                     className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white/70 hover:bg-white/20 transition-all duration-300"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
                   >
                     <social.icon className={`text-sm ${social.color}`} />
-                  </motion.a>
+                  </a>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
             {/* Contact Section */}
-            <motion.div variants={animationVariants.item}>
+            <div>
               <h4 className="text-xl font-semibold mb-6 flex items-center gap-2">
                 <FaEnvelope className="text-white" />
                 Contact Us
               </h4>
               <div className="space-y-4">
-                <div className="flex items-center gap-3 group">
-                  <div className="w-10 h-10 bg-[#A1AA8A] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <FaEnvelope className="text-white text-sm" />
+                {[
+                  {
+                    icon: FaEnvelope,
+                    title: "Email",
+                    text: "om.alrbedan100@gmail.com",
+                  },
+                  {
+                    icon: FaPhone,
+                    title: "Phone",
+                    text: "009929929992",
+                  },
+                  {
+                    icon: FaGlobe,
+                    title: "Global",
+                    text: "Available Worldwide",
+                  },
+                ].map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-3 group"
+                  >
+                    <div className="w-10 h-10 bg-[#A1AA8A] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <item.icon className="text-white text-sm" />
+                    </div>
+                    <div>
+                      <p className="text-white/90 font-medium">{item.title}</p>
+                      <p className="text-white/70 text-sm">{item.text}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-white/90 font-medium">Email</p>
-                    <p className="text-white/70 text-sm">
-                      om.alrbedan100@gmail.com
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3 group">
-                  <div className="w-10 h-10 bg-[#A1AA8A] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <FaPhone className="text-white text-sm" />
-                  </div>
-                  <div>
-                    <p className="text-white/90 font-medium">Phone</p>
-                    <p className="text-white/70 text-sm">009929929992</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3 group">
-                  <div className="w-10 h-10 bg-[#A1AA8A] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <FaGlobe className="text-white text-sm" />
-                  </div>
-                  <div>
-                    <p className="text-white/90 font-medium">Global</p>
-                    <p className="text-white/70 text-sm">Available Worldwide</p>
-                  </div>
-                </div>
+                ))}
               </div>
-            </motion.div>
+            </div>
 
             {/* Legal Section */}
-            <motion.div variants={animationVariants.item}>
+            <div>
               <h4 className="text-xl font-semibold mb-6 flex items-center gap-2">
-                <FaShieldAlt className="text-white  " />
+                <FaShieldAlt className="text-white" />
                 Legal
               </h4>
               <div className="space-y-4">
-                <div className="flex items-center gap-3 group">
-                  <div className="w-10 h-10 bg-[#A1AA8A] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <FaFileContract className="text-white text-sm" />
+                {[
+                  {
+                    icon: FaFileContract,
+                    title: "Terms & Conditions",
+                  },
+                  {
+                    icon: FaShieldAlt,
+                    title: "Privacy Policy",
+                  },
+                ].map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-3 group"
+                  >
+                    <div className="w-10 h-10 bg-[#A1AA8A] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <item.icon className="text-white text-sm" />
+                    </div>
+                    <div>
+                      <p className="text-white/90 font-medium">{item.title}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-white/90 font-medium">
-                      Terms & Conditions
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3 group">
-                  <div className="w-10 h-10 bg-[#A1AA8A] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <FaShieldAlt className="text-white text-sm" />
-                  </div>
-                  <div>
-                    <p className="text-white/90 font-medium">Privacy Policy</p>
-                  </div>
-                </div>
+                ))}
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Mission Statement & Copyright */}
-          <motion.div
-            className="pt-8 border-t border-white/20"
-            variants={animationVariants.item}
-          >
+          <div className="pt-8 border-t border-white/20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
                 <p className="text-white/80 text-sm leading-relaxed mb-4">
@@ -167,9 +152,9 @@ export default function Footer() {
                   commitments.
                 </p>
                 <div className="flex items-center gap-2 text-white/60 text-sm">
-                  <TiHeartFullOutline className="text-red-500 " />
+                  <TiHeartFullOutline className="text-red-500" />
                   <span>
-                    Building meaningful Islamic relationships since 2024
+                    Building meaningful Islamic relationships since 2025
                   </span>
                 </div>
               </div>
@@ -178,60 +163,17 @@ export default function Footer() {
                 <p className="text-white/70 text-md">
                   © {new Date().getFullYear()} Litaskunu. All rights reserved.
                 </p>
-                <motion.p
-                  className="text-white/50 text-sm mt-1 flex items-center justify-center lg:justify-end gap-2"
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  viewport={{ once: true }}
-                >
+                <p className="text-white/50 text-sm mt-1 flex items-center justify-center lg:justify-end gap-2">
                   Made with
-                  <motion.span
-                    animate={{
-                      scale: [1.2, 1.6, 1.2],
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    <TiHeartFullOutline className="text-red-600" />
-                  </motion.span>
+                  <TiHeartFullOutline className="text-red-600" />
                   for the Muslim Ummah
-                </motion.p>
+                </p>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
-      {/* Floating decorative elements */}
-      <motion.div
-        className="absolute top-10 right-10 w-4 h-4 bg-[#A1AA8A] rounded-full opacity-30"
-        animate={{
-          y: [0, -20, 0],
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      <motion.div
-        className="absolute bottom-20 left-10 w-6 h-6 bg-white rounded-full opacity-20"
-        animate={{
-          y: [0, 15, 0],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1,
-        }}
-      />
-    </motion.footer>
+    </footer>
   );
 }

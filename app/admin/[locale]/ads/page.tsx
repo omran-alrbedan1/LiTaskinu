@@ -43,7 +43,7 @@ export default function AdsManagementPage() {
     },
   });
 
-  // toggle status  functionality: 
+  // toggle status  function  ality: 
   const { 
     toggleStatus, 
     loading: isToggling 

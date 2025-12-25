@@ -1,9 +1,14 @@
 import React from "react";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="max-h-screen dark -mb-32 overflow-clip">{children}</div>
+    // Add "dark" class to force dark mode
+    <div className="dark">
+      <div className="max-h-screen dark:bg-gray-900 bg-gray-900 -mb-32 overflow-clip">
+        {children}
+      </div>
+    </div>
   );
 };
 
-export default layout;
+export default Layout;

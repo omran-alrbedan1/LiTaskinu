@@ -73,50 +73,6 @@ async function handleFormDataRequest(
   try {
     const formData = await request.formData();
     
-    // Validate that image exists and is a valid file
-    const image = formData.get("image");
-    if (!image || !(image instanceof File) || image.size === 0) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: "Validation errors",
-          errors: {
-            image: ["The image field is required."]
-          },
-          data: null
-        },
-        { status: 422 }
-      );
-    }
-
-    // Validate required text fields
-    const requiredFields = ["title[en]", "title[ar]", "content[en]", "content[ar]"];
-    const missingFields: string[] = [];
-    
-    for (const field of requiredFields) {
-      const value = formData.get(field);
-      if (!value || (typeof value === "string" && value.trim() === "")) {
-        missingFields.push(field);
-      }
-    }
-
-    if (missingFields.length > 0) {
-      const errors: Record<string, string[]> = {};
-      missingFields.forEach(field => {
-        errors[field] = [`The ${field} field is required.`];
-      });
-      
-      return NextResponse.json(
-        {
-          status: false,
-          message: "Validation errors",
-          errors: errors,
-          data: null
-        },
-        { status: 422 }
-      );
-    }
-    
     // Create FormData for external API - forward ALL fields exactly as received
     const externalFormData = new FormData();
 
@@ -154,34 +110,6 @@ async function handleJsonRequest(
 ): Promise<NextResponse> {
   try {
     const body = await request.json();
-
-    // For JSON requests (if your backend accepts JSON for ads with image as base64 or URL)
-    // Validate required fields
-    const requiredFields = ["title", "content", "image"];
-    const missingFields: string[] = [];
-    
-    for (const field of requiredFields) {
-      if (!body[field] || (typeof body[field] === "string" && body[field].trim() === "")) {
-        missingFields.push(field);
-      }
-    }
-
-    if (missingFields.length > 0) {
-      const errors: Record<string, string[]> = {};
-      missingFields.forEach(field => {
-        errors[field] = [`The ${field} field is required.`];
-      });
-      
-      return NextResponse.json(
-        {
-          status: false,
-          message: "Validation errors",
-          errors: errors,
-          data: null
-        },
-        { status: 422 }
-      );
-    }
 
     const response = await axios.post(`${API_BASE_URL}/ads`, body, {
       headers: {

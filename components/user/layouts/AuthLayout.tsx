@@ -36,9 +36,6 @@ const AuthLayout = ({
 }: AuthLayoutProps) => {
   const router = useRouter();
 
-  const handleLanguageSwitch = () => {
-    router.push("./select-language");
-  };
 
   // Common content for both sides
   const welcomeContent = (
@@ -178,26 +175,7 @@ const AuthLayout = ({
         transition={{ duration: 0.6, delay: 0.4 }}
         className="w-full max-w-xs sm:max-w-sm lg:max-w-md lg:w-[400px] xl:w-[450px] space-y-4 sm:space-y-5 lg:space-y-6"
       >
-        {/* Language Selector */}
-        {showLanguageSwitch && (
-          <motion.div
-            variants={fadeInUpVariants}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.6 }}
-            className="flex justify-end"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleLanguageSwitch}
-              className="flex items-center gap-2 text-white text-xs sm:text-sm hover:text-gray-300 transition bg-white/10 rounded-full px-3 py-1.5 sm:px-3 sm:py-2 backdrop-blur-sm"
-            >
-              <Globe className="text-primary-color1 size-3 sm:size-4" />
-              <span className="text-xs sm:text-sm">EN</span>
-            </motion.button>
-          </motion.div>
-        )}
+
 
         {/* Form Content */}
         <motion.div

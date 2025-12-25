@@ -1,24 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import { getSession } from "@/lib/session";
+import { handleAxiosError } from "@/lib/api-error-handler";
 
-const handleAxiosError = (error: any) => {
-  if (axios.isAxiosError(error)) {
-    const statusCode = error.response?.status || 500;
-    const errorResponse = error.response?.data;
-    
-    return NextResponse.json(
-      errorResponse || { error: "API request failed" },
-      { status: statusCode }
-    );
-  }
-  
-  console.error("Non-axios error:", error);
-  return NextResponse.json(
-    { error: "Internal server error" },
-    { status: 500 }
-  );
-};
 
 // GET single city
 export async function GET(

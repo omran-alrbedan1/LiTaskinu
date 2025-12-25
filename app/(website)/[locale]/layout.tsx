@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "LITASKUNU",
   description: "",
   icons: {
-    icon: "/images/logo.png",
+    icon: "/images/logo2.png",
   },
 };
 

@@ -6,7 +6,7 @@ import { Form } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
 import { ICONS } from "@/constants/icons";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
-import { countryOptions, genderOptions } from "@/constants/options";
+import { genderOptions } from "@/constants/options";
 import Image from "next/image";
 import { images } from "@/constants/images";
 import usePostData from "@/hooks/usePostData";
@@ -16,9 +16,21 @@ import CustomFormField, {
 } from "@/components/shared/CustomInput";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import useGetData from "@/hooks/useGetData";
+import { useEffect } from "react";
 
 const RegisterForm = () => {
   const router = useRouter();
+
+  // Force dark mode on mount
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+    document.body.classList.add('dark');
+    
+    return () => {
+      document.documentElement.classList.remove('dark');
+      document.body.classList.remove('dark');
+    };
+  }, []);
 
   const {
     data: countries,
@@ -85,13 +97,11 @@ const RegisterForm = () => {
     },
   });
 
-  // Handle form submission
   async function onSubmit(values: z.infer<typeof RegisterFormValidation>) {
-    // Format date if it's a string
     const formattedValues = {
       ...values,
-      country_id: Number(values.country_id), // Convert to number
-      city_id: Number(values.city_id), // Convert to number
+      country_id: Number(values.country_id),
+      city_id: Number(values.city_id),
       birath_day:
         values.birath_day instanceof Date
           ? values.birath_day.toISOString().split("T")[0]
@@ -108,7 +118,6 @@ const RegisterForm = () => {
 
     if (credential) {
       try {
-        // Use the same hook for Google registration
         await postData({
           googleCredential: credential,
           loginType: "google",
@@ -120,7 +129,8 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="w-full py-12 sm:py-16 lg:py-20 mt-40 sm:mt-48 lg:mt-56 px-4 sm:px-6 lg:px-8 rounded-lg shadow-sm bg-transparent">
+    // Add dark class to root div
+    <div className="w-full py-12 sm:py-16 lg:py-20 mt-40 sm:mt-48 lg:mt-56 px-4 sm:px-6 lg:px-8 rounded-lg shadow-sm bg-transparent dark">
       <div className="text-center mb-6 sm:mb-8">
         <Image
           src={images.logo}
@@ -217,20 +227,19 @@ const RegisterForm = () => {
             iconAlt="email"
           />
 
-          {/* Phone Field */}
-          <div className="text-white">
+          {/* Phone Field - Fixed */}
+          <div className="dark">
             <CustomFormField
               fieldType={FormFieldType.PHONE_INPUT}
               control={form.control}
               name="phone"
               label="Phone Number"
               placeholder="Enter your phone number"
-              inputClassName="!bg-blue-50 !border-blue-300 text-white dark:!bg-blue-900/20"
             />
           </div>
 
           {/* Password Fields */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-3 sm:gap-4">
             <CustomFormField
               control={form.control}
               fieldType={FormFieldType.PASSWORD}

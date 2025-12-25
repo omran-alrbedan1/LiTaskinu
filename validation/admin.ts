@@ -35,3 +35,15 @@ export const stepSchema = z.object({
     .min(1, "Description is required")
     .max(500, "Description cannot exceed 500 characters"),
 });
+
+export const SocialMediaFormValidation = z.object({
+  name: z.string().min(2).max(50),
+  type: z.enum(["social", "contact"]),
+  value: z.string(),
+  icon: z.string().min(1),
+  is_active: z.boolean(), 
+});
+
+export type SocialMediaFormValues = z.infer<
+  typeof SocialMediaFormValidation
+>;

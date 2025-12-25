@@ -1,13 +1,12 @@
 import couple from "../public/images/couple.png";
-import png1 from "../public/images/1.png";
-import png2 from "../public/images/2.png";
 import logo from "../public/images/logo.png";
 import Unknown from "../public/images/default_avatar.jpg";
 import avatar from "../public/images/userTest.jpg";
 import uploadImage from "../public/images/upload-image.png";
 import notifications from "../public/images/notification.png";
 import hero from "../public/images/hero_image.png";
-import logo2 from "../public/images/logo2.png";
+import logo2 from "../public/svg/logo2.svg";
+import litaskunuLogo from "../public/svg/logo1.svg";
 import request from "../public/images/request.png";
 import chatTest from "../public/images/snow-mountain.jpg";
 import emptyResultSearch from "../public/images/search_result.png";
@@ -19,17 +18,16 @@ import landingPage from "../public/images/landing_page.jpg";
 import landingPage2 from "../public/images/landing_page2.jpg";
 import emptyProfileResults from "../public/images/profle not found.png";
 import changePassword from "../public/images/change-password.png";
-import litaskunuLogo from "../public/images/Litaskunu_logo.png";
 import litaskunuLogoWhite from "../public/images/Litaskunu_logo_light.png";
 import landingCouple from "../public/images/landing_couple.png";
 import interest from "../public/images/interest.png";
 import adminLogin from "../public/images/admin-login.jpg";
 import emptySteps from "../public/images/steps.png";
+import aboutUs1 from "../public/images/about-us1.jpg";
+import aboutUs2 from "../public/images/about-us2.jpg";
 
 export const images = {
   couple,
-  png1,
-  png2,
   logo,
   logo2,
   Unknown,
@@ -54,4 +52,6 @@ export const images = {
   interest,
   adminLogin,
   emptySteps,
+  aboutUs1,
+  aboutUs2, 
 };

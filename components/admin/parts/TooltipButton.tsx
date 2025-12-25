@@ -8,7 +8,7 @@ import { ReactNode } from "react";
 
 interface TooltipButtonProps extends ButtonProps {
   tooltipContent: ReactNode;
-  onClick?: () => void;
+  onClick?: () => void; 
   children: ReactNode;
 }
 

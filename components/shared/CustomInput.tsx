@@ -10,10 +10,8 @@ import {
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import ReactCountryFlag from "react-country-flag";
-
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-
 import {
   Select,
   SelectContent,
@@ -25,7 +23,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -119,82 +116,141 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   switch (fieldType) {
     case FormFieldType.INPUT:
       return (
-        <div className="flex rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus-within:ring-2 ring-primary-color1">
+        <div className="flex rounded-md border border-input bg-background focus-within:ring-2 ring-ring">
           {iconSrc && (
             <Image
               src={iconSrc}
               alt={iconAlt || "icon"}
               width={24}
               height={24}
-              className="ml-2 dark:invert"
+              className="ml-2"
             />
           )}
           <FormControl>
             <Input
               {...field}
               placeholder={placeholder}
-              className="border-0 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus-within:border-none focus-within:ring-0 bg-transparent text-gray-900 dark:text-white"
+              className="border-0 placeholder:text-muted-foreground focus:outline-none focus-within:border-none focus-within:ring-0 bg-transparent text-foreground"
             />
           </FormControl>
         </div>
       );
-    case FormFieldType.PASSWORD:
-      return (
-        <div className="flex rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus-within:ring-2 ring-primary-color1">
-          {iconSrc && (
-            <Image
-              src={iconSrc}
-              alt={iconAlt || "icon"}
-              width={20}
-              height={20}
-              className="ml-2 dark:invert"
-            />
-          )}
-          <FormControl>
-            <Input
-              {...field}
-              type={"password"}
-              placeholder={placeholder}
-              className="border-0 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus-within:border-none focus-within:ring-0 bg-transparent text-gray-900 dark:text-white"
-            />
-          </FormControl>
-        </div>
-      );
-    case FormFieldType.PHONE_INPUT:
-      return (
-        <FormControl>
-          <PhoneInput
-            country={"us"}
-            value={field.value}
-            onChange={field.onChange}
-            buttonClass="!h-10 !border-gray-300 dark:!border-gray-600 !bg-white dark:!bg-gray-800 !rounded-l-md !text-gray-900 dark:!text-white"
-            dropdownClass="!bg-white dark:!bg-gray-800 !border-gray-300 dark:!border-gray-600 !text-gray-900 dark:!text-white !shadow-lg"
-            inputClass={cn(
-              "!h-10 !w-full !rounded-md !border-gray-300 dark:!border-gray-600 !bg-white dark:!bg-gray-800 !text-gray-900 dark:!text-white focus:!ring-2 focus:!ring-primary-color1 focus:!border-primary-color1",
-              inputClassName
-            )}
-          />
-        </FormControl>
-      );
-    case FormFieldType.DATE_PICKER:
+case FormFieldType.PASSWORD:
+  const [showPassword, setShowPassword] = React.useState(false);
+  
+  return (
+    <div className="flex rounded-md border border-input bg-background focus-within:ring-2 ring-ring">
+      {iconSrc && (
+        <Image
+          src={iconSrc}
+          alt={iconAlt || "icon"}
+          width={20}
+          height={20}
+          className="ml-2"
+        />
+      )}
+      <FormControl>
+        <Input
+          {...field}
+          type={showPassword ? "text" : "password"}
+          placeholder={placeholder}
+          className="border-0 placeholder:text-muted-foreground focus:outline-none focus-within:border-none focus-within:ring-0 bg-transparent text-foreground pr-10"
+        />
+      </FormControl>
+      <button
+        type="button"
+        onClick={() => setShowPassword(!showPassword)}
+        className="px-3 text-muted-foreground hover:text-foreground"
+      >
+        {showPassword ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
+            <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
+            <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
+            <line x1="2" x2="22" y1="2" y2="22" />
+          </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        )}
+      </button>
+    </div>
+  );
+      case FormFieldType.PHONE_INPUT:
+  return (
+    <FormControl>
+      <PhoneInput
+        country={"us"}
+        value={field.value}
+        onChange={field.onChange}
+        buttonStyle={{
+          backgroundColor: 'rgb(17 24 39)', // bg-gray-900
+          borderColor: 'rgb(75 85 99)', // border-gray-600
+          color: 'rgb(249 250 251)', // text-gray-50
+        }}
+        dropdownStyle={{
+          backgroundColor: 'rgb(17 24 39)', // bg-gray-900
+          borderColor: 'rgb(75 85 99)', // border-gray-600
+          color: 'rgb(249 250 251)', // text-gray-50
+        }}
+        inputStyle={{
+          backgroundColor: 'rgb(17 24 39)', // bg-gray-900
+          borderColor: 'rgb(75 85 99)', // border-gray-600
+          color: 'rgb(249 250 251)', // text-gray-50
+          width: '100%',
+          height: '40px',
+        }}
+        buttonClass="!h-10 !rounded-l-md"
+        dropdownClass="!shadow-lg"
+        inputClass={cn(
+          "!h-10 !w-full !rounded-md focus:!ring-2 focus:!ring-primary-color1",
+          inputClassName
+        )}
+      />
+    </FormControl>
+  );
+    
+  case FormFieldType.DATE_PICKER:
       return (
         <FormControl>
           <Popover>
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className="w-full flex justify-between font-normal border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full flex justify-between font-normal border border-input bg-background hover:bg-accent text-foreground"
               >
                 <span>
                   {field.value ? (
                     format(field.value, "PPP")
                   ) : (
-                    <span className="text-gray-500 dark:text-gray-400">
+                    <span className="text-muted-foreground">
                       {placeholder}
                     </span>
                   )}
                 </span>
-                <CalendarIcon className="h-4 w-4 opacity-50 text-primary-color1" />
+                <CalendarIcon className="h-4 w-4 opacity-50" />
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
@@ -202,10 +258,10 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                 mode="single"
                 selected={field.value}
                 onSelect={field.onChange}
-                className="rounded-lg border shadow-sm bg-white dark:bg-gray-800"
+                className="rounded-lg border shadow-sm bg-background"
                 classNames={{
-                  day_selected: "bg-primary-color1 text-white",
-                  day_today: "border border-primary-color1",
+                  day_selected: "bg-primary text-primary-foreground",
+                  day_today: "border border-primary",
                 }}
               />
             </PopoverContent>
@@ -214,22 +270,21 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
       );
     case FormFieldType.SELECT:
       return (
-        <Select
-          onValueChange={field.onChange}
-          value={field.value?.toString()}
-          defaultValue={field.value?.toString()}
-        >
+     <Select
+  onValueChange={field.onChange}
+  value={field.value}
+>
           <FormControl>
-            <SelectTrigger className="w-full border border-gray-300 dark:border-gray-600 pl-3 rounded-lg h-10 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary-color1 focus:border-primary-color1 text-gray-900 dark:text-white">
+            <SelectTrigger className="w-full border border-input pl-3 rounded-lg h-10 bg-background focus:ring-2 focus:ring-ring focus:border-ring text-foreground">
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
           </FormControl>
-          <SelectContent className="  bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white z-[9999] max-h-60">
+          <SelectContent className="bg-background border-input text-foreground z-[9999] max-h-60">
             {options.map((option) => (
               <SelectItem
                 key={option.value}
                 value={option.value.toString()}
-                className="flex items-center gap-2 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-700"
+                className="flex items-center gap-2 py-2 hover:bg-accent focus:bg-accent"
               >
                 <div className="flex items-center gap-2">
                   {option.code && (
@@ -269,7 +324,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                     <Badge
                       key={value}
                       variant="secondary"
-                      className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-primary-light3 text-primary-color1 border-primary-color1"
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-full"
                     >
                       {option?.icon && (
                         <Image
@@ -295,7 +350,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                           e.stopPropagation();
                           removeSelected(value);
                         }}
-                        className="ml-1 hover:text-red-600"
+                        className="ml-1 hover:text-destructive"
                       >
                         <X className="w-3 h-3" />
                       </button>
@@ -311,8 +366,8 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                   variant="outline"
                   role="combobox"
                   className={cn(
-                    "w-full justify-between border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 h-10 text-gray-900 dark:text-white",
-                    !field.value && "text-gray-500 dark:text-gray-400"
+                    "w-full justify-between border border-input bg-background hover:bg-accent h-10 text-foreground",
+                    !field.value && "text-muted-foreground"
                   )}
                 >
                   <span>
@@ -324,13 +379,13 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-full p-0" align="start">
-                <Command className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg">
+                <Command className="bg-background border border-input rounded-md shadow-lg">
                   <CommandInput
                     placeholder={props.searchPlaceholder || "Search options..."}
-                    className="h-12 text-base border-b border-gray-200 dark:border-gray-700 rounded-t-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                    className="h-12 text-base border-b border-border rounded-t-md bg-background text-foreground"
                   />
                   <CommandList className="max-h-60 overflow-auto">
-                    <CommandEmpty className="py-6 text-center text-gray-500 dark:text-gray-400">
+                    <CommandEmpty className="py-6 text-center text-muted-foreground">
                       No options found.
                     </CommandEmpty>
                     <CommandGroup>
@@ -345,18 +400,18 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                             onSelect={() =>
                               handleMultiSelectChange(option.value)
                             }
-                            className="flex items-center px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 aria-selected:bg-gray-100 dark:aria-selected:bg-gray-700 text-gray-900 dark:text-white"
+                            className="flex items-center px-4 py-3 cursor-pointer hover:bg-accent aria-selected:bg-accent text-foreground"
                           >
                             <div
                               className={cn(
-                                "w-5 h-5 border border-gray-300 dark:border-gray-600 rounded flex items-center justify-center mr-3",
+                                "w-5 h-5 border border-input rounded flex items-center justify-center mr-3",
                                 isSelected
-                                  ? "bg-primary-color1 border-primary-color1"
-                                  : "bg-white dark:bg-gray-800"
+                                  ? "bg-primary border-primary"
+                                  : "bg-background"
                               )}
                             >
                               {isSelected && (
-                                <CheckIcon className="w-3 h-3 text-white" />
+                                <CheckIcon className="w-3 h-3 text-primary-foreground" />
                               )}
                             </div>
                             {option.icon && (
@@ -401,8 +456,8 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                 variant="outline"
                 role="combobox"
                 className={cn(
-                  "w-full justify-between border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white",
-                  !field.value && "text-gray-500 dark:text-gray-400"
+                  "w-full justify-between border border-input bg-background hover:bg-accent text-foreground",
+                  !field.value && "text-muted-foreground"
                 )}
               >
                 {field.value
@@ -413,13 +468,13 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-full p-0" align="start">
-              <Command className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg">
+              <Command className="bg-background border border-input rounded-md shadow-lg">
                 <CommandInput
                   placeholder={props.searchPlaceholder || "Search..."}
-                  className="h-12 text-base border-b border-gray-200 dark:border-gray-700 rounded-t-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                  className="h-12 text-base border-b border-border rounded-t-md bg-background text-foreground"
                 />
                 <CommandList className="max-h-60 overflow-auto">
-                  <CommandEmpty className="py-6 text-center text-gray-500 dark:text-gray-400">
+                  <CommandEmpty className="py-6 text-center text-muted-foreground">
                     No results found.
                   </CommandEmpty>
                   <CommandGroup>
@@ -432,11 +487,11 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                             option.value === field.value ? "" : option.value
                           );
                         }}
-                        className="flex items-center px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 aria-selected:bg-primary-color1 aria-selected:text-white text-gray-900 dark:text-white"
+                        className="flex items-center px-4 py-3 cursor-pointer hover:bg-accent aria-selected:bg-primary aria-selected:text-primary-foreground text-foreground"
                       >
                         <CheckIcon
                           className={cn(
-                            "mr-3 h-5 w-5 text-primary-color1",
+                            "mr-3 h-5 w-5",
                             field.value === option.value
                               ? "opacity-100"
                               : "opacity-0"
@@ -480,7 +535,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             placeholder={placeholder}
             {...field}
             rows={5}
-            className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:ring-2 focus:ring-primary-color1"
+            className="border border-input bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
             disabled={props.disabled}
           />
         </FormControl>
@@ -493,11 +548,11 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
               id={props.name}
               checked={field.value}
               onCheckedChange={field.onChange}
-              className="border-gray-300 dark:border-gray-600 data-[state=checked]:bg-primary-color1"
+              className="border-input data-[state=checked]:bg-primary"
             />
             <Label
               htmlFor={props.name}
-              className="checkbox-label text-gray-900 dark:text-white"
+              className="checkbox-label text-foreground"
             >
               {props.label}
             </Label>
@@ -520,11 +575,11 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                 <RadioGroupItem
                   value={option.value}
                   id={`${props.name}-${option.value}`}
-                  className="border-gray-300 dark:border-gray-600 text-primary-color1"
+                  className="border-input text-primary"
                 />
                 <Label
                   htmlFor={`${props.name}-${option.value}`}
-                  className="cursor-pointer text-sm text-gray-900 dark:text-white"
+                  className="cursor-pointer text-sm text-foreground"
                 >
                   {option.label}
                 </Label>
@@ -553,13 +608,13 @@ const CustomFormField = (props: CustomProps) => {
             label &&
             (required ? (
               <p className="flex items-center gap-1">
-                <FormLabel className="mb-2 text-gray-900 dark:text-white">
+                <FormLabel className="mb-2 text-foreground">
                   {label}
                 </FormLabel>
-                <span className="text-red-500 text-xl -mt-1">*</span>
+                <span className="text-destructive text-xl -mt-1">*</span>
               </p>
             ) : (
-              <FormLabel className="mb-2 text-gray-900 dark:text-white">
+              <FormLabel className="mb-2 text-foreground">
                 {label}
               </FormLabel>
             ))}
@@ -568,13 +623,13 @@ const CustomFormField = (props: CustomProps) => {
             label &&
             (required ? (
               <p className="flex items-center gap-1 mb-3">
-                <FormLabel className="text-gray-900 dark:text-white">
+                <FormLabel className="text-foreground">
                   {label}
                 </FormLabel>
-                <span className="text-red-500 text-xl -mt-1">*</span>
+                <span className="text-destructive text-xl -mt-1">*</span>
               </p>
             ) : (
-              <FormLabel className="mb-3 text-gray-900 dark:text-white">
+              <FormLabel className="mb-3 text-foreground">
                 {label}
               </FormLabel>
             ))}
@@ -583,13 +638,13 @@ const CustomFormField = (props: CustomProps) => {
             label &&
             (required ? (
               <p className="flex items-center gap-1 mb-3">
-                <FormLabel className="text-gray-900 dark:text-white">
+                <FormLabel className="text-foreground">
                   {label}
                 </FormLabel>
-                <span className="text-red-500 text-xl -mt-1">*</span>
+                <span className="text-destructive text-xl -mt-1">*</span>
               </p>
             ) : (
-              <FormLabel className="mb-3 text-gray-900 dark:text-white">
+              <FormLabel className="mb-3 text-foreground">
                 {label}
               </FormLabel>
             ))}
@@ -598,10 +653,10 @@ const CustomFormField = (props: CustomProps) => {
             <div className="mb-2">
               {required && label && (
                 <p className="flex items-center gap-1 mb-2">
-                  <span className="text-sm font-medium text-gray-900 dark:text-white">
+                  <span className="text-sm font-medium text-foreground">
                     {label}
                   </span>
-                  <span className="text-red-500 text-xl -mt-1">*</span>
+                  <span className="text-destructive text-xl -mt-1">*</span>
                 </p>
               )}
             </div>
@@ -610,7 +665,7 @@ const CustomFormField = (props: CustomProps) => {
           <FormControl>
             <RenderField field={field} props={props} />
           </FormControl>
-          <FormMessage className="text-red-500 dark:text-red-400 mt-1" />
+          <FormMessage className="text-destructive mt-1" />
         </FormItem>
       )}
     />

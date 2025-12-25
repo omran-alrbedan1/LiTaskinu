@@ -392,8 +392,8 @@ const Header: React.FC = () => {
           <div className="flex items-center -my-6 space-x-2">
             <Image
               src={images.logo2}
-              height={80}
-              width={80}
+              height={60}
+              width={60}
               alt="logo"
               priority
             />

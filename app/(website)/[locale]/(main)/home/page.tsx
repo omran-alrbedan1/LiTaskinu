@@ -66,12 +66,12 @@ const HomePage = () => {
   }, [filters]);
 
   return (
-    <div className="max-h-screen pb-32 custom-scrollbar sidebar-scrollbar overflow-auto bg-gray-50">
+    <div className=" pb-32  bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-6">
         <FilterSection filters={filters} onFiltersChange={setFilters} />
 
         {/* Profile Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 xl:grid-cols-6 gap-6 mt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 xl:grid-cols-6 gap-6 mt-6 h-full">
           {filteredProfiles.map((profile, index) => (
             <motion.div
               key={profile.id}

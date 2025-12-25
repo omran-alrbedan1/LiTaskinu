@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Calendar,
   Globe,
-  Image as ImageIcon, 
+  Image as ImageIcon,
   Clock, TrendingUp, Globe2, MoreVertical,
   Edit,
   Trash2
@@ -150,7 +150,7 @@ const AdDetailPage = () => {
                       <div className="absolute top-0 left-0 z-50 m-2">
                         {
                           ad.is_premium &&
-                           <CustomPremiumIcon
+                          <CustomPremiumIcon
                             size={58}
                             variant={'floating'}
                             animation={'sparkle'}
@@ -349,13 +349,13 @@ const AdDetailPage = () => {
                   </div>
                   <div className="space-y-1">
                     <p className="text-xs text-gray-500">Type</p>
-                      <StatusBadge 
-    status={ad.is_premium ? "Premium" : "Standard"} 
-    variant={ad.is_premium ? "premium" : "standard"} 
-    size="sm" 
-    showIcon 
-    className="px-3 py-1.5"
-  />
+                    <StatusBadge
+                      status={ad.is_premium ? "Premium" : "Standard"}
+                      variant={ad.is_premium ? "premium" : "standard"}
+                      size="sm"
+                      showIcon
+                      className="px-3 py-1.5"
+                    />
                   </div>
                 </div>
 
@@ -389,12 +389,12 @@ const AdDetailPage = () => {
                     <span className="text-sm font-medium text-gray-700">
                       Current Status
                     </span>
-                       <StatusBadge 
-      status={ad.status} 
-      size="sm" 
-      showIcon 
-      className="px-3 py-1.5"
-    />
+                    <StatusBadge
+                      status={ad.status}
+                      size="sm"
+                      showIcon
+                      className="px-3 py-1.5"
+                    />
                   </div>
                 </div>
               </CardContent>

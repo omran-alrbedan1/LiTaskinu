@@ -58,7 +58,7 @@ const usePutData = <T = any>(
       setSuccess(false);
 
       try {
-   const finalUrl = id ? `${url}/${id}` : url;
+        const finalUrl = id ? `${url}/${id}` : url;
 
         const response = await axios<T>({
           url: finalUrl,
@@ -93,7 +93,7 @@ const usePutData = <T = any>(
           if (responseData.status === false && responseData.errors) {
             const validationErrors = responseData.errors;
             setValidationErrors(validationErrors);
-            
+
             if (showNotifications) {
               // Show each validation error as separate notification
               Object.entries(validationErrors).forEach(([field, messages]) => {
@@ -107,17 +107,17 @@ const usePutData = <T = any>(
                 });
               });
             }
-            
+
             onValidationError?.(validationErrors);
             onError?.(responseData.message || "Validation failed");
             return null;
           }
-          
+
           // Case 2: Regular error message
           if (responseData.message) {
             const errorMsg = responseData.message;
             setError(errorMsg);
-            
+
             if (showNotifications) {
               notification.error({
                 message: "Error",
@@ -126,16 +126,16 @@ const usePutData = <T = any>(
                 duration: 5,
               });
             }
-            
+
             onError?.(errorMsg);
             return null;
           }
-          
+
           // Case 3: Error in error field
           if (responseData.error) {
             const errorMsg = responseData.error;
             setError(errorMsg);
-            
+
             if (showNotifications) {
               notification.error({
                 message: "Error",
@@ -144,7 +144,7 @@ const usePutData = <T = any>(
                 duration: 5,
               });
             }
-            
+
             onError?.(errorMsg);
             return null;
           }
@@ -153,7 +153,7 @@ const usePutData = <T = any>(
         // Default error
         const defaultError = axiosError.message || errorMessage;
         setError(defaultError);
-        
+
         if (showNotifications) {
           notification.error({
             message: "Error",
@@ -162,7 +162,7 @@ const usePutData = <T = any>(
             duration: 5,
           });
         }
-        
+
         onError?.(defaultError);
         return null;
       } finally {
@@ -190,13 +190,13 @@ const usePutData = <T = any>(
     setLoading(false);
   }, []);
 
-  return { 
-    putData, 
-    loading, 
-    error, 
+  return {
+    putData,
+    loading,
+    error,
     validationErrors,
-    success, 
-    reset 
+    success,
+    reset
   };
 };
 

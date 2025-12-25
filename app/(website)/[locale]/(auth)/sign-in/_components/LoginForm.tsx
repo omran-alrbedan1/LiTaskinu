@@ -63,12 +63,12 @@ export const LoginForm = () => {
     // or use a package like next-auth
     console.log("Google login clicked");
 
-    // If using NextAuth.js:
+    // If using NextAuth.js
     // signIn('google', { callbackUrl: '/dashboard' });
   };
 
   return (
-    <div className="w-full p-8 bg-transparent rounded-lg  ">
+    <div className="w-full dark p-8 bg-transparent rounded-lg  ">
       <div className="text-center mb-6">
         <h2 className="text-2xl font-bold text-white">Welcome Back</h2>
         <p className="text-gray-300 mt-2">Sign in to your account</p>
