@@ -47,3 +47,12 @@ export const SocialMediaFormValidation = z.object({
 export type SocialMediaFormValues = z.infer<
   typeof SocialMediaFormValidation
 >;
+
+
+export const FAQFormValidation = z.object({
+  question: z.string().min(5, "Question must be at least 5 characters"),
+  answer: z.string().min(10, "Answer must be at least 10 characters"),
+  is_active: z.boolean().default(true),
+});
+
+export type FAQFormValues = z.infer<typeof FAQFormValidation>;

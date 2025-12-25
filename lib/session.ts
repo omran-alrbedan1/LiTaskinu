@@ -205,10 +205,3 @@ export async function updateSession(
   await createSession(updatedSession, type);
   return updatedSession;
 }
-
-/**
- * Helper to get the appropriate session cookie name based on path
- */
-export function getSessionCookieName(pathname: string): SessionType {
-  return pathname.startsWith("/admin") ? "admin" : "user";
-}

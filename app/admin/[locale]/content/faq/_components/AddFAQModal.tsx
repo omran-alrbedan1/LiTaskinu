@@ -1,25 +1,33 @@
-// app/admin/social-media/_components/AddSocialMediaModal.tsx
 "use client";
 
 import { Modal } from "antd";
 import { Plus } from "lucide-react";
-import { SocialMediaForm } from "./SocialMediaForm";
+import FAQForm from "./FAQForm";
 
-interface AddSocialMediaModalProps {
+interface FAQ {
+  id: number;
+  question: string;
+  answer: string;
+  is_active: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
+
+interface AddFAQModalProps {
   open: boolean;
   onClose: () => void;
-  onAddSocialMedia: (data: SocialMedia) => Promise<void>;
+  onAddFAQ: (data: FAQ) => Promise<void>;
   isLoading?: boolean;
 }
 
-export function AddSocialMediaModal({
+export function AddFAQModal({
   open,
   onClose,
-  onAddSocialMedia,
+  onAddFAQ,
   isLoading = false,
-}: AddSocialMediaModalProps) {
-  const handleSubmit = async (data: SocialMedia) => {
-    await onAddSocialMedia(data);
+}: AddFAQModalProps) {
+  const handleSubmit = async (data: FAQ) => {
+    await onAddFAQ(data);
   };
 
   const handleCancel = () => {
@@ -35,10 +43,10 @@ export function AddSocialMediaModal({
           </div>
           <div>
             <span className="text-xl font-bold text-gray-900">
-              Add New Contact Link
+              Add New FAQ
             </span>
             <p className="text-sm text-gray-500 mt-1">
-              Add a new social media or contact link
+              Add a new frequently asked question
             </p>
           </div>
         </div>
@@ -56,7 +64,7 @@ export function AddSocialMediaModal({
     >
       <div className="px-6 pb-6">
         <div className="mt-6">
-          <SocialMediaForm
+          <FAQForm
             onSubmit={handleSubmit}
             onCancel={handleCancel}
             isLoading={isLoading}

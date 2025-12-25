@@ -1,25 +1,28 @@
-// app/admin/social-media/_components/AddSocialMediaModal.tsx
 "use client";
 
 import { Modal } from "antd";
-import { Plus } from "lucide-react";
-import { SocialMediaForm } from "./SocialMediaForm";
+import { Edit } from "lucide-react";
+import FAQForm from "./FAQForm";
 
-interface AddSocialMediaModalProps {
+interface EditFAQModalProps {
   open: boolean;
   onClose: () => void;
-  onAddSocialMedia: (data: SocialMedia) => Promise<void>;
+  onEditFAQ: (data: FAQ, id: number) => Promise<void>;
   isLoading?: boolean;
+  editingFAQ?: FAQ | null;
 }
 
-export function AddSocialMediaModal({
+export function EditFAQModal({
   open,
   onClose,
-  onAddSocialMedia,
+  onEditFAQ,
   isLoading = false,
-}: AddSocialMediaModalProps) {
-  const handleSubmit = async (data: SocialMedia) => {
-    await onAddSocialMedia(data);
+  editingFAQ,
+}: EditFAQModalProps) {
+  const handleSubmit = async (data: FAQ) => {
+    if (editingFAQ?.id) {
+      await onEditFAQ(data, editingFAQ.id);
+    }
   };
 
   const handleCancel = () => {
@@ -30,15 +33,15 @@ export function AddSocialMediaModal({
     <Modal
       title={
         <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-8 h-8 bg-primary-light2 rounded-lg">
-            <Plus className="w-5 h-5 text-primary-color1" />
+          <div className="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-lg">
+            <Edit className="w-5 h-5 text-blue-600" />
           </div>
           <div>
             <span className="text-xl font-bold text-gray-900">
-              Add New Contact Link
+              Edit FAQ
             </span>
             <p className="text-sm text-gray-500 mt-1">
-              Add a new social media or contact link
+              Update frequently asked question information
             </p>
           </div>
         </div>
@@ -56,10 +59,13 @@ export function AddSocialMediaModal({
     >
       <div className="px-6 pb-6">
         <div className="mt-6">
-          <SocialMediaForm
+          <FAQForm
+            key={editingFAQ?.id}
             onSubmit={handleSubmit}
             onCancel={handleCancel}
             isLoading={isLoading}
+            initialData={editingFAQ}
+            isEdit
           />
         </div>
       </div>
