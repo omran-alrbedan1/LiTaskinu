@@ -29,7 +29,7 @@ const config: Config = {
           light2: "#e8ebe4",
           light3: "#f8f9f7",
           hover: "#838C6E",
-          color3: "#FFFFFF",
+          color3: "#e3c87f",
           color4: "#E0E0E0",
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

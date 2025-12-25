@@ -74,7 +74,7 @@ const AuthLayout = ({
           initial="hidden"
           animate="visible"
           transition={{ delay: 0.6 }}
-          className="text-2xl lg:text-3xl xl:text-4xl font-bold text-yellow-400 mb-4 lg:mb-6"
+          className="text-2xl lg:text-3xl xl:text-4xl font-bold text-primary-color3 mb-4 lg:mb-6"
         >
           {title}
         </motion.h1>
@@ -83,7 +83,7 @@ const AuthLayout = ({
           initial="hidden"
           animate="visible"
           transition={{ delay: 0.8 }}
-          className="text-yellow-400 text-sm lg:text-base leading-relaxed"
+          className="text-primary-color3 text-sm lg:text-base leading-relaxed"
         >
           {description}
         </motion.p>
@@ -152,10 +152,10 @@ const AuthLayout = ({
         variants={mobileItemVariants}
         className="text-center mb-4 sm:mb-6 px-2"
       >
-        <h1 className="text-lg sm:text-xl font-bold text-yellow-400 mb-2 sm:mb-3">
+        <h1 className="text-lg sm:text-xl font-bold text-primary-color3 mb-2 sm:mb-3">
           {title}
         </h1>
-        <p className="text-yellow-400 text-xs sm:text-sm leading-relaxed max-w-xs sm:max-w-md">
+        <p className="text-primary-color3 text-xs sm:text-sm leading-relaxed max-w-xs sm:max-w-md">
           {description}
         </p>
       </motion.div>
