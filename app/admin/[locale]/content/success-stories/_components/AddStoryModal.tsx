@@ -2,23 +2,24 @@
 
 import { Modal } from "antd";
 import { Plus } from "lucide-react";
-import FAQForm from "./FAQForm";
+import StoryForm from "./StoryForm";
 
-interface AddFAQModalProps {
+interface AddStoryModalProps {
   open: boolean;
   onClose: () => void;
-  onAddFAQ: (data: FAQ) => Promise<void>;
+  onAddStory: (data: any) => Promise<void>;
   isLoading?: boolean;
 }
 
-export function AddFAQModal({
+export function AddStoryModal({
   open,
   onClose,
-  onAddFAQ,
+  onAddStory,
   isLoading = false,
-}: AddFAQModalProps) {
-  const handleSubmit = async (data: FAQ) => {
-    await onAddFAQ(data);
+}: AddStoryModalProps) {
+  const handleSubmit = async (data: any) => {
+    console.log(data);
+    await onAddStory(data);
   };
 
   const handleCancel = () => {
@@ -29,15 +30,15 @@ export function AddFAQModal({
     <Modal
       title={
         <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-8 h-8 bg-primary-light2 rounded-lg">
+          <div className="flex items-center justify-center w-8 h-8 bg-primary-color1/80 rounded-lg">
             <Plus className="w-5 h-5 text-primary-color1" />
           </div>
           <div>
             <span className="text-xl font-bold text-gray-900">
-              Add New FAQ
+              Add New Success Story
             </span>
             <p className="text-sm text-gray-500 mt-1">
-              Add a new frequently asked question
+              Share an inspiring story of a couple who found love
             </p>
           </div>
         </div>
@@ -45,7 +46,7 @@ export function AddFAQModal({
       open={open}
       onCancel={handleCancel}
       footer={null}
-      width={800}
+      width={900}
       centered
       styles={{
         body: { padding: 0 },
@@ -55,7 +56,7 @@ export function AddFAQModal({
     >
       <div className="px-6 pb-6">
         <div className="mt-6">
-          <FAQForm
+          <StoryForm
             onSubmit={handleSubmit}
             onCancel={handleCancel}
             isLoading={isLoading}

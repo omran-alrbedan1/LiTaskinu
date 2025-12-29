@@ -25,6 +25,8 @@ import adminLogin from "../public/images/admin-login.jpg";
 import emptySteps from "../public/images/steps.png";
 import aboutUs1 from "../public/images/about-us1.jpg";
 import aboutUs2 from "../public/images/about-us2.jpg";
+import FAQs from "../public/images/FAQs.png";
+import successStory from "../public/images/successStory.png";
 
 export const images = {
   couple,
@@ -54,4 +56,6 @@ export const images = {
   emptySteps,
   aboutUs1,
   aboutUs2, 
+  FAQs,
+  successStory,
 };

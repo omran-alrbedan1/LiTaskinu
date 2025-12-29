@@ -1,5 +1,4 @@
     "use client";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -41,13 +40,14 @@ export function SocialMediaForm({
 
 const form = useForm<SocialMediaFormValues>({
   resolver: zodResolver(SocialMediaFormValidation),
+  //@ts-ignore
   values: isEdit && initialData
     ? {
         name: initialData.name,
         type: initialData.type as "social" | "contact",
         value: initialData.value,
         icon: initialData.icon,
-        is_active: initialData.is_active,
+        is_active: initialData.is_active?"true":"false",
       }
     : {
         name: "",
@@ -108,6 +108,7 @@ const handleSubmit: SubmitHandler<SocialMediaFormValues> = async (values) => {
 
   return (
     <Form {...form}>
+      {/* @ts-ignore */}
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         {/* Basic Info */}
         <Card className="border-blue-100 bg-blue-50/20">

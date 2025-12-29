@@ -21,16 +21,15 @@ const useGetData = <T = any>({
   ...axiosConfig
 }: UseGetDataProps & AxiosRequestConfig): UseGetDataReturn<T> => {
   const [data, setData] = useState<T | null>(initialData);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true); 
   const [error, setError] = useState<string | null>(null);
+  const [isInitialFetch, setIsInitialFetch] = useState<boolean>(true);
 
   const lastUrlRef = useRef<string>("");
 
   const fetchData = useCallback(async () => {
     if (!enabled || !url) return;
 
-    // prevent double fetch if URL not changed
-    if (lastUrlRef.current === url) return;
     lastUrlRef.current = url;
 
     setLoading(true);
@@ -55,16 +54,24 @@ const useGetData = <T = any>({
       setError(backendError);
     } finally {
       setLoading(false);
+      setIsInitialFetch(false);
     }
-  }, [url, enabled]);
+  }, [url, enabled, isInitialFetch]);
+
+  useEffect(() => {
+    if (enabled && url) {
+      setLoading(true);
+    }
+  }, [enabled, url]);
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
   const refetch = useCallback(() => {
-    // allow refetch even if URL didn’t change
+    setIsInitialFetch(true);
     lastUrlRef.current = "";
+    setLoading(true);
     fetchData();
   }, [fetchData]);
 

@@ -36,7 +36,10 @@ const EmptyState: React.FC<EmptyStateProps> = ({
       <p className="text-gray-500 dark:text-gray-400 mb-4">
         {description || defaultDescription}
       </p>
+      <div className=" flex  justify-center">
+
       {action}
+      </div>
     </div>
   );
 };

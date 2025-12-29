@@ -41,18 +41,30 @@ export const SocialMediaFormValidation = z.object({
   type: z.enum(["social", "contact"]),
   value: z.string(),
   icon: z.string().min(1),
-  is_active: z.boolean(), 
+   is_active: z.enum(["true", "false"]),
+
 });
 
 export type SocialMediaFormValues = z.infer<
   typeof SocialMediaFormValidation
 >;
 
-
 export const FAQFormValidation = z.object({
   question: z.string().min(5, "Question must be at least 5 characters"),
-  answer: z.string().min(10, "Answer must be at least 10 characters"),
-  is_active: z.boolean().default(true),
+  answer: z.string().min(5, "Answer must be at least 5 characters"),
+  is_active: z.enum(["true", "false"]),
 });
 
 export type FAQFormValues = z.infer<typeof FAQFormValidation>;
+
+
+export const SuccessStoryFormValidation = z.object({
+  name_male: z.string().min(1, "Male name is required"),
+  name_female: z.string().min(1, "Female name is required"),
+  description: z.string().min(1, "Description is required"),
+  testimonial: z.string(),
+  rating: z.string().min(1, "Rating is required"),
+  country_id: z.string().min(1, "Country is required"),
+  city_id: z.string().min(1, "City is required"),
+});
+export type SuccessStoryFormValues = z.infer<typeof SuccessStoryFormValidation>;

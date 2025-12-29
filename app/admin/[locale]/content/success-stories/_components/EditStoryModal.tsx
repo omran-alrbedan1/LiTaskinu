@@ -1,43 +1,46 @@
 "use client";
 
 import { Modal } from "antd";
-import { Plus } from "lucide-react";
-import FAQForm from "./FAQForm";
+import { Edit } from "lucide-react";
+import StoryForm from "./StoryForm";
 
-interface AddFAQModalProps {
+interface EditStoryModalProps {
   open: boolean;
   onClose: () => void;
-  onAddFAQ: (data: FAQ) => Promise<void>;
+  onEditStory: (data: any) => Promise<void>;
   isLoading?: boolean;
+  editingStory?: any | null;
 }
 
-export function AddFAQModal({
+export function EditStoryModal({
   open,
   onClose,
-  onAddFAQ,
+  onEditStory,
   isLoading = false,
-}: AddFAQModalProps) {
-  const handleSubmit = async (data: FAQ) => {
-    await onAddFAQ(data);
+  editingStory,
+}: EditStoryModalProps) {
+  const handleSubmit = async (data: any) => {
+    await onEditStory(data);
   };
 
   const handleCancel = () => {
     onClose();
   };
+  console.log(editingStory)
 
   return (
     <Modal
       title={
         <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-8 h-8 bg-primary-light2 rounded-lg">
-            <Plus className="w-5 h-5 text-primary-color1" />
+          <div className="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-lg">
+            <Edit className="w-5 h-5 text-blue-600" />
           </div>
           <div>
             <span className="text-xl font-bold text-gray-900">
-              Add New FAQ
+              Edit Success Story
             </span>
             <p className="text-sm text-gray-500 mt-1">
-              Add a new frequently asked question
+              Update the success story information
             </p>
           </div>
         </div>
@@ -45,7 +48,7 @@ export function AddFAQModal({
       open={open}
       onCancel={handleCancel}
       footer={null}
-      width={800}
+      width={900}
       centered
       styles={{
         body: { padding: 0 },
@@ -55,10 +58,12 @@ export function AddFAQModal({
     >
       <div className="px-6 pb-6">
         <div className="mt-6">
-          <FAQForm
+          <StoryForm
+            key={editingStory?.id}
             onSubmit={handleSubmit}
             onCancel={handleCancel}
-            isLoading={isLoading}
+            initialData={editingStory}
+            isEdit
           />
         </div>
       </div>
