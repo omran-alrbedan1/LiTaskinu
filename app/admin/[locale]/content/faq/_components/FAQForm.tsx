@@ -28,20 +28,19 @@ const FAQForm = ({
   initialData,
   isEdit = false,
 }: FAQFormProps) => {
- const form = useForm<FAQFormValues>({
+const form = useForm<FAQFormValues>({
   resolver: zodResolver(FAQFormValidation),
-  defaultValues: {
-    question: "",
-    answer: "",
-    is_active: "true",
-  },
-  values: isEdit && initialData
+  defaultValues: isEdit && initialData
     ? {
         question: initialData.question,
         answer: initialData.answer,
         is_active: initialData.is_active ? "true" : "false",
       }
-    : undefined,
+    : {
+        question: "",
+        answer: "",
+        is_active: "true",
+      },
 });
 
 
