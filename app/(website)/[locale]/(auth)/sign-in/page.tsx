@@ -1,4 +1,4 @@
-import AuthLayout from "@/components/user/layouts/AuthLayout";
+import AuthLayout from "@/components/website/layouts/AuthLayout";
 import React from "react";
 import LoginForm from "./_components/LoginForm";
 

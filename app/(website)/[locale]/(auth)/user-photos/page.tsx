@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import UserPhotoForm from "@/components/user/forms/UserPhotoForm";
-import AuthLayout from "@/components/user/layouts/AuthLayout";
+import UserPhotoForm from "@/components/website/forms/UserPhotoForm";
+import AuthLayout from "@/components/website/layouts/AuthLayout";
 
 const SelectUserPhoto = () => {
   return (

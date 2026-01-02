@@ -43,20 +43,20 @@ const STATS = [
 
 const Page = () => {
   return (
-    <div className="">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Header Section */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 text-center">
         <div className="inline-block mb-4 sm:mb-6">
-          <span className="px-4 sm:px-6 py-2 bg-white rounded-full text-xs sm:text-sm text-gray-600 shadow-sm border border-gray-200">
+          <span className="px-4 sm:px-6 py-2 bg-white dark:bg-gray-800 rounded-full text-xs sm:text-sm text-gray-600 dark:text-gray-300 shadow-sm border border-gray-200 dark:border-gray-700">
             Halal Matchmaking Platform
           </span>
         </div>
         
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4 sm:mb-6">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-4 sm:mb-6">
           About LITASKUNU
         </h1>
         
-        <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
+        <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
           We help Muslims find their life partners through a halal, dignified, and modern approach
           to matchmaking. For years, NikahConnect has been bringing together compatible
           individuals seeking meaningful Islamic marriages.
@@ -65,21 +65,21 @@ const Page = () => {
 
       {/* Mission Section */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        <div className="bg-gray-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12">
+        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12">
           <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             {/* Left Content */}
             <div className="order-2 lg:order-1">
               <div className="inline-block mb-4 sm:mb-6">
-                <span className="px-4 sm:px-5 py-2 bg-white rounded-full text-xs sm:text-sm text-gray-600 border border-gray-200">
+                <span className="px-4 sm:px-5 py-2 bg-white dark:bg-gray-800 rounded-full text-xs sm:text-sm text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
                   Our Purpose
                 </span>
               </div>
               
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4 sm:mb-6">
                 Our Mission
               </h2>
               
-              <p className="text-gray-600 leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">
                 To facilitate meaningful connections between Muslims seeking
                 marriage, while upholding Islamic values and principles. We
                 believe that finding a righteous spouse is half of one's faith, and
@@ -91,11 +91,11 @@ const Page = () => {
                 {CHECKLIST_ITEMS.map((item, index) => (
                   <div key={index} className="flex items-start gap-3">
                     <div className="mt-1 flex-shrink-0">
-                      <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">
-                        <Check className="w-3 h-3 text-green-600" />
+                      <div className="w-5 h-5 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                        <Check className="w-3 h-3 text-green-600 dark:text-green-400" />
                       </div>
                     </div>
-                    <p className="text-gray-700 text-sm sm:text-base">
+                    <p className="text-gray-700 dark:text-gray-300 text-sm sm:text-base">
                       {item}
                     </p>
                   </div>
@@ -105,13 +105,13 @@ const Page = () => {
 
             {/* Right Image */}
             <div className="order-1 lg:order-2 relative w-full">
-              <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg sm:shadow-xl">
+              <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg sm:shadow-xl dark:shadow-gray-900">
                 <Image
                   src={IMAGES.FAMILY}
                   alt="Muslim family spending time together"
-                  className=" h-96 w-full object-cover"
+                  className="h-96 w-full object-cover"
                   loading="lazy"
-                  width={300}
+                  width={600}
                   height={400}
                 />
               </div>
@@ -124,16 +124,16 @@ const Page = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16">
         <div className="text-center mb-8 sm:mb-12">
           <div className="inline-block mb-4 sm:mb-6">
-            <span className="px-4 sm:px-6 py-2 bg-white rounded-full text-xs sm:text-sm text-gray-600 shadow-sm border border-gray-200">
+            <span className="px-4 sm:px-6 py-2 bg-white dark:bg-gray-800 rounded-full text-xs sm:text-sm text-gray-600 dark:text-gray-300 shadow-sm border border-gray-200 dark:border-gray-700">
               What We Offer
             </span>
           </div>
           
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">
             Our Services
           </h2>
           
-          <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
+          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-sm sm:text-base px-4">
             Comprehensive support on your journey to finding a righteous spouse, guided by
             Islamic principles.
           </p>
@@ -144,14 +144,14 @@ const Page = () => {
           {SERVICES.map((service, index) => {
             const Icon = service.icon;
             return (
-              <div key={index} className=" rounded-xl sm:rounded-2xl p-6 sm:p-8 text-center shadow-md hover:shadow-md transition-shadow">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                  <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+              <div key={index} className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-6 sm:p-8 text-center shadow-md dark:shadow-gray-900 hover:shadow-lg dark:hover:shadow-gray-800 transition-shadow border border-gray-100 dark:border-gray-700">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-color1/10 dark:bg-primary-color1/20 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                  <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary-color1 dark:text-primary-color1" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2 sm:mb-3">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm leading-relaxed">
                   {service.description}
                 </p>
               </div>
@@ -164,27 +164,27 @@ const Page = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16">
         <div className="text-center mb-8 sm:mb-12">
           <div className="inline-block mb-4 sm:mb-6">
-            <span className="px-4 sm:px-6 py-2 bg-white rounded-full text-xs sm:text-sm text-gray-600 shadow-sm border border-gray-200">
+            <span className="px-4 sm:px-6 py-2 bg-white dark:bg-gray-800 rounded-full text-xs sm:text-sm text-gray-600 dark:text-gray-300 shadow-sm border border-gray-200 dark:border-gray-700">
               Our Impact
             </span>
           </div>
           
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">
             Trusted by the Community
           </h2>
           
-          <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
+          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-sm sm:text-base px-4">
             Our platform is built on trust, dedication, and commitment to helping Muslims find
             their compatible life partners.
           </p>
         </div>
 
         {/* Success Stories */}
-        <div className="bg-gray-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12">
+        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12">
           <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             {/* Left Image */}
             <div className="order-1 lg:order-1 relative w-full">
-              <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg sm:shadow-xl">
+              <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg sm:shadow-xl dark:shadow-gray-900">
                 <Image
                   src={IMAGES.WEDDING}
                   alt="Wedding rings symbolizing successful matches"
@@ -198,10 +198,10 @@ const Page = () => {
 
             {/* Right Content */}
             <div className="order-2 lg:order-2">
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">
                 Success Stories
               </h3>
-              <p className="text-gray-600 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
+              <p className="text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
                 Alhamdulillah, we've helped thousands of Muslims find their life partners through our halal and dignified matchmaking platform.
               </p>
 
@@ -209,10 +209,10 @@ const Page = () => {
               <div className="grid grid-cols-2 gap-4 sm:gap-6">
                 {STATS.map((stat, index) => (
                   <div key={index} className="text-center">
-                    <div className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+                    <div className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-1">
                       {stat.value}
                     </div>
-                    <div className="text-xs sm:text-sm text-gray-600">
+                    <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                       {stat.label}
                     </div>
                   </div>
@@ -226,21 +226,21 @@ const Page = () => {
       {/* CTA Section */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16">
         <div className="text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">
             Ready to Begin Your Journey?
           </h2>
           
-          <p className="text-gray-600 max-w-2xl mx-auto mb-6 sm:mb-8 text-sm sm:text-base px-4">
+          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-6 sm:mb-8 text-sm sm:text-base px-4">
             Take the first step towards completing half your deen. Join our trusted Islamic
             matchmaking platform today.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-            <Button className="w-full sm:w-auto px-6 sm:px-8 py-5 rounded-full bg-primary-color1 hover:bg-primary-color1/20 text-white font-medium transition-colors">
+            <Button className="w-full sm:w-auto px-6 sm:px-8 py-5 rounded-full bg-primary-color1 hover:bg-primary-color2 dark:hover:bg-primary-color2 text-white font-medium transition-colors">
               Create your profile
             </Button>
-            <Button className="w-full sm:w-auto px-6 sm:px-8 py-5 bg-white hover:bg-gray-50 text-gray-700 font-medium rounded-full transition-colors border border-gray-300">
+            <Button className="w-full sm:w-auto px-6 sm:px-8 py-5 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium rounded-full transition-colors border border-gray-300 dark:border-gray-600">
               Learn More
             </Button>
           </div>

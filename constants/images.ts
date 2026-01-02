@@ -27,6 +27,7 @@ import aboutUs1 from "../public/images/about-us1.jpg";
 import aboutUs2 from "../public/images/about-us2.jpg";
 import FAQs from "../public/images/FAQs.png";
 import successStory from "../public/images/successStory.png";
+import privacyPolicy from "../public/images/Privacy-policy.png";
 
 export const images = {
   couple,
@@ -58,4 +59,5 @@ export const images = {
   aboutUs2, 
   FAQs,
   successStory,
+  privacyPolicy
 };

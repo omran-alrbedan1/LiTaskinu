@@ -1,7 +1,7 @@
 "use client";
-import VerifiyResetCodeForm from "@/components/user/forms/VerifiyResetCodeForm";
+import VerifiyResetCodeForm from "@/components/website/forms/VerifiyResetCodeForm";
 import { useRouter } from "next/navigation";
-import AuthLayout from "@/components/user/layouts/AuthLayout";
+import AuthLayout from "@/components/website/layouts/AuthLayout";
 
 const VerifyResetCode = () => {
   const router = useRouter();

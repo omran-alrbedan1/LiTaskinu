@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
-import { Mail, Phone, MessageCircle } from "lucide-react";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import CustomFormField, { FormFieldType } from "@/components/shared/CustomInput";
 import usePostData from "@/hooks/usePostData";
@@ -59,7 +58,7 @@ export function ContactForm() {
   }
 
   return (
-    <div className="bg-gray-100 rounded-3xl p-8">
+    <div className="bg-gray-100 dark:bg-gray-800 rounded-3xl p-8">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           {/* Name Fields */}
@@ -71,7 +70,6 @@ export function ContactForm() {
               label="First Name"
               placeholder="John"
               iconSrc={ICONS.userInput}
-              className=" rounded-lg"
             />
             
             <CustomFormField
@@ -81,7 +79,6 @@ export function ContactForm() {
               label="Last Name"
               placeholder="Carter"
               iconSrc={ICONS.userInput}
-              className=" rounded-lg"
             />
           </div>
 
@@ -92,9 +89,8 @@ export function ContactForm() {
               control={form.control}
               name="email"
               label="Email"
-                iconSrc={ICONS.email}
+              iconSrc={ICONS.email}
               placeholder="John@gmail.com"
-              className=" rounded-lg"
             />
             
             <CustomFormField
@@ -104,7 +100,6 @@ export function ContactForm() {
               label="Phone Number"
               iconSrc={ICONS.phone}
               placeholder="09613358846"
-              className=" rounded-lg"
             />
           </div>
 
@@ -114,13 +109,12 @@ export function ContactForm() {
             name="message"
             label="Message"
             placeholder="Type here your message"
-            className=" rounded-lg resize-none"
           />
 
           {/* Submit Button */}
           <SubmitButton
             isLoading={isLoading}
-            className="w-full md:w-auto px-8 py-3 text-white font-medium rounded-lg transition-colors"
+            className="w-full md:w-auto px-8 py-3 bg-primary-color1 hover:bg-primary-color2 dark:hover:bg-primary-color2 text-white font-medium rounded-lg transition-colors"
             loadingText="Sending..."
           >
             Send Message

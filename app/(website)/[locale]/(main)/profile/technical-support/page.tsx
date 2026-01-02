@@ -1,4 +1,4 @@
-import ContactUsForm from "@/components/user/forms/ContactUsForm";
+import ContactUsForm from "@/components/website/forms/ContactUsForm";
 import Image from "next/image";
 import { ICONS } from "@/constants/icons";
 import WhatsAppFloatingButton from "@/components/shared/WhatsappFloatingButton";

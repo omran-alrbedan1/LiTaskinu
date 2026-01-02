@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import ForgotPasswordForm from "@/components/user/forms/ForgotPasswordForm";
-import AuthLayout from "@/components/user/layouts/AuthLayout";
+import ForgotPasswordForm from "@/components/website/forms/ForgotPasswordForm";
+import AuthLayout from "@/components/website/layouts/AuthLayout";
 
 const ForgotPassword = () => {
   return (

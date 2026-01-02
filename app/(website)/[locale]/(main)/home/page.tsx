@@ -5,8 +5,9 @@ import FilterSection from "./_components/FilterSection";
 import { motion } from "framer-motion";
 import { EmptyState } from "@/components/shared";
 import { images } from "@/constants/images";
-import ProfileCard, { Profile } from "./_components/ProfileCard";
+import ProfileCard from "./_components/ProfileCard";
 import useGetData from "@/hooks/useGetData";
+import HomeLoader from "./_components/homeLoader";
 
 interface UserProfile {
   id: number;
@@ -59,14 +60,13 @@ const HomePage = () => {
 
   const {
     data: usersData,
-    loading: isFetching,
+    loading: isLoading,
     error: fetchError,
     refetch: refetchUsers,
   } = useGetData<UserProfile[]>({
     url: '/api/website/home-users',
     enabled: true,
   });
-
 
   const usersList = usersData || [];
 
@@ -82,31 +82,9 @@ const HomePage = () => {
     };
   };
 
+  if (isLoading)  return <HomeLoader filters={filters} onFiltersChange={setFilters}/>
 
-  // Show loading state
-  if (isFetching) {
-    return (
-      <div className="pb-32 bg-gray-50 min-h-screen">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <FilterSection filters={filters} onFiltersChange={setFilters} />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 xl:grid-cols-6 gap-6 mt-6">
-            {[...Array(12)].map((_, index) => (
-              <div key={index} className="animate-pulse bg-white rounded-2xl shadow-md border border-gray-200">
-                <div className="h-40 bg-gray-200 rounded-t-2xl"></div>
-                <div className="p-4">
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                  <div className="h-3 bg-gray-200 rounded w-1/2 mb-4"></div>
-                  <div className="h-10 bg-gray-200 rounded"></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Show error state
+  // 2. Then show error state
   if (fetchError) {
     return (
       <div className="pb-32 bg-gray-50 min-h-screen">
@@ -127,7 +105,7 @@ const HomePage = () => {
   }
 
   return (
-    <div className="pb-32 bg-gray-50 min-h-screen">
+    <div className="pb-32 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 py-6">
         <FilterSection filters={filters} onFiltersChange={setFilters} />
 
@@ -174,7 +152,5 @@ const HomePage = () => {
     </div>
   );
 };
-
-
 
 export default HomePage;

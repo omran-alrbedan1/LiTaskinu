@@ -14,6 +14,10 @@ html {
     text-wrap: balance;
   }
 }
+.bg-gradient {
+  @apply bg-gradient-to-br from-[#8B9475] to-[#6B7355] dark:from-[#6B7355] dark:to-[#4A5237];
+}
+
 
 .hide-scrollbar {
   scrollbar-width: none;
@@ -37,7 +41,7 @@ html {
 }
 
 .sidebar-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--primary-color1);
+  background: "#A1AA8A";
   border-radius: 10px;
   border: 2px solid transparent;
   min-height: 10px;
@@ -59,12 +63,12 @@ html {
 /* For Firefox */
 .sidebar-scrollbar {
   scrollbar-width: 300px;
-  scrollbar-color: var(--primary-color1) transparent;
+  scrollbar-color: #A1AA8A transparent;
 }
 
 /* Optional: Add hover effect for better UX */
 .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-color1);
+  background: "#A1AA8A";
   opacity: 0.8;
 }
 

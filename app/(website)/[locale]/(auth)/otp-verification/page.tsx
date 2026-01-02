@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import OtpForm from "@/components/user/forms/OtpForm";
-import AuthLayout from "@/components/user/layouts/AuthLayout";
+import OtpForm from "@/components/website/forms/OtpForm";
+import AuthLayout from "@/components/website/layouts/AuthLayout";
 
 const OtpVerification = () => {
   return (

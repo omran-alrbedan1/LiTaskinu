@@ -203,7 +203,7 @@ const SuccessStoriesPage = () => {
       ) : (
         <div className="space-y-6">
           <div className="grid grid-cols-1 gap-6">
-            {stories.map((story) => (
+            {stories.map((story:any) => (
               <SuccessStoryCard
                 key={story.id}
                 story={story}

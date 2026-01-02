@@ -1,8 +1,8 @@
 // app/select-user-type/page.tsx
 "use client";
 import React from "react";
-import SelectUserTypeForm from "@/components/user/forms/SelectUserTypeForm";
-import AuthLayout from "@/components/user/layouts/AuthLayout";
+import SelectUserTypeForm from "@/components/website/forms/SelectUserTypeForm";
+import AuthLayout from "@/components/website/layouts/AuthLayout";
 
 const SelectUserType = () => {
   return (

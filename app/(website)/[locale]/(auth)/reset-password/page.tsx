@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import ResetPasswordForm from "@/components/user/forms/ResetPasswordForm";
-import AuthLayout from "@/components/user/layouts/AuthLayout";
+import ResetPasswordForm from "@/components/website/forms/ResetPasswordForm";
+import AuthLayout from "@/components/website/layouts/AuthLayout";
 
 const ResetPassword = () => {
   return (

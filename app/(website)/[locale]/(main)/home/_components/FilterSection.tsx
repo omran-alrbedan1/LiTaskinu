@@ -50,7 +50,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
   };
 
   return (
-    <div className="bg-primary-light rounded-lg shadow-md p-6 mb-6 relative">
+    <div className=" bg-primary-light dark:bg-gradient-to-br from-[#8B9475] to-[#6B7355] rounded-lg shadow-md p-6 mb-6 relative">
       {/* Company Logo - Top Right Corner */}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">

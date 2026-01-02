@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import ParentRegisterForm from "@/components/user/forms/ParentRegisterForm";
-import AuthLayout from "@/components/user/layouts/AuthLayout";
+import ParentRegisterForm from "@/components/website/forms/ParentRegisterForm";
+import AuthLayout from "@/components/website/layouts/AuthLayout";
 
 const ParentInfo = () => {
   return (

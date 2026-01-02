@@ -29,6 +29,11 @@ const nextConfig = {
         hostname: "api.litaskunu.com",
         pathname: "/storage/**",
       },
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+        pathname: "/**",
+      },
     ],
   },
   logging: {

@@ -11,10 +11,11 @@ import {
   FaFacebookF,
 } from "react-icons/fa";
 import { TiHeartFullOutline } from "react-icons/ti";
+import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-[#8B9475] to-[#6B7355] text-white p-4 pt-16 pb-24 md:pb-8 relative overflow-hidden">
+    <footer className="bg-gradient text-white p-4 pt-16 pb-24 md:pb-8 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Main Footer Content */}
@@ -118,10 +119,13 @@ export default function Footer() {
                   {
                     icon: FaFileContract,
                     title: "Terms & Conditions",
+                    link:"#",
                   },
                   {
                     icon: FaShieldAlt,
                     title: "Privacy Policy",
+                    link:"./privacy-policy",
+
                   },
                 ].map((item, index) => (
                   <div
@@ -131,9 +135,12 @@ export default function Footer() {
                     <div className="w-10 h-10 bg-[#A1AA8A] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <item.icon className="text-white text-sm" />
                     </div>
-                    <div>
+                    <Link
+                      href={item.link}
+                      className="hover:cursor-pointer"
+                    >
                       <p className="text-white/90 font-medium">{item.title}</p>
-                    </div>
+                    </Link>
                   </div>
                 ))}
               </div>

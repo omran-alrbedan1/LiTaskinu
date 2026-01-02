@@ -1,4 +1,4 @@
-import Header from "@/components/user/elements/Header";
+import Header from "@/components/website/elements/Header";
 import React from "react";
 import Footer from "../_components/Footer";
 

@@ -1113,3 +1113,57 @@ export const INITIAL_PERSONAL_DATA = {
     familyValues: "Traditional",
   },
 };
+
+
+export const REAL_SHEIKHS = [
+  {
+    id: 1,
+    name: "Dr. Ahmed el-Tayeb",
+    title: "Grand Imam of Al-Azhar & Islamic Scholar",
+    image: images.Unknown,
+    experience: "50+ years",
+    specialization: ["Islamic Jurisprudence", "Theology", "Interfaith Dialogue"],
+    languages: ["Arabic", "English", "French"],
+    bio: "الإمام الأكبر للدين الإسلامي وشيخ الأزهر الشريف، معروف بدوره في نشر الفكر الوسطي وتعليم علماء المستقبل" 
+  },
+  {
+    id: 2,
+    name: "Dr. Ali Gomaa",
+    title: "Former Grand Mufti of Egypt & Islamic Jurist",
+    image: images.Unknown,
+    experience: "45+ years",
+    specialization: ["Usul al-Fiqh", "Jurisprudence", "Islamic Legal Theory"],
+    languages: ["Arabic", "English"],
+    bio: "عالم وعضو سابق في هيئة كبار العلماء في الأزهر، خاض تجارب واسعة في الإفتاء والتعليم الشرعي العالمي." 
+  },
+  {
+    id: 3,
+    name: "Sheikh Habib Ali Zain al-Abidin al-Jifri",
+    title: "Islamic Scholar & Spiritual Educator",
+    image: images.Unknown,
+    experience: "30+ years",
+    specialization: ["Spiritual Education", "Islamic Ethics", "Community Guidance"],
+    languages: ["Arabic", "English"],
+    bio: "عالِم يمني مشهور عالمياً، مؤسس مؤسسة طابة للأبحاث، وله حضور واسع في الدعوة والتعليم الإسلامي حول العالم." 
+  },
+  {
+    id: 4,
+    name: "Sheikh Hamza Yusuf",
+    title: "Islamic Scholar & Educator",
+    image: images.Unknown,
+    experience: "30+ years",
+    specialization: ["Islamic Neo-traditionalism", "Ethics", "Academic Instruction"],
+    languages: ["English", "Arabic"],
+    bio: "عالم إسلامي أمريكي، شارك في تأسيس Zaytuna College ويشتهر بتقديم العلوم الإسلامية بمنهج مترابط بين التراث والمعاصرة." 
+  },
+  {
+    id: 5,
+    name: "Sheikh Yusuf al-Qaradawi",
+    title: "Islamic Theologian & Author",
+    image: images.Unknown,
+    experience: "60+ years",
+    specialization: ["Islamic Jurisprudence", "Fiqh al-Zakat", "Islam & Life Media"],
+    languages: ["Arabic", "English"],
+    bio: "أحد أبرز العلماء في العالم الإسلامي في العصر الحديث، معروف ببرنامجه 'الشريعة والحياة' وبكتب فقهية مؤثرة." 
+  }
+];
