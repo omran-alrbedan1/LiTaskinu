@@ -135,6 +135,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           },
         ],
       },
+      {
+        title: "Consultation Management",
+        url: `/admin/${locale}/consultation`,
+        icon: HelpCircle,
+        items: [
+       {
+            title: "Sheikhes",
+            url: `/admin/${locale}/consultations/sheikhs`,
+          },
+          {
+            title: "Psychiatrist ",
+            url: `/admin/${locale}/consultations/psychiatrists`,
+          },
+        ],
+      },
     ],
 
     // Marriage & Matching System

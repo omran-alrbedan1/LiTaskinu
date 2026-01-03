@@ -30,7 +30,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { CalendarIcon, CheckIcon, ChevronsUpDownIcon, X } from "lucide-react";
+import { CalendarIcon, CheckIcon, ChevronsUpDownIcon, X, Plus } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import {
@@ -41,7 +41,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import React from "react";
+import React, { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 
 export enum FormFieldType {
@@ -56,6 +56,9 @@ export enum FormFieldType {
   COMBOBOX = "combobox",
   RADIO = "radio",
   MULTI_SELECT = "multiSelect",
+  TAG_INPUT = "tagInput", 
+  NUMBER = "number",
+
 }
 
 interface Option {
@@ -84,6 +87,16 @@ interface CustomProps {
   searchPlaceholder?: string;
   className?: string;
   children?: React.ReactNode;
+  tagInputProps?: {
+    placeholder?: string;
+    addButtonText?: string;
+    maxTags?: number;
+    allowDuplicates?: boolean;
+    separator?: string; 
+  };
+    min?: number;
+  max?: number;
+  step?: number;
 }
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
@@ -95,9 +108,16 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     options = [],
     inputClassName,
     orientation = "vertical",
+    tagInputProps = {},
+    min,
+    max,
+    step,
   } = props;
 
   const selectedValues = field.value || [];
+
+  // حالة محلية لإدارة المدخلات
+  const [inputValue, setInputValue] = useState("");
 
   const handleMultiSelectChange = (value: string) => {
     const currentValues = field.value || [];
@@ -135,104 +155,106 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           </FormControl>
         </div>
       );
-case FormFieldType.PASSWORD:
-  const [showPassword, setShowPassword] = React.useState(false);
-  
-  return (
-    <div className="flex rounded-md border border-input bg-background focus-within:ring-2 ring-ring">
-      {iconSrc && (
-        <Image
-          src={iconSrc}
-          alt={iconAlt || "icon"}
-          width={20}
-          height={20}
-          className="ml-2"
-        />
-      )}
-      <FormControl>
-        <Input
-          {...field}
-          type={showPassword ? "text" : "password"}
-          placeholder={placeholder}
-          className="border-0 placeholder:text-muted-foreground focus:outline-none focus-within:border-none focus-within:ring-0 bg-transparent text-foreground pr-10"
-        />
-      </FormControl>
-      <button
-        type="button"
-        onClick={() => setShowPassword(!showPassword)}
-        className="px-3 text-muted-foreground hover:text-foreground"
-      >
-        {showPassword ? (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
-            <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
-            <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
-            <line x1="2" x2="22" y1="2" y2="22" />
-          </svg>
-        ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
-            <circle cx="12" cy="12" r="3" />
-          </svg>
-        )}
-      </button>
-    </div>
-  );
-      case FormFieldType.PHONE_INPUT:
-  return (
-    <FormControl>
-      <PhoneInput
-        country={"us"}
-        value={field.value}
-        onChange={field.onChange}
-        buttonStyle={{
-          backgroundColor: 'rgb(17 24 39)', // bg-gray-900
-          borderColor: 'rgb(75 85 99)', // border-gray-600
-          color: 'rgb(249 250 251)', // text-gray-50
-        }}
-        dropdownStyle={{
-          backgroundColor: 'rgb(17 24 39)', // bg-gray-900
-          borderColor: 'rgb(75 85 99)', // border-gray-600
-          color: 'rgb(249 250 251)', // text-gray-50
-        }}
-        inputStyle={{
-          backgroundColor: 'rgb(17 24 39)', // bg-gray-900
-          borderColor: 'rgb(75 85 99)', // border-gray-600
-          color: 'rgb(249 250 251)', // text-gray-50
-          width: '100%',
-          height: '40px',
-        }}
-        buttonClass="!h-10 !rounded-l-md"
-        dropdownClass="!shadow-lg"
-        inputClass={cn(
-          "!h-10 !w-full !rounded-md focus:!ring-2 focus:!ring-primary-color1",
-          inputClassName
-        )}
-      />
-    </FormControl>
-  );
     
-  case FormFieldType.DATE_PICKER:
+    case FormFieldType.PASSWORD:
+      const [showPassword, setShowPassword] = React.useState(false);
+      
+      return (
+        <div className="flex rounded-md border border-input bg-background focus-within:ring-2 ring-ring">
+          {iconSrc && (
+            <Image
+              src={iconSrc}
+              alt={iconAlt || "icon"}
+              width={20}
+              height={20}
+              className="ml-2"
+            />
+          )}
+          <FormControl>
+            <Input
+              {...field}
+              type={showPassword ? "text" : "password"}
+              placeholder={placeholder}
+              className="border-0 placeholder:text-muted-foreground focus:outline-none focus-within:border-none focus-within:ring-0 bg-transparent text-foreground pr-10"
+            />
+          </FormControl>
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="px-3 text-muted-foreground hover:text-foreground"
+          >
+            {showPassword ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
+                <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
+                <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
+                <line x1="2" x2="22" y1="2" y2="22" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            )}
+          </button>
+        </div>
+      );
+    
+    case FormFieldType.PHONE_INPUT:
+      return (
+        <FormControl>
+          <PhoneInput
+            country={"us"}
+            value={field.value}
+            onChange={field.onChange}
+            buttonStyle={{
+              backgroundColor: 'rgb(17 24 39)',
+              borderColor: 'rgb(75 85 99)',
+              color: 'rgb(249 250 251)',
+            }}
+            dropdownStyle={{
+              backgroundColor: 'rgb(17 24 39)',
+              borderColor: 'rgb(75 85 99)',
+              color: 'rgb(249 250 251)',
+            }}
+            inputStyle={{
+              backgroundColor: 'rgb(17 24 39)',
+              borderColor: 'rgb(75 85 99)',
+              color: 'rgb(249 250 251)',
+              width: '100%',
+              height: '40px',
+            }}
+            buttonClass="!h-10 !rounded-l-md"
+            dropdownClass="!shadow-lg"
+            inputClass={cn(
+              "!h-10 !w-full !rounded-md focus:!ring-2 focus:!ring-primary-color1",
+              inputClassName
+            )}
+          />
+        </FormControl>
+      );
+    
+    case FormFieldType.DATE_PICKER:
       return (
         <FormControl>
           <Popover>
@@ -268,12 +290,13 @@ case FormFieldType.PASSWORD:
           </Popover>
         </FormControl>
       );
+    
     case FormFieldType.SELECT:
       return (
-     <Select
-  onValueChange={field.onChange}
-  value={field.value}
->
+        <Select
+          onValueChange={field.onChange}
+          value={field.value}
+        >
           <FormControl>
             <SelectTrigger className="w-full border border-input pl-3 rounded-lg h-10 bg-background focus:ring-2 focus:ring-ring focus:border-ring text-foreground">
               <SelectValue placeholder={placeholder} />
@@ -312,6 +335,7 @@ case FormFieldType.PASSWORD:
           </SelectContent>
         </Select>
       );
+    
     case FormFieldType.MULTI_SELECT:
       return (
         <FormControl>
@@ -390,16 +414,12 @@ case FormFieldType.PASSWORD:
                     </CommandEmpty>
                     <CommandGroup>
                       {options.map((option) => {
-                        const isSelected = selectedValues.includes(
-                          option.value
-                        );
+                        const isSelected = selectedValues.includes(option.value);
                         return (
                           <CommandItem
                             key={option.value}
                             value={option.value}
-                            onSelect={() =>
-                              handleMultiSelectChange(option.value)
-                            }
+                            onSelect={() => handleMultiSelectChange(option.value)}
                             className="flex items-center px-4 py-3 cursor-pointer hover:bg-accent aria-selected:bg-accent text-foreground"
                           >
                             <div
@@ -447,6 +467,7 @@ case FormFieldType.PASSWORD:
           </div>
         </FormControl>
       );
+    
     case FormFieldType.COMBOBOX:
       return (
         <FormControl>
@@ -461,8 +482,7 @@ case FormFieldType.PASSWORD:
                 )}
               >
                 {field.value
-                  ? options.find((option) => option.value === field.value)
-                      ?.label
+                  ? options.find((option) => option.value === field.value)?.label
                   : placeholder || "Select an option..."}
                 <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
@@ -483,18 +503,14 @@ case FormFieldType.PASSWORD:
                         key={option.value}
                         value={option.value}
                         onSelect={() => {
-                          field.onChange(
-                            option.value === field.value ? "" : option.value
-                          );
+                          field.onChange(option.value === field.value ? "" : option.value);
                         }}
                         className="flex items-center px-4 py-3 cursor-pointer hover:bg-accent aria-selected:bg-primary aria-selected:text-primary-foreground text-foreground"
                       >
                         <CheckIcon
                           className={cn(
                             "mr-3 h-5 w-5",
-                            field.value === option.value
-                              ? "opacity-100"
-                              : "opacity-0"
+                            field.value === option.value ? "opacity-100" : "opacity-0"
                           )}
                         />
                         {option.icon && (
@@ -528,6 +544,7 @@ case FormFieldType.PASSWORD:
           </Popover>
         </FormControl>
       );
+    
     case FormFieldType.TEXTAREA:
       return (
         <FormControl>
@@ -540,6 +557,7 @@ case FormFieldType.PASSWORD:
           />
         </FormControl>
       );
+    
     case FormFieldType.CHECKBOX:
       return (
         <FormControl>
@@ -559,6 +577,7 @@ case FormFieldType.PASSWORD:
           </div>
         </FormControl>
       );
+    
     case FormFieldType.RADIO:
       return (
         <FormControl>
@@ -588,9 +607,161 @@ case FormFieldType.PASSWORD:
           </RadioGroup>
         </FormControl>
       );
- 
- 
-      default:
+    
+    case FormFieldType.TAG_INPUT:
+      const {
+        placeholder: tagPlaceholder = "Add item...",
+        addButtonText = "Add",
+        maxTags,
+        allowDuplicates = false,
+        separator,
+      } = tagInputProps;
+
+      const handleAddTag = () => {
+        if (!inputValue.trim()) return;
+        
+        if (separator && inputValue.includes(separator)) {
+          // معالجة عدة علامات مفصولة
+          const newTags = inputValue
+            .split(separator)
+            .map(tag => tag.trim())
+            .filter(tag => tag.length > 0);
+          
+          let updatedTags = [...selectedValues];
+          
+          newTags.forEach(tag => {
+            if (!allowDuplicates && updatedTags.includes(tag)) return;
+            if (maxTags && updatedTags.length >= maxTags) return;
+            updatedTags.push(tag);
+          });
+          
+          field.onChange(updatedTags);
+          setInputValue("");
+          return;
+        }
+
+        if (!allowDuplicates && selectedValues.includes(inputValue.trim())) {
+          return;
+        }
+
+        if (maxTags && selectedValues.length >= maxTags) {
+          return;
+        }
+
+        const newTags = [...selectedValues, inputValue.trim()];
+        field.onChange(newTags);
+        setInputValue("");
+      };
+
+      const handleRemoveTag = (index: number) => {
+        const newTags = selectedValues.filter((_:any, i:any) => i !== index);
+        field.onChange(newTags);
+      };
+
+      const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          handleAddTag();
+        } else if (e.key === 'Backspace' && !inputValue && selectedValues.length > 0) {
+          handleRemoveTag(selectedValues.length - 1);
+        }
+      };
+
+      return (
+        <FormControl>
+          <div className="space-y-3">
+            {/* Tags Display */}
+            {selectedValues.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {selectedValues.map((tag: string, index: number) => (
+                  <Badge
+                    key={index}
+                    variant="secondary"
+                    className="flex items-center gap-1 px-3 py-1.5 rounded-full"
+                  >
+                    <span>{tag}</span>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveTag(index)}
+                      className="ml-1 hover:text-destructive"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </Badge>
+                ))}
+              </div>
+            )}
+
+            {/* Input and Add Button */}
+            <div className="flex gap-2">
+              <div className="flex rounded-md border border-input bg-background focus-within:ring-2 ring-ring flex-1">
+                {iconSrc && (
+                  <Image
+                    src={iconSrc}
+                    alt={iconAlt || "icon"}
+                    width={20}
+                    height={20}
+                    className="ml-2"
+                  />
+                )}
+                <Input
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder={tagPlaceholder }
+                  className="border-0 placeholder:text-muted-foreground focus:outline-none focus-within:border-none focus-within:ring-0 bg-transparent text-foreground"
+                />
+              </div>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleAddTag}
+                disabled={
+                  !inputValue.trim() || 
+                  (maxTags && selectedValues.length >= maxTags) ||
+                  (!allowDuplicates && selectedValues.includes(inputValue.trim()) && !separator)
+                }
+              >
+                <Plus className="h-4 w-4 mr-2" />
+                {addButtonText}
+              </Button>
+            </div>
+          </div>
+        </FormControl>
+      );
+    
+          case FormFieldType.NUMBER:
+      return (
+        <div className="flex rounded-md border border-input bg-background focus-within:ring-2 ring-ring">
+          {iconSrc && (
+            <Image
+              src={iconSrc}
+              alt={iconAlt || "icon"}
+              width={24}
+              height={24}
+              className="ml-2"
+            />
+          )}
+     
+          <FormControl>
+            <Input
+              {...field}
+              type="number"
+              placeholder={placeholder}
+              min={min}
+              max={max}
+              step={step}
+              onChange={(e) => {
+                const value = e.target.value;
+                field.onChange(value === "" ? "" : Number(value));
+              }}
+              className="border-0 placeholder:text-muted-foreground focus:outline-none focus-within:border-none focus-within:ring-0 bg-transparent text-foreground [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+          </FormControl>
+        </div>
+      );
+
+    default:
       return null;
   }
 };
@@ -607,6 +778,7 @@ const CustomFormField = (props: CustomProps) => {
           {fieldType !== FormFieldType.CHECKBOX &&
             fieldType !== FormFieldType.RADIO &&
             fieldType !== FormFieldType.MULTI_SELECT &&
+            fieldType !== FormFieldType.TAG_INPUT &&
             label &&
             (required ? (
               <p className="flex items-center gap-1">
@@ -622,6 +794,21 @@ const CustomFormField = (props: CustomProps) => {
             ))}
 
           {fieldType === FormFieldType.MULTI_SELECT &&
+            label &&
+            (required ? (
+              <p className="flex items-center gap-1 mb-3">
+                <FormLabel className="text-foreground">
+                  {label}
+                </FormLabel>
+                <span className="text-destructive text-xl -mt-1">*</span>
+              </p>
+            ) : (
+              <FormLabel className="mb-3 text-foreground">
+                {label}
+              </FormLabel>
+            ))}
+
+          {fieldType === FormFieldType.TAG_INPUT &&
             label &&
             (required ? (
               <p className="flex items-center gap-1 mb-3">

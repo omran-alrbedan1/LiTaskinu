@@ -110,15 +110,17 @@ html {
     --primary-color1: #A1AA8A; /* Light mode primary */
   }
 
-  .dark {
+.dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 7 47% 62%; /* #c77971 in HSL - Dark mode */
+    
+    --primary: 75 14% 62%; 
     --primary-foreground: 0 0% 9%;
+    
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 14.9%;
@@ -129,21 +131,23 @@ html {
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
-    --ring: 7 47% 62%; /* Updated to match dark mode primary */
+    --ring: 75 14% 62%; 
+    
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 7 47% 62%; /* Updated to dark mode primary */
+    --sidebar-primary: 75 14% 62%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 7 47% 62%; /* Updated to dark mode primary */
-    --primary-color1: #c77971; /* Dark mode primary */
+    --sidebar-ring: 75 14% 62%; 
+    --primary-color1: #A1AA8A;
   }
 }
 

@@ -68,3 +68,31 @@ export const SuccessStoryFormValidation = z.object({
   city_id: z.string().min(1, "City is required"),
 });
 export type SuccessStoryFormValues = z.infer<typeof SuccessStoryFormValidation>;
+
+export const SheikhFormValidation = z.object({
+    name: z.string().min(2, "Name must be at least 2 characters"),
+    email: z.string().email("Invalid email address"),
+    username: z.string().min(3, "Username must be at least 3 characters"),
+    password: z.string().optional(),
+    phone: z.string().optional(),
+    image: z.string().optional(),
+    experience: z.string().min(5, "Experience must be at least 5 characters"),
+    specialization: z.array(z.string()).min(1, "At least one specialization is required "),
+    languages: z.array(z.string()).min(1, "At least one language is required"),
+    bio: z.string().min(20, "Bio must be at least 20 characters"),
+});
+
+
+export const PsychiatristFormValidation = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  username: z.string().min(3, "Username must be at least 3 characters"),
+  password: z.string().min(6, "Password must be at least 6 characters").optional(),
+  phone: z.string().optional(),
+  image: z.string().optional(),
+  experience: z.string().min(10, "Please provide detailed experience"),
+  specialization: z.array(z.string()).min(1, "At least one specialization is required"),
+  languages: z.array(z.string()).min(1, "At least one language is required"),
+  rating: z.number().min(0).max(5).optional(),
+  bio: z.string().min(20, "Biography must be at least 20 characters"),
+});

@@ -29,4 +29,5 @@ export const ICONS = {
   premium: "/icons/premium.svg",
   name: "/icons/name.svg",
   link: "/icons/link.svg",
+  star: "/icons/star.svg",
 };

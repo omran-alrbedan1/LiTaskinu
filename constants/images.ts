@@ -30,6 +30,8 @@ import successStory from "../public/images/successStory.png";
 import privacyPolicy from "../public/images/Privacy-policy.png";
 import mentalHealth from "../public/images/mental-health.jpg";
 import sheikhBackground from "../public/images/sheikh-background.jpg";
+import emptySheikhs from "../public/images/emptySheikhs.png";
+import emptyPsychiatrists from "../public/images/emptyPsychiatrists.png";
 
 export const images = {
   couple,
@@ -63,5 +65,7 @@ export const images = {
   successStory,
   privacyPolicy,
   mentalHealth,
-  sheikhBackground
+  sheikhBackground,
+  emptySheikhs,
+  emptyPsychiatrists,
 };

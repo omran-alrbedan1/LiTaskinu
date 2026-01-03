@@ -18,7 +18,6 @@ export const useNavigation = () => {
     return path.replace(/\/$/, "") || "/";
   };
 
-  // Get path without locale prefix
   const getPathWithoutLocale = useCallback(() => {
     if (!pathname) return "/";
     

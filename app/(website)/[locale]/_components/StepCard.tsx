@@ -1,6 +1,5 @@
 "use client";
 
-import { animationVariants } from "@/constants/landingData";
 import { motion } from "framer-motion";
 
 interface StepCardProps {

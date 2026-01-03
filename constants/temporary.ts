@@ -1243,3 +1243,106 @@ export const Doctors = [
     price: "$130/session"
   }
 ];
+
+// Mock data for testing
+export const MOCK_SHEIKHS: Sheikh[] = [
+  {
+    id: 1,
+    name: "Dr. Ahmed Al-Mansoori",
+    email: "ahmed@example.com",
+    username: "ahmed_almansoori",
+    phone: "+971501234567",
+    image: images.Unknown,
+    experience: "20 years of teaching Quranic studies and Islamic jurisprudence",
+    specialization: ["Quranic Studies", "Islamic Jurisprudence", "Hadith Sciences"],
+    languages: ["Arabic", "English", "Urdu"],
+    bio: "Graduated from Al-Azhar University with honors. Served as Imam in multiple mosques across the Gulf region. Published several books on Islamic theology.",
+    created_at: "2024-01-15T10:30:00Z",
+      updated_at: "2024-02-20T14:45:00Z"
+
+  },
+  {
+    id: 2,
+    name: "Sheikh Omar Farooq",
+    email: "omar@example.com",
+    username: "omar_farooq",
+    phone: "+966551234567",
+    image: images.Unknown,
+    experience: "15 years specializing in family and marriage counseling",
+    specialization: ["Family Counseling", "Marriage Guidance", "Youth Mentoring"],
+    languages: ["Arabic", "English", "French"],
+    bio: "Expert in Islamic family law with focus on contemporary issues. Regular speaker at international Islamic conferences.",
+    created_at: "2024-02-20T14:45:00Z",
+    updated_at: "2024-02-20T14:45:00Z"
+  },
+  {
+    id: 3,
+    name: "Sheikha Fatima Al-Hassan",
+    email: "fatima@example.com",
+    username: "fatima_alhassan",
+    phone: "+974331234567",
+    image: images.Unknown,
+    experience: "12 years teaching Islamic studies to women and children",
+    specialization: ["Women's Studies", "Child Education", "Islamic Ethics"],
+    languages: ["Arabic", "English", "Persian"],
+    bio: "First female scholar in the region to establish an Islamic learning center for women. Focus on authentic Islamic teachings.",
+    created_at: "2024-03-10T09:15:00Z",
+    updated_at: "2024-02-20T14:45:00Z"
+
+  }
+];
+
+
+export const MOCK_PSYCHIATRISTS = [
+  {
+    id: 1,
+    name: "Dr. Sarah Johnson",
+    email: "sarah.johnson@example.com",
+    username: "dr.sarahj",
+    phone: "+1 (555) 123-4567",
+    image: "/psychiatrists/dr-sarah.jpg",
+    experience: "15 years of clinical practice specializing in anxiety and depression disorders",
+    specialization: ["Anxiety Disorders", "Depression", "PTSD", "Cognitive Behavioral Therapy"],
+    qualifications: ["MD Psychiatry", "Board Certified", "PhD Clinical Psychology"],
+    languages: ["English", "Spanish", "French"],
+    hourly_rate: 180,
+    rating: 4.8,
+    bio: "Dr. Sarah Johnson is a board-certified psychiatrist with over 15 years of experience...",
+    created_at: "2024-01-15T10:30:00Z",
+    is_available: true,
+  },
+  {
+    id: 2,
+    name: "Dr. Michael Chen",
+    email: "michael.chen@example.com",
+    username: "dr.mchen",
+    phone: "+1 (555) 987-6543",
+    image: "/psychiatrists/dr-chen.jpg",
+    experience: "12 years specializing in child and adolescent psychiatry",
+    specialization: ["Child Psychiatry", "Adolescent Mental Health", "Family Therapy", "ADHD"],
+    qualifications: ["MD Child Psychiatry", "Board Certified", "MSc Developmental Psychology"],
+    languages: ["English", "Mandarin"],
+    hourly_rate: 200,
+    rating: 4.9,
+    bio: "Dr. Michael Chen specializes in child and adolescent mental health...",
+    created_at: "2024-02-20T14:15:00Z",
+    is_available: false,
+  },
+  {
+    id: 3,
+    name: "Dr. Aisha Rahman",
+    email: "aisha.rahman@example.com",
+    username: "dr.arahman",
+    phone: "+1 (555) 456-7890",
+    image: "/psychiatrists/dr-aisha.jpg",
+    experience: "8 years focusing on trauma therapy and cultural psychiatry",
+    specialization: ["Trauma Therapy", "Cultural Psychiatry", "EMDR", "Group Therapy"],
+    qualifications: ["MD Psychiatry", "Certified EMDR Therapist", "MA Cultural Studies"],
+    languages: ["English", "Arabic", "Urdu"],
+    hourly_rate: 160,
+    rating: 4.7,
+    bio: "Dr. Aisha Rahman brings a culturally sensitive approach to mental health care...",
+    created_at: "2024-03-10T09:45:00Z",
+    is_available: true,
+  },
+];
