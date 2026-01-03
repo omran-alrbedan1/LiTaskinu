@@ -18,7 +18,6 @@ export default function TestimonialCard({ index }: TestimonialCardProps) {
         transition: { duration: 0.3 },
       }}
     >
-      {/* النجوم - أصغر على الموبايل */}
       <div className="flex justify-center mb-3 sm:mb-4">
         {[...Array(5)].map((_, i) => (
           <svg

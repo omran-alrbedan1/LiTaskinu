@@ -59,11 +59,11 @@ export default function SheikhsPage() {
         <div className="mt-32 mb-16">
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-gradient-to-r from-[#8B9475]/10 to-[#6B7355]/10 dark:from-[#6B7355]/20 dark:to-[#4A5237]/20 border border-[#8B9475]/20 dark:border-[#6B7355]/30 mb-4">
-              <span className="text-sm font-semibold text-[#6B7355] dark:text-[#8B9475]">
+              <span className="text-sm font-semibold text-primary-color1">
                 WHY CHOOSE OUR SHEIKHS
               </span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-color1 mb-4">
               Excellence in Islamic Guidance
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
