@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, MessageCircle, Globe, User, Eye } from 'lucide-react';
+import { BookOpen, MessageCircle, Globe, Eye } from 'lucide-react';
 import Image from 'next/image';
 
 interface SheikhCardProps {
@@ -18,47 +18,49 @@ interface SheikhCardProps {
 const SheikhCard: React.FC<SheikhCardProps> = ({ sheikh }) => {
   return (
     <div className="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-primary-color1 dark:hover:border-primary-color1 transform hover:-translate-y-1">
-      {/* Card Content */}
-      <div className="flex p-4">
-        {/* Image Section - Left Side */}
-        <div className="flex-shrink-0 mr-4">
-          <div className="relative">
-            <div className="h-20 w-20 rounded-xl overflow-hidden border-2 border-primary-color1/20 dark:border-primary-color1/30 shadow-md group-hover:shadow-lg transition-shadow">
-              {/* صورة حقيقية للشيخ */}
-              <div className="h-full w-full relative">
-                <Image
-                  src={sheikh.image}
-                  alt={sheikh.name}
-                  fill
-                  className="object-cover"
-                  sizes="80px"
-                />
-
+      {/* Single Responsive Layout */}
+      <div className="flex flex-col md:flex-row p-4 md:p-4">
+        {/* Image Section - Centered on mobile, left on desktop */}
+        <div className="flex-shrink-0 md:mr-4 mb-4 md:mb-0">
+          <div className="flex justify-center md:justify-start">
+            <div className="relative">
+              <div className="h-24 w-24 md:h-20 md:w-20 rounded-xl overflow-hidden border-2 border-primary-color1/20 dark:border-primary-color1/30 shadow-md group-hover:shadow-lg transition-shadow">
+                <div className="h-full w-full relative">
+                  <Image
+                    src={sheikh.image}
+                    alt={sheikh.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 96px, 80px"
+                  />
+                </div>
               </div>
-            </div>
-            
-            {/* Experience Badge */}
-            <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-primary-color1 to-primary-color1/90 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-md transform group-hover:scale-110 transition-transform z-10">
-              {sheikh.experience}
+              
+              {/* Experience Badge */}
+              <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-primary-color1 to-primary-color1/90 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-md transform group-hover:scale-110 transition-transform z-10">
+                {sheikh.experience}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Info Section - Right Side */}
+        {/* Info Section */}
         <div className="flex-1 min-w-0">
           {/* Name and Title */}
-          <div className="mb-2">
-            <h3 className="text-lg font-bold text-gray-800 dark:text-white truncate group-hover:text-primary-color1 dark:group-hover:text-primary-color1 transition-colors">
-              {sheikh.name}
-            </h3>
-            <p className="text-sm text-primary-color1 dark:text-primary-color1/90 font-medium truncate">
-              {sheikh.title}
-            </p>
+          <div className="mb-2 md:mb-2">
+            <div className="text-center md:text-left">
+              <h3 className="text-xl md:text-lg font-bold text-gray-800 dark:text-white md:truncate group-hover:text-primary-color1 dark:group-hover:text-primary-color1 transition-colors">
+                {sheikh.name}
+              </h3>
+              <p className="text-sm text-primary-color1 dark:text-primary-color1/90 font-medium md:truncate">
+                {sheikh.title}
+              </p>
+            </div>
           </div>
 
           {/* Specializations */}
           <div className="mb-3">
-            <div className="flex flex-wrap gap-1">
+            <div className="flex flex-wrap gap-1 justify-center md:justify-start">
               {sheikh.specialization.slice(0, 2).map((spec, index) => (
                 <span 
                   key={index} 
@@ -77,13 +79,15 @@ const SheikhCard: React.FC<SheikhCardProps> = ({ sheikh }) => {
           </div>
 
           {/* Languages */}
-          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 mb-3">
-            <Globe className="h-4 w-4 text-primary-color1" />
-            <span className="truncate">{sheikh.languages.join(', ')}</span>
+          <div className="mb-3 flex justify-center md:justify-start">
+            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+              <Globe className="h-4 w-4 text-primary-color1" />
+              <span className="md:truncate text-center md:text-left">{sheikh.languages.join(', ')}</span>
+            </div>
           </div>
 
-          {/* Bio - Truncated */}
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
+          {/* Bio */}
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 md:line-clamp-2 text-center md:text-left">
             {sheikh.bio}
           </p>
 
