@@ -33,11 +33,24 @@ export const useNavigation = () => {
     return normalizePath(pathWithoutLocale);
   }, [pathname]);
 
+  // Remove locale from any path
+  const removeLocaleFromPath = useCallback((path: string) => {
+    let cleanedPath = path;
+    LANGUAGE_OPTIONS.forEach((option) => {
+      const localeRegex = new RegExp(`^/${option.value}(/|$)`);
+      if (localeRegex.test(path)) {
+        cleanedPath = path.replace(localeRegex, "/");
+      }
+    });
+    return normalizePath(cleanedPath);
+  }, []);
+
   const isActiveLink = useCallback(
     (linkPath: string): boolean => {
       if (!pathname) return false;
 
-      const normalizedLinkPath = normalizePath(linkPath);
+      // Remove locale from both paths
+      const normalizedLinkPath = removeLocaleFromPath(linkPath);
       const currentPath = getPathWithoutLocale();
 
       // Remove leading slash for comparison
@@ -53,7 +66,7 @@ export const useNavigation = () => {
       // Home page check
       return (cleanLinkPath === "" || cleanLinkPath === "home") && cleanCurrentPath === "";
     },
-    [pathname, getPathWithoutLocale]
+    [pathname, getPathWithoutLocale, removeLocaleFromPath]
   );
 
   const getLocalizedPath = useCallback(

@@ -20,13 +20,17 @@ export const DesktopNav: React.FC<DesktopNavProps> = React.memo(({
             key={link.link}
             href={link.link}
             className={`transition-colors duration-300 font-medium relative group ${
-              isActive ? "text-primary-color1" : "hover:text-primary-color1"
+              isActive 
+                ? "text-primary-color1 dark:text-primary-color1-dark" 
+                : "text-gray-700 dark:text-gray-300 hover:text-primary-color1 dark:hover:text-primary-color1-dark"
             }`}
           >
             {link.title}
             <span
-              className={`absolute bottom-0 left-0 h-0.5 bg-primary-color1 transition-all duration-300 ${
-                isActive ? "w-full" : "w-0 group-hover:w-full"
+              className={`absolute bottom-0 left-0 h-0.5 transition-all duration-300 ${
+                isActive 
+                  ? "w-full bg-primary-color1 dark:bg-primary-color1-dark" 
+                  : "w-0 bg-primary-color1 dark:bg-primary-color1-dark group-hover:w-full"
               }`}
             />
           </a>

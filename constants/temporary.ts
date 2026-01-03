@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { images } from "./images";
 
 export const userData = {
@@ -1165,5 +1166,80 @@ export const REAL_SHEIKHS = [
     specialization: ["Islamic Jurisprudence", "Fiqh al-Zakat", "Islam & Life Media"],
     languages: ["Arabic", "English"],
     bio: "أحد أبرز العلماء في العالم الإسلامي في العصر الحديث، معروف ببرنامجه 'الشريعة والحياة' وبكتب فقهية مؤثرة." 
+  }
+];
+
+export const Doctors = [
+  {
+    id: 1,
+    name: "Dr. Sarah Johnson",
+    title: "Clinical Psychologist",
+    image: images.Unknown,
+    experience: "15+ years",
+    specialization: ["Anxiety Disorders", "Depression", "Trauma Therapy"],
+    languages: ["English", "Arabic"],
+    bio: "Specialized in cognitive behavioral therapy with extensive experience in treating anxiety and mood disorders.",
+    rating: 4.9,
+    price: "$120/session"
+  },
+  {
+    id: 2,
+    name: "Dr. Michael Chen",
+    title: "Psychiatrist",
+    image: images.Unknown,
+    experience: "12+ years",
+    specialization: ["Medication Management", "ADHD", "Bipolar Disorder"],
+    languages: ["English", "French"],
+    bio: "Board-certified psychiatrist with expertise in medication management and integrative treatment approaches.",
+    rating: 4.8,
+    price: "$150/session"
+  },
+  {
+    id: 3,
+    name: "Dr. Aisha Rahman",
+    title: "Counseling Psychologist",
+    image: images.Unknown,
+    experience: "10+ years",
+    specialization: ["Marital Counseling", "Family Therapy", "Stress Management"],
+    languages: ["Arabic", "English", "French"],
+    bio: "Specialized in family systems therapy and multicultural counseling with a focus on Arab families.",
+    rating: 4.9,
+    price: "$100/session"
+  },
+  {
+    id: 4,
+    name: "Dr. Robert Martinez",
+    title: "Trauma Specialist",
+    image: images.Unknown,
+    experience: "18+ years",
+    specialization: ["PTSD", "EMDR Therapy", "Grief Counseling"],
+    languages: ["English", "Spanish"],
+    bio: "Certified EMDR therapist with extensive experience in trauma recovery and resilience building.",
+    rating: 5.0,
+    price: "$140/session"
+  },
+  {
+    id: 5,
+    name: "Dr. Lisa Park",
+    title: "Child Psychologist",
+    image: images.Unknown,
+    experience: "8+ years",
+    specialization: ["Child Psychology", "Autism Spectrum", "Parent Coaching"],
+    languages: ["English", "Korean"],
+    bio: "Specialized in developmental psychology and evidence-based interventions for children and adolescents.",
+    rating: 4.7,
+    price: "$110/session"
+  },
+  {
+    id: 6,
+    name: "Dr. David Wilson",
+    title: "Addiction Specialist",
+    image: images.Unknown,
+    experience: "20+ years",
+    specialization: ["Substance Abuse", "Behavioral Addiction", "Relapse Prevention"],
+    languages: ["English"],
+    bio: "Expert in addiction treatment with a holistic approach combining therapy and lifestyle interventions.",
+    rating: 4.8,
+    price: "$130/session"
   }
 ];
