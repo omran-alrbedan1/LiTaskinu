@@ -1,18 +1,10 @@
 import React from 'react';
 import { BookOpen, MessageCircle, Globe, Eye } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface SheikhCardProps {
-  sheikh: {
-    id: number;
-    name: string;
-    title: string;
-    image: any;
-    experience: string;
-    specialization: string[];
-    languages: string[];
-    bio: string;
-  };
+  sheikh: Sheikh
 }
 
 const SheikhCard: React.FC<SheikhCardProps> = ({ sheikh }) => {
@@ -35,11 +27,7 @@ const SheikhCard: React.FC<SheikhCardProps> = ({ sheikh }) => {
                   />
                 </div>
               </div>
-              
-              {/* Experience Badge */}
-              <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-primary-color1 to-primary-color1/90 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-md transform group-hover:scale-110 transition-transform z-10">
-                {sheikh.experience}
-              </div>
+      
             </div>
           </div>
         </div>
@@ -53,7 +41,7 @@ const SheikhCard: React.FC<SheikhCardProps> = ({ sheikh }) => {
                 {sheikh.name}
               </h3>
               <p className="text-sm text-primary-color1 dark:text-primary-color1/90 font-medium md:truncate">
-                {sheikh.title}
+                {sheikh.username}
               </p>
             </div>
           </div>
@@ -93,14 +81,18 @@ const SheikhCard: React.FC<SheikhCardProps> = ({ sheikh }) => {
 
           {/* Action Buttons */}
           <div className="flex gap-2">
-            <button className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-primary-color1/5 dark:bg-primary-color1/10 text-primary-color1 dark:text-primary-color1/90 rounded-lg text-sm font-medium hover:bg-primary-color1/10 dark:hover:bg-primary-color1/20 transition-colors border border-primary-color1/10 dark:border-primary-color1/20">
+            <Link
+              href={`./sheikhs/${sheikh.id}/chat`}
+            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-primary-color1/5 dark:bg-primary-color1/10 text-primary-color1 dark:text-primary-color1/90 rounded-lg text-sm font-medium hover:bg-primary-color1/10 dark:hover:bg-primary-color1/20 transition-colors border border-primary-color1/10 dark:border-primary-color1/20">
               <MessageCircle className="h-4 w-4" />
               Chat
-            </button>
-            <button className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-primary-color1 to-primary-color1/80 text-white rounded-lg text-sm font-medium hover:from-primary-color1/90 hover:to-primary-color1/70 transition-all transform hover:scale-105 shadow-md shadow-primary-color1/20">
+            </Link>
+            <Link 
+              href={`./sheikhs/${sheikh.id}`}
+            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-primary-color1 to-primary-color1/80 text-white rounded-lg text-sm font-medium hover:from-primary-color1/90 hover:to-primary-color1/70 transition-all transform hover:scale-105 shadow-md shadow-primary-color1/20">
               <Eye className="h-4 w-4" />
               View
-            </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { FEATURES } from '@/constants/website';
 import SheikhCard from './_components/SheikhCard';
-import { REAL_SHEIKHS } from '@/constants/temporary';
+import { MOCK_SHEIKHS } from '@/constants/temporary';
 import Image from 'next/image';
 import { images } from '@/constants/images';
 import FeatureCard from '@/components/website/shared/FeatureCard';
@@ -50,7 +50,7 @@ export default function SheikhsPage() {
       <div className="container mx-auto px-4 py-12">
         {/* Sheikhs Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {REAL_SHEIKHS.map((sheikh) => (
+          {MOCK_SHEIKHS.map((sheikh) => (
             <SheikhCard key={sheikh.id} sheikh={sheikh} />
           ))}
         </div>
