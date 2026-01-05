@@ -2,6 +2,7 @@ import React from 'react';
 import { BookOpen, MessageCircle, Globe, Eye } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { images } from '@/constants/images';
 
 interface SheikhCardProps {
   sheikh: Sheikh
@@ -19,7 +20,7 @@ const SheikhCard: React.FC<SheikhCardProps> = ({ sheikh }) => {
               <div className="h-24 w-24 md:h-20 md:w-20 rounded-xl overflow-hidden border-2 border-primary-color1/20 dark:border-primary-color1/30 shadow-md group-hover:shadow-lg transition-shadow">
                 <div className="h-full w-full relative">
                   <Image
-                    src={sheikh.image}
+                    src={sheikh.image||images.Unknown}
                     alt={sheikh.name}
                     fill
                     className="object-cover"

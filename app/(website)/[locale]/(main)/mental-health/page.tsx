@@ -1,4 +1,4 @@
-import { Doctors } from '@/constants/temporary';
+import {  MOCK_PSYCHIATRISTS } from '@/constants/temporary';
 import DoctorCard from './_components/DoctorCard';
 import { MENTAL_HEALTH_FEATURES } from '@/constants/website';
 import Image from 'next/image';
@@ -55,7 +55,7 @@ export default function MentalHealthPage() {
       <div className="container mx-auto px-4 py-12 relative">
         {/* Doctors Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {Doctors.map((doctor) => (
+          {MOCK_PSYCHIATRISTS.map((doctor) => (
             <DoctorCard key={doctor.id} doctor={doctor} />
           ))}
         </div>

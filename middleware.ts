@@ -9,7 +9,6 @@ export function middleware(request: NextRequest) {
 
   // ===== ADMIN ROUTES =====
   if (pathname.startsWith("/admin")) {
-    // السماح بصفحات تسجيل الدخول
     if (
       pathname === "/admin/login" ||
       pathname === "/admin/en/login"
@@ -17,7 +16,6 @@ export function middleware(request: NextRequest) {
       return NextResponse.next();
     }
 
-    // تحقق سريع: هل يوجد cookie؟
     const adminSession = request.cookies.get(SESSION_COOKIES.ADMIN);
 
     if (!adminSession) {
@@ -26,7 +24,6 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(loginUrl);
     }
 
-    // يوجد cookie → نسمح بالمرور
     return NextResponse.next();
   }
 
@@ -34,7 +31,6 @@ export function middleware(request: NextRequest) {
   if (pathname.startsWith("/en")) {
     // صفحات عامة
     if (
-      pathname.startsWith("/en") ||
       pathname.startsWith("/en/login") ||
       pathname.startsWith("/en/sign-in") ||
       pathname.startsWith("/en/sign-up")
@@ -53,6 +49,5 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // باقي المسارات
-  return NextResponse.next();
+    return NextResponse.next();
 }

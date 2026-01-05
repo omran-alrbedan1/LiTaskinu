@@ -2,17 +2,15 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { 
-  Send, 
-  Paperclip, 
-  MoreVertical, 
-  ArrowLeft, 
-  Smile, 
-  X, 
-  Mic, 
-  Video, 
-  Phone,
-  Play,
+import { Image as AntdImage } from 'antd';
+import {
+  Send,
+  Paperclip,
+  MoreVertical,
+  ArrowLeft,
+  Smile,
+  X,
+  Mic, Play,
   Pause,
   Download,
   Image as ImageIcon,
@@ -25,6 +23,7 @@ import { images } from '@/constants/images';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
+import { MOCK_MESSAGES } from '@/constants/temporary';
 
 interface Message {
   id: number;
@@ -56,84 +55,25 @@ export default function ChatPage() {
   const [isRecording, setIsRecording] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
   const [uploading, setUploading] = useState(false);
-  const [uploadProgress, setUploadProgress] = useState(0);
   const [activeVoiceId, setActiveVoiceId] = useState<number | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const messagesContainerRef = useRef<HTMLDivElement>(null); // ADD THIS REF
+  const messagesContainerRef = useRef<HTMLDivElement>(null); 
   const recordingIntervalRef = useRef<NodeJS.Timeout>();
   const emojiPickerRef = useRef<HTMLDivElement>(null);
 
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: 1,
-      sender: 'sheikh',
-      content: 'As-salamu alaykum! How can I help you today?',
-      timestamp: new Date(Date.now() - 3600000),
-      type: 'text',
-      isRead: true
-    },
-    {
-      id: 2,
-      sender: 'user',
-      content: 'Wa alaykumu as-salam! I have a question about prayer times.',
-      timestamp: new Date(Date.now() - 3500000),
-      type: 'text',
-      isRead: true
-    },
-    {
-      id: 3,
-      sender: 'sheikh',
-      content: 'Of course, I\'d be happy to help you with that. What specifically would you like to know about prayer times?',
-      timestamp: new Date(Date.now() - 3400000),
-      type: 'text',
-      isRead: true
-    },
-    {
-      id: 4,
-      sender: 'sheikh',
-      type: 'voice',
-      timestamp: new Date(Date.now() - 3200000),
-      voice: {
-        duration: '0:26',
-        url: '#',
-        isPlaying: false
-      },
-      isRead: true
-    },
-    {
-      id: 5,
-      sender: 'sheikh',
-      type: 'image',
-      timestamp: new Date(Date.now() - 3000000),
-      images: ['/images/sample1.jpg', '/images/sample2.jpg'],
-      isRead: true
-    },
-    {
-      id: 6,
-      sender: 'sheikh',
-      type: 'file',
-      timestamp: new Date(Date.now() - 2800000),
-      file: {
-        name: 'Prayer_Times_Guide.pdf',
-        size: '2.4 MB',
-        type: 'pdf',
-        url: '#'
-      },
-      isRead: true
-    }
-  ]);
+  //@ts-ignore
+  const [messages, setMessages] = useState<Message[]>(MOCK_MESSAGES);
 
-  const sheikh = {
+  const doctor = {
     id: 1,
-    name: 'Sheikh Abdullah',
+    name: 'Doctor Ahmad',
     image: images.Unknown,
     isOnline: true,
     typing: false
   };
 
-  // Close emoji picker when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (emojiPickerRef.current && !emojiPickerRef.current.contains(event.target as Node)) {
@@ -145,10 +85,8 @@ export default function ChatPage() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Custom scroll function - ADD THIS
   const scrollToBottom = () => {
     if (messagesContainerRef.current) {
-      // Scroll the container, not the whole page
       messagesContainerRef.current.scrollTo({
         top: messagesContainerRef.current.scrollHeight,
         behavior: 'smooth'
@@ -156,7 +94,6 @@ export default function ChatPage() {
     }
   };
 
-  // Auto scroll to bottom - UPDATE THIS
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -165,7 +102,6 @@ export default function ChatPage() {
     e.preventDefault();
     
     if (selectedImages.length > 0) {
-      // Send images
       const newMessage: Message = {
         id: messages.length + 1,
         sender: 'user',
@@ -179,7 +115,6 @@ export default function ChatPage() {
       setSelectedImages([]);
       setImagePreviews([]);
       
-      // Simulate sheikh response
       setTimeout(() => {
         const response: Message = {
           id: messages.length + 2,
@@ -208,7 +143,6 @@ export default function ChatPage() {
       setMessages([...messages, newMessage]);
       setMessage('');
       
-      // Simulate sheikh typing and response
       setTimeout(() => {
         const responses = [
           "Alhamdulillah, that's a great question.",
@@ -232,7 +166,6 @@ export default function ChatPage() {
 
   const handleEmojiClick = (emojiData: EmojiClickData) => {
     setMessage(prev => prev + emojiData.emoji);
-    setShowEmojiPicker(false);
   };
 
   const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -306,34 +239,8 @@ export default function ChatPage() {
 
   const simulateFileUpload = (file: File) => {
     setUploading(true);
-    setUploadProgress(0);
     
-    const progressInterval = setInterval(() => {
-      setUploadProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(progressInterval);
-          setTimeout(() => {
-            setUploading(false);
-            const newMessage: Message = {
-              id: messages.length + 1,
-              sender: 'user',
-              type: 'file',
-              timestamp: new Date(),
-              file: {
-                name: file.name,
-                size: `${(file.size / (1024 * 1024)).toFixed(1)} MB`,
-                type: file.type.split('/')[1] || 'file',
-                url: URL.createObjectURL(file)
-              },
-              isRead: false
-            };
-            setMessages(prev => [...prev, newMessage]);
-          }, 500);
-          return 100;
-        }
-        return prev + Math.random() * 20;
-      });
-    }, 200);
+  
   };
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -388,24 +295,24 @@ export default function ChatPage() {
               <div className="relative">
                 <div className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary-color1/20">
                   <Image
-                    src={sheikh.image}
-                    alt={sheikh.name}
+                    src={doctor.image}
+                    alt={doctor.name}
                     width={40}
                     height={40}
                     className="object-cover"
                   />
                 </div>
-                {sheikh.isOnline && (
+                {doctor.isOnline && (
                   <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full ring-2 ring-white dark:ring-gray-900"></div>
                 )}
               </div>
               <div>
-                <h2 className="font-bold text-gray-900 dark:text-white">{sheikh.name}</h2>
+                <h2 className="font-bold text-gray-900 dark:text-white">{doctor.name}</h2>
                 <div className="flex items-center gap-2">
-                  <div className={`h-2 w-2 rounded-full ${sheikh.isOnline ? 'bg-green-500' : 'bg-gray-400'}`}></div>
+                  <div className={`h-2 w-2 rounded-full ${doctor.isOnline ? 'bg-green-500' : 'bg-gray-400'}`}></div>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {sheikh.isOnline ? 'Online' : 'Offline'}
-                    {sheikh.typing && <span className="text-primary-color1 ml-2">• typing...</span>}
+                    {doctor.isOnline ? 'Online' : 'Offline'}
+                    {doctor.typing && <span className="text-primary-color1 ml-2">• typing...</span>}
                   </p>
                 </div>
               </div>
@@ -425,7 +332,7 @@ export default function ChatPage() {
         ref={messagesContainerRef} 
         className="flex-1 overflow-y-auto p-4"
         style={{ 
-          overscrollBehavior: 'contain', // Prevents page scroll
+          overscrollBehavior: 'contain', 
           scrollBehavior: 'smooth'
         }}
       >
@@ -452,8 +359,8 @@ export default function ChatPage() {
                     {msg.sender === 'sheikh' && (
                       <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
                         <Image
-                          src={sheikh.image}
-                          alt={sheikh.name}
+                          src={doctor.image}
+                          alt={doctor.name}
                           width={32}
                           height={32}
                           className="object-cover"
@@ -508,17 +415,12 @@ export default function ChatPage() {
                                   msg.images?.length === 1 ? 'max-w-md' : ''
                                 }`}
                               >
-                                <Image
+                                <AntdImage
                                   src={img}
                                   alt={`Image ${idx + 1}`}
-                                  width={300}
-                                  height={200}
                                   className="object-cover w-full h-auto rounded-xl hover:scale-105 transition-transform duration-300 cursor-pointer"
                                 />
-                                <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded-full">
-                                  <ImageIcon className="h-3 w-3 inline mr-1" />
-                                  {idx + 1}/{msg.images.length}
-                                </div>
+                              
                               </div>
                             ))}
                           </div>
@@ -603,10 +505,8 @@ export default function ChatPage() {
       {imagePreviews.length > 0 && (
         <div className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 px-4 py-3 flex-shrink-0">
           <div className="container mx-auto max-w-3xl">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                {imagePreviews.length} {imagePreviews.length === 1 ? 'image' : 'images'} selected
-              </span>
+            <div className="flex items-center justify-end mb-2">
+           
               <Button
                 variant="ghost"
                 size="sm"
@@ -644,7 +544,6 @@ export default function ChatPage() {
         </div>
       )}
 
-      {/* Voice Recording - FIXED */}
       {isRecording && (
         <div className="bg-white dark:bg-gray-900 border-t border-red-200 dark:border-red-900 px-4 py-3 flex-shrink-0">
           <div className="container mx-auto max-w-3xl">
@@ -679,7 +578,6 @@ export default function ChatPage() {
       <div className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 px-4 py-3 flex-shrink-0">
         <div className="container mx-auto max-w-3xl">
           <form onSubmit={handleSendMessage} className="flex items-end gap-2">
-            {/* Hidden file inputs */}
             <input
               type="file"
               ref={fileInputRef}

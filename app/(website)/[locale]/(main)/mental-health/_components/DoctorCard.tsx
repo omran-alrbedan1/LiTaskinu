@@ -1,19 +1,11 @@
 import React from 'react';
 import { Brain, MessageCircle, Globe, Star, Eye } from 'lucide-react';
 import Image from 'next/image';
+import { images } from '@/constants/images';
+import Link from 'next/link';
 
 interface DoctorCardProps {
-  doctor: {
-    id: number;
-    name: string;
-    title: string;
-    image: any;
-    experience: string;
-    specialization: string[];
-    languages: string[];
-    bio: string;
-    rating: number;
-  };
+doctor:Psychiatrist
 }
 
 const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
@@ -28,7 +20,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
                 <div className="h-full w-full relative bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-700 dark:to-gray-800">
                   {doctor.image && (
                     <Image
-                      src={doctor.image}
+                      src={doctor.image||images.Unknown}
                       alt={doctor.name}
                       fill
                       className="object-cover"
@@ -36,11 +28,6 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
                     />
                   )}
                 </div>
-              </div>
-              
-              {/* Experience Badge */}
-              <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-primary-color1 to-primary-color1/90 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-md transform group-hover:scale-110 transition-transform z-10">
-                {doctor.experience}
               </div>
             </div>
           </div>
@@ -55,9 +42,6 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
                 <h3 className="text-xl md:text-lg font-bold text-gray-800 dark:text-white md:truncate group-hover:text-primary-color1 dark:group-hover:text-primary-color1 transition-colors">
                   {doctor.name}
                 </h3>
-                <p className="text-sm text-primary-color1 dark:text-primary-color1/90 font-medium md:truncate">
-                  {doctor.title}
-                </p>
               </div>
               <div className="flex justify-center md:justify-start items-center gap-1">
                 <Star className="h-4 w-4 text-yellow-500 fill-current" />
@@ -103,14 +87,18 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
 
           {/* Action Buttons */}
           <div className="flex gap-2">
-            <button className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-primary-color1/5 dark:bg-primary-color1/10 text-primary-color1 dark:text-primary-color1/90 rounded-lg text-sm font-medium hover:bg-primary-color1/10 dark:hover:bg-primary-color1/20 transition-colors border border-primary-color1/10 dark:border-primary-color1/20">
+            <Link
+              href={`./mental-health/${doctor.id}/chat`}
+            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-primary-color1/5 dark:bg-primary-color1/10 text-primary-color1 dark:text-primary-color1/90 rounded-lg text-sm font-medium hover:bg-primary-color1/10 dark:hover:bg-primary-color1/20 transition-colors border border-primary-color1/10 dark:border-primary-color1/20">
               <MessageCircle className="h-4 w-4" />
               Chat
-            </button>
-            <button className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-primary-color1 to-primary-color1/80 text-white rounded-lg text-sm font-medium hover:from-primary-color1/90 hover:to-primary-color1/70 transition-all transform hover:scale-105 shadow-md shadow-primary-color1/20">
+            </Link>
+                <Link
+              href={`./mental-health/${doctor.id}`}
+            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-primary-color1 to-primary-color1/80 text-white rounded-lg text-sm font-medium hover:from-primary-color1/90 hover:to-primary-color1/70 transition-all transform hover:scale-105 shadow-md shadow-primary-color1/20">
               <Eye className="h-4 w-4" />
               View
-            </button>
+            </Link>
           </div>
         </div>
       </div>

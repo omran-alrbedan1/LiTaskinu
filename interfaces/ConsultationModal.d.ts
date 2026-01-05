@@ -20,7 +20,7 @@ declare interface Psychiatrist {
   email: string;
   username: string;
   phone?: string;
-  image: string;
+  image: string|StaticImageData;
   experience: string;
   specialization: string[];
   languages: string[];

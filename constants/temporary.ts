@@ -1173,10 +1173,9 @@ export const MOCK_PSYCHIATRISTS = [
     email: "sarah.johnson@example.com",
     username: "dr.sarahj",
     phone: "+1 (555) 123-4567",
-    image: "/psychiatrists/dr-sarah.jpg",
+    image: images.Unknown,
     experience: "15 years of clinical practice specializing in anxiety and depression disorders",
     specialization: ["Anxiety Disorders", "Depression", "PTSD", "Cognitive Behavioral Therapy"],
-    qualifications: ["MD Psychiatry", "Board Certified", "PhD Clinical Psychology"],
     languages: ["English", "Spanish", "French"],
     rating: 4.8,
     bio: "Dr. Sarah Johnson is a board-certified psychiatrist with over 15 years of experience...",
@@ -1188,10 +1187,10 @@ export const MOCK_PSYCHIATRISTS = [
     email: "michael.chen@example.com",
     username: "dr.mchen",
     phone: "+1 (555) 987-6543",
-    image: "/psychiatrists/dr-chen.jpg",
+    image: images.Unknown,
+
     experience: "12 years specializing in child and adolescent psychiatry",
     specialization: ["Child Psychiatry", "Adolescent Mental Health", "Family Therapy", "ADHD"],
-    qualifications: ["MD Child Psychiatry", "Board Certified", "MSc Developmental Psychology"],
     languages: ["English", "Mandarin"],
     rating: 4.9,
     bio: "Dr. Michael Chen specializes in child and adolescent mental health...",
@@ -1203,13 +1202,73 @@ export const MOCK_PSYCHIATRISTS = [
     email: "aisha.rahman@example.com",
     username: "dr.arahman",
     phone: "+1 (555) 456-7890",
-    image: "/psychiatrists/dr-aisha.jpg",
+    image: images.Unknown,
     experience: "8 years focusing on trauma therapy and cultural psychiatry",
     specialization: ["Trauma Therapy", "Cultural Psychiatry", "EMDR", "Group Therapy"],
-    qualifications: ["MD Psychiatry", "Certified EMDR Therapist", "MA Cultural Studies"],
     languages: ["English", "Arabic", "Urdu"],
     rating: 4.7,
     bio: "Dr. Aisha Rahman brings a culturally sensitive approach to mental health care...",
     created_at: "2024-03-10T09:45:00Z",
   },
-];
+];  
+
+
+export const MOCK_MESSAGES =[
+    {
+      id: 1,
+      sender: 'sheikh',
+      content: 'As-salamu alaykum! How can I help you today?',
+      timestamp: new Date(Date.now() - 3600000),
+      type: 'text',
+      isRead: true
+    },
+    {
+      id: 2,
+      sender: 'user',
+      content: 'Wa alaykumu as-salam! I have a question about prayer times.',
+      timestamp: new Date(Date.now() - 3500000),
+      type: 'text',
+      isRead: true
+    },
+    {
+      id: 3,
+      sender: 'sheikh',
+      content: 'Of course, I\'d be happy to help you with that. What specifically would you like to know about prayer times?',
+      timestamp: new Date(Date.now() - 3400000),
+      type: 'text',
+      isRead: true
+    },
+    {
+      id: 4,
+      sender: 'sheikh',
+      type: 'voice',
+      timestamp: new Date(Date.now() - 3200000),
+      voice: {
+        duration: '0:26',
+        url: '#',
+        isPlaying: false
+      },
+      isRead: true
+    },
+    {
+      id: 5,
+      sender: 'sheikh',
+      type: 'image',
+      timestamp: new Date(Date.now() - 3000000),
+      images: ['/images/sample1.jpg', '/images/sample2.jpg'],
+      isRead: true
+    },
+    {
+      id: 6,
+      sender: 'sheikh',
+      type: 'file',
+      timestamp: new Date(Date.now() - 2800000),
+      file: {
+        name: 'Prayer_Times_Guide.pdf',
+        size: '2.4 MB',
+        type: 'pdf',
+        url: '#'
+      },
+      isRead: true
+    }
+  ]

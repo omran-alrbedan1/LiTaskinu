@@ -2,16 +2,16 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import {
-    Mail,
-    Phone,
-    Globe,
-    BookOpen,
-    GraduationCap,
-    MessageCircle, Award
+  Mail,
+  Phone,
+  Globe,
+  BookOpen,
+  GraduationCap,
+  MessageCircle, Award
 } from 'lucide-react';
 import { MOCK_SHEIKHS } from '@/constants/temporary';
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import FloatingChatButton from '@/components/website/shared/FloatingChatButton';
 
 interface SheikhDetailPageProps {
   params: {
@@ -22,13 +22,13 @@ interface SheikhDetailPageProps {
 
 export default function SheikhDetailPage({ params }: SheikhDetailPageProps) {
   const { id } = params;
-  
+
   const sheikh = MOCK_SHEIKHS.find(s => s.id.toString() === id);
-  
+
   if (!sheikh) {
     notFound();
   }
-  
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-950 dark:to-gray-900">
       <div className="container mx-auto px-4 py-8 max-w-6xl">
@@ -59,7 +59,7 @@ export default function SheikhDetailPage({ params }: SheikhDetailPageProps) {
                       <Mail className="h-4 w-4 text-primary-color1" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <a 
+                      <a
                         href={`mailto:${sheikh.email}`}
                         className="text-sm text-gray-600 dark:text-gray-300 hover:text-primary-color1 transition-colors truncate block font-medium"
                         title={sheikh.email}
@@ -76,7 +76,7 @@ export default function SheikhDetailPage({ params }: SheikhDetailPageProps) {
                         <Phone className="h-4 w-4 text-primary-color1" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <a 
+                        <a
                           href={`tel:${sheikh.phone}`}
                           className="text-sm text-gray-600 dark:text-gray-300 hover:text-primary-color1 transition-colors truncate block font-medium"
                         >
@@ -98,7 +98,7 @@ export default function SheikhDetailPage({ params }: SheikhDetailPageProps) {
                     </div>
                     <div className="flex flex-wrap gap-2 pl-12">
                       {sheikh.languages.map((language, index) => (
-                        <span 
+                        <span
                           key={index}
                           className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-primary-color1/10 to-primary-color1/5 text-primary-color1 border border-primary-color1/20"
                         >
@@ -175,7 +175,7 @@ export default function SheikhDetailPage({ params }: SheikhDetailPageProps) {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl">
                   {sheikh.specialization.map((spec, index) => (
-                    <div 
+                    <div
                       key={index}
                       className="group flex items-center gap-3 p-4 rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-primary-color1 transition-all bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-850 hover:shadow-md"
                     >
@@ -195,19 +195,9 @@ export default function SheikhDetailPage({ params }: SheikhDetailPageProps) {
       </div>
 
       {/* Floating Chat Button */}
-<div className="fixed bottom-6 right-6 z-40">
-  <Link 
-  href={`${id}/chat`}
-    className="h-14 px-5 rounded-full bg-gradient-to-r from-primary-color1 to-primary-color1/80 shadow-lg hover:shadow-xl transition-all duration-300 group flex items-center gap-3 hover:pr-20 overflow-hidden relative"
-  >
-    <MessageCircle className="h-5 text-white dark:text-black w-5 shrink-0 group-hover:animate-bounce" />
-    
-    <span className="text-sm font-medium text-white absolute right-5 opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-300 whitespace-nowrap">
-      Start Chat
-    </span>
-    
-  </Link>
-</div>
+      <FloatingChatButton
+        url={`./${id}/chat`}
+      />
     </div>
   );
 }
