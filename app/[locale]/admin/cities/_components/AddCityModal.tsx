@@ -1,32 +1,27 @@
-// app/admin/en/cities/_components/EditCityModal.tsx
 "use client";
 import { Modal } from "antd";
-import { Edit } from "lucide-react";
+import { Plus } from "lucide-react";
 import { CityForm } from "./cityForm";
 
-interface EditCityModalProps {
+interface AddCityModalProps {
   open: boolean;
   onClose: () => void;
-  onEditCity: (data: City, id: number) => Promise<void>;
+  onAddCity: (data: City) => Promise<void>;
   isLoading?: boolean;
-  editingCity?: City | null;
   countries: Country[];
   isFetchingCountries?: boolean;
 }
 
-export function EditCityModal({
+export function AddCityModal({
   open,
   onClose,
-  onEditCity,
+  onAddCity,
   isLoading = false,
-  editingCity,
   countries = [],
   isFetchingCountries = false,
-}: EditCityModalProps) {
+}: AddCityModalProps) {
   const handleSubmit = async (data: City) => {
-    if (editingCity?.id) {
-      await onEditCity(data, editingCity.id);
-    }
+    await onAddCity(data);
   };
 
   const handleCancel = () => {
@@ -37,13 +32,15 @@ export function EditCityModal({
     <Modal
       title={
         <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-lg">
-            <Edit className="w-5 h-5 text-blue-600" />
+          <div className="flex items-center justify-center w-8 h-8 bg-primary-light2 rounded-lg">
+            <Plus className="w-5 h-5 text-primary-color1" />
           </div>
           <div>
-            <span className="text-xl font-bold text-gray-900">Edit City</span>
+            <span className="text-xl font-bold text-gray-900">
+              Add New City
+            </span>
             <p className="text-sm text-gray-500 mt-1">
-              Update city information with multilingual support
+              Add a new city with multilingual support
             </p>
           </div>
         </div>
@@ -66,10 +63,8 @@ export function EditCityModal({
             onSubmit={handleSubmit}
             onCancel={handleCancel}
             isLoading={isLoading}
-            initialData={editingCity}
             countries={countries}
             isFetchingCountries={isFetchingCountries}
-            isEdit
           />
         </div>
       </div>

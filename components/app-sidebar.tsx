@@ -57,96 +57,96 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     platform: [
       {
         title: "Dashboard",
-        url: `/admin/${locale}/dashboard`,
+        url: `/${locale}/admin/dashboard`,
         icon: Home,
         isActive: true,
       },
       {
         title: "User Management",
-        url: `/admin/${locale}/users`,
+        url: `/${locale}/admin/users`,
         icon: Users,
         items: [
           {
             title: "All Users",
-            url: `/admin/${locale}/users`,
+            url: `/${locale}/admin/users`,
           },
           {
             title: "New Registrations",
-            url: `/admin/${locale}/users?filter=new`,
+            url: `/${locale}/admin/users?filter=new`,
           },
           {
             title: "Verified Users",
-            url: `/admin/${locale}/users?filter=verified`,
+            url: `/${locale}/admin/users?filter=verified`,
           },
           {
             title: "Pending Verification",
-            url: `/admin/${locale}/users?filter=pending`,
+            url: `/${locale}/admin/users?filter=pending`,
           },
           {
             title: "Banned Users",
-            url: `/admin/${locale}/users?filter=banned`,
+            url: `/${locale}/admin/users?filter=banned`,
           },
         ],
       },
       {
         title: "Countries Management",
-        url: `/admin/${locale}/countries`,
+        url: `/${locale}/admin/countries`,
         icon: Globe,
         items: [
           {
             title: " Countries",
-            url: `/admin/${locale}/countries`,
+            url: `/${locale}/admin/countries`,
           },
 
           {
             title: "Regions/Cities",
-            url: `/admin/${locale}/cities`,
+            url: `/${locale}/admin/cities`,
           },
         ],
       },
       {
         title: "Parent Management",
-        url: `/admin/${locale}/parents`,
+        url: `/${locale}/admin/parents`,
         icon: UserCog,
         items: [
           {
             title: "All Parents",
-            url: `/admin/${locale}/parents`,
+            url: `/${locale}/admin/parents`,
           },
           {
             title: "Parent Messages",
-            url: `/admin/${locale}/parents/messages`,
+            url: `/${locale}/admin/parents/messages`,
           },
         ],
       },
       {
         title: "Verification System",
-        url: `/admin/${locale}/verification`,
+        url: `/${locale}/admin/verification`,
         icon: UserCheck,
         items: [
           {
             title: "verification Requests",
-            url: `/admin/${locale}/verification?status=pending`,
+            url: `/${locale}/admin/verification?status=pending`,
           },
 
           {
             title: "Required Documents",
-            url: `/admin/${locale}/verification/required-documents`,
+            url: `/${locale}/admin/verification/required-documents`,
           },
         ],
       },
       {
         title: "Consultation Management",
-        url: `/admin/${locale}/consultation`,
+        url: `/${locale}/admin/consultation`,
         icon: HelpCircle,
         items: [
        {
             title: "Sheikhes",
-            url: `/admin/${locale}/consultations/sheikhs`,
+            url: `/${locale}/admin/consultations/sheikhs`,
           },
           {
             title: "Psychiatrist ",
-            url: `/admin/${locale}/consultations/psychiatrists`,
+            url: `/${locale}/admin/consultations/psychiatrists`,
           },
         ],
       },
@@ -156,51 +156,51 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     matching: [
       {
         title: "Marriage Requests",
-        url: `/admin/${locale}/marriage-requests`,
+        url: `/${locale}/admin/marriage-requests`,
         icon: Heart,
         items: [
           {
             title: "New Requests",
-            url: `/admin/${locale}/marriage-requests?status=new`,
+            url: `/${locale}/admin/marriage-requests?status=new`,
           },
           {
             title: "In Progress",
-            url: `/admin/${locale}/marriage-requests?status=progress`,
+            url: `/${locale}/admin/marriage-requests?status=progress`,
           },
           {
             title: "Approved Requests",
-            url: `/admin/${locale}/marriage-requests?status=approved`,
+            url: `/${locale}/admin/marriage-requests?status=approved`,
           },
           {
             title: "Completed Matches",
-            url: `/admin/${locale}/marriage-requests?status=completed`,
+            url: `/${locale}/admin/marriage-requests?status=completed`,
           },
           {
             title: "Parent Approvals",
-            url: `/admin/${locale}/marriage-requests/parent-approvals`,
+            url: `/${locale}/admin/marriage-requests/parent-approvals`,
           },
           {
             title: "Track Status",
-            url: `/admin/${locale}/marriage-requests/tracking`,
+            url: `/${locale}/admin/marriage-requests/tracking`,
           },
           {
             title: "Chat Approvals",
-            url: `/admin/${locale}/marriage-requests/chat-approvals`,
+            url: `/${locale}/admin/marriage-requests/chat-approvals`,
           },
         ],
       },
       {
         title: "Matching System",
-        url: `/admin/${locale}/matching`,
+        url: `/${locale}/admin/matching`,
         icon: Calendar,
         items: [
           {
             title: "Manual Matching",
-            url: `/admin/${locale}/matching/manual`,
+            url: `/${locale}/admin/matching/manual`,
           },
           {
             title: "Success Stories",
-            url: `/admin/${locale}/matching/success-stories`,
+            url: `/${locale}/admin/matching/success-stories`,
           },
         ],
       },
@@ -210,12 +210,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     communication: [
       {
         title: "Chat Management",
-        url: `/admin/${locale}/chats`,
+        url: `/${locale}/admin/chats`,
         icon: MessageSquare,
         items: [
           {
             title: " Conversations",
-            url: `/admin/${locale}/chats?status=active`,
+            url: `/${locale}/admin/chats?status=active`,
           },
         ],
       },
@@ -225,24 +225,24 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     security: [
       {
         title: "Complaints System",
-        url: `/admin/${locale}/complaints`,
+        url: `/${locale}/admin/complaints`,
         icon: ShieldAlert,
         items: [
           {
             title: "All Complaints",
-            url: `/admin/${locale}/complaints`,
+            url: `/${locale}/admin/complaints`,
           },
           {
             title: "Under Review",
-            url: `/admin/${locale}/complaints?status=review`,
+            url: `/${locale}/admin/complaints?status=review`,
           },
           {
             title: "Resolved Complaints",
-            url: `/admin/${locale}/complaints?status=resolved`,
+            url: `/${locale}/admin/complaints?status=resolved`,
           },
           {
             title: "Complaint Statistics",
-            url: `/admin/${locale}/complaints/statistics`,
+            url: `/${locale}/admin/complaints/statistics`,
           },
         ],
       },
@@ -252,95 +252,95 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     management: [
       {
         title: "Website Management",
-        url: `/admin/${locale}/content`,
+        url: `/${locale}/admin/content`,
         icon: FileText,
         items: [
           {
             title: "About Us",
-            url: `/admin/${locale}/content/about-us`,
+            url: `/${locale}/admin/content/about-us`,
           },
           {
             title: "Social Media Links",
-            url: `/admin/${locale}/content/social-media`,
+            url: `/${locale}/admin/content/social-media`,
           },
 
           {
             title: "Terms & Conditions",
-            url: `/admin/${locale}/content/terms`,
+            url: `/${locale}/admin/content/terms`,
           },
           {
             title: "Privacy Policy",
-            url: `/admin/${locale}/content/privacy`,
+            url: `/${locale}/admin/content/privacy`,
           },
           {
             title: "FAQ Management",
-            url: `/admin/${locale}/content/faq`,
+            url: `/${locale}/admin/content/faq`,
           },
           {
             title: "Success Stories",
-            url: `/admin/${locale}/content/success-stories`,
+            url: `/${locale}/admin/content/success-stories`,
           },
           {
             title: "Advertisements",
-            url: `/admin/${locale}/ads`,
+            url: `/${locale}/admin/ads`,
           },
           {
             title: "How It Works",
-            url: `/admin/${locale}/content/how-it-works`,
+            url: `/${locale}/admin/content/how-it-works`,
           },
           {
             title: "Landing Page Hero",
-            url: `/admin/${locale}/content/hero`,
+            url: `/${locale}/admin/content/hero`,
           },
         ],
       },
       {
         title: "Analytics & Reports",
-        url: `/admin/${locale}/analytics`,
+        url: `/${locale}/admin/analytics`,
         icon: PieChart,
         items: [
           {
             title: "Platform Analytics",
-            url: `/admin/${locale}/analytics/platform`,
+            url: `/${locale}/admin/analytics/platform`,
           },
           {
             title: "User Statistics",
-            url: `/admin/${locale}/analytics/users`,
+            url: `/${locale}/admin/analytics/users`,
           },
           {
             title: "Matching Reports",
-            url: `/admin/${locale}/analytics/matching`,
+            url: `/${locale}/admin/analytics/matching`,
           },
           {
             title: "Parent Engagement", // إضافة جديدة
-            url: `/admin/${locale}/analytics/parent-engagement`,
+            url: `/${locale}/admin/analytics/parent-engagement`,
           },
         ],
       },
       {
         title: "Notification System",
-        url: `/admin/${locale}/notifications`,
+        url: `/${locale}/admin/notifications`,
         icon: Bell,
         items: [
           {
             title: "Push Notifications",
-            url: `/admin/${locale}/notifications/push`,
+            url: `/${locale}/admin/notifications/push`,
           },
           {
             title: "Email Templates",
-            url: `/admin/${locale}/notifications/email`,
+            url: `/${locale}/admin/notifications/email`,
           },
           {
             title: "SMS Notifications",
-            url: `/admin/${locale}/notifications/sms`,
+            url: `/${locale}/admin/notifications/sms`,
           },
           {
             title: "Parent Notifications", // إضافة جديدة
-            url: `/admin/${locale}/notifications/parent`,
+            url: `/${locale}/admin/notifications/parent`,
           },
           {
             title: "Notification Settings",
-            url: `/admin/${locale}/notifications/settings`,
+            url: `/${locale}/admin/notifications/settings`,
           },
         ],
       },
@@ -350,39 +350,39 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     settings: [
       {
         title: "System Settings",
-        url: `/admin/${locale}/settings`,
+        url: `/${locale}/admin/settings`,
         icon: Settings,
         items: [
           {
             title: "General Settings",
-            url: `/admin/${locale}/settings/general`,
+            url: `/${locale}/admin/settings/general`,
           },
           {
             title: "Payment Settings",
-            url: `/admin/${locale}/settings/payment`,
+            url: `/${locale}/admin/settings/payment`,
           },
           {
             title: "Parent Settings", // إضافة جديدة
-            url: `/admin/${locale}/settings/parent`,
+            url: `/${locale}/admin/settings/parent`,
           },
         ],
       },
       {
         title: "Support Center",
-        url: `/admin/${locale}/support`,
+        url: `/${locale}/admin/support`,
         icon: HelpCircle,
         items: [
           {
             title: "System Documentation",
-            url: `/admin/${locale}/support/docs`,
+            url: `/${locale}/admin/support/docs`,
           },
           {
             title: "Contact Management",
-            url: `/admin/${locale}/support/contacts`,
+            url: `/${locale}/admin/support/contacts`,
           },
           {
-            title: "Parent Support", // إضافة جديدة
-            url: `/admin/${locale}/support/parent`,
+            title: "Parent Support", 
+            url: `/${locale}/admin/support/parent`,
           },
         ],
       },

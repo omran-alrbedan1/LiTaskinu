@@ -487,7 +487,7 @@ export const AdForm: React.FC<AdFormProps> = ({
     
         {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-3 justify-end">
-          <Link href={`/admin/${locale}/ads`}>
+          <Link href={`/admin/ads`}>
             <Button
               variant="outline"
               className="w-full sm:w-auto"

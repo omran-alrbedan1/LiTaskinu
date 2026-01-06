@@ -20,7 +20,7 @@ export default function CreateAdPage() {
     successMessage: "Advertisement created successfully",
     errorMessage: "Failed to create advertisement",
     onSuccess: () => {
-      router.push(`/admin/${locale}/ads`);
+      router.push(`/admin/ads`);
     },
   });
 

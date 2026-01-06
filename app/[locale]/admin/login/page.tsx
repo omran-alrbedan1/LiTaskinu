@@ -1,4 +1,3 @@
-// app/admin/en/login/page.tsx
 import Image from "next/image";
 import { images } from "@/constants/images";
 import { LoginForm } from "./_components/loginForm";

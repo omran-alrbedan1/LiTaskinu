@@ -8,10 +8,12 @@ import { Form } from "@/components/ui/form";
 import CustomFormField, { FormFieldType } from "@/components/shared/CustomInput";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import { useEffect, useState } from "react";
-import { Plus, Edit, User, Image as ImageIcon, BookOpen, FileText } from "lucide-react";
+import { Plus, Edit, User, Image as ImageIcon, BookOpen, FileText, MapPin, Globe } from "lucide-react";
 import { ICONS } from "@/constants/icons";
 import { SheikhFormValidation } from "@/validation/admin";
 import CustomUpload from "@/components/shared/CustomUpload";
+import { genderOptions } from "@/constants/options";
+import useGetData from "@/hooks/useGetData";
 
 interface SheikhFormProps { 
     onSubmit: (data: Sheikh) => void;
@@ -35,33 +37,98 @@ export function SheikhForm({
             : ""
     );
 
+    // Fetch countries data
+    const {
+        data: countries,
+        loading: isFetchingCountries,
+        error: fetchCountriesError,
+        refetch: refetchCountries,
+    } = useGetData<Country[]>({
+        url: "/api/public/countries",
+        enabled: true,
+    });
+
+    const [selectedCountryId, setSelectedCountryId] = useState<string>("");
+
+  const {
+    data: cities,
+    loading: isFetchingCities,
+    error: fetchCitiesError,
+    refetch: refetchCities,
+  } = useGetData<City[]>({
+    url: "/api/public/cities",
+    enabled: true,
+  });
+
+
+    // Transform countries data for select options
+    const countriesData = countries?.map((country:Country) => ({
+        value: country.id.toString(),
+        label: country.name,
+        code: country.code,
+    })) || [];
+
+    // Transform cities data for select options
+    const citiesData = cities?.map((city:City) => ({
+        value: city.id.toString(),
+        label: city.name,
+    })) || [];
+
     const form = useForm<z.infer<typeof SheikhFormValidation>>({
         resolver: zodResolver(SheikhFormValidation),
         defaultValues: {
-            name: "",
+            first_name: "",
+            last_name: "",
+            gender: "",
             email: "",
             username: "",
             password: "",
             phone: "",
             image: "",
+            country_id: "",
+            city_id: "",
             experience: "",
-            specialization: [],
+            specialization: "", // Always string
             languages: [],
             bio: "",
         },
     });
 
+    // Watch country_id to fetch cities when country changes
+    const watchCountryId = form.watch("country_id");
+
+    // Fetch cities when country is selected
+    useEffect(() => {
+        if (watchCountryId) {
+            setSelectedCountryId(watchCountryId);
+            // Reset city when country changes
+            form.setValue("city_id", "");
+        }
+    }, [watchCountryId, form]);
+
     // Set form values when editing
     useEffect(() => {
         if (initialData && isEdit) {
+            // specialization is always string, no need to convert from array
+            const specializationString = initialData.specialization || "";
+
+            // Set selected country ID to fetch cities
+            if (initialData.country_id) {
+                setSelectedCountryId(initialData.country_id.toString());
+            }
+
             form.reset({
-                name: initialData.name || "",
+                first_name: initialData.first_name || "",
+                last_name: initialData.last_name || "",
+                gender: initialData.gender || "",
                 email: initialData.email || "",
                 username: initialData.username || "",
                 phone: initialData.phone || "",
                 image: initialData.image || "",
+                country_id: initialData.country_id?.toString() || "",
+                city_id: initialData.city_id?.toString() || "",
                 experience: initialData.experience || "",
-                specialization: initialData.specialization || [],
+                specialization: specializationString, // String
                 languages: initialData.languages || [],
                 bio: initialData.bio || "",
             });
@@ -87,45 +154,21 @@ export function SheikhForm({
     };
 
     const handleSubmit = (values: z.infer<typeof SheikhFormValidation>) => {
-        const formData = new FormData();
-        
-        formData.append("name", values.name);
-        formData.append("email", values.email);
-        formData.append("username", values.username);
-        formData.append("phone", values.phone || "");
-        formData.append("experience", values.experience);
-        formData.append("bio", values.bio);
-        
-        formData.append("specialization", JSON.stringify(values.specialization));
-        formData.append("languages", JSON.stringify(values.languages));
-        
-        if (!isEdit && values.password) {
-            formData.append("password", values.password);
-        }
-        
-        if (imageFile) {
-            formData.append("image", imageFile);
-        } else if (values.image && isEdit) {
-            const imagePath = values.image.includes("/") 
-                ? values.image.split("/").pop()! 
-                : values.image;
-            formData.append("image", imagePath);
-        }
-        
-        if (isEdit && initialData?.id) {
-            formData.append("id", initialData.id.toString());
-        }
-        
         const sheikhData = {
             id: initialData?.id || 0,
-            name: values.name,
+            first_name: values.first_name,
+            last_name: values.last_name,
+            name: `${values.first_name} ${values.last_name}`.trim(),
+            gender: values.gender,
             email: values.email,
             username: values.username,
             password: isEdit ? undefined : values.password,
             phone: values.phone,
             image: values.image || "/placeholder-avatar.jpg",
+            country_id: Number(values.country_id),
+            city_id: Number(values.city_id),
             experience: values.experience,
-            specialization: values.specialization,
+            specialization: values.specialization, 
             languages: values.languages,
             bio: values.bio,
             created_at: initialData?.created_at || new Date().toISOString(),
@@ -159,10 +202,28 @@ export function SheikhForm({
                             <CustomFormField
                                 fieldType={FormFieldType.INPUT}
                                 control={form.control}
-                                name="name"
-                                label="Full Name"
-                                placeholder="Enter full name"
+                                name="first_name"
+                                label="First Name"
+                                placeholder="Enter first name"
                                 iconSrc={ICONS.user}
+                            />
+
+                            <CustomFormField
+                                fieldType={FormFieldType.INPUT}
+                                control={form.control}
+                                name="last_name"
+                                label="Last Name"
+                                placeholder="Enter last name"
+                                iconSrc={ICONS.user}
+                            />
+
+                            <CustomFormField
+                                fieldType={FormFieldType.SELECT}
+                                control={form.control}
+                                name="gender"
+                                label="Gender"
+                                placeholder="Select gender"
+                                options={genderOptions}
                             />
 
                             <CustomFormField
@@ -201,6 +262,27 @@ export function SheikhForm({
                                 label="Phone Number"
                                 placeholder="+1234567890"
                                 iconSrc={ICONS.phone}
+                            />
+
+                            {/* Country Field */}
+                            <CustomFormField
+                                fieldType={FormFieldType.SELECT}
+                                control={form.control}
+                                name="country_id"
+                                label="Country"
+                                placeholder="Select country"
+                                options={countriesData}
+                            />
+
+                            {/* City Field */}
+                            <CustomFormField
+                                fieldType={FormFieldType.SELECT}
+                                control={form.control}
+                                name="city_id"
+                                label="City"
+                                placeholder="Select city"
+                                options={citiesData}
+                                disabled={!watchCountryId}
                             />
                         </div>
                         
@@ -251,29 +333,23 @@ export function SheikhForm({
                             placeholder="e.g., 15 years of Islamic studies teaching, graduated from Al-Azhar University..."
                         />
 
-                        {/* Specialization using TAG_INPUT */}
+                        {/* Specialization as TEXTAREA (String) */}
                         <CustomFormField
-                            fieldType={FormFieldType.TAG_INPUT}
+                            fieldType={FormFieldType.TEXTAREA}
                             control={form.control}
                             name="specialization"
                             label="Specialization"
-                            tagInputProps={{
-                                placeholder: "Add specialization ",
-                                addButtonText: "Add Specialization",
-                                maxTags: 10,
-                                allowDuplicates: false,
-                                separator: ",",
-                            }}
+                            placeholder="e.g., Tafseer, Hadith, Fiqh, Islamic Law, Quranic Studies..."
                         />
 
-                        {/* Languages using TAG_INPUT */}
+                        {/* Languages using TAG_INPUT (array) */}
                         <CustomFormField
                             fieldType={FormFieldType.TAG_INPUT}
                             control={form.control}
                             name="languages"
                             label="Languages"
                             tagInputProps={{
-                                placeholder: "Add language ",
+                                placeholder: "Add language (e.g., Arabic, English, Urdu)",
                                 addButtonText: "Add Language",
                                 maxTags: 5,
                                 allowDuplicates: false,

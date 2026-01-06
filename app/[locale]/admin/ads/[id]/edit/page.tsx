@@ -30,7 +30,7 @@ export default function EditAdPage() {
     successMessage: "Advertisement updated successfully",
     errorMessage: "Failed to update advertisement",
     onSuccess: () => {
-      router.push(`/admin/${locale}/ads`);
+      router.push(`/admin/ads`);
     },
   });
 

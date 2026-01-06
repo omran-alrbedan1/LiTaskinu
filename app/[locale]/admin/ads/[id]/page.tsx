@@ -63,7 +63,7 @@ const AdDetailPage = () => {
     successMessage: "Advertisement deleted successfully",
     errorMessage: "Failed to delete advertisement",
     onDeleteSuccess: () => {
-      router.push(`/admin/${locale}/ads`);
+      router.push(`/admin/ads`);
     },
   });
 
@@ -96,7 +96,7 @@ const AdDetailPage = () => {
         <CustomHeader
           title="Advertisement Details"
           description="View and manage the details of this advertisement"
-          backLink={`/admin/${locale}/ads`}
+          backLink={`/admin/ads`}
 
         >
           {/* Dropdown Menu for Actions */}
@@ -110,7 +110,7 @@ const AdDetailPage = () => {
 
 
               <DropdownMenuItem asChild>
-                <Link href={`/admin/${locale}/ads/${adId}/edit`} className="flex items-center cursor-pointer">
+                <Link href={`/admin/ads/${adId}/edit`} className="flex items-center cursor-pointer">
                   <Edit className="w-4 h-4 mr-2 text-green-500" />
                   Edit Advertisement
                 </Link>
@@ -308,7 +308,7 @@ const AdDetailPage = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {ad.countries?.map((country) => (
+                  {ad.countries?.map((country:Country) => (
                     <div
                       key={country.id}
                       className="flex items-center justify-between p-3 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors"

@@ -63,7 +63,7 @@ const VerificationPage = () => {
   } = useVerificationRequests();
 
   const handleReview = (requestId: number) => {
-    window.location.href = `/admin/en/verification/${requestId}`;
+    window.location.href = `/admin/verification/${requestId}`;
   };
 
   const hasActiveFilters = searchTerm || statusFilter !== "all";

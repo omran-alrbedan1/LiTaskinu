@@ -31,7 +31,7 @@ export function LoginForm() {
     successMessage: "Login successfully",
     errorMessage: "Login failed. Please try again.",
     onSuccess: (data) => {
-      router.push("/admin/en/dashboard");
+      router.push("./dashboard");
       router.refresh();
     },
   });
