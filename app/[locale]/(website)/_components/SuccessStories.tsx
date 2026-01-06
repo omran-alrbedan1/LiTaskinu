@@ -8,7 +8,7 @@ import SectionHeader from "./SectionHeader";
 export default function SuccessStories() {
   return (
     <motion.section
-      className="py-16 sm:py-20 bg-black "
+      className="py-16 sm:py-20 dark:bg-black "
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}

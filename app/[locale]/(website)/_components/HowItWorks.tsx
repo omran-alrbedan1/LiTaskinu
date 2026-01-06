@@ -73,7 +73,7 @@ const imageVariants: Variants = {
 export default function HowItWorks() {
   return (
     <motion.section
-      className="py-8 sm:py-16 pb-40 md:pb-20 bg-primary-color1 dark:bg-black"
+      className="py-8 sm:py-16 pb-40 md:pb-20 bg-primary-light2 dark:bg-black"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
@@ -86,7 +86,7 @@ export default function HowItWorks() {
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
-          {/* Left Steps */}
+          {/* Left Steps - Animate first, one by one */}
           <div className="space-y-8 lg:space-y-12 order-2 lg:order-1">
             {steps.slice(0, 3).map((step, index) => (
               <motion.div
@@ -99,7 +99,7 @@ export default function HowItWorks() {
             ))}
           </div>
 
-          {/* Center Image */}
+          {/* Center Image - Animate after left column starts */}
           <motion.div
             className="flex justify-center items-center order-1 lg:order-2 mb-8 lg:mb-0"
             variants={imageVariants}
@@ -116,13 +116,13 @@ export default function HowItWorks() {
                   alt="App preview showing the platform interface"
                   width={400}
                   height={600}
-                  className="rounded-3xl w-full border-4 border-white dark:border-gray-700 shadow-xl"
+                  className="rounded-3xl w-full"
                   priority
                 />
               </motion.div>
 
               <motion.div
-                className="absolute -top-4 -left-4 w-8 h-8 bg-[#A1AA8A] dark:bg-[#8B9475] rounded-full opacity-20 dark:opacity-30"
+                className="absolute -top-4 -left-4 w-8 h-8 bg-[#A1AA8A] rounded-full opacity-20"
                 animate={{
                   scale: [1, 1.2, 1],
                   opacity: [0.2, 0.4, 0.2],
@@ -134,7 +134,7 @@ export default function HowItWorks() {
                 }}
               />
               <motion.div
-                className="absolute -bottom-4 -right-4 w-6 h-6 bg-[#8B9475] dark:bg-[#A1AA8A] rounded-full opacity-30 dark:opacity-20"
+                className="absolute -bottom-4 -right-4 w-6 h-6 bg-[#8B9475] rounded-full opacity-30"
                 animate={{
                   scale: [1, 1.3, 1],
                   opacity: [0.3, 0.5, 0.3],
@@ -149,7 +149,7 @@ export default function HowItWorks() {
             </div>
           </motion.div>
 
-          {/* Right Steps */}
+          {/* Right Steps - Animate last, one by one */}
           <div className="space-y-8 lg:space-y-12 order-3">
             {steps.slice(3, 6).map((step, index) => (
               <motion.div
