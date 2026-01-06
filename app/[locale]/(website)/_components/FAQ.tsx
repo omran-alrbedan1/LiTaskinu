@@ -9,7 +9,7 @@ import SectionHeader from "./SectionHeader";
 export default function FAQ() {
   return (
     <motion.section
-      className="py-16 sm:py-20 bg-primary-light3"
+      className="py-16 sm:py-20 bg-primary-light3 dark:bg-black"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
@@ -32,13 +32,13 @@ export default function FAQ() {
             className="text-center mt-12"
             variants={animationVariants.item}
           >
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
               Still have questions? We're here to help!
             </p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/contact"
-                className="bg-transparent border border-[#A1AA8A] text-[#8B9475] hover:bg-[#A1AA8A] hover:text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2"
+                className="bg-transparent border border-[#A1AA8A] dark:border-[#8B9475] text-[#8B9475] dark:text-[#A1AA8A] hover:bg-[#A1AA8A] dark:hover:bg-[#8B9475] hover:text-white dark:hover:text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl dark:shadow-gray-800/50 inline-flex items-center gap-2"
               >
                 Contact Support
                 <svg

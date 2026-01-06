@@ -10,22 +10,7 @@ import {
   FileText,
   Settings,
   PieChart,
-  Home,
-  Ban,
-  Bell,
-  BookOpen,
-  HelpCircle,
-  Shield,
-  Calendar,
-  Flag,
-  Archive,
-  Eye,
-  Mail,
-  Phone,
-  UserCog, // إضافة أيقونة جديدة لإدارة أولياء الأمور
-  UserPlus,
-  Contact,
-  Globe,
+  Home, Bell, HelpCircle, Calendar, UserCog, Globe
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";

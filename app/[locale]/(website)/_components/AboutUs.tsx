@@ -7,7 +7,7 @@ import FeatureCard from "./FeatureCard";
 export default function AboutUs() {
   return (
     <motion.section
-      className="py-12 sm:py-16 lg:py-20 bg-white"
+      className="py-12 sm:py-16 lg:py-20 bg-white dark:bg-black"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
@@ -21,17 +21,17 @@ export default function AboutUs() {
             variants={animationVariants.item}
           >
             <div className="flex-1 w-full">
-              <p className="text-xs sm:text-sm text-gray-500 uppercase tracking-wider mb-2 sm:mb-3">
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2 sm:mb-3">
                 ABOUT US
               </p>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-[#8B9475] leading-snug sm:leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-[#8B9475] dark:text-[#A1AA8A] leading-snug sm:leading-tight">
                 Litaskunu is an Islamic
                 <br className="hidden sm:block" />
                 marriage platform
               </h2>
             </div>
 
-            <p className="flex-1 w-full text-sm sm:text-base lg:text-lg text-gray-600 leading-relaxed sm:leading-loose">
+            <p className="flex-1 w-full text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-300 leading-relaxed sm:leading-loose">
               is designed to be a safe and legitimate environment that brings
               together those seeking marriage according to Islamic principles.
               The platform focuses on transparency, trust, and respect for the

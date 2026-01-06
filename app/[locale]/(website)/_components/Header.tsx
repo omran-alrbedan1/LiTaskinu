@@ -8,7 +8,7 @@ import { images } from "@/constants/images";
 export default function Header() {
   return (
     <motion.header
-      className="bg-transparent fixed -top-6 flex bg-white w-full shadow-sm shadow-primary-light md:-left-3.5 z-50"
+      className="dark:bg-black bg-white fixed -top-6 flex w-full shadow-sm shadow-primary-light/30 dark:shadow-gray-800/50 md:-left-3.5 z-50"
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.2 }}
@@ -36,7 +36,7 @@ export default function Header() {
         >
           <Link
             href="/en/sign-in"
-            className="bg-[#A1AA8A] text-white px-4 sm:px-6 py-2 rounded-full font-semibold hover:bg-[#8f9978] transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base"
+            className="bg-[#A1AA8A] dark:bg-[#8B9475] text-white px-4 sm:px-6 py-2 rounded-full font-semibold hover:bg-[#8f9978] dark:hover:bg-[#7A8366] transition-all duration-300 shadow-lg hover:shadow-xl dark:shadow-gray-800/50 text-sm sm:text-base"
           >
             Login
           </Link>
