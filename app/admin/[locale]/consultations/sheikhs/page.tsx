@@ -18,18 +18,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Plus, Edit, Trash2, Eye, MoreHorizontal, User, Phone } from "lucide-react";
+import { Plus, Edit, Trash2, MoreHorizontal, User, Phone } from "lucide-react";
 import { AddSheikhModal } from "./_components/AddSheikhModal";
 import { EditSheikhModal } from "./_components/EditSheikhModal";
-import { Header, StatsCard } from "@/components/admin/shared";
+import { Header } from "@/components/admin/shared";
 import DeleteModal from "@/components/admin/shared/DeleteModal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import useGetData from "@/hooks/useGetData";
-import usePostData from "@/hooks/usePostData";
-import usePutData from "@/hooks/usePutData";
-import useDeleteData from "@/hooks/useDeleteData";
 import { EmptyState } from "@/components/shared";
 import { MOCK_SHEIKHS } from "@/constants/temporary";
 import Image from "next/image";
@@ -48,7 +43,6 @@ const SheikhsPage = () => {
   
   const API_ENDPOINT = "/api/admin/consultants/sheikhs";
   
-  // Use mock data for testing - تعليق هذا السطر واستخدام useGetData لاحقًا
   const [sheikhsData, setSheikhsData] = useState<Sheikh[]>(MOCK_SHEIKHS);
   const [isFetchingSheikhs, setIsFetchingSheikhs] = useState(false);
   const [fetchError, setFetchError] = useState<string | null>(null);

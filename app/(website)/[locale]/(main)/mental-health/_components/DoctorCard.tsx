@@ -5,7 +5,7 @@ import { images } from '@/constants/images';
 import Link from 'next/link';
 
 interface DoctorCardProps {
-doctor:Psychiatrist
+  doctor: Psychiatrist
 }
 
 const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
@@ -20,7 +20,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
                 <div className="h-full w-full relative bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-700 dark:to-gray-800">
                   {doctor.image && (
                     <Image
-                      src={doctor.image||images.Unknown}
+                      src={doctor.image || images.Unknown}
                       alt={doctor.name}
                       fill
                       className="object-cover"
@@ -56,8 +56,8 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
           <div className="mb-3">
             <div className="flex flex-wrap gap-1 justify-center md:justify-start">
               {doctor.specialization.slice(0, 2).map((spec, index) => (
-                <span 
-                  key={index} 
+                <span
+                  key={index}
                   className="inline-flex items-center gap-1 px-2 py-1 bg-primary-color1/5 dark:bg-primary-color1/10 text-primary-color1 dark:text-primary-color1/90 rounded-lg text-xs font-medium border border-primary-color1/10 dark:border-primary-color1/20"
                 >
                   <Brain className="h-3 w-3" />
@@ -89,13 +89,13 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
           <div className="flex gap-2">
             <Link
               href={`./mental-health/${doctor.id}/chat`}
-            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-primary-color1/5 dark:bg-primary-color1/10 text-primary-color1 dark:text-primary-color1/90 rounded-lg text-sm font-medium hover:bg-primary-color1/10 dark:hover:bg-primary-color1/20 transition-colors border border-primary-color1/10 dark:border-primary-color1/20">
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-primary-color1/5 dark:bg-primary-color1/10 text-primary-color1 dark:text-primary-color1/90 rounded-lg text-sm font-medium hover:bg-primary-color1/10 dark:hover:bg-primary-color1/20 transition-colors border border-primary-color1/10 dark:border-primary-color1/20">
               <MessageCircle className="h-4 w-4" />
               Chat
             </Link>
-                <Link
+            <Link
               href={`./mental-health/${doctor.id}`}
-            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-primary-color1 to-primary-color1/80 text-white rounded-lg text-sm font-medium hover:from-primary-color1/90 hover:to-primary-color1/70 transition-all transform hover:scale-105 shadow-md shadow-primary-color1/20">
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-primary-color1 to-primary-color1/80 text-white rounded-lg text-sm font-medium hover:from-primary-color1/90 hover:to-primary-color1/70 transition-all transform hover:scale-105 shadow-md shadow-primary-color1/20">
               <Eye className="h-4 w-4" />
               View
             </Link>

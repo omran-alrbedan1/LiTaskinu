@@ -661,7 +661,7 @@ export default function ChatPage() {
                 <Mic className="h-5 w-5" />
               </Button>
             </div>
-{/* //test    */}
+
             <Button
               type="submit"
               size="icon"
