@@ -4,7 +4,7 @@ import LoginForm from "./_components/LoginForm";
 import { getTranslations } from "next-intl/server";
 
 const LoginPage = async () => {
-  const t = await getTranslations("signIn");
+  const t = await getTranslations("auth");
   return (
     <AuthLayout
       title={t("welcome_aboard")}
