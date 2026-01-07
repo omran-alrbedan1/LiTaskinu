@@ -12,10 +12,15 @@ import CustomFormField, {
 } from "@/components/shared/CustomInput";
 import { ICONS } from "@/constants/icons";
 import usePostData from "@/hooks/usePostData";
-import { ForgotPasswordValidation } from "@/validation";
+import { useForgotPasswordValidation } from "@/validation";
+import { useTranslations } from "next-intl";
 
 const ForgotPasswordForm = () => {
   const router = useRouter();
+  const t = useTranslations("auth");
+  const ft = useTranslations("fields");
+
+  const ForgotPasswordValidation = useForgotPasswordValidation();
 
   const {
     postData,
@@ -24,9 +29,9 @@ const ForgotPasswordForm = () => {
     success,
   } = usePostData("/api/website/forgot-password", {
     showNotifications: true,
-    successMessage: "Reset code sent to your email!",
-    errorMessage: "Failed to send reset code. Please try again.",
-    onSuccess: (data) => {
+    successMessage: t("reset_code_sent"),
+    errorMessage: t("reset_code_failed"),
+    onSuccess: () => {
       router.push(
         `./verify-reset-code?email=${encodeURIComponent(
           form.getValues("email")
@@ -47,7 +52,7 @@ const ForgotPasswordForm = () => {
   return (
     <div className="w-full max-w-md mx-auto p-6 text-white">
       <h2 className="text-2xl text-center font-bold mb-6">
-        Reset Your Password
+        {t("reset_password_title")}
       </h2>
 
       <Form {...form}>
@@ -56,14 +61,14 @@ const ForgotPasswordForm = () => {
             fieldType={FormFieldType.INPUT}
             control={form.control}
             name="email"
-            label="Email"
-            placeholder="your@email.com"
+            label={ft("email")}
+            placeholder={ft("email_placeholder")}
             iconSrc={ICONS.email}
             iconAlt="email"
           />
 
           <SubmitButton isLoading={isLoading} className="w-full">
-            {isLoading ? "Sending Code..." : "Send Reset Code"}
+            {isLoading ? t("sending_code") : t("send_reset_code")}
           </SubmitButton>
         </form>
       </Form>
@@ -73,7 +78,7 @@ const ForgotPasswordForm = () => {
           href="./sign-in"
           className="text-primary-color2 hover:text-primary-color1 transition-colors"
         >
-          Back to Sign In
+          {t("back_to_sign_in")}
         </Link>
       </div>
     </div>

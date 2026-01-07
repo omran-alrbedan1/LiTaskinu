@@ -8,7 +8,7 @@ import { Form } from "@/components/ui/form";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ICONS } from "@/constants/icons";
-import { countryOptions, genderOptions } from "@/constants/options";
+import { countryOptions, useGenderOptions } from "@/constants/options";
 import CustomFormField, {
   FormFieldType,
 } from "@/components/shared/CustomInput";
@@ -47,6 +47,8 @@ interface EditProfileFormProps {
 }
 
 const EditProfileForm = ({ initialData }: EditProfileFormProps) => {
+  const genderOptions = useGenderOptions();
+
   const [isLoading, setIsLoading] = useState(false);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const router = useRouter();

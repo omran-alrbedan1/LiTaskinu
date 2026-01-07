@@ -12,7 +12,7 @@ import { Plus, Edit, User, Image as ImageIcon, BookOpen, FileText, MapPin, Globe
 import { ICONS } from "@/constants/icons";
 import { SheikhFormValidation } from "@/validation/admin";
 import CustomUpload from "@/components/shared/CustomUpload";
-import { genderOptions } from "@/constants/options";
+import { useGenderOptions } from "@/constants/options";
 import useGetData from "@/hooks/useGetData";
 
 interface SheikhFormProps { 
@@ -30,6 +30,8 @@ export function SheikhForm({
     initialData,
     isEdit = false,
 }: SheikhFormProps) {
+    const genderOptions = useGenderOptions();
+
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [imagePreview, setImagePreview] = useState<string>(
         initialData?.image 

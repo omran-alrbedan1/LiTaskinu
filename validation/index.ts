@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { z } from "zod";
 
 export const LoginFormValidation = z.object({
@@ -5,30 +6,33 @@ export const LoginFormValidation = z.object({
   password: z.string().min(1, "Password is required"),
 });
 
-export const RegisterFormValidation = z
-  .object({
-    first_name: z.string().min(1, "First name is required"),
-    last_name: z.string().min(1, "Last name is required"),
-    gender: z.string().min(1, "Gender is required"),
-    birath_day: z.union([z.string(), z.date()]).refine(
-      (val) => {
-        if (val instanceof Date) return !isNaN(val.getTime());
-        return val.length > 0;
-      },
-      { message: "Date of birth is required" }
-    ),
-    country_id: z.string().min(1, "Country is required"),
-    city_id: z.string().min(1, "City is required"),
-    role: z.string().optional(),
-    email: z.string().email("Invalid email address"),
-    phone: z.string().min(1, "Phone number is required"),
-    password: z.string().min(8, "Password must be at least 8 characters"),
-    password_confirmation: z.string().min(1, "Please confirm your password"),
-  })
-  .refine((data) => data.password === data.password_confirmation, {
-    message: "Passwords don't match",
-    path: ["password_confirmation"],
+export const useRegisterFormValidation = () => {
+  const t = useTranslations("validation");
+  return z
+    .object({
+      first_name: z.string().min(1, t("first_name_required")),
+      last_name: z.string().min(1, t("last_name_required")),
+      gender: z.string().min(1, t("gender_required")),
+      birath_day: z.union([z.string(), z.date()]).refine(
+        (val) => {
+          if (val instanceof Date) return !isNaN(val.getTime());
+          return val.length > 0;
+        },
+        { message: t("date_of_birth_required") }
+      ),
+      country_id: z.string().min(1, t("country_required")),
+      city_id: z.string().min(1, t("city_required")),
+      role: z.string().optional(),
+      email: z.string().email(t("invalid_email")),
+      phone: z.string().min(1, t("phone_required")),
+      password: z.string().min(8, t("password_min_length")),
+      password_confirmation: z.string().min(1, t("password_confirmation_required")),
+    })
+    .refine((data) => data.password === data.password_confirmation, {
+      message: t("passwords_not_match"),
+      path: ["password_confirmation"],
   });
+}
 
 export const UserFormValidation = z.object({
   name: z
@@ -41,19 +45,27 @@ export const UserFormValidation = z.object({
     .refine((phone) => /^\+\d{10,15}$/.test(phone), "Invalid phone number"),
 });
 
-export const ForgotPasswordValidation = z.object({
-  email: z.string().email("Please enter a valid email address"),
-});
-
-export const ResetPasswordValidation = z
-  .object({
-    password: z.string().min(8, "Password must be at least 8 characters"),
-    password_confirmation: z.string(),
-  })
-  .refine((data) => data.password === data.password_confirmation, {
-    message: "Passwords don't match",
-    path: ["password_confirmation"],
+export const useForgotPasswordValidation = () => {
+  const t = useTranslations("validation");
+  return z.object({
+    email: z.string().email(t("valid_email")),
   });
+}
+
+export const useResetPasswordValidation = () => {
+  const t = useTranslations("validation");
+  return z
+    .object({
+      password: z
+        .string()
+        .min(8, t("password_min_length")),
+      password_confirmation: z.string(),
+    })
+    .refine((data) => data.password === data.password_confirmation, {
+      message: t("passwords_not_match"),
+      path: ["password_confirmation"],
+  });
+}
 
 // export const PatientFormValidation = z.object({
 //   name: z

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ICONS } from "@/constants/icons";
 import SubmitButton from "@/components/Buttons/SubmitButton";
+import { useTranslations } from "next-intl";
 
 interface UserTypeCardProps {
   title: string;
@@ -63,24 +64,25 @@ const SelectUserTypeForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const t = useTranslations("auth");
+
   const userTypes = [
     {
       id: "regular",
-      title: "Regular user",
-      description: "I'm registering for myself as a regular user",
+      title: t("regular_user"),
+      description: t("regular_user_desc"),
       icon: ICONS.user,
     },
     {
       id: "guardian",
-      title: "Guardian",
-      description: "I'm registering as a guardian for someone else",
+      title: t("guardian_user"),
+      description: t("guardian_user_desc"),
       icon: ICONS.guardian,
     },
   ];
 
   const handleContinue = () => {
     if (!selectedUserType) return;
-
     router.push("./sign-up");
   };
 
@@ -88,10 +90,11 @@ const SelectUserTypeForm = () => {
     <div className="w-full max-w-md mx-auto p-6bg-gray-900 rounded-lg shadow-sm -mt-28 md:-mt-0">
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-2xl font-bold text-white mb-2">Select user type</h1>
+        <h1 className="text-2xl font-bold text-white mb-2">
+          {t("select_user_type")}
+        </h1>
         <p className="text-gray-300 text-sm">
-          Please select the user type you want to complete the process
-          correctly.
+          {t("select_user_type_desc")}
         </p>
       </div>
 
@@ -114,7 +117,7 @@ const SelectUserTypeForm = () => {
         isLoading={isLoading}
         className="w-full"
       >
-        Continue
+        {t("continue")}
       </SubmitButton>
     </div>
   );
