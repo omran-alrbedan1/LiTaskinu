@@ -10,16 +10,13 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-
-// Hooks
-import { usePreferenceForm } from "@/hooks/usePreferenceForm";
-
 // Components
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import CustomHeader from "@/components/shared/CustomHeader";
-import { PREFERENCE_SECTIONS } from "../constants/preference-sections";
+import { PREFERENCE_SECTIONS } from "../_constants/preference-sections";
 import { SectionContent } from "../_components/SectionContent";
 import Loader from "@/components/shared/Loader";
+import { usePreferenceForm } from "../_hooks/usePreferenceForm";
 
 const EditPreferencePage = () => {
   const { form, isLoading, error, handleSubmit } = usePreferenceForm();

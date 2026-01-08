@@ -172,7 +172,7 @@ export const formatRemainingTime = (endDate: string) => {
   const now = new Date();
   const diffInMs = end.getTime() - now.getTime();
   const diffInSeconds = Math.floor(diffInMs / 1000);
-  
+
   // Use your formatDuration utility for consistent formatting
   if (diffInSeconds < 60) return "Less than a minute";
   if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes`;
@@ -181,14 +181,14 @@ export const formatRemainingTime = (endDate: string) => {
 };
 
 // transfer data : 
-export    const toBoolean = (value: any) => {
-        if (value === "1" || value === 1 || value === true) return 1;
-        if (value === "0" || value === 0 || value === false) return 0;
-        return 0;
-      };
+export const toBoolean = (value: any) => {
+  if (value === "1" || value === 1 || value === true) return 1;
+  if (value === "0" || value === 0 || value === false) return 0;
+  return 0;
+};
 
-     export  const toNumber = (value: any) => {
-        if (value === null || value === undefined) return 0;
-        const num = Number(value);
-        return isNaN(num) ? 0 : num;
-      };
+export const toNumber = (value: any) => {
+  if (value === null || value === undefined) return 0;
+  const num = Number(value);
+  return isNaN(num) ? 0 : num;
+};

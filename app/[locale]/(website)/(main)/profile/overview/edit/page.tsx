@@ -12,14 +12,14 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 // Hooks
-import { useProfileForm } from "@/hooks/useProfileForm";
 
 // Components
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import CustomHeader from "@/components/shared/CustomHeader";
-import { PROFILE_SECTIONS } from "../constants/profile-sections";
+import { PROFILE_SECTIONS } from "../_constants/profile-sections";
 import { SectionContent } from "../_components/SectionContent";
 import Loader from "@/components/shared/Loader";
+import { useProfileForm } from "../_hooks/useProfileForm";
 
 const EditPersonalDataPage = () => {
   const { form, isLoading, error, handleSubmit } = useProfileForm();
@@ -33,11 +33,7 @@ const EditPersonalDataPage = () => {
           description="Update your personal details and information"
           backLink="../overview"
           showBackButton={true}
-        />
-
-        {isLoading ? (
-          <Loader/>
-        ) : (
+        />   
           <Form {...form}>
             <form onSubmit={handleSubmit} className="space-y-8">
               <Accordion 
@@ -77,8 +73,6 @@ const EditPersonalDataPage = () => {
                 ))}
               </Accordion>
 
-        
-
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row justify-end gap-3 pt-8 border-t border-gray-200 dark:border-gray-700">
                 <Button
@@ -104,7 +98,7 @@ const EditPersonalDataPage = () => {
               </div>
             </form>
           </Form>
-        )}
+
       </Card>
     </div>
   );

@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import usePostData from "@/hooks/usePostData";
-import { PreferenceFormData, preferenceSchema } from "@/validation/preference-schema";
+import { PreferenceFormData, preferenceSchema } from "@/validation/profile-schema";
 import useGetData from "@/hooks/useGetData";
 import { useEffect } from "react";
 

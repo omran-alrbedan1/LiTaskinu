@@ -4,13 +4,14 @@ import { ProfileSection } from "./_components/ProfileSection";
 import { User, Heart } from "lucide-react";
 import CustomHeader from "@/components/shared/CustomHeader";
 import useGetData from "@/hooks/useGetData";
+import Loader from "@/components/shared/Loader";
 
 const OverviewPage = () => {
   const {
     data: profileInfo,
-    loading: isFetchingAds,
+    loading: isFetchingProfileInfo,
     error: fetchError,
-    refetch: refetchAds,
+    refetch: refetchProfileInfo,
   } = useGetData({
     url: "/api/website/profile/info",
     enabled: true,
@@ -23,7 +24,7 @@ const OverviewPage = () => {
   });
 
 
-  if (isFetchingAds) {
+  if (isFetchingProfileInfo) {
     return (
       <div className="space-y-6">
         <CustomHeader
@@ -44,10 +45,7 @@ const OverviewPage = () => {
             },
           ]}
         />
-        <div className="text-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-color1 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading profile information...</p>
-        </div>
+       <Loader/>
       </div>
     );
   }
@@ -76,7 +74,7 @@ const OverviewPage = () => {
         <div className="text-center py-12">
           <p className="text-red-600">Error loading profile: {fetchError.message}</p>
           <button 
-            onClick={() => refetchAds()} 
+            onClick={() => refetchProfileInfo()} 
             className="mt-4 px-4 py-2 bg-primary-color1 text-white rounded hover:bg-primary-color2"
           >
             Retry
@@ -88,10 +86,6 @@ const OverviewPage = () => {
 
   const profileData = profileInfo?.data || {};
   const preferenceData = preferenceInfo?.data || {};
-
-
-
-  console.log(preferenceData)
   return (
     <div className="space-y-6">
       <CustomHeader

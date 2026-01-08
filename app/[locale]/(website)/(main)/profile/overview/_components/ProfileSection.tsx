@@ -21,15 +21,15 @@ export const ProfileSection: React.FC<ProfileSectionProps> = ({
 
   // Process fields for personal data
   const personalFields = fields
-    .filter(field => !field.section || field.section !== "seeking")
+    .filter(field => !field.section || field.section !== "preference")
     .map(field => ({
       ...field,
       value: transformValue(personalData[field.key], field.transform)
     }));
 
-  // Process fields for seeking data
+  // Process fields for preference data
   const seekingFields = fields
-    .filter(field => field.section === "seeking")
+    .filter(field => field.section === "preference")
     .map(field => ({
       ...field,
       value: transformValue(seekingData[field.key], field.transform)
@@ -56,7 +56,7 @@ export const ProfileSection: React.FC<ProfileSectionProps> = ({
             icon={<Heart className="w-4 h-4 text-primary-color1" />}
             data={seekingData}
             fields={seekingFields}
-            variant="seeking"
+            variant="preference"
             transformValue={transformValue}
           />
         )}

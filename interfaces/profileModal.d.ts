@@ -102,7 +102,7 @@ declare interface EditProfileField {
   label: string;
   type: FieldType;
   placeholder?: string;
-  options?: Array<{ value: string | number; label: string }>;
+  options?: Array<{ value: string |boolean| number; label: string }>;
   section?: "personal" | "preference";
 }
 

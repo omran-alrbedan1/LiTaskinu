@@ -2,10 +2,9 @@
 
 import React from "react";
 import CustomFormField, { FormFieldType } from "@/components/shared/CustomInput";
-import { ProfileSection, ProfileField } from "../constants/profile-sections";
 
 interface SectionContentProps {
-  section: ProfileSection;
+  section: any;
   control: any;
 }
 
@@ -13,7 +12,7 @@ export const SectionContent: React.FC<SectionContentProps> = ({
   section,
   control,
 }) => {
-  const getFieldType = (field: ProfileField): FormFieldType => {
+  const getFieldType = (field: any): FormFieldType => {
     switch (field.type) {
       case "radio":
         return FormFieldType.RADIO;
@@ -33,7 +32,7 @@ export const SectionContent: React.FC<SectionContentProps> = ({
 
   return (
     <div className="grid grid-cols-1  gap-6"> 
-      {section?.fields.map((field) => {
+      {section?.fields.map((field:any) => {
         const fieldType = getFieldType(field);
 
         return (
