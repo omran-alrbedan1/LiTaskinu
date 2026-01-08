@@ -1,40 +1,43 @@
-  "use client";
+"use client";
 
-  import { Save } from "lucide-react";
-  import { Form } from "@/components/ui/form";
-  import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-  } from "@/components/ui/accordion";
-  import { Button } from "@/components/ui/button";
-  import { Card } from "@/components/ui/card";
+import { Save } from "lucide-react";
+import { Form } from "@/components/ui/form";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
-  // Hooks
-  import { useProfileForm } from "@/hooks/useProfileForm";
+// Hooks
+import { useProfileForm } from "@/hooks/useProfileForm";
 
-  // Components
-  import SubmitButton from "@/components/Buttons/SubmitButton";
-  import CustomHeader from "@/components/shared/CustomHeader";
-  import { PROFILE_SECTIONS } from "../constants/profile-sections";
+// Components
+import SubmitButton from "@/components/Buttons/SubmitButton";
+import CustomHeader from "@/components/shared/CustomHeader";
+import { PROFILE_SECTIONS } from "../constants/profile-sections";
 import { SectionContent } from "../_components/SectionContent";
+import Loader from "@/components/shared/Loader";
 
+const EditPersonalDataPage = () => {
+  const { form, isLoading, error, handleSubmit } = useProfileForm();
 
-  const EditPersonalDataPage = () => {
-    const { form, isLoading, error, handleSubmit } = useProfileForm();
+  return (
+    <div className="container mx-auto px-4 py-8 max-w-6xl">
+      <Card className="p-6 shadow-lg dark:bg-gray-900 dark:border-gray-800">
+        {/* Header using CustomHeader component */}
+        <CustomHeader
+          title="Edit Personal Information"
+          description="Update your personal details and information"
+          backLink="../overview"
+          showBackButton={true}
+        />
 
-    return (
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
-        <Card className="p-6 shadow-lg dark:bg-gray-900 dark:border-gray-800">
-          {/* Header using CustomHeader component */}
-          <CustomHeader
-            title="Edit Personal Information"
-            description="Update your personal details and information"
-            backLink="../overview"
-            showBackButton={true}
-          />
-
+        {isLoading ? (
+          <Loader/>
+        ) : (
           <Form {...form}>
             <form onSubmit={handleSubmit} className="space-y-8">
               <Accordion 
@@ -74,6 +77,8 @@ import { SectionContent } from "../_components/SectionContent";
                 ))}
               </Accordion>
 
+        
+
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row justify-end gap-3 pt-8 border-t border-gray-200 dark:border-gray-700">
                 <Button
@@ -99,9 +104,10 @@ import { SectionContent } from "../_components/SectionContent";
               </div>
             </form>
           </Form>
-        </Card>
-      </div>
-    );
-  };
+        )}
+      </Card>
+    </div>
+  );
+};
 
-  export default EditPersonalDataPage;
+export default EditPersonalDataPage;

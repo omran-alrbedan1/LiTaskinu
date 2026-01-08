@@ -35,8 +35,8 @@ export const PROFILE_SECTIONS = [
         label: "Willing to Relocate",
         type: "radio" as const,
         options: [
-          { value: "1", label: "Yes" },
-          { value: "0", label: "No" },
+          { value: 1, label: "Yes" },
+          { value: 0, label: "No" },
         ],
       },
       {
@@ -127,15 +127,15 @@ export const PROFILE_SECTIONS = [
         label: "Smoking",
         type: "radio" as const,
         options: [
-          { value: "1", label: "Yes" },
-          { value: "0", label: "No" },
+          { value: 1, label: "Yes" },
+          { value: 0, label: "No" },
         ],
       },
       {
         name: "children_count",
         label: "Children Count",
         type: "number" as const,
-        placeholder: "0",
+        placeholder: 0,
       },
       {
         name: "want_more_children",
@@ -181,8 +181,8 @@ export const PROFILE_SECTIONS = [
         label: "Has House",
         type: "radio" as const,
         options: [
-          { value: "1", label: "Yes" },
-          { value: "0", label: "No" },
+          { value: 1, label: "Yes" },
+          { value: 0, label: "No" },
         ],
       },
       {
@@ -199,8 +199,8 @@ export const PROFILE_SECTIONS = [
         label: "Has Vehicle",
         type: "radio" as const,
         options: [
-          { value: "1", label: "Yes" },
-          { value: "0", label: "No" },
+          { value: 1, label: "Yes" },
+          { value: 0, label: "No" },
         ],
       },
       {
@@ -208,8 +208,8 @@ export const PROFILE_SECTIONS = [
         label: "Sporty",
         type: "radio" as const,
         options: [
-          { value: "1", label: "Yes" },
-          { value: "0", label: "No" },
+          { value: 1, label: "Yes" },
+          { value: 0, label: "No" },
         ],
       },
     ],
@@ -235,16 +235,8 @@ export const PROFILE_SECTIONS = [
       {
         name: "languages_spoken",
         label: "Languages Spoken",
-        type: "multiSelect" as const,
-        options: [
-          { value: "Arabic", label: "Arabic" },
-          { value: "English", label: "English" },
-          { value: "French", label: "French" },
-          { value: "Spanish", label: "Spanish" },
-          { value: "Urdu", label: "Urdu" },
-          { value: "Turkish", label: "Turkish" },
-          { value: "Other", label: "Other" },
-        ],
+        type: "input" as const,
+     
       },
     ],
   },
@@ -324,13 +316,14 @@ export const PROFILE_SECTIONS = [
 ];
 
 // Type definitions
+// Type definitions
 export type ProfileField = {
   name: string;
   label: string;
   type: "input" | "textarea" | "radio" | "number" | "multiSelect" | "checkbox";
   section?: "personal" | "seeking";
-  placeholder?: string;
-  options?: { value: string; label: string }[];
+  placeholder?: string | number; 
+  options?: { value: string | number; label: string }[]; 
 };
 
 export type ProfileSection = {

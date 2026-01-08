@@ -34,13 +34,14 @@ export const FIELD_OPTIONS = {
   languages: ["Arabic", "English", "French", "Spanish", "Urdu", "Turkish", "Other"] as const,
 };
 
+
 export const profileSchema = z.object({
   // Basic Information
   religion: z.string().optional(),
-  religious_commitment: z.string().optional(),
-  marital_status: z.string().optional(),
-  children_count: z.number().min(0).optional(),
-  born_reverted: z.string().optional(),
+  religious_commitment: z.enum(["low", "medium", "high"]),
+  marital_status: z.enum(["single", "married", "widowed", "divorced"]),
+  children_count: z.coerce.number().int().nonnegative(),
+  born_reverted: z.enum(["born_muslim", "reverted"]),
   
   // Appearance
   hair_color: z.string().optional(),
@@ -50,12 +51,12 @@ export const profileSchema = z.object({
   body_style: z.string().optional(),
   
   // Lifestyle
-  is_sporty: z.coerce.number().min(0).max(1).optional(),
-  is_smoker: z.coerce.number().min(0).max(1).optional(),
-  has_house: z.coerce.number().min(0).max(1).optional(),
+  is_sporty: z.coerce.number().min(0).max(1),
+  is_smoker: z.coerce.number().min(0).max(1),
+  has_house: z.coerce.number().min(0).max(1),
   house_type: z.string().optional(),
-  has_vehicle: z.coerce.number().min(0).max(1).optional(),
-  willing_to_relocate: z.coerce.number().min(0).max(1).optional(),
+  has_vehicle: z.coerce.number().min(0).max(1),
+  willing_to_relocate: z.coerce.number().min(0).max(1),
   
   // Career & Education
   job: z.string().optional(),
@@ -64,9 +65,9 @@ export const profileSchema = z.object({
   living_situation: z.string().optional(),
   
   // Family & Preferences
-  want_more_children: z.string().optional(),
-  wear_hijab: z.string().optional(),
-  polygamy: z.string().optional(),
+  want_more_children: z.enum(["yes", "no", "not_sure"]),
+  wear_hijab: z.enum(["yes", "sometimes", "no"]),
+  polygamy: z.enum(["accept", "maybe", "do_not_accept"]),
   profile_creator: z.string().optional(),
   
   // Languages & About
@@ -74,8 +75,6 @@ export const profileSchema = z.object({
   bio: z.string().optional(),
   partner_description: z.string().optional(),
   partner_preferences: z.string().optional(),
-  
-  language: z.string().optional(),
 });
 
 export type ProfileFormData = z.infer<typeof profileSchema>;

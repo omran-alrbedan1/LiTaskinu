@@ -179,3 +179,16 @@ export const formatRemainingTime = (endDate: string) => {
   if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours`;
   return `${Math.floor(diffInSeconds / 86400)} days`;
 };
+
+// transfer data : 
+export    const toBoolean = (value: any) => {
+        if (value === "1" || value === 1 || value === true) return 1;
+        if (value === "0" || value === 0 || value === false) return 0;
+        return 0;
+      };
+
+     export  const toNumber = (value: any) => {
+        if (value === null || value === undefined) return 0;
+        const num = Number(value);
+        return isNaN(num) ? 0 : num;
+      };

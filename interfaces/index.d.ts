@@ -446,14 +446,6 @@ interface Religious {
   familyValues: string;
 }
 
-interface FieldConfig {
-  key: string;
-  label: string;
-  type?: string;
-  options?: string[];
-  value?: any;
-}
-
 // types/profile.ts
 interface UserData {
   basicInfo: {

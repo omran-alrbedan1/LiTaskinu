@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { GiDiamondRing } from "react-icons/gi";
 
-export const profileSectionsConfig = [
+export const profileSectionsConfig:ProfileSectionConfig[] = [
   {
     title: "Basic Information",
     icon: <User className="w-5 h-5 text-primary-color1" />,

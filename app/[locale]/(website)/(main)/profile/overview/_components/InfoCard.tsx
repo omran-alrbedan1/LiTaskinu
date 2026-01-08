@@ -1,11 +1,3 @@
-interface InfoCardProps {
-  title: string;
-  icon: React.ReactNode;
-  data: Record<string, any>;
-  fields: FieldConfig[];
-  variant: "personal" | "seeking";
-  transformValue: (value: any, transformFn?: (value: any) => any) => any;
-}
 
 export const InfoCard: React.FC<InfoCardProps> = ({
   title,

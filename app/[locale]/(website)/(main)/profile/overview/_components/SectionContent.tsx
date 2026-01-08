@@ -1,14 +1,12 @@
 "use client";
 
 import React from "react";
-import { Control } from "react-hook-form";
 import CustomFormField, { FormFieldType } from "@/components/shared/CustomInput";
 import { ProfileSection, ProfileField } from "../constants/profile-sections";
-import { ProfileFormData } from "@/validation/profile-schema";
 
 interface SectionContentProps {
   section: ProfileSection;
-  control: Control<ProfileFormData>;
+  control: any;
 }
 
 export const SectionContent: React.FC<SectionContentProps> = ({
@@ -35,7 +33,7 @@ export const SectionContent: React.FC<SectionContentProps> = ({
 
   return (
     <div className="grid grid-cols-1  gap-6"> 
-      {section.fields.map((field) => {
+      {section?.fields.map((field) => {
         const fieldType = getFieldType(field);
 
         return (

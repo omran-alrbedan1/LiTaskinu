@@ -62,7 +62,7 @@ export enum FormFieldType {
 }
 
 interface Option {
-  value: string;
+  value: any;
   label: string;
   code?: string;
   icon?: string;
@@ -73,7 +73,7 @@ interface CustomProps {
   control: any;
   name: string;
   label?: string;
-  placeholder?: string;
+  placeholder?: string|number;
   iconSrc?: string;
   iconAlt?: string;
   required?: boolean;
