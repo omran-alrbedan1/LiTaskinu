@@ -48,11 +48,12 @@ export const languageOptions = [
 export const LANGUAGE_OPTIONS = [
   { value: "en", label: "English", code: "US", native: "English" },
   { value: "ar", label: "العربية", code: "JO", native: "العربية" },
-  { value: "fr", label: "Français", code: "FR", native: "Français" },
-  { value: "es", label: "Español", code: "ES", native: "Español" },
-  { value: "de", label: "Deutsch", code: "DE", native: "Deutsch" },
-  { value: "zh", label: "中文", code: "CN", native: "中文" },
-  { value: "ja", label: "日本語", code: "JP", native: "日本語" },
+  { value: "tr", label: "Turkish", code: "TR", native: "Türkçe" },
+  { value: "es", label: "Spanish", code: "ES", native: "Español" },
+  { value: "fr", label: "French", code: "FR", native: "Français" },
+  { value: "zh", label: "Chinese", code: "CN", native: "中文" },
+  { value: "fa", label: "Persian", code: "IR", native: "فارسی" },
+  { value: "ru", label: "Russian", code: "RU", native: "Русский" },
 ] as const;
 
 export const useKinshipOptions = () => {

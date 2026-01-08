@@ -3,15 +3,19 @@ import {
     Lock, Scale, GraduationCap,
     Brain, Video, Clock, Shield, Heart
 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
-export const NAV_LINKS = [
-  { title: "Home", path: "home" },
-  { title: "Chats", path: "chats" },
-  { title: "About Us", path: "about-us" },
-  { title: "Contact Us", path: "contact-us" },
-  { title: "Our Sheikhs", path: "sheikhs" },  
-  { title: "Mental Health", path: "mental-health" }
-] ;
+export const useNavLinks = () => {
+  const t = useTranslations("header");
+  return [
+    { title: t("home"), path: "home" },
+    { title: t("chats"), path: "chats" },
+    { title: t("about"), path: "about-us" },
+    { title: t("contact"), path: "contact-us" },
+    { title: t("sheikhs"), path: "sheikhs" },  
+    { title: t("mental_health"), path: "mental-health" }
+  ];
+}
 
 export const FEATURES = [
   {

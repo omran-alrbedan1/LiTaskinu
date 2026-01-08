@@ -1,8 +1,11 @@
 import { images } from "@/constants/images";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import React from "react";
 
-const EmptyResult = () => {
+const EmptyResult = async () => {
+  const t = await getTranslations("person_detail");
+
   return (
     <div className="text-center py-12">
       <Image
@@ -12,10 +15,9 @@ const EmptyResult = () => {
         alt="search"
         className="mx-auto"
       />
-      <p className="text-gray-500 text-lg">No results found</p>
+      <p className="text-gray-500 text-lg">{t('title')}</p>
       <p className="text-gray-400 text-lg mt-2">
-        The search result is not avaliable , re-search again for something new
-        and explore
+        {t('description')}
       </p>
     </div>
   );

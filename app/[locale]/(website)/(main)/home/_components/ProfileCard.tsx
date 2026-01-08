@@ -4,6 +4,7 @@ import { Heart, MessageCircle, MapPin, Briefcase, User } from "lucide-react";
 import Image from "next/image";
 import { images } from "@/constants/images";
 import { ICONS } from "@/constants/icons";
+import { useTranslations } from "next-intl";
 
 // Types
 export interface Profile {
@@ -22,6 +23,8 @@ interface ProfileCardProps {
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
+  const t = useTranslations("home.profile_card");
+
   const handleMessageClick = () => {
     console.log(`Message ${profile.name}`);
   };
@@ -42,14 +45,17 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
       {/* Image Section */}
       <div className="relative h-48 bg-gray-100 dark:bg-gray-800 overflow-hidden">
         <Image
-          src={profile.image ? `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${profile.image}` : images.Unknown}
-          alt={`${profile.name}'s profile`}
+          src={
+            profile.image
+              ? `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${profile.image}`
+              : images.Unknown
+          }
+          alt={t("profile_image_alt", { name: profile.name })}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
           width={400}
           height={192}
         />
-
 
         {/* Name and Age */}
         <div className="absolute bottom-4 left-4 right-4">
@@ -60,7 +66,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
               </h3>
               <div className="flex items-center gap-2 mt-1">
                 <User className="w-3 h-3 text-white/80" />
-                <span className="text-white/90 text-sm">{profile.age} years</span>
+                <span className="text-white/90 text-sm">{t("age", { age: profile.age })}</span>
               </div>
             </div>
           </div>
@@ -68,22 +74,23 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
 
         {/* Gender Badge */}
         <div className={`absolute top-3 right-3`}>
-          {profile.gender === 'male' ? 
+          {profile.gender === 'male' ? (
             <Image
               src={ICONS.male}
               height={32}
               width={32}
-              alt="male"
+              alt={t("male")}
               className="dark:invert-0"
-            /> :
+            />
+          ) : (
             <Image
               src={ICONS.female}
               height={32}
               width={32}
-              alt="female"
-              className="dark:invert-0" 
+              alt={t("female")}
+              className="dark:invert-0"
             />
-          }
+          )}
         </div>
       </div>
 
@@ -94,7 +101,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
           <div className="flex items-start gap-2">
             <Briefcase className="w-4 h-4 text-primary-color1 dark:text-primary-color1 mt-0.5 flex-shrink-0" />
             <div>
-              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Occupation</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t("occupation")}</p>
               <p className="text-sm text-gray-600 dark:text-gray-300">{profile.occupation}</p>
             </div>
           </div>
@@ -102,7 +109,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
           <div className="flex items-start gap-2">
             <MapPin className="w-4 h-4 text-primary-color1 dark:text-primary-color1 mt-0.5 flex-shrink-0" />
             <div>
-              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Location</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t("location")}</p>
               <p className="text-sm text-gray-600 dark:text-gray-300">{profile.location}</p>
             </div>
           </div>
@@ -111,7 +118,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
           <div className="flex items-start gap-2">
             <Briefcase className="w-4 h-4 text-primary-color1 dark:text-primary-color1 mt-0.5 flex-shrink-0" />
             <div>
-              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Available Time</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t("available_time")}</p>
               <p className="text-sm text-gray-600 dark:text-gray-300">{profile.time}</p>
             </div>
           </div>
@@ -127,7 +134,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
             className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-primary-color1 hover:bg-primary-color2 dark:hover:bg-primary-color2 text-white font-medium transition-all duration-200 text-sm hover:shadow-md dark:hover:shadow-lg"
           >
             <MessageCircle className="w-4 h-4" />
-            Message
+            {t("message")}
           </button>
           <button
             onClick={(e) => {

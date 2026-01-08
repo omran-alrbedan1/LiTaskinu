@@ -7,6 +7,7 @@ import { Search } from "lucide-react";
 import Image from "next/image";
 import { images } from "@/constants/images";
 import { ChatListLoader } from ".";
+import { useTranslations } from "next-intl";
 
 interface Chat {
   id: string;
@@ -91,6 +92,8 @@ const mockChats: Chat[] = [
 ];
 
 export default function ChatList() {
+  const t = useTranslations("chats");
+
   const [chats, setChats] = useState<Chat[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -123,7 +126,7 @@ export default function ChatList() {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input
             type="text"
-            placeholder="Search here..."
+            placeholder={t("search_placeholder")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full pl-10 pr-4 py-2 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-color1"
@@ -134,7 +137,7 @@ export default function ChatList() {
       {/* Conversation count */}
       <div className="px-4 pb-3 flex-shrink-0">
         <p className="text-rose-400 text-sm font-medium">
-          {chats.length} conversations
+          {chats.length} {t("conversations")}
         </p>
       </div>
 

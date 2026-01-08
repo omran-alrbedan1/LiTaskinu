@@ -3,12 +3,15 @@ import { Brain, MessageCircle, Globe, Star, Eye } from 'lucide-react';
 import Image from 'next/image';
 import { images } from '@/constants/images';
 import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
 
 interface DoctorCardProps {
   doctor: Psychiatrist
 }
 
-const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
+const DoctorCard: React.FC<DoctorCardProps> = async ({ doctor }) => {
+  const t = await getTranslations("mental_health");
+
   return (
     <div className="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-primary-color1 dark:hover:border-primary-color1 transform hover:-translate-y-1">
       <div className="flex flex-col md:flex-row p-4 md:p-4">
@@ -91,13 +94,13 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
               href={`./mental-health/${doctor.id}/chat`}
               className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-primary-color1/5 dark:bg-primary-color1/10 text-primary-color1 dark:text-primary-color1/90 rounded-lg text-sm font-medium hover:bg-primary-color1/10 dark:hover:bg-primary-color1/20 transition-colors border border-primary-color1/10 dark:border-primary-color1/20">
               <MessageCircle className="h-4 w-4" />
-              Chat
+              {t("chat")}
             </Link>
             <Link
               href={`./mental-health/${doctor.id}`}
               className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-primary-color1 to-primary-color1/80 text-white rounded-lg text-sm font-medium hover:from-primary-color1/90 hover:to-primary-color1/70 transition-all transform hover:scale-105 shadow-md shadow-primary-color1/20">
               <Eye className="h-4 w-4" />
-              View
+              {t("view")}
             </Link>
           </div>
         </div>

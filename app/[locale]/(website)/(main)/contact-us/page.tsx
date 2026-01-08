@@ -1,9 +1,12 @@
 'use client';
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Mail, Phone, MessageCircle } from "lucide-react";
 import { ContactForm } from "./_components/ContactUsForm";
 
 const Page = () => {
+  const t = useTranslations("contact");
+
   return (
     <div className="min-h-screen bg-white dark:bg-background py-16 px-6">
       <div className="max-w-6xl mx-auto">
@@ -11,7 +14,7 @@ const Page = () => {
           {/* Left Side - Contact Info */}
           <div>
             <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-              Contact Us
+              {t("title")}
             </h1>
             
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
@@ -20,7 +23,7 @@ const Page = () => {
 
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                Our Contact information :
+                {t("contactInfo")}
               </h3>
 
               <div className="space-y-4">
@@ -53,7 +56,7 @@ const Page = () => {
             {/* Social Media */}
             <div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                Follow Us On:
+                {t("followUs")}
               </h3>
               
               <div className="flex gap-3">
