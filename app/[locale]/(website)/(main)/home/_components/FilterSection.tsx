@@ -38,7 +38,6 @@ const FilterSection: React.FC<FilterSectionProps> = ({
     });
   };
 
-  // Handle number input changes (convert number to string)
   const handleNumberChange = (
     key: "ageFrom" | "ageTo",
     value: number | null

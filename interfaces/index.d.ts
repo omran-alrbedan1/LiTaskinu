@@ -449,7 +449,7 @@ interface Religious {
 interface FieldConfig {
   key: string;
   label: string;
-  type: string;
+  type?: string;
   options?: string[];
   value?: any;
 }
@@ -496,36 +496,6 @@ interface UserData {
   };
 }
 
-interface SeekingPreferences {
-  basic: {
-    lookingFor: string;
-    ageRange: string;
-    locationPreference: string;
-  };
-  appearance: {
-    hairColor: string;
-    eyeColor: string;
-    height: string;
-    weight: string;
-    bodyStyle: string;
-    ethnicity: string;
-  };
-  lifestyle: {
-    smoke: string;
-    maritalStatus: string;
-    wantChildren: string;
-    eatingHabits: string;
-  };
-  religious: {
-    education: string;
-    religion: string;
-    nationality: string;
-    languages: string;
-    hijab: string;
-    niqab: string;
-  };
-}
-
 interface SectionConfig {
   id: string;
   title: string;
@@ -540,5 +510,5 @@ interface FieldConfig {
   key: string;
   label: string;
   icon?: React.ReactNode;
-  section?: "personal" | "seeking";
+  section?: string;
 }

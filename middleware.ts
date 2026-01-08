@@ -42,6 +42,7 @@ export function middleware(request: NextRequest) {
       pathname === `/${locale}/sign-in` ||
       pathname === `/${locale}/sign-up` ||
       pathname === `/${locale}/login` ||
+      pathname === `/${locale}/otp-verification` ||
       false;
 
     if (isPublicRoute) {

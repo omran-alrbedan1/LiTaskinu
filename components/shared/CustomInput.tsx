@@ -586,7 +586,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             defaultValue={field.value}
             value={field.value}
             className={`flex ${
-              orientation === "horizontal" ? "flex-row gap-6" : "flex-col gap-3"
+              orientation === "horizontal" ? "flex-row gap-6 flex-wrap" : "flex-col gap-3"
             }`}
           >
             {options.map((option) => (
