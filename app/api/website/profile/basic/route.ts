@@ -73,15 +73,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const body = await request.json();
-
+    // Get FormData from request
+    const formData = await request.formData();
+    
     const response = await fetch(`${API_BASE_URL}/children/update`, {
       method: 'POST', 
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${session.accessToken}`,
       },
-      body: JSON.stringify(body),
+      body: formData,
     });
 
     const responseData = await response.json();
@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
     });
     
   } catch (error: any) {
-      console.error("Update children preferences API error:", error);
-      return handleFetchError(error); 
-    }
+    console.error("Update children preferences API error:", error);
+    return handleFetchError(error); 
+  }
 }

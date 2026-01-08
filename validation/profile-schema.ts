@@ -87,3 +87,31 @@ export const preferenceSchema = z.object({
 });
 
 export type PreferenceFormData = z.infer<typeof preferenceSchema>;
+
+
+export const profileBasicInfo = z.object({
+  
+  // Basic Information
+  first_name: z.string().optional(),
+  last_name: z.string().optional(),
+  gender: z.string().optional(),
+  birth_day: z.union([z.string(), z.date()]).refine(
+    (val) => {
+      if (val instanceof Date) return !isNaN(val.getTime());
+      return val.length > 0;
+    },
+    { message: "Date of birth is required" }
+  ),
+  
+  // Location
+  country_id: z.string().optional(),
+  city_id: z.string().optional(),
+  
+  // Contact Information
+  email: z.string().optional(),
+  phone: z.string().optional(),
+  
+  personal_photo: z.any().optional(),
+  images: z.any().optional(), 
+  
+});

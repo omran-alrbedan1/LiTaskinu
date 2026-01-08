@@ -30,6 +30,11 @@ const nextConfig = {
         pathname: "/storage/**",
       },
       {
+        protocol: "http",
+        hostname: "localhost",
+        pathname: "/storage/**",
+      },
+      {
         protocol: "https",
         hostname: "upload.wikimedia.org",
         pathname: "/**",

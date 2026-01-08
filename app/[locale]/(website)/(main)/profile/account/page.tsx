@@ -65,16 +65,7 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/* Introduction */}
-        <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-          <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-            <FaBook className="text-primary-color1" />
-            Introduction
-          </h3>
-          <p className="text-gray-700 leading-relaxed">
-            {userData.introduction}
-          </p>
-        </div>
+    
       </div>
     </div>
   );

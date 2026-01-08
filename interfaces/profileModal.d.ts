@@ -168,3 +168,24 @@ declare interface PreferencesApiResponse {
 declare type TransformFunction = (value: any) => any;
 declare type ValueTransformer = (value: any, transformFn?: TransformFunction) => any;
 
+
+
+// basic profile types : 
+declare interface BasicProfileInfo {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: number | string;
+  birth_day: string | null;
+  gender: string;
+  child_id: number;
+  Country_id: number | null;
+  city_id: number | null;
+  documents: {
+    id: number;
+    personal_identity: string | null;
+    personal_photo: string;
+    images: (string | null)[];
+  };
+}

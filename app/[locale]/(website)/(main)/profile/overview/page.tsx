@@ -1,5 +1,5 @@
 'use client'
-import { profileSectionsConfig } from "@/constants/profileSections";
+import { profileSectionsConfig } from "@/app/[locale]/(website)/(main)/profile/overview/_components/profileSectionsConfig";
 import { ProfileSection } from "./_components/ProfileSection";
 import { User, Heart } from "lucide-react";
 import CustomHeader from "@/components/shared/CustomHeader";

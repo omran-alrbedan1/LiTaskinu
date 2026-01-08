@@ -97,6 +97,7 @@ interface CustomProps {
     min?: number;
   max?: number;
   step?: number;
+   lightMode?: boolean;
 }
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
@@ -220,40 +221,24 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
         </div>
       );
     
-    case FormFieldType.PHONE_INPUT:
-      return (
-        <FormControl>
-          <PhoneInput
-            country={"us"}
-            value={field.value}
-            onChange={field.onChange}
-            buttonStyle={{
-              backgroundColor: 'rgb(17 24 39)',
-              borderColor: 'rgb(75 85 99)',
-              color: 'rgb(249 250 251)',
-            }}
-            dropdownStyle={{
-              backgroundColor: 'rgb(17 24 39)',
-              borderColor: 'rgb(75 85 99)',
-              color: 'rgb(249 250 251)',
-            }}
-            inputStyle={{
-              backgroundColor: 'rgb(17 24 39)',
-              borderColor: 'rgb(75 85 99)',
-              color: 'rgb(249 250 251)',
-              width: '100%',
-              height: '40px',
-            }}
-            buttonClass="!h-10 !rounded-l-md"
-            dropdownClass="!shadow-lg"
-            inputClass={cn(
-              "!h-10 !w-full !rounded-md focus:!ring-2 focus:!ring-primary-color1",
-              inputClassName
-            )}
-          />
-        </FormControl>
-      );
-    
+ case FormFieldType.PHONE_INPUT:
+  return (
+    <FormControl>
+      <PhoneInput
+        country={"us"}
+        value={field.value}
+        onChange={field.onChange}
+        buttonClass="!h-10 !rounded-l-md !bg-background !border-input !text-foreground hover:!bg-accent"
+        dropdownClass="!shadow-lg !z-50 !bg-background !border-input !text-foreground"
+        inputClass={cn(
+          "!h-10 !w-full !rounded-md !bg-background !border-input !text-foreground",
+          "focus:!ring-2 focus:!ring-ring focus:!border-ring",
+          inputClassName
+        )}
+        containerClass="w-full"
+      />
+    </FormControl>
+  );
     case FormFieldType.DATE_PICKER:
       return (
         <FormControl>
@@ -861,4 +846,4 @@ const CustomFormField = (props: CustomProps) => {
   );
 };
 
-export default CustomFormField;
+export default CustomFormField; 
