@@ -8,6 +8,7 @@ import { images } from "@/constants/images";
 import ProfileCard from "./_components/ProfileCard";
 import useGetData from "@/hooks/useGetData";
 import HomeLoader from "./_components/homeLoader";
+import { useTranslations } from "next-intl";
 
 interface UserProfile {
   id: number;
@@ -25,7 +26,7 @@ interface UserProfile {
     email_verified_at: string | null;
     is_verified: number;
     phone: number;
-    image:string;
+    image: string;
     birth_day: string | null;
     account_status: string;
     created_at: string;
@@ -35,6 +36,8 @@ interface UserProfile {
 }
 
 const HomePage = () => {
+  const t = useTranslations("home");
+
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -64,21 +67,23 @@ const HomePage = () => {
     error: fetchError,
     refetch: refetchUsers,
   } = useGetData<UserProfile[]>({
-    url: '/api/website/home-users',
+    url: "/api/website/home-users",
     enabled: true,
   });
 
   const usersList = usersData || [];
 
   const convertToProfileCardData = (userProfile: UserProfile) => {
-    const name = `${userProfile.user.first_name || ''} ${userProfile.user.last_name || ''}`.trim() || 'Unknown User';
-    
+    const name =
+      `${userProfile.user.first_name || ""} ${userProfile.user.last_name || ""}`.trim() ||
+      t("unknown_user");
+
     return {
       id: userProfile.id,
       name: name,
       gender: userProfile.user.gender.toLowerCase() as "male" | "female",
-      location: `City ID: ${userProfile.city_id || "Unknown"}`,
-      image: userProfile.user.image, 
+      location: `${t("city_id")}: ${userProfile.city_id || t("unknown")}`,
+      image: userProfile.user.image,
     };
   };
 
@@ -91,12 +96,12 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 py-6">
           <FilterSection filters={filters} onFiltersChange={setFilters} />
           <div className="text-center py-12">
-            <p className="text-red-500">Error loading profiles. Please try again.</p>
+            <p className="text-red-500">{t("error_loading")}</p>
             <button
               className="mt-4 px-6 py-2 bg-primary-color1 text-white rounded-md"
               onClick={() => refetchUsers()}
             >
-              Retry
+              {t("retry")}
             </button>
           </div>
         </div>
@@ -132,15 +137,15 @@ const HomePage = () => {
             className="-mt-24"
           >
             <EmptyState
-              title="No profiles found"
-              description="Try adjusting your search or filters to find more matches"
+              title={t("empty_title")}
+              description={t("empty_description")}
               hasFilters={true}
               action={
                 <motion.button
                   className="mt-4 px-6 py-2 bg-primary-color1 text-white rounded-md"
                   onClick={resetFilter}
                 >
-                  Reset Filters
+                  {t("reset_filters")}
                 </motion.button>
               }
               image={images.emptyProfileResults}

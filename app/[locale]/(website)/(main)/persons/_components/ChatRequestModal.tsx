@@ -5,6 +5,7 @@ import { Modal, Button } from "antd";
 import { CheckCircleOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import { images } from "@/constants/images";
+import { useTranslations } from "next-intl";
 
 interface ChatRequestModalProps {
   isOpen: boolean;
@@ -17,6 +18,8 @@ const ChatRequestModal: React.FC<ChatRequestModalProps> = ({
   onClose,
   userName,
 }) => {
+  const t = useTranslations("person_detail");
+
   return (
     <Modal
       open={isOpen}
@@ -40,14 +43,15 @@ const ChatRequestModal: React.FC<ChatRequestModalProps> = ({
 
         {/* Title */}
         <h2 className="text-2xl font-bold text-primary-color1 mb-4">
-          Request Sent Successfully!
+          {t('success_title')}
         </h2>
 
         {/* Message */}
         <p className="text-gray-600 mb-6 leading-relaxed">
-          Your chat request to <span className="font-semibold">{userName}</span>{" "}
-          has been sent and is under review. You will be informed as soon as
-          possible about the opinion of your guardian.
+          {t.rich('request_message', {
+            name: userName,
+            span: (chunks) => <span className="font-semibold">{chunks}</span>
+          })}
         </p>
 
         {/* Action Button */}
@@ -57,7 +61,7 @@ const ChatRequestModal: React.FC<ChatRequestModalProps> = ({
           onClick={onClose}
           className="!px-8 !py-3 !h-auto text-base font-semibold"
         >
-          I Understand
+          {t('understand_btn')}
         </Button>
       </div>
     </Modal>

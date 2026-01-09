@@ -9,30 +9,34 @@ import { images } from "@/constants/images";
 import { TooltipButton } from "@/components/admin/parts";
 import { Badge } from "@/components/ui/badge";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
-import { NAV_LINKS } from "@/constants/website";
+import { useNavLinks } from "@/constants/website";
 import { useNavigation } from "@/hooks/useNavigation";
 import { DesktopNav } from "./DesktopNav";
 import { MobileDrawer } from "./MobileDrawer";
 import { LanguageDropdown } from "./LanguageDropdown";
+import { useTranslations } from "next-intl";
 
 const SearchBar: React.FC<{
   searchQuery: string;
   onSearchChange: (value: string) => void;
   onSearchSubmit: (e: React.FormEvent) => void;
-}> = ({ searchQuery, onSearchChange, onSearchSubmit }) => (
-  <div className="hidden sm:block bg-gray-100 dark:bg-gray-800 rounded-full relative">
-    <form onSubmit={onSearchSubmit} className="relative">
-      <FaSearch className="absolute z-20 text-primary-color1 dark:text-primary-color1-dark mt-2.5 ml-3" />
-      <input
-        type="text"
-        placeholder="Search Here"
-        value={searchQuery}
-        onChange={(e) => onSearchChange(e.target.value)}
-        className="bg-white/15 dark:bg-gray-700/30 backdrop-blur-sm border-none text-black dark:text-white rounded-full pl-10 pr-4 py-1.5 placeholder-gray-300 dark:placeholder-gray-400 focus:bg-white/25 dark:focus:bg-gray-700/50 focus:outline-none focus:ring-2 focus:ring-primary-color1 dark:focus:ring-primary-color1-dark transition-all duration-300 w-48 focus:w-64"
-      />
-    </form>
-  </div>
-);
+}> = ({ searchQuery, onSearchChange, onSearchSubmit }) => {
+  const t = useTranslations("header");
+  return (
+    <div className="hidden sm:block bg-gray-100 dark:bg-gray-800 rounded-full relative">
+      <form onSubmit={onSearchSubmit} className="relative">
+        <FaSearch className="absolute z-20 text-primary-color1 dark:text-primary-color1-dark mt-2.5 ml-3" />
+        <input
+          type="text"
+          placeholder={t("search_here")}
+          value={searchQuery}
+          onChange={(e) => onSearchChange(e.target.value)}
+          className="bg-white/15 dark:bg-gray-700/30 backdrop-blur-sm border-none text-black dark:text-white rounded-full pl-10 pr-4 py-1.5 placeholder-gray-300 dark:placeholder-gray-400 focus:bg-white/25 dark:focus:bg-gray-700/50 focus:outline-none focus:ring-2 focus:ring-primary-color1 dark:focus:ring-primary-color1-dark transition-all duration-300 w-48 focus:w-64"
+        />
+      </form>
+    </div>
+  );
+}
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -53,6 +57,8 @@ const Header: React.FC = () => {
     e.preventDefault();
     console.log("Searching for:", searchQuery);
   };
+
+  const NAV_LINKS = useNavLinks();
 
   const links = useMemo(
     () =>

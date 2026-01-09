@@ -12,26 +12,31 @@ import CustomFormField, {
 } from "@/components/shared/CustomInput";
 import { ICONS } from "@/constants/icons";
 import usePostData from "@/hooks/usePostData";
-import { ResetPasswordValidation } from "@/validation";
+import { useResetPasswordValidation } from "@/validation";
+import { useTranslations } from "next-intl";
 
 const ResetPasswordForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const reset_token = searchParams.get("token");
 
-  const {
-    postData,
-    loading: isLoading,
-    error,
-    success,
-  } = usePostData("/api/website/reset-password", {
-    showNotifications: true,
-    successMessage: "Password reset successfully!",
-    errorMessage: "Failed to reset password.",
-    onSuccess: (data) => {
-      router.push("./sign-in");
-    },
-  });
+  const t = useTranslations("auth");
+  const ft = useTranslations("fields");
+  const vt = useTranslations("validation");
+
+  const ResetPasswordValidation = useResetPasswordValidation();
+
+  const { postData, loading: isLoading } = usePostData(
+    "/api/website/reset-password",
+    {
+      showNotifications: true,
+      successMessage: t("password_reset_success"),
+      errorMessage: t("password_reset_failed"),
+      onSuccess: () => {
+        router.push("./sign-in");
+      },
+    }
+  );
 
   const form = useForm<z.infer<typeof ResetPasswordValidation>>({
     resolver: zodResolver(ResetPasswordValidation),
@@ -44,7 +49,7 @@ const ResetPasswordForm = () => {
   const onSubmit = async (values: z.infer<typeof ResetPasswordValidation>) => {
     if (!reset_token) {
       form.setError("root", {
-        message: "Reset token is missing. Please request a new reset link.",
+        message: vt("reset_token_missing"),
       });
       return;
     }
@@ -61,18 +66,17 @@ const ResetPasswordForm = () => {
   return (
     <div className="w-full max-w-md md:mt-44 mx-auto p-6">
       <h2 className="text-2xl text-center font-bold text-white mb-6">
-        Create New Password
+        {t("create_new_password")}
       </h2>
 
       <p className="text-gray-400 text-center mb-6">
-        Please enter your new password below.
+        {t("new_password_desc")}
       </p>
 
       {!reset_token && (
         <div className="bg-red-500/20 border border-red-500 rounded-lg p-4 mb-4">
           <p className="text-red-400 text-sm">
-            Invalid or missing reset token. Please request a new password reset
-            link.
+            {t("invalid_reset_token")}
           </p>
         </div>
       )}
@@ -86,8 +90,8 @@ const ResetPasswordForm = () => {
             fieldType={FormFieldType.PASSWORD}
             control={form.control}
             name="password"
-            label="New Password"
-            placeholder="Enter your new password"
+            label={ft("new_password")}
+            placeholder={ft("new_password_placeholder")}
             iconSrc={ICONS.lock}
             iconAlt="password"
           />
@@ -96,14 +100,16 @@ const ResetPasswordForm = () => {
             fieldType={FormFieldType.PASSWORD}
             control={form.control}
             name="password_confirmation"
-            label="Confirm Password"
-            placeholder="Confirm your new password"
+            label={ft("confirm_password")}
+            placeholder={ft("confirm_password_placeholder")}
             iconSrc={ICONS.lock}
             iconAlt="confirm password"
           />
 
           <SubmitButton isLoading={isLoading} className="w-full">
-            {isLoading ? "Resetting Password..." : "Reset Password"}
+            {isLoading
+              ? t("resetting_password")
+              : t("reset_password")}
           </SubmitButton>
         </form>
       </Form>
@@ -113,7 +119,7 @@ const ResetPasswordForm = () => {
           href="./sign-in"
           className="text-primary-color2 hover:text-primary-color1 transition-colors"
         >
-          Back to Sign In
+          {t("back_to_sign_in")}
         </Link>
       </div>
     </div>

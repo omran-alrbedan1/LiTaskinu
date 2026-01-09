@@ -1,4 +1,5 @@
 "use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -6,29 +7,35 @@ import { Form } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
 import { ICONS } from "@/constants/icons";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
-import { genderOptions } from "@/constants/options";
-import Image from "next/image";
-import { images } from "@/constants/images";
+import { useGenderOptions } from "@/constants/options";
 import usePostData from "@/hooks/usePostData";
-import { RegisterFormValidation } from "@/validation";
+import { useRegisterFormValidation } from "@/validation";
 import CustomFormField, {
   FormFieldType,
 } from "@/components/shared/CustomInput";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import useGetData from "@/hooks/useGetData";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 const RegisterForm = () => {
   const router = useRouter();
 
+  const t = useTranslations("auth");
+  const ft = useTranslations("fields");
+
+  const RegisterFormValidation = useRegisterFormValidation();
+
+  const genderOptions = useGenderOptions();
+
   // Force dark mode on mount
   useEffect(() => {
-    document.documentElement.classList.add('dark');
-    document.body.classList.add('dark');
-    
+    document.documentElement.classList.add("dark");
+    document.body.classList.add("dark");
+
     return () => {
-      document.documentElement.classList.remove('dark');
-      document.body.classList.remove('dark');
+      document.documentElement.classList.remove("dark");
+      document.body.classList.remove("dark");
     };
   }, []);
 
@@ -69,8 +76,8 @@ const RegisterForm = () => {
     success,
   } = usePostData("/api/website/signup", {
     showNotifications: true,
-    successMessage: "Registration successful! Please verify your email.",
-    errorMessage: "Registration failed. Please try again.",
+    successMessage: t("register_success"),
+    errorMessage: t("register_failed"),
     onSuccess: (data) => {
       router.push(
         `./otp-verification?email=${encodeURIComponent(
@@ -111,9 +118,7 @@ const RegisterForm = () => {
     await postData(formattedValues);
   }
 
-  const handleGoogleSuccess = async (
-    credentialResponse: CredentialResponse
-  ) => {
+  const handleGoogleSuccess = async (credentialResponse: CredentialResponse) => {
     const credential = credentialResponse.credential;
 
     if (credential) {
@@ -129,14 +134,13 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="w-full  py-44   sm:py-16 lg:py-20 mt-56 sm:mt-48 lg:mt-56 px-4 sm:px-6 lg:px-8 rounded-lg shadow-sm bg-transparent dark">
+    <div className="w-full py-44 sm:py-16 lg:py-20 mt-56 sm:mt-48 lg:mt-56 px-4 sm:px-6 lg:px-8 rounded-lg shadow-sm bg-transparent dark">
       <div className="text-center mt-14 mb-6 sm:mb-8">
-    
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
-          Create Account
+          {t("register_create_account")}
         </h2>
         <p className="mt-2 text-xs sm:text-sm text-gray-400">
-          Sign up for a new account  
+          {t("register_subtitle")}
         </p>
       </div>
 
@@ -151,8 +155,8 @@ const RegisterForm = () => {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="first_name"
-              label="First Name"
-              placeholder="John"
+              label={ft("first_name")}
+              placeholder={ft("first_name_placeholder")}
               iconSrc={ICONS.userInput}
               iconAlt="first name"
             />
@@ -161,8 +165,8 @@ const RegisterForm = () => {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="last_name"
-              label="Last Name"
-              placeholder="Doe"
+              label={ft("last_name")}
+              placeholder={ft("last_name_placeholder")}
               iconSrc={ICONS.userInput}
               iconAlt="last name"
             />
@@ -174,8 +178,8 @@ const RegisterForm = () => {
               fieldType={FormFieldType.SELECT}
               control={form.control}
               name="gender"
-              label="Gender"
-              placeholder="Select gender"
+              label={ft("gender")}
+              placeholder={ft("gender_placeholder")}
               options={genderOptions}
             />
 
@@ -183,8 +187,8 @@ const RegisterForm = () => {
               fieldType={FormFieldType.SELECT}
               control={form.control}
               name="country_id"
-              label="Country"
-              placeholder="Select your country"
+              label={ft("country")}
+              placeholder={ft("country_placeholder")}
               options={countriesData}
             />
           </div>
@@ -195,8 +199,8 @@ const RegisterForm = () => {
               fieldType={FormFieldType.SELECT}
               control={form.control}
               name="city_id"
-              label="City"
-              placeholder="Select your city"
+              label={ft("city")}
+              placeholder={ft("city_placeholder")}
               options={citiesData}
             />
 
@@ -204,8 +208,8 @@ const RegisterForm = () => {
               fieldType={FormFieldType.DATE_PICKER}
               control={form.control}
               name="birath_day"
-              label="Date of Birth"
-              placeholder="Select your birth date"
+              label={ft("date_of_birth")}
+              placeholder={ft("date_of_birth_placeholder")}
             />
           </div>
 
@@ -214,20 +218,20 @@ const RegisterForm = () => {
             fieldType={FormFieldType.INPUT}
             control={form.control}
             name="email"
-            label="Email Address"
-            placeholder="john@gmail.com"
+            label={ft("email_address")}
+            placeholder={ft("email_placeholder")}
             iconSrc={ICONS.email}
             iconAlt="email"
           />
 
-          {/* Phone Field - Fixed */}
+          {/* Phone Field */}
           <div className="dark">
             <CustomFormField
               fieldType={FormFieldType.PHONE_INPUT}
               control={form.control}
               name="phone"
-              label="Phone Number"
-              placeholder="Enter your phone number"
+              label={ft("phone_number")}
+              placeholder={ft("phone_placeholder")}
             />
           </div>
 
@@ -237,8 +241,8 @@ const RegisterForm = () => {
               control={form.control}
               fieldType={FormFieldType.PASSWORD}
               name="password"
-              label="Password"
-              placeholder="Enter your password"
+              label={ft("password")}
+              placeholder={ft("password_placeholder")}
               iconSrc={ICONS.lock}
               iconAlt="password"
             />
@@ -247,19 +251,19 @@ const RegisterForm = () => {
               control={form.control}
               fieldType={FormFieldType.PASSWORD}
               name="password_confirmation"
-              label="Confirm Password"
-              placeholder="Enter your password again"
+              label={ft("confirm_password")}
+              placeholder={ft("confirm_password_again_placeholder")}
               iconSrc={ICONS.lock}
               iconAlt="password"
             />
           </div>
 
           <SubmitButton
-            loadingText="Creating Account..."
+            loadingText={t("creating_account")}
             isLoading={isLoading}
             className="w-full text-sm sm:text-base"
           >
-            Create Account
+            {t("register_create_account")}
           </SubmitButton>
         </form>
       </Form>
@@ -270,7 +274,7 @@ const RegisterForm = () => {
           <div className="w-full border-t border-gray-400" />
         </div>
         <div className="relative flex justify-center text-xs sm:text-sm">
-          <span className="px-2 bg-black text-gray-300">Or continue with</span>
+          <span className="px-2 bg-black text-gray-300">{t("or_continue_with")}</span>
         </div>
       </div>
 
@@ -289,12 +293,12 @@ const RegisterForm = () => {
       {/* Sign In Link */}
       <div className="mt-4 sm:mt-6 text-center">
         <p className="text-xs sm:text-sm text-gray-300">
-          Already have an account?{" "}
+          {t("already_have_account")}{" "}
           <button
             onClick={() => router.push("./sign-in")}
             className="font-medium text-white hover:text-gray-300 transition-colors"
           >
-            Sign in
+            {t("sign_in")}
           </button>
         </p>
       </div>

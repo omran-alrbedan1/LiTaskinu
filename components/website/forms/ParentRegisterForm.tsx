@@ -12,22 +12,26 @@ import SubmitButton from "../../Buttons/SubmitButton";
 import CustomFormField, { FormFieldType } from "../../shared/CustomInput";
 import { ICONS } from "@/constants/icons";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
-import { countryOptions, kinshipOptions } from "@/constants/options";
-import Image from "next/image";
-import { images } from "@/constants/images";
-
-const RegisterFormValidation = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  kinship: z.string().min(1, "Type of kinship is required"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(1, "Phone number is required"),
-});
+import { useKinshipOptions } from "@/constants/options";
+import { useTranslations } from "next-intl";
 
 const ParentRegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
+  const t = useTranslations("auth");
+  const ft = useTranslations("fields");
+  const vt = useTranslations("validation");
+
+  const kinshipOptions = useKinshipOptions();
+
+  const RegisterFormValidation = z.object({
+    firstName: z.string().min(1, vt("first_name_required")),
+    lastName: z.string().min(1, vt("last_name_required")),
+    kinship: z.string().min(1, vt("kinship_required")),
+    email: z.string().email(vt("invalid_email")),
+    phone: z.string().min(1, vt("phone_required")),
+  });
 
   const form = useForm<z.infer<typeof RegisterFormValidation>>({
     resolver: zodResolver(RegisterFormValidation),
@@ -67,13 +71,13 @@ const ParentRegisterForm = () => {
   };
 
   return (
-    <div className="w-full overflow-y-scroll max-h-svh hide-scrollbar pb-20 md:p-6 md:pb-20 rounded-lg shadow-sm ">
+    <div className="w-full overflow-y-scroll max-h-svh hide-scrollbar pb-20 md:p-6 md:pb-20 rounded-lg shadow-sm">
       <div className="text-center mb-4 hidden md:block">
         <h2 className="text:2xl md:text-3xl font-bold text-white">
-          Parent Information
+          {t("parent_information")}
         </h2>
         <p className="mt-2 text-sm text-gray-300">
-          Please provide parent details
+          {t("parent_information_desc")}
         </p>
       </div>
 
@@ -88,8 +92,8 @@ const ParentRegisterForm = () => {
                 fieldType={FormFieldType.INPUT}
                 control={form.control}
                 name="firstName"
-                label="First Name"
-                placeholder="John"
+                label={ft("first_name")}
+                placeholder={ft("first_name_placeholder")}
                 iconSrc={ICONS.userInput}
               />
 
@@ -97,8 +101,8 @@ const ParentRegisterForm = () => {
                 fieldType={FormFieldType.INPUT}
                 control={form.control}
                 name="lastName"
-                label="Last Name"
-                placeholder="Doe"
+                label={ft("last_name")}
+                placeholder={ft("last_name_placeholder")}
                 iconSrc={ICONS.userInput}
               />
             </div>
@@ -107,8 +111,8 @@ const ParentRegisterForm = () => {
               fieldType={FormFieldType.SELECT}
               control={form.control}
               name="kinship"
-              label="Type of kinship"
-              placeholder="Select kinship type"
+              label={ft("kinship")}
+              placeholder={ft("kinship_placeholder")}
               options={kinshipOptions}
             />
 
@@ -116,7 +120,7 @@ const ParentRegisterForm = () => {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="email"
-              label="Email Address"
+              label={ft("email_address")}
               placeholder="loisbecket@gmail.com"
               iconSrc={ICONS.email}
               iconAlt="email"
@@ -126,17 +130,17 @@ const ParentRegisterForm = () => {
               fieldType={FormFieldType.PHONE_INPUT}
               control={form.control}
               name="phone"
-              label="Phone Number"
+              label={ft("phone_number")}
             />
 
             <SubmitButton
               isLoading={isLoading}
-              loadingText="Submitting..."
+              loadingText={t("submitting")}
               className="w-full"
               type="submit"
               onClick={() => console.log("Submit button clicked")}
             >
-              Continue
+              {t("continue")}
             </SubmitButton>
           </>
         </form>
@@ -148,7 +152,7 @@ const ParentRegisterForm = () => {
         </div>
         <div className="relative flex justify-center text-sm">
           <span className="px-2 bg-gray-900 text-gray-500 dark:text-gray-400">
-            Or continue with
+            {t("or_continue_with")}
           </span>
         </div>
       </div>

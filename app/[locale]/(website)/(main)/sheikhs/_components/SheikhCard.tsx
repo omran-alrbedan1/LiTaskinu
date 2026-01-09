@@ -3,12 +3,15 @@ import { BookOpen, MessageCircle, Globe, Eye } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { images } from '@/constants/images';
+import { getTranslations } from 'next-intl/server';
 
 interface SheikhCardProps {
   sheikh: Sheikh
 }
 
-const SheikhCard: React.FC<SheikhCardProps> = ({ sheikh }) => {
+const SheikhCard: React.FC<SheikhCardProps> = async ({ sheikh }) => {
+  const t = await getTranslations('sheikhs_page');
+
   return (
     <div className="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-primary-color1 dark:hover:border-primary-color1 transform hover:-translate-y-1">
       {/* Single Responsive Layout */}
@@ -20,15 +23,14 @@ const SheikhCard: React.FC<SheikhCardProps> = ({ sheikh }) => {
               <div className="h-24 w-24 md:h-20 md:w-20 rounded-xl overflow-hidden border-2 border-primary-color1/20 dark:border-primary-color1/30 shadow-md group-hover:shadow-lg transition-shadow">
                 <div className="h-full w-full relative">
                   <Image
-                    src={sheikh.image||images.Unknown}
-                    alt={sheikh.name}
+                    src={sheikh.image || images.Unknown}
+                    alt={sheikh.name || t('unknown_alt')}
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 96px, 80px"
                   />
                 </div>
               </div>
-      
             </div>
           </div>
         </div>
@@ -84,15 +86,17 @@ const SheikhCard: React.FC<SheikhCardProps> = ({ sheikh }) => {
           <div className="flex gap-2">
             <Link
               href={`./sheikhs/${sheikh.id}/chat`}
-            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-primary-color1/5 dark:bg-primary-color1/10 text-primary-color1 dark:text-primary-color1/90 rounded-lg text-sm font-medium hover:bg-primary-color1/10 dark:hover:bg-primary-color1/20 transition-colors border border-primary-color1/10 dark:border-primary-color1/20">
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-primary-color1/5 dark:bg-primary-color1/10 text-primary-color1 dark:text-primary-color1/90 rounded-lg text-sm font-medium hover:bg-primary-color1/10 dark:hover:bg-primary-color1/20 transition-colors border border-primary-color1/10 dark:border-primary-color1/20"
+            >
               <MessageCircle className="h-4 w-4" />
-              Chat
+              {t('buttons.chat')}
             </Link>
             <Link 
               href={`./sheikhs/${sheikh.id}`}
-            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-primary-color1 to-primary-color1/80 text-white rounded-lg text-sm font-medium hover:from-primary-color1/90 hover:to-primary-color1/70 transition-all transform hover:scale-105 shadow-md shadow-primary-color1/20">
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-primary-color1 to-primary-color1/80 text-white rounded-lg text-sm font-medium hover:from-primary-color1/90 hover:to-primary-color1/70 transition-all transform hover:scale-105 shadow-md shadow-primary-color1/20"
+            >
               <Eye className="h-4 w-4" />
-              View
+              {t('buttons.view')}
             </Link>
           </div>
         </div>
