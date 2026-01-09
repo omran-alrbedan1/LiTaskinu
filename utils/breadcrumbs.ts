@@ -24,7 +24,7 @@ export const getBreadcrumbs = (pathname: string): BreadcrumbItem[] => {
   const breadcrumbs: BreadcrumbItem[] = [
     {
       label: "Dashboard",
-      href: `/admin/${locale}/dashboard`,
+      href: `/admin/dashboard`,
     },
   ];
 
@@ -59,7 +59,7 @@ export const getBreadcrumbs = (pathname: string): BreadcrumbItem[] => {
 
     breadcrumbs.push({
       label,
-      href: isLast ? undefined : `/admin/${locale}/${currentPath}`,
+      href: isLast ? undefined : `/admin/${currentPath}`,
       isCurrent: isLast,
     });
   });

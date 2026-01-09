@@ -18,7 +18,6 @@ export default async function Layout({
   return (
     <html>
       <body className=" text-base">
-        {" "}
         <AppProvider>{children}</AppProvider>
       </body>
     </html>

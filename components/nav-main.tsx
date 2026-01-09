@@ -2,6 +2,7 @@
 
 import { ChevronRight, type LucideIcon } from "lucide-react";
 import { usePathname, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 import {
   Collapsible,
@@ -66,6 +67,14 @@ export function NavMain({
     return parentItem.items.some((child) => isActiveLink(child.url));
   };
 
+  // Helper function to extract path from URL for Link component
+  const getLinkProps = (url: string) => {
+    const [path, query] = url.split("?");
+    return {
+      href: query ? `${path}?${query}` : path,
+    };
+  };
+
   return (
     <SidebarGroup>
       {title && (
@@ -77,6 +86,7 @@ export function NavMain({
         {items?.map((item) => {
           const isActive = isActiveLink(item.url);
           const childActive = hasActiveChild(item);
+          const linkProps = getLinkProps(item.url);
 
           return (
             <SidebarMenuItem key={item.title}>
@@ -114,6 +124,7 @@ export function NavMain({
                       <SidebarMenuSub>
                         {item.items.map((subItem) => {
                           const isSubItemActive = isActiveLink(subItem.url);
+                          const subLinkProps = getLinkProps(subItem.url);
 
                           return (
                             <SidebarMenuSubItem key={subItem.title}>
@@ -126,9 +137,9 @@ export function NavMain({
                                     : "hover:bg-muted"
                                 )}
                               >
-                                <a href={subItem.url}>
+                                <Link {...subLinkProps} >
                                   <span>{subItem.title}</span>
-                                </a>
+                                </Link>
                               </SidebarMenuSubButton>
                             </SidebarMenuSubItem>
                           );
@@ -148,7 +159,7 @@ export function NavMain({
                       : "hover:bg-muted"
                   )}
                 >
-                  <a href={item.url}>
+                  <Link {...linkProps} >
                     {item.icon && (
                       <item.icon
                         className={
@@ -157,7 +168,7 @@ export function NavMain({
                       />
                     )}
                     <span>{item.title}</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               )}
             </SidebarMenuItem>

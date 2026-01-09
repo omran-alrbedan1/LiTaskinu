@@ -25,6 +25,13 @@ import adminLogin from "../public/images/admin-login.jpg";
 import emptySteps from "../public/images/steps.png";
 import aboutUs1 from "../public/images/about-us1.jpg";
 import aboutUs2 from "../public/images/about-us2.jpg";
+import FAQs from "../public/images/FAQs.png";
+import successStory from "../public/images/successStory.png";
+import privacyPolicy from "../public/images/Privacy-policy.png";
+import mentalHealth from "../public/images/mental-health.jpg";
+import sheikhBackground from "../public/images/sheikh-background.jpg";
+import emptySheikhs from "../public/images/emptySheikhs.png";
+import emptyPsychiatrists from "../public/images/emptyPsychiatrists.png";
 
 export const images = {
   couple,
@@ -54,4 +61,11 @@ export const images = {
   emptySteps,
   aboutUs1,
   aboutUs2, 
+  FAQs,
+  successStory,
+  privacyPolicy,
+  mentalHealth,
+  sheikhBackground,
+  emptySheikhs,
+  emptyPsychiatrists,
 };

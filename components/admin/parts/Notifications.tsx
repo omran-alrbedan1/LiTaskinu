@@ -164,7 +164,7 @@ export default function Notifications() {
           {/* Footer with View All Link */}
           <div className="border-t border-gray-200/50 dark:border-gray-700/50 bg-gradient-to-b from-transparent to-gray-50/50 dark:to-gray-800/30 p-3">
             <Link
-              href={`/admin/${locale}/notifications`}
+              href={`/admin/notifications`}
               className="flex items-center justify-center gap-2 text-sm text-primary-color1 hover:text-primary-color2 font-semibold transition-all duration-200 py-2 px-4 rounded-lg hover:bg-primary/5 dark:hover:bg-primary/10 group"
             >
               View all notifications

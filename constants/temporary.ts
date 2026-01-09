@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { images } from "./images";
 
 export const userData = {
@@ -1113,3 +1114,161 @@ export const INITIAL_PERSONAL_DATA = {
     familyValues: "Traditional",
   },
 };
+
+
+
+// Mock data for testing
+export const MOCK_SHEIKHS: Sheikh[] = [
+  {
+    id: 1,
+    name: "Dr. Ahmed Al-Mansoori",
+    email: "ahmed@example.com",
+    username: "ahmed_almansoori",
+    phone: "+971501234567",
+    image: images.Unknown,
+    experience: "20 years of teaching Quranic studies and Islamic jurisprudence",
+    specialization: ["Quranic Studies", "Islamic Jurisprudence", "Hadith Sciences"],
+    languages: ["Arabic", "English", "Urdu"],
+    bio: "Graduated from Al-Azhar University with honors. Served as Imam in multiple mosques across the Gulf region. Published several books on Islamic theology.",
+    created_at: "2024-01-15T10:30:00Z",
+      updated_at: "2024-02-20T14:45:00Z"
+
+  },
+  {
+    id: 2,
+    name: "Sheikh Omar Farooq",
+    email: "omar@example.com",
+    username: "omar_farooq",
+    phone: "+966551234567",
+    image: images.Unknown,
+    experience: "15 years specializing in family and marriage counseling",
+    specialization: ["Family Counseling", "Marriage Guidance", "Youth Mentoring"],
+    languages: ["Arabic", "English", "French"],
+    bio: "Expert in Islamic family law with focus on contemporary issues. Regular speaker at international Islamic conferences.",
+    created_at: "2024-02-20T14:45:00Z",
+    updated_at: "2024-02-20T14:45:00Z"
+  },
+  {
+    id: 3,
+    name: "Sheikha Fatima Al-Hassan",
+    email: "fatima@example.com",
+    username: "fatima_alhassan",
+    phone: "+974331234567",
+    image: images.Unknown,
+    experience: "12 years teaching Islamic studies to women and children",
+    specialization: ["Women's Studies", "Child Education", "Islamic Ethics"],
+    languages: ["Arabic", "English", "Persian"],
+    bio: "First female scholar in the region to establish an Islamic learning center for women. Focus on authentic Islamic teachings.",
+    created_at: "2024-03-10T09:15:00Z",
+    updated_at: "2024-02-20T14:45:00Z"
+
+  }
+];
+
+
+export const MOCK_PSYCHIATRISTS = [
+  {
+    id: 1,
+    name: "Dr. Sarah Johnson",
+    email: "sarah.johnson@example.com",
+    username: "dr.sarahj",
+    phone: "+1 (555) 123-4567",
+    image: images.Unknown,
+    experience: "15 years of clinical practice specializing in anxiety and depression disorders",
+    specialization: ["Anxiety Disorders", "Depression", "PTSD", "Cognitive Behavioral Therapy"],
+    languages: ["English", "Spanish", "French"],
+    rating: 4.8,
+    bio: "Dr. Sarah Johnson is a board-certified psychiatrist with over 15 years of experience...",
+    created_at: "2024-01-15T10:30:00Z",
+  },
+  {
+    id: 2,
+    name: "Dr. Michael Chen",
+    email: "michael.chen@example.com",
+    username: "dr.mchen",
+    phone: "+1 (555) 987-6543",
+    image: images.Unknown,
+
+    experience: "12 years specializing in child and adolescent psychiatry",
+    specialization: ["Child Psychiatry", "Adolescent Mental Health", "Family Therapy", "ADHD"],
+    languages: ["English", "Mandarin"],
+    rating: 4.9,
+    bio: "Dr. Michael Chen specializes in child and adolescent mental health...",
+    created_at: "2024-02-20T14:15:00Z",
+  },
+  {
+    id: 3,
+    name: "Dr. Aisha Rahman",
+    email: "aisha.rahman@example.com",
+    username: "dr.arahman",
+    phone: "+1 (555) 456-7890",
+    image: images.Unknown,
+    experience: "8 years focusing on trauma therapy and cultural psychiatry",
+    specialization: ["Trauma Therapy", "Cultural Psychiatry", "EMDR", "Group Therapy"],
+    languages: ["English", "Arabic", "Urdu"],
+    rating: 4.7,
+    bio: "Dr. Aisha Rahman brings a culturally sensitive approach to mental health care...",
+    created_at: "2024-03-10T09:45:00Z",
+  },
+];  
+
+
+export const MOCK_MESSAGES =[
+    {
+      id: 1,
+      sender: 'sheikh',
+      content: 'As-salamu alaykum! How can I help you today?',
+      timestamp: new Date(Date.now() - 3600000),
+      type: 'text',
+      isRead: true
+    },
+    {
+      id: 2,
+      sender: 'user',
+      content: 'Wa alaykumu as-salam! I have a question about prayer times.',
+      timestamp: new Date(Date.now() - 3500000),
+      type: 'text',
+      isRead: true
+    },
+    {
+      id: 3,
+      sender: 'sheikh',
+      content: 'Of course, I\'d be happy to help you with that. What specifically would you like to know about prayer times?',
+      timestamp: new Date(Date.now() - 3400000),
+      type: 'text',
+      isRead: true
+    },
+    {
+      id: 4,
+      sender: 'sheikh',
+      type: 'voice',
+      timestamp: new Date(Date.now() - 3200000),
+      voice: {
+        duration: '0:26',
+        url: '#',
+        isPlaying: false
+      },
+      isRead: true
+    },
+    {
+      id: 5,
+      sender: 'sheikh',
+      type: 'image',
+      timestamp: new Date(Date.now() - 3000000),
+      images: ['/images/sample1.jpg', '/images/sample2.jpg'],
+      isRead: true
+    },
+    {
+      id: 6,
+      sender: 'sheikh',
+      type: 'file',
+      timestamp: new Date(Date.now() - 2800000),
+      file: {
+        name: 'Prayer_Times_Guide.pdf',
+        size: '2.4 MB',
+        type: 'pdf',
+        url: '#'
+      },
+      isRead: true
+    }
+  ]
