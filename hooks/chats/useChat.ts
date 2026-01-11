@@ -1,33 +1,52 @@
-import { api } from "@/lib/apiClient";
 import { useCallback, useEffect, useRef, useState } from "react";
 // import { pusherClient } from "../utils/pusher";
-const getInfoChat = "/children/chat/get-my-info";
-const startConversationUrl = "/children/chat/start-conversation";
-const getMessagesUrl = "/children/chat/messages";
-const sendMessagesUrl = "/children/chat/send-message";
-const getConversationsUrl = "/children/chat/get-conversations";
+
+const getInfoChat = "/api/chat?type=my-info";
+const startConversationUrl = "/api/chat?type=start";
+const getMessagesUrl = "/api/chat?type=messages"; // + &conversationId=ID
+const sendMessagesUrl = "/api/chat?type=send";
+const getConversationsUrl = "/api/chat?type=conversations";
 
 type UseChatArgs = {
   receiverId?: string | number | null;
 };
 
+async function readError(res: Response) {
+  try {
+    const data = await res.json();
+    return data?.error || data?.message || `Request failed (${res.status})`;
+  } catch {
+    return `Request failed (${res.status})`;
+  }
+}
+
+async function fetchJson<T = any>(input: RequestInfo, init?: RequestInit): Promise<T> {
+  const res = await fetch(input, {
+    ...init,
+    credentials: "include", // keep cookies/session
+    headers: {
+      Accept: "application/json",
+      ...(init?.headers || {}),
+    },
+  });
+
+  if (!res.ok) throw new Error(await readError(res));
+  return (await res.json()) as T;
+}
+
 export default function useChat({ receiverId }: UseChatArgs = {}) {
   const [messages, setMessages] = useState<any[]>([]);
   const [newMessage, setNewMessage] = useState("");
-  const [conversationId, setConversationId] = useState<string | number | null>(
-    null
-  );
+  const [conversationId, setConversationId] = useState<string | number | null>(null);
   const [initiatorId, setInitiatorId] = useState<string | number | null>(null);
 
   const [conversations, setConversations] = useState<any[]>([]);
 
-  // ✅ Loading + error states
-  const [isLoading, setIsLoading] = useState(false); // startConversation + fetch messages
+  const [isLoading, setIsLoading] = useState(false);
   const [isConversationsLoading, setIsConversationsLoading] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // ✅ Keep channel in a ref (no rerender problems)
   const channelRef = useRef<any>(null);
 
   const unsubscribe = useCallback(() => {
@@ -39,47 +58,45 @@ export default function useChat({ receiverId }: UseChatArgs = {}) {
   }, []);
 
   const fetchMessages = useCallback(async (convId: string | number) => {
-    const { data } = await api.get(`${getMessagesUrl}/${convId}`);
-    // adjust mapping if your API returns { data: { data: [] } } etc.
+    const data = await fetchJson<any>(`${getMessagesUrl}&conversationId=${convId}`, {
+      method: "GET",
+    });
+
     setMessages(Array.isArray(data) ? data : data?.data ?? []);
   }, []);
 
   const subscribeToConversation = useCallback(
-    (convId: string | number) => {
-      unsubscribe();
+      (convId: string | number) => {
+        unsubscribe();
 
-      const channelName = `private-conversation.${convId}`;
-      // const channel = pusherClient.subscribe(channelName);
-      // channelRef.current = channel;
+        const channelName = `private-conversation.${convId}`;
+        // const channel = pusherClient.subscribe(channelName);
+        // channelRef.current = channel;
 
-      // // ✅ only ONE bind (no nested bind)
-      // channel.bind("new-message", () => {
-      //   fetchMessages(convId).catch(() => {
-      //     // silent; keep UI stable
-      //   });
-      // });
-    },
-    [fetchMessages, unsubscribe]
+        // channel.bind("new-message", () => {
+        //   fetchMessages(convId).catch(() => {});
+        // });
+      },
+      [fetchMessages, unsubscribe]
   );
 
   const fetchMessagesAndSubscribe = useCallback(
-    async (convId: string | number) => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        await fetchMessages(convId);
-        subscribeToConversation(convId);
-      } catch (e: any) {
-        setError(e?.message ?? "Failed to load messages");
-        console.error("Failed to fetch messages or subscribe:", e);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [fetchMessages, subscribeToConversation]
+      async (convId: string | number) => {
+        setIsLoading(true);
+        setError(null);
+        try {
+          await fetchMessages(convId);
+          subscribeToConversation(convId);
+        } catch (e: any) {
+          setError(e?.message ?? "Failed to load messages");
+          console.error("Failed to fetch messages or subscribe:", e);
+        } finally {
+          setIsLoading(false);
+        }
+      },
+      [fetchMessages, subscribeToConversation]
   );
 
-  // ✅ Start / load conversation when receiverId changes
   useEffect(() => {
     const startConversation = async () => {
       if (!receiverId) return;
@@ -88,12 +105,11 @@ export default function useChat({ receiverId }: UseChatArgs = {}) {
       setError(null);
 
       try {
-        const res = await api.post(startConversationUrl, {
-          receiver_id: receiverId,
+        const conversation = await fetchJson<any>(startConversationUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ receiver_id: receiverId }),
         });
-
-        // adjust if your API differs
-        const conversation = res?.data?.data ?? res?.data;
 
         const id = conversation?.id ?? null;
         setConversationId(id);
@@ -109,11 +125,9 @@ export default function useChat({ receiverId }: UseChatArgs = {}) {
     };
 
     startConversation();
-    // cleanup if receiver changes or unmount
     return () => unsubscribe();
   }, [receiverId, fetchMessagesAndSubscribe, unsubscribe]);
 
-  // ✅ On unmount cleanup
   useEffect(() => {
     return () => unsubscribe();
   }, [unsubscribe]);
@@ -124,7 +138,6 @@ export default function useChat({ receiverId }: UseChatArgs = {}) {
     setIsSending(true);
     setError(null);
 
-    // Optional: optimistic UI
     const optimistic = {
       id: `tmp-${Date.now()}`,
       message: newMessage.trim(),
@@ -137,16 +150,18 @@ export default function useChat({ receiverId }: UseChatArgs = {}) {
     setNewMessage("");
 
     try {
-      await api.post(sendMessagesUrl, {
-        conversation_id: conversationId,
-        message: optimistic.message,
-        message_type: "text",
+      await fetchJson(sendMessagesUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          conversation_id: conversationId,
+          message: optimistic.message,
+          message_type: "text",
+        }),
       });
 
-      // After send, refresh to replace optimistic with real one (safer)
       await fetchMessages(conversationId);
     } catch (e: any) {
-      // remove optimistic on error
       setMessages((prev) => prev.filter((m) => m.id !== optimistic.id));
       setNewMessage(optimistic.message);
       setError(e?.message ?? "Failed to send message");
@@ -157,60 +172,65 @@ export default function useChat({ receiverId }: UseChatArgs = {}) {
   }, [conversationId, fetchMessages, newMessage]);
 
   const handleFileSend = useCallback(
-    async (file: File) => {
-      if (!conversationId || !file) return;
+      async (file: File) => {
+        if (!conversationId || !file) return;
 
-      setIsSending(true);
-      setError(null);
+        setIsSending(true);
+        setError(null);
 
-      const formData = new FormData();
-      formData.append("conversation_id", String(conversationId));
-      formData.append(
-        "message_type",
-        file.type.startsWith("image/") ? "photo" : "file"
-      );
-      formData.append("file", file);
+        const formData = new FormData();
+        formData.append("conversation_id", String(conversationId));
+        formData.append("message_type", file.type.startsWith("image/") ? "photo" : "file");
+        formData.append("file", file);
 
-      try {
-        await api.post(sendMessagesUrl, formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-        await fetchMessages(conversationId);
-      } catch (e: any) {
-        setError(e?.message ?? "Failed to send file");
-        console.error("Failed to send file:", e);
-      } finally {
-        setIsSending(false);
-      }
-    },
-    [conversationId, fetchMessages]
+        try {
+          const res = await fetch(sendMessagesUrl, {
+            method: "POST",
+            credentials: "include",
+            body: formData, // don't set content-type
+          });
+
+          if (!res.ok) throw new Error(await readError(res));
+          await fetchMessages(conversationId);
+        } catch (e: any) {
+          setError(e?.message ?? "Failed to send file");
+          console.error("Failed to send file:", e);
+        } finally {
+          setIsSending(false);
+        }
+      },
+      [conversationId, fetchMessages]
   );
 
   const handleAudioSend = useCallback(
-    async (audioBlob: Blob) => {
-      if (!conversationId || !audioBlob) return;
+      async (audioBlob: Blob) => {
+        if (!conversationId || !audioBlob) return;
 
-      setIsSending(true);
-      setError(null);
+        setIsSending(true);
+        setError(null);
 
-      const formData = new FormData();
-      formData.append("conversation_id", String(conversationId));
-      formData.append("message_type", "audio");
-      formData.append("file", audioBlob, "voice-message.webm");
+        const formData = new FormData();
+        formData.append("conversation_id", String(conversationId));
+        formData.append("message_type", "audio");
+        formData.append("file", audioBlob, "voice-message.webm");
 
-      try {
-        await api.post(sendMessagesUrl, formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-        await fetchMessages(conversationId);
-      } catch (e: any) {
-        setError(e?.message ?? "Failed to send audio");
-        console.error("Failed to send audio:", e);
-      } finally {
-        setIsSending(false);
-      }
-    },
-    [conversationId, fetchMessages]
+        try {
+          const res = await fetch(sendMessagesUrl, {
+            method: "POST",
+            credentials: "include",
+            body: formData,
+          });
+
+          if (!res.ok) throw new Error(await readError(res));
+          await fetchMessages(conversationId);
+        } catch (e: any) {
+          setError(e?.message ?? "Failed to send audio");
+          console.error("Failed to send audio:", e);
+        } finally {
+          setIsSending(false);
+        }
+      },
+      [conversationId, fetchMessages]
   );
 
   const getConversations = useCallback(async () => {
@@ -218,7 +238,7 @@ export default function useChat({ receiverId }: UseChatArgs = {}) {
     setError(null);
 
     try {
-      const { data } = await api.get(getConversationsUrl);
+      const data = await fetchJson<any>(getConversationsUrl, { method: "GET" });
       const list = Array.isArray(data) ? data : data?.data ?? [];
       setConversations(list);
       return list;
@@ -232,33 +252,27 @@ export default function useChat({ receiverId }: UseChatArgs = {}) {
   }, []);
 
   return {
-    // ids
     initiatorId,
     conversationId,
     setConversationId,
 
-    // messages
     messages,
     newMessage,
     setNewMessage,
 
-    // actions
     fetchMessagesAndSubscribe,
     handleSend,
     handleFileSend,
     handleAudioSend,
     getConversations,
 
-    // conversations list
     conversations,
 
-    // ui states
     isLoading,
     isSending,
     isConversationsLoading,
     error,
 
-    // optional helpers
     unsubscribe,
   };
 }
