@@ -1,190 +1,99 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Search } from "lucide-react";
-import Image from "next/image";
-import { images } from "@/constants/images";
-import { ChatListLoader } from ".";
 import { useTranslations } from "next-intl";
 
-interface Chat {
-  id: string;
-  name: string;
-  lastMessage: string;
-  timestamp: string;
-  image?: string;
-  unread: number;
-  avatar: string;
-  online: boolean;
-}
+import { ChatListLoader } from ".";
+import useChat from "@/hooks/chats/useChat";
+import { ChatListItem, ChatListItemModel } from "./ChatLits/ChatListItem";
+import { ChatSearchInput } from "./ChatLits/ChatSearchInput";
 
-const mockChats: Chat[] = [
-  {
-    id: "1",
-    name: "Alex Linderson",
-    image: "/images/userTest.jpg",
-    lastMessage: "How are you today?",
-    timestamp: "2 min ago",
-    unread: 3,
-    avatar: "AL",
-    online: true,
-  },
-  {
-    id: "2",
-    name: "Team Align",
-    lastMessage: "Don't miss to attend the meeting.",
-    timestamp: "2 min ago",
-    unread: 1,
-    avatar: "TA",
-    online: true,
-  },
-  {
-    id: "3",
-    name: "John Ahraham",
-    image: "/images/userTest.jpg",
 
-    lastMessage: "Hey! Can you join the meeting?",
-    timestamp: "2 min ago",
-    unread: 0,
-    avatar: "JA",
-    online: false,
-  },
-  {
-    id: "4",
-    name: "John Borino",
-    lastMessage: "Have a good day 🌸",
-    timestamp: "2 min ago",
-    unread: 0,
-    avatar: "JB",
-    online: true,
-  },
-  {
-    id: "5",
-    name: "Angel Dayna",
-    image: "/images/userTest.jpg",
-
-    lastMessage: "How are you today?",
-    timestamp: "2 min ago",
-    unread: 0,
-    avatar: "AD",
-    online: false,
-  },
-  {
-    id: "6",
-    name: "Eben Hunt",
-    lastMessage: "Let's discuss the project",
-    timestamp: "5 min ago",
-    unread: 0,
-    avatar: "EH",
-    online: true,
-  },
-  {
-    id: "7",
-    name: "Team Updates",
-    lastMessage: "New features deployed",
-    timestamp: "1 hour ago",
-    unread: 2,
-    avatar: "TU",
-    online: true,
-  },
+// ✅ Keep mock data separate (later you can delete it)
+const mockChats: ChatListItemModel[] = [
+  { id: "1", name: "Alex Linderson", image: "/images/userTest.jpg", lastMessage: "How are you today?", timestamp: "2 min ago", unread: 3, online: true },
+  { id: "2", name: "Team Align", lastMessage: "Don't miss to attend the meeting.", timestamp: "2 min ago", unread: 1, online: true },
+  { id: "3", name: "John Ahraham", image: "/images/userTest.jpg", lastMessage: "Hey! Can you join the meeting?", timestamp: "2 min ago", unread: 0, online: false },
+  { id: "4", name: "John Borino", lastMessage: "Have a good day 🌸", timestamp: "2 min ago", unread: 0, online: true },
+  { id: "5", name: "Angel Dayna", image: "/images/userTest.jpg", lastMessage: "How are you today?", timestamp: "2 min ago", unread: 0, online: false },
+  { id: "6", name: "Eben Hunt", lastMessage: "Let's discuss the project", timestamp: "5 min ago", unread: 0, online: true },
+  { id: "7", name: "Team Updates", lastMessage: "New features deployed", timestamp: "1 hour ago", unread: 2, online: true },
 ];
 
-export default function ChatList() {
+export default function ChatList({
+  localePrefix = "/en",
+  dataSource = "mock",
+}: {
+  localePrefix?: string; // so component can be reused with different locales
+  dataSource?: "mock" | "api";
+}) {
   const t = useTranslations("chats");
-
-  const [chats, setChats] = useState<Chat[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
 
-  useEffect(() => {
-    const fetchChats = async () => {
-      setIsLoading(true);
-      try {
-        setChats(mockChats);
-      } catch (error) {
-        console.error("Failed to fetch chats:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const [searchTerm, setSearchTerm] = useState("");
 
-    fetchChats();
+  // ✅ Single hook usage
+  const { conversations, getConversations, isLoading } = useChat();
+
+  // ✅ Load conversations only if using API
+  useEffect(() => {
+    getConversations();
   }, []);
 
-  if (isLoading) {
+  // ✅ Choose source (mock vs API)
+  const chats: ChatListItemModel[] = useMemo(() => {
+    if (dataSource === "api") {
+      // Map your API shape -> UI shape here
+      // return conversations.map(...)
+      return (conversations as unknown as ChatListItemModel[]) ?? [];
+    }
+    return mockChats;
+  }, [dataSource, conversations]);
+
+  // ✅ Filter
+  const filteredChats = useMemo(() => {
+    const q = searchTerm.trim().toLowerCase();
+    if (!q) return chats;
+
+    return chats.filter((c) => {
+      return (
+        c.name.toLowerCase().includes(q) ||
+        c.lastMessage.toLowerCase().includes(q)
+      );
+    });
+  }, [chats, searchTerm]);
+
+  if (dataSource === "api" && isLoading) {
     return <ChatListLoader />;
   }
 
   return (
     <div className="flex flex-col h-full hide-scrollbar">
-      {/* Search */}
-      <div className="p-4 flex-shrink-0">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-          <input
-            type="text"
-            placeholder={t("search_placeholder")}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-color1"
-          />
-        </div>
-      </div>
+      <ChatSearchInput
+        value={searchTerm}
+        onChange={setSearchTerm}
+        placeholder={t("search_placeholder")}
+      />
 
-      {/* Conversation count */}
       <div className="px-4 pb-3 flex-shrink-0">
         <p className="text-rose-400 text-sm font-medium">
-          {chats.length} {t("conversations")}
+          {filteredChats.length} {t("conversations")}
         </p>
       </div>
 
-      {/* Conversations list */}
       <div className="flex-1 overflow-y-auto hide-scrollbar">
-        {chats.map((chat) => {
-          const isActive = pathname === `/chats/${chat.id}`;
+        {filteredChats.map((chat) => {
+          const href = `${localePrefix}/chats/${chat.id}`;
+          const isActive = pathname === href;
 
           return (
-            <Link
+            <ChatListItem
               key={chat.id}
-              href={`/en/chats/${chat.id}`}
-              className={`flex items-center gap-3 p-4 cursor-pointer hover:bg-gray-50 ${
-                isActive ? "bg-red-300" : ""
-              }`}
-            >
-              <div className="relative">
-                <Image
-                  src={chat.image || images.Unknown}
-                  height={44}
-                  width={44}
-                  className="rounded-full"
-                  alt={chat.name}
-                />
-                {chat.online && (
-                  <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
-                )}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex justify-between items-start">
-                  <h3 className="font-semibold text-gray-900 truncate">
-                    {chat.name}
-                  </h3>
-                  <span className="text-xs text-gray-500">
-                    {chat.timestamp}
-                  </span>
-                </div>
-                <p className="text-sm text-gray-600 truncate">
-                  {chat.lastMessage}
-                </p>
-              </div>
-              {chat.unread > 0 && (
-                <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-semibold">
-                  {chat.unread}
-                </div>
-              )}
-            </Link>
+              chat={chat}
+              href={href}
+              isActive={isActive}
+            />
           );
         })}
       </div>

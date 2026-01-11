@@ -3,20 +3,21 @@ import ChatList from "./_components/ChatList";
 
 interface ChatLayoutProps {
   children: ReactNode;
-  chatlist: ReactNode;
 }
 
-export default function ChatLayout({ children, chatlist }: ChatLayoutProps) {
+export default function ChatLayout({ children }: ChatLayoutProps) {
   return (
-    <div className="flex   my-auto h-screen -mb-32 rounded-lg mx-4 overflow-hidden">
-      {/* Chat List Sidebar */}
-      <div className="w-80 bg-white border-r h-[90vh] border-gray-200 rounded-l-lg flex flex-col">
-        <ChatList />
-      </div>
+    <div className="flex h-screen ">
+      <div className="flex w-full overflow-hidden shadow-sm ">
+        {/* Chat List Sidebar */}
+        <aside className="w-80 shrink-0 bg-white border-r border-gray-200 flex flex-col py-4 ">
+          <ChatList />
+        </aside>
 
-      {/* Chat Content Area */}
-      <div className="flex-1 flex flex-col h-[90vh] bg-white rounded-r-lg">
-        {children}
+        {/* Chat Content Area */}
+        <main className="flex-1 flex flex-col bg-white py-4">
+          {children}
+        </main>
       </div>
     </div>
   );
