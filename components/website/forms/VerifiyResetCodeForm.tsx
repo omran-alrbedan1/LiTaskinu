@@ -5,8 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
 import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import {
   InputOTP,
@@ -15,6 +14,7 @@ import {
 } from "@/components/ui/input-otp";
 import usePostData from "@/hooks/usePostData";
 import { useTranslations } from "next-intl";
+import { Link, useRouter } from "@/i18n/navigation";
 
 const VerifyResetCodeForm = () => {
   const t = useTranslations("auth");

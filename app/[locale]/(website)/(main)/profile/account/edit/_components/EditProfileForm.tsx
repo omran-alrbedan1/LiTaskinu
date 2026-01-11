@@ -6,7 +6,6 @@ import { z } from "zod";
 
 import { Form } from "@/components/ui/form";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { ICONS } from "@/constants/icons";
 import { countryOptions, useGenderOptions } from "@/constants/options";
 import CustomFormField, {
@@ -19,6 +18,7 @@ import { Calendar, Key, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ChangePasswordModal from "./ChangePasswordModal";
 import ImageUploader from "./ImageUploader";
+import { useRouter } from "@/i18n/navigation";
 
 const EditProfileValidation = z.object({
   firstName: z.string().min(1, "First name is required"),

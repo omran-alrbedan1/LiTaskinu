@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import { ICONS } from "@/constants/icons";
 import CustomFormField, {

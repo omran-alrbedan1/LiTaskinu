@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Save } from "lucide-react";
 import {
   Accordion,
@@ -17,6 +16,7 @@ import SubmitButton from "@/components/Buttons/SubmitButton";
 import { SectionContent } from "../_components";
 import { PROFILE_SECTIONS } from "../constants/form-sections-profile";
 import CustomHeader from "@/components/shared/CustomHeader";
+import { Link } from "@/i18n/navigation";
 
 const EditPersonalDataPage = () => {
   const {

@@ -4,8 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import CustomFormField, {
   FormFieldType,
@@ -14,6 +12,7 @@ import { ICONS } from "@/constants/icons";
 import usePostData from "@/hooks/usePostData";
 import { useForgotPasswordValidation } from "@/validation";
 import { useTranslations } from "next-intl";
+import { Link, useRouter } from "@/i18n/navigation";
 
 const ForgotPasswordForm = () => {
   const router = useRouter();

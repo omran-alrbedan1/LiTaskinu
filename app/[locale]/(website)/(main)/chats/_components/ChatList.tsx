@@ -1,13 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Search } from "lucide-react";
 import Image from "next/image";
 import { images } from "@/constants/images";
 import { ChatListLoader } from ".";
 import { useTranslations } from "next-intl";
+import { Link, usePathname } from "@/i18n/navigation";
 
 interface Chat {
   id: string;
@@ -149,7 +148,7 @@ export default function ChatList() {
           return (
             <Link
               key={chat.id}
-              href={`/en/chats/${chat.id}`}
+              href={`/chats/${chat.id}`}
               className={`flex items-center gap-3 p-4 cursor-pointer hover:bg-gray-50 ${
                 isActive ? "bg-red-300" : ""
               }`}

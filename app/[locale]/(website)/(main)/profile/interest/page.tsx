@@ -10,10 +10,10 @@ import {
   Dumbbell,
   Plus,
 } from "lucide-react";
-import Link from "next/link";
 import { EmptyState } from "@/components/shared";
 import { images } from "@/constants/images";
 import CustomHeader from "@/components/shared/CustomHeader";
+import { Link } from "@/i18n/navigation";
 
 const mockUserInterests = {
   interests: ["Reading", "Traveling", "Photography", "Cooking"],

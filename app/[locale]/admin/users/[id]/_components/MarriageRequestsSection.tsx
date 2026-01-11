@@ -10,8 +10,8 @@ import Image from "next/image";
 import { images } from "@/constants/images";
 import { RiUserReceivedFill, RiUserShared2Fill } from "react-icons/ri";
 import { LuMailQuestion } from "react-icons/lu";
-import Link from "next/link";
 import SectionHeader from "./SectionHeader";
+import { Link } from "@/i18n/navigation";
 
 interface MarriageRequest {
   to?: User;

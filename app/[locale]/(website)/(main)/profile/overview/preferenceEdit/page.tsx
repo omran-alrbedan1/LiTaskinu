@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Save } from "lucide-react";
 import {
   Accordion,
@@ -16,6 +15,7 @@ import { SectionContent } from "../_components";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import { PREFERENCE_SECTIONS } from "../constants/form-sections-preferences";
 import CustomHeader from "@/components/shared/CustomHeader";
+import { Link } from "@/i18n/navigation";
 
 const EditPreferencePage = () => {
   const {

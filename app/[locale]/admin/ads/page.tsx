@@ -3,7 +3,6 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Eye, Plus, Pause, Play } from "lucide-react";
 import { Header, StatsCard } from "@/components/admin/shared";
-import Link from "next/link";
 import { EmptyState } from "@/components/shared";
 import { images } from "@/constants/images";
 import useGetData from "@/hooks/useGetData";
@@ -12,6 +11,7 @@ import DeleteModal from "@/components/admin/shared/DeleteModal";
 import { AdsCard, AdsCardSkeleton } from "./_components";
 import StatsCardSkeleton from "@/components/shared/StatsCardSkeleton";
 import useToggleStatus from "@/hooks/useToggleStatus";
+import { Link } from "@/i18n/navigation";
 
 export default function AdsManagementPage() {
 
