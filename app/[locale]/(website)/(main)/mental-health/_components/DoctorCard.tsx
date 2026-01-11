@@ -2,8 +2,8 @@ import React from 'react';
 import { Brain, MessageCircle, Globe, Star, Eye } from 'lucide-react';
 import Image from 'next/image';
 import { images } from '@/constants/images';
-import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
+import { Link } from '@/i18n/navigation';
 
 interface DoctorCardProps {
   doctor: Psychiatrist

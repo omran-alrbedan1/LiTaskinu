@@ -7,7 +7,6 @@ import { z } from "zod";
 import { Form } from "@/components/ui/form";
 import { useState } from "react";
 
-import { useRouter } from "next/navigation";
 import SubmitButton from "../../Buttons/SubmitButton";
 import { ICONS } from "@/constants/icons";
 import CustomFormField, {
@@ -23,8 +22,6 @@ const RegisterFormValidation = z.object({
 
 const ContactUsForm = () => {
   const [isLoading, setIsLoading] = useState(false);
-
-  const router = useRouter();
 
   const form = useForm<z.infer<typeof RegisterFormValidation>>({
     resolver: zodResolver(RegisterFormValidation),

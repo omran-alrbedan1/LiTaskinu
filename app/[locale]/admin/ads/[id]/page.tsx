@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import useGetData from "@/hooks/useGetData";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -18,7 +18,6 @@ import Loader from "@/components/shared/Loader";
 import { Separator } from "@/components/ui/separator";
 import ReactCountryFlag from "react-country-flag";
 import { calculateDaysRemaining, formatDate, formatDateTime } from "@/utils/format";
-import Link from "next/link";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,6 +30,7 @@ import DeleteModal from "@/components/admin/shared/DeleteModal";
 import CustomPremiumIcon from "@/components/shared/PremiumIcon";
 import CustomHeader from "@/components/shared/CustomHeader";
 import StatusBadge from "@/components/shared/StatusBadge";
+import { Link, useRouter } from "@/i18n/navigation";
 
 const AdDetailPage = () => {
   const params = useParams();

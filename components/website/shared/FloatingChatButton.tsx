@@ -1,5 +1,5 @@
+import { Link } from '@/i18n/navigation';
 import { MessageCircle } from 'lucide-react'
-import Link from 'next/link'
 import React from 'react'
 
 interface FloatingChatProps {
@@ -9,7 +9,7 @@ interface FloatingChatProps {
 const FloatingChatButton = ({url}:FloatingChatProps) => {
   return (
         <div className="fixed bottom-6 right-6 z-40">
-        <Link 
+        <Link
           href={url}
           className="h-14 px-5 rounded-full bg-gradient-to-r from-primary-color1 to-primary-color1/80 shadow-lg hover:shadow-xl transition-all duration-300 group flex items-center gap-3 hover:pr-20 overflow-hidden relative"
         >

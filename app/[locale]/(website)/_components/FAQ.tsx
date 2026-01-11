@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import FAQCard from "./FAQCard";
 import { animationVariants, faqItems } from "@/constants/landingData";
 import SectionHeader from "./SectionHeader";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export default function FAQ() {
   const t = useTranslations("homePage");

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { images } from "@/constants/images";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import Image from "next/image";

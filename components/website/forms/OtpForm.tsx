@@ -3,7 +3,7 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import React, { useState, useEffect } from "react";
 import SubmitButton from "../../Buttons/SubmitButton";
 import { useSearchParams } from "next/navigation";

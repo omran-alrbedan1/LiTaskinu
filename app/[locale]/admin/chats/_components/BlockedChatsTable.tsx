@@ -24,7 +24,7 @@ import { Badge } from "@/components/ui/badge";
 import BanModal from "@/components/admin/shared/BanModal";
 import { DeletePermanentModal } from "./DeleteModal";
 import { UnblockModal } from "./UnblockModal";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 const MOCK_BLOCKED_CHATS = [
   {

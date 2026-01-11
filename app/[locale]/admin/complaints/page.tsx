@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { Card, Tag, message } from "antd";
 import { FileTextOutlined } from "@ant-design/icons";
 import { BanModal, Header, SendWarningModal } from "@/components/admin/shared";

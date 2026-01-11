@@ -4,9 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { images } from "@/constants/images";
-import Link from "next/link";
 import { Globe } from "lucide-react";
-import { useRouter } from "next/navigation";
 import {
   mobileContainerVariants,
   mobileItemVariants,
@@ -16,6 +14,7 @@ import {
   scaleVariants,
 } from "@/constants/animation-variants";
 import { socialMediaLinks } from "@/constants/userTemporary";
+import { Link, useRouter } from "@/i18n/navigation";
 
 interface AuthLayoutProps {
   children: React.ReactNode;

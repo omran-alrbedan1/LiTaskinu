@@ -5,12 +5,12 @@ import {
 } from "@/components/ui/popover";
 import { Bell, Check, ChevronRight, BellRing } from "lucide-react";
 import TooltipButton from "./TooltipButton";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { mockNotifications } from "@/constants/temporary";
 import { formatTimeAgo } from "@/utils/format";
 import { notificationConfig } from "@/configs/notificationConfigs";
 import { useLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export default function Notifications() {
   const locale = useLocale();

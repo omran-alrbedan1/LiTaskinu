@@ -1,12 +1,13 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { Header } from "@/components/admin/shared";
 import useGetData from "@/hooks/useGetData";
 import usePutData from "@/hooks/usePutData";
 import { AdForm, AdFormSubmitData } from "../../_components/AdForm";
 import { formatDateForSubmission } from "@/utils/format";
 import Loader from "@/components/shared/Loader";
+import { useRouter } from "@/i18n/navigation";
 
 export default function EditAdPage() {
   const params = useParams();

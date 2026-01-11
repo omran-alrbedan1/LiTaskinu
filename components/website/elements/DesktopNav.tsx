@@ -12,7 +12,7 @@ export const DesktopNav: React.FC<DesktopNavProps> = React.memo(({
   isActiveLink 
 }) => {
   return (
-    <nav className="hidden md:flex items-center space-x-6">
+    <nav className="hidden md:flex items-center gap-6">
       {links.map((link) => {
         const isActive = isActiveLink(link.link);
         return (
