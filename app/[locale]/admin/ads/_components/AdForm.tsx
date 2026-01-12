@@ -25,7 +25,6 @@ import {
   Globe,
   Crown,
 } from "lucide-react";
-import Link from "next/link";
 import CustomFormField, {
   FormFieldType,
 } from "@/components/shared/CustomInput";
@@ -34,6 +33,7 @@ import { BsAspectRatio } from "react-icons/bs";
 import { useLocale } from "next-intl";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import useGetData from "@/hooks/useGetData";
+import { Link } from "@/i18n/navigation";
 
 // Validation schema for multilingual ads
 export const AdFormValidation = z.object({

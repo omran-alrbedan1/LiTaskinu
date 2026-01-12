@@ -8,12 +8,12 @@ import {
 } from "react-icons/fa";
 import { MdOutlineMail } from "react-icons/md";
 import { RiTelegram2Fill } from "react-icons/ri";
-import Link from "next/link";
 import { images } from "@/constants/images";
 import { FaLocationDot } from "react-icons/fa6";
 import { useTranslations } from "next-intl";
 import { Smartphone } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 
 const Footer = async () => {
   const t = await getTranslations("footer");

@@ -1,10 +1,11 @@
 "use client";
 import React, { useState, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { images } from "@/constants/images";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import Image from "next/image";
 import { Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const PhotoUploadCard: React.FC<PhotoUploadCardProps> = ({
   title,
@@ -12,6 +13,8 @@ const PhotoUploadCard: React.FC<PhotoUploadCardProps> = ({
   onImageUpload,
   previewUrl,
 }) => {
+  const t = useTranslations("auth");
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragOver, setIsDragOver] = useState(false);
 
@@ -60,7 +63,7 @@ const PhotoUploadCard: React.FC<PhotoUploadCardProps> = ({
           <div className="relative w-8 h-8 rounded-full overflow-hidden border border-primary-color1 flex items-center justify-center flex-shrink-0">
             <Image
               src={previewUrl}
-              alt="Preview"
+              alt={t("preview_alt")}
               className="object-cover"
               height={180}
               width={180}
@@ -78,7 +81,7 @@ const PhotoUploadCard: React.FC<PhotoUploadCardProps> = ({
           </h3>
           <p className="text-gray-300 text-sm">{description}</p>
           <p className="text-primary-color1 text-sm mt-1 font-medium">
-            {previewUrl ? "Change photo" : "Click to upload"}
+            {previewUrl ? t("change_photo") : t("click_to_upload")}
           </p>
         </div>
       </div>
@@ -89,13 +92,15 @@ const PhotoUploadCard: React.FC<PhotoUploadCardProps> = ({
         onChange={handleFileChange}
         accept="image/*"
         className="hidden"
-        capture={title.includes("selfie") ? "user" : undefined}
+        capture={title.toLowerCase().includes("selfie") ? "user" : undefined}
       />
     </div>
   );
 };
 
 const UserPhotoForm = () => {
+  const t = useTranslations("auth");
+
   const [isLoading, setIsLoading] = useState(false);
   const [photos, setPhotos] = useState<{
     rightSide: File | null;
@@ -158,31 +163,31 @@ const UserPhotoForm = () => {
     <div className="w-full max-w-md mx-auto p-4 min-h-screen">
       {/* Header - More compact */}
       <div className="text-center mb-6 mt-12">
-        <h1 className="text-xl font-bold text-white mb-1">Face Verification</h1>
+        <h1 className="text-xl font-bold text-white mb-1">{t("face_verification")}</h1>
         <p className="text-gray-400 text-sm">
-          Upload clear photos from different angles
+          {t("upload_photos_instruction")}
         </p>
       </div>
 
       {/* Photo Upload Sections - More compact */}
       <div className="space-y-4 mb-6">
         <PhotoUploadCard
-          title="Right side photo"
-          description="Clear view of right side"
+          title={t("right_side_photo")}
+          description={t("right_side_description")}
           onImageUpload={(file) => handleImageUpload("rightSide", file)}
           previewUrl={previewUrls.rightSide}
         />
 
         <PhotoUploadCard
-          title="Left side photo"
-          description="Clear view of left side"
+          title={t("left_side_photo")}
+          description={t("left_side_description")}
           onImageUpload={(file) => handleImageUpload("leftSide", file)}
           previewUrl={previewUrls.leftSide}
         />
 
         <PhotoUploadCard
-          title="Selfie photo"
-          description="Front facing selfie"
+          title={t("selfie_photo")}
+          description={t("selfie_description")}
           onImageUpload={(file) => handleImageUpload("selfie", file)}
           previewUrl={previewUrls.selfie}
         />
@@ -191,16 +196,16 @@ const UserPhotoForm = () => {
       {/* Confirm Button */}
       <SubmitButton
         isLoading={isLoading}
-        loadingText="Verifying..."
+        loadingText={t("verifying")}
         className="w-full"
         onClick={onSubmit}
       >
-        Confirm
+        {t("confirm")}
       </SubmitButton>
 
       {/* Help Text - Smaller */}
       <p className="text-center text-sm text-gray-400 mt-3">
-        Ensure photos are clear and well-lit
+        {t("ensure_clear_photos")}
       </p>
     </div>
   );

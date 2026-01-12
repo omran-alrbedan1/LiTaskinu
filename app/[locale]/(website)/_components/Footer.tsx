@@ -11,9 +11,12 @@ import {
   FaFacebookF,
 } from "react-icons/fa";
 import { TiHeartFullOutline } from "react-icons/ti";
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 
-export default function Footer() {
+export default async function Footer() {
+  const t = await getTranslations("footer");
+
   return (
     <footer className="bg-gradient text-white p-4 pt-16 pb-24 md:pb-8 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
@@ -30,16 +33,13 @@ export default function Footer() {
                   className="h-16 w-20 mr-4"
                 />
                 <div>
-                  <h3 className="text-2xl font-bold">Litaskunu</h3>
-                  <p className="text-white/70 text-sm">
-                    Islamic Marriage Platform
-                  </p>
+                  <h3 className="text-2xl font-bold">{t('brand.title')}</h3>
+                  <p className="text-white/70 text-sm">{t('brand.subtitle')}</p>
                 </div>
               </div>
 
               <p className="text-white/90 leading-relaxed mb-6 text-lg text-center lg:text-left">
-                Making halal marriages accessible worldwide through modern
-                technology while honoring Islamic traditions.
+                {t('brand.description')}
               </p>
 
               {/* Social Media */}
@@ -72,24 +72,24 @@ export default function Footer() {
             <div>
               <h4 className="text-xl font-semibold mb-6 flex items-center gap-2">
                 <FaEnvelope className="text-white" />
-                Contact Us
+                {t('contact.title')}
               </h4>
               <div className="space-y-4">
                 {[
                   {
                     icon: FaEnvelope,
-                    title: "Email",
+                    title: t('contact.email'),
                     text: "om.alrbedan100@gmail.com",
                   },
                   {
                     icon: FaPhone,
-                    title: "Phone",
+                    title: t('contact.phone'),
                     text: "009929929992",
                   },
                   {
                     icon: FaGlobe,
-                    title: "Global",
-                    text: "Available Worldwide",
+                    title: t('contact.global'),
+                    text: t('contact.global_desc'),
                   },
                 ].map((item, index) => (
                   <div
@@ -112,20 +112,19 @@ export default function Footer() {
             <div>
               <h4 className="text-xl font-semibold mb-6 flex items-center gap-2">
                 <FaShieldAlt className="text-white" />
-                Legal
+                {t('legal.title')}
               </h4>
               <div className="space-y-4">
                 {[
                   {
                     icon: FaFileContract,
-                    title: "Terms & Conditions",
-                    link:"#",
+                    title: t('legal.terms'),
+                    link: "#",
                   },
                   {
                     icon: FaShieldAlt,
-                    title: "Privacy Policy",
-                    link:"./privacy-policy",
-
+                    title: t('legal.privacy'),
+                    link: "./privacy-policy",
                   },
                 ].map((item, index) => (
                   <div
@@ -152,35 +151,28 @@ export default function Footer() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
                 <p className="text-white/80 text-sm leading-relaxed mb-4">
-                  It is also an incredibly affordable platform for those seeking
-                  meaningful relationships through traditional values, respect,
-                  and honesty. With cultural authenticity at its core, Litaskunu
-                  connects millions of users worldwide who are ready for serious
-                  commitments.
+                  {t('mission.statement')}
                 </p>
                 <div className="flex items-center gap-2 text-white/60 text-sm">
                   <TiHeartFullOutline className="text-red-500" />
-                  <span>
-                    Building meaningful Islamic relationships since 2025
-                  </span>
+                  <span>{t('mission.established')}</span>
                 </div>
               </div>
 
               <div className="text-center lg:text-right">
                 <p className="text-white/70 text-md">
-                  © {new Date().getFullYear()} Litaskunu. All rights reserved.
+                  © {new Date().getFullYear()} {t('brand.title')}. {t('copyright.rights')}
                 </p>
                 <p className="text-white/50 text-sm mt-1 flex items-center justify-center lg:justify-end gap-2">
-                  Made with
+                  {t('copyright.made_with')}
                   <TiHeartFullOutline className="text-red-600" />
-                  for the Muslim Ummah
+                  {t('copyright.made_for')}
                 </p>
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </footer>
   );
 }

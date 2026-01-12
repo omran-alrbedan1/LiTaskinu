@@ -1,0 +1,615 @@
+{
+  "header": {
+    "search_here": "在此搜索",
+    "home": "首页",
+    "chats": "聊天",
+    "about": "关于我们",
+    "contact": "联系我们",
+    "sheikhs": "我们的学者",
+    "mental_health": "心理健康"
+  },
+  "footer": {
+    "brand": {
+      "title": "Litaskunu",
+      "subtitle": "伊斯兰婚姻平台",
+      "description": "通过现代技术让全球穆斯林能够遵循伊斯兰传统，轻松实现清真婚姻。"
+    },
+    "contact": {
+      "title": "联系我们",
+      "email": "电子邮件",
+      "phone": "电话",
+      "global": "全球",
+      "global_desc": "服务覆盖全球"
+    },
+    "legal": {
+      "title": "法律信息",
+      "terms": "条款与条件",
+      "privacy": "隐私政策"
+    },
+    "mission": {
+      "statement": "对于通过传统价值观、尊重和诚实寻求有意义关系的人来说，这是一个非常实惠的平台。Litaskunu 以文化真实性为核心，连接数百万准备建立严肃承诺的用户。",
+      "established": "自 2025 年起建立有意义的伊斯兰关系"
+    },
+    "copyright": {
+      "rights": "版权所有。",
+      "made_for": "为穆斯林乌玛打造",
+      "made_with": "精心制作"
+    }
+  },
+  "homePage": {
+    "login": "登录",
+    "faq_contact": "还有疑问？我们随时为您提供帮助！",
+    "contact_support": "联系客服"
+  },
+  "chats": {
+    "header": {
+      "title": "Litaskunu",
+      "subtitleStart": "开启寻找伴侣之旅",
+      "subtitleContinue": "选择对话或寻找新联系"
+    },
+    "main": {
+      "titleStart": "开始您的旅程",
+      "titleContinue": "继续您的旅程",
+      "descStart": "让我们寻找一位与您拥有共同价值观和婚姻愿景的人。搜索您的理想伴侣，开启有意义的对话。",
+      "descContinue": "从侧边栏的现有对话中选择，或探索新的潜在伴侣以扩大您的联系。"
+    },
+    "quran": {
+      "verse": "“他的一种迹象是：他从你们的同类中为你们创造配偶，以便你们依恋她们……”",
+      "reference": "古兰经 30:21"
+    },
+    "actions": {
+      "findFirst": "寻找伴侣",
+      "findNew": "寻找新伴侣"
+    },
+    "safety": {
+      "title": "安全尊重的环境",
+      "descStart": "在专为伊斯兰意义关系设计的受保护空间中开始搜索。",
+      "descContinue": "您的所有对话都受到监控，以确保沟通尊重且符合清真原则。"
+    },
+    "guidance": {
+      "labelStart": "入门步骤：",
+      "labelContinue": "后续步骤：",
+      "steps": {
+        "preferences": "设置偏好",
+        "browse": "浏览个人资料",
+        "startChat": "开始聊天",
+        "continueChat": "继续对话",
+        "explore": "探索新伴侣",
+        "family": "家庭参与"
+      }
+    },
+    "search_placeholder": "在此搜索...",
+    "conversations": "对话",
+    "status": {
+      "online": "在线",
+      "offline": "离线",
+      "today": "今天"
+    },
+    "input": {
+      "placeholder": "输入消息"
+    },
+    "aria": {
+      "sentImage": "已发送图片",
+      "preview": "预览"
+    }
+  },
+  "about": {
+    "header": {
+      "platform_name": "清真配对平台",
+      "about_title": "关于 LITASKUNU",
+      "about_description": "我们通过清真、体面且现代的方式帮助穆斯林寻找人生伴侣。多年来，我们一直致力于团结寻求伊斯兰婚姻的有缘人。"
+    },
+    "mission": {
+      "purpose": "我们的宗旨",
+      "title": "我们的使命",
+      "description": "在维护伊斯兰价值观和原则的同时，促进寻求婚姻的穆斯林之间建立有意义的联系。我们相信找到贤惠的配偶是信仰的一半，我们很荣幸能帮助您完成您的信仰（Deen）。",
+      "family_image_alt": "享受时光的穆斯林家庭"
+    },
+    "checklist": {
+      "strict_adherence": "严格遵守伊斯兰原则。",
+      "privacy_dignity": "时刻维护隐私与尊严。",
+      "family_involvement": "鼓励并支持家庭参与。"
+    },
+    "services": {
+      "section_title": "我们提供的服务",
+      "title": "我们的服务",
+      "description": "在伊斯兰原则的指导下，为您寻找贤惠配偶的旅程提供全面支持。",
+      "unique_experience": {
+        "title": "独特的用户体验",
+        "description": "一个以真实和诚恳设计的平台。我们维持严格的标准来保护我们的社区。"
+      },
+      "data_integrity": {
+        "title": "数据完整性",
+        "description": "您的个人信息受到最高安全标准的保护，并促进监护人（Wali）的介入。"
+      },
+      "islamic_vibes": {
+        "title": "伊斯兰氛围",
+        "description": "遵循伊斯兰教法，以尊重和合乎道德的方式协助完成婚姻过程。"
+      }
+    },
+    "impact": {
+      "section_title": "我们的影响",
+      "title": "深受社区信赖",
+      "description": "我们的平台建立在信任、奉献和帮助穆斯林寻找兼容人生伴侣的承诺之上。",
+      "wedding_image_alt": "象征成功结合的婚戒",
+      "success_stories_title": "成功案例",
+      "success_stories_description": "感谢真主（Alhamdulillah），我们已通过体面且清真的平台帮助数千名穆斯林找到了理想伴侣。"
+    },
+    "stats": {
+      "successful_matches": "成功结合",
+      "countries_served": "服务国家",
+      "success_rate": "成功率",
+      "support_available": "客服支持"
+    },
+    "cta": {
+      "title": "准备好开始您的旅程了吗？",
+      "description": "迈出完成一半信仰的第一步。今天就加入我们值得信赖的伊斯兰婚姻平台。",
+      "create_profile": "创建个人资料",
+      "learn_more": "了解更多"
+    }
+  },
+  "contact": {
+    "title": "联系我们",
+    "contactInfo": "我们的联系信息：",
+    "followUs": "关注我们：",
+    "success_msg": "消息发送成功！",
+    "error_msg": "发送消息错误。请重试。",
+    "send_message": "发送消息",
+    "sending": "正在发送..."
+  },
+  "home": {
+    "error_loading": "加载个人资料错误。请重试。",
+    "retry": "重试",
+    "empty_title": "未找到个人资料",
+    "empty_description": "尝试调整您的搜索或筛选条件以查找更多结果",
+    "reset_filters": "重置筛选",
+    "unknown_user": "未知用户",
+    "unknown": "未知",
+    "city_id": "城市 ID",
+    "filters": {
+      "looking_for": "寻找",
+      "select_gender": "选择性别",
+      "female": "女性",
+      "male": "男性",
+      "both": "全部",
+      "age_from": "年龄从",
+      "age_to": "年龄到",
+      "country": "国家",
+      "select_country": "选择国家",
+      "city": "城市",
+      "select_city": "选择城市",
+      "reset_filters": "重置筛选",
+      "countries": {
+        "jordan": "约旦",
+        "usa": "美国",
+        "uk": "英国",
+        "canada": "加拿大",
+        "uae": "阿联酋"
+      },
+      "cities": {
+        "amman": "安曼",
+        "irbid": "伊尔比德",
+        "zarqa": "扎尔卡",
+        "aqaba": "亚喀巴",
+        "madaba": "马德巴"
+      }
+    },
+    "profile_card": {
+      "occupation": "职业",
+      "location": "地点",
+      "available_time": "可用时间",
+      "message": "消息",
+      "male": "男性",
+      "female": "女性",
+      "age": "{age} 岁",
+      "profile_image_alt": "{name} 的个人资料"
+    }
+  },
+  "mental_health": {
+    "hero": {
+      "background_alt": "心理健康背景",
+      "title_start": "寻找您的",
+      "title_highlight": "心理专家",
+      "title_end": "",
+      "subtitle": "联系获得许可的治疗师和心理学家，获得专业且保密的咨询支持。"
+    },
+    "features": {
+      "badge": "为什么选择我们的医生",
+      "title": "专业的心理健康支持",
+      "subtitle": "与获授权的专业人士一起体验保密的、基于证据的治疗。"
+    },
+    "chat": "聊天",
+    "view": "查看"
+  },
+  "psychiatrist_detail": {
+    "languages": "语言",
+    "experience": {
+      "title": "专业经验"
+    },
+    "background": {
+      "title": "职业背景"
+    },
+    "specializations": {
+      "title": "专业领域"
+    },
+    "chat": {
+      "status": {
+        "online": "在线",
+        "offline": "离线",
+        "typing": "正在输入..."
+      },
+      "date": {
+        "today": "今天",
+        "yesterday": "昨天"
+      },
+      "messageTypes": {
+        "userVoice": "您的语音消息",
+        "doctorVoice": "语音消息",
+        "fileDownload": "下载",
+        "clearAll": "清除全部"
+      },
+      "input": {
+        "placeholder": "输入您的消息...",
+        "recording": "正在录制语音",
+        "stopRecording": "停止录制"
+      }
+    }
+  },
+  "persons": {
+    "sidebar_title": "筛选",
+    "marital_status": "婚姻状况",
+    "religion": "宗教",
+    "job_title": "职位名称",
+    "job_placeholder": "输入职位",
+    "place": "地点",
+    "age": "年龄",
+    "occupation": "职业",
+    "education": "教育程度",
+    "weight": "体重",
+    "height": "身高",
+    "continue_btn": "继续",
+    "reset_btn": "重置筛选",
+    "search_placeholder": "立即搜索...",
+    "results_title": "搜索结果 ({count})",
+    "recent_search": "最近搜索",
+    "select_opt": "请选择",
+    "options": {
+      "single": "单身",
+      "married": "已婚",
+      "divorced": "离婚",
+      "widowed": "丧偶",
+      "christianity": "基督教",
+      "islam": "伊斯兰教",
+      "hinduism": "印度教",
+      "buddhism": "佛教",
+      "male": "男性",
+      "female": "女性",
+      "other": "其他",
+      "urban": "城市",
+      "suburban": "郊区",
+      "rural": "农村",
+      "high_school": "高中",
+      "bachelors": "学士",
+      "masters": "硕士",
+      "phd": "博士",
+      "employed": "在职",
+      "self_employed": "自雇",
+      "unemployed": "待业",
+      "student": "学生"
+    }
+  },
+  "person_detail": {
+    "photos_title": "照片",
+    "send_interest": "发送兴趣",
+    "block_user": "拉黑用户",
+    "info_title": "信息：",
+    "introduction": "自我介绍",
+    "personal_details": "个人详情",
+    "occupation": "职业",
+    "job_title": "职位名称",
+    "weight": "体重",
+    "height": "身高",
+    "age": "年龄",
+    "place": "地点",
+    "religion": "宗教",
+    "marital_status": "婚姻状况",
+    "chat_with": "与 {name} 聊天",
+    "education": "教育程度",
+    "success_title": "申请发送成功！",
+    "request_message": "您对 {name} 的聊天申请已发送，正在审核中。一旦您的监护人给出意见，我们会尽快通知您。",
+    "understand_btn": "我了解了",
+    "title": "未找到结果",
+    "description": "暂无搜索结果，请重新搜索以探索更多内容。"
+  },
+  "privacy_policy": {
+    "title": "隐私政策",
+    "header_desc": "我们致力于保护您的隐私，并为您提供有关我们如何收集和使用您数据的透明信息。最后更新：2025年2月10日",
+    "last_updated": "最后更新：2025年2月10日。我们保留随时更新此政策的权利。",
+    "sections": {
+      "intro": {
+        "title": "简介",
+        "p1": "欢迎访问 <important>Clande</important> 网站。本隐私政策描述了我们的个人信息处理惯例...",
+        "p2": "我们承诺保护您的隐私，并对我们的数据处理活动保持透明。"
+      },
+      "collection": {
+        "title": "数据收集",
+        "desc": "我们直接从您那里收集信息，通过您使用我们的产品自动收集，或从第三方处收集。",
+        "direct_title": "我们直接从您那里收集的信息：",
+        "items": [
+          "姓名、电子邮件、电话号码及其他联系信息",
+          "账户凭据，如用户名和密码",
+          "购买时的付款信息",
+          "您发送给我们的通信内容"
+        ],
+        "footer": "我们使用的信息类型：姓名、联系方式、人口统计详情、技术数据以及您提供的内容。如果我们收集敏感数据，我们将通知您并征得您的同意。"
+      },
+      "usage": {
+        "title": "数据用途",
+        "desc": "我们使用您的数据用于：",
+        "items": [
+          "为您提供个性化的服务和内容",
+          "处理付款并完成交易",
+          "发送重要的服务更新",
+          "回复您的查询",
+          "营销传播（经您同意）",
+          "改进和开发我们的产品",
+          "进行分析和研究",
+          "确保我们系统的安全"
+        ]
+      },
+      "cookies": {
+        "title": "Cookie 与追踪",
+        "desc": "我们使用 Cookie 来优化平台并了解用户行为。",
+        "essential_title": "必需的 Cookie：",
+        "essential_desc": "网站运行所必需。无法禁用。",
+        "performance_title": "性能 Cookie：",
+        "performance_desc": "通过了解哪些页面最受欢迎来帮助我们改进网站。"
+      },
+      "third_party": {
+        "title": "第三方服务",
+        "desc": "我们可能会使用值得信赖的第三方供应商来提升您的体验。",
+        "items": [
+          "安全的付款处理器",
+          "分析服务提供商",
+          "客户支持平台",
+          "云托管服务",
+          "营销平台"
+        ],
+        "footer": "我们要求第三方提供与我们相同水平的数据保护。"
+      },
+      "rights": {
+        "title": "您的权利",
+        "desc": "您对个人信息享有以下权利：",
+        "footer": "如需行使这些权利，请通过联系栏目与我们联系。",
+        "list": {
+          "access": {
+            "title": "访问权",
+            "desc": "索取您的个人数据副本。"
+          },
+          "correction": {
+            "title": "更正权",
+            "desc": "请求更正错误的数据。"
+          },
+          "deletion": {
+            "title": "删除权",
+            "desc": "请求删除您的数据（特定情况除外）。"
+          },
+          "objection": {
+            "title": "反对权",
+            "desc": "反对出于特定目的处理您的数据。"
+          },
+          "portability": {
+            "title": "迁移权",
+            "desc": "索取结构化且机器可读格式的数据。"
+          }
+        }
+      },
+      "contact": {
+        "title": "联系我们",
+        "desc": "如果您对此政策有任何疑问，请联系：",
+        "email_label": "电子邮件：",
+        "phone_label": "电话：",
+        "hours_label": "工作时间：",
+        "hours_value": "周一至周五，上午 9:00 - 下午 6:00"
+      }
+    }
+  },
+  "sheikhs_page": {
+    "hero_title": "伊斯兰教法咨询师",
+    "hero_subtitle": "从专门从事家庭和婚姻事务的学者和顾问团队中进行选择",
+    "features_badge": "为什么选择我们的学者",
+    "features_title": "卓越的伊斯兰指导",
+    "features_subtitle": "体验传统伊斯兰知识与现代咨询服务的完美结合。",
+    "buttons": {
+      "chat": "聊天",
+      "view": "查看"
+    },
+    "unknown_alt": "未知学者"
+  },
+  "sheikh_detail": {
+    "labels": {
+      "languages": "语言",
+      "experience": "经验",
+      "about": "关于",
+      "expertise": "专业领域"
+    },
+    "chat": {
+      "status": {
+        "online": "在线",
+        "offline": "离线",
+        "typing": "正在输入..."
+      },
+      "date": {
+        "today": "今天",
+        "yesterday": "昨天"
+      },
+      "recording": {
+        "active": "录制语音消息中",
+        "stop": "停止录制"
+      },
+      "input": {
+        "placeholder": "输入您的消息...",
+        "clear_all": "清除全部"
+      },
+      "message_types": {
+        "voice_user": "您的语音消息",
+        "voice_sheikh": "学者的语音消息",
+        "download": "下载"
+      }
+    }
+  },
+  "auth": {
+    "welcome_aboard": "欢迎加入！",
+    "login_success": "登录成功",
+    "login_failed": "登录失败。请重试。",
+    "title": "欢迎回来",
+    "sub_title": "登录您的账户",
+    "forgot_your_password": "忘记密码？",
+    "sign_in": "登录",
+    "continue_with_email": "或通过邮箱继续",
+    "continue_with_google": "通过 Google 继续",
+    "don't_have_account": "还没有账户？",
+    "sign_up_now": "立即注册",
+    "reset_password_title": "重置密码",
+    "forgot_desc": "输入您的电子邮件，我们将发送验证码以重置密码。",
+    "reset_code_sent": "验证码已发送至您的邮箱！",
+    "reset_code_failed": "验证码发送失败。",
+    "send_reset_code": "发送验证码",
+    "sending_code": "正在发送验证码...",
+    "back_to_sign_in": "返回登录",
+    "verify_title": "验证您的账户",
+    "verify_subtitle": "输入发送至您邮箱的验证码以完成注册。",
+    "enter_verification_code": "输入验证码",
+    "verification_code_sent": "我们已向您的邮箱发送了验证码",
+    "email_verified_success": "邮箱验证成功！",
+    "verification_failed": "验证失败。",
+    "verify": "验证",
+    "verifying": "正在验证...",
+    "resend_code_success": "新验证码已发送！",
+    "resend_code_failed": "重发验证码失败。",
+    "send_code_again": "重新发送验证码",
+    "sending": "正在发送...",
+    "parent_title": "完成监护人资料",
+    "parent_subtitle": "提供您的信息以设置家庭账户。",
+    "parent_information": "监护人信息",
+    "parent_information_desc": "父母/监护人详情",
+    "continue": "继续",
+    "submitting": "正在提交...",
+    "or_continue_with": "或继续使用",
+    "reset_desc": "为您的账户创建一个新的安全密码。",
+    "create_new_password": "创建新密码",
+    "new_password_desc": "在下方输入您的新密码。",
+    "password_reset_success": "密码重置成功！",
+    "password_reset_failed": "密码重置失败。",
+    "reset_password": "重置密码",
+    "resetting_password": "正在重置...",
+    "invalid_reset_token": "令牌无效。请重新申请链接。",
+    "select_user_type": "选择用户类型",
+    "select_user_type_desc": "请选择正确的用户类型以继续。",
+    "regular_user": "普通用户",
+    "regular_user_desc": "我为自己注册",
+    "guardian_user": "监护人",
+    "guardian_user_desc": "我作为他人的监护人进行注册",
+    "register_title": "加入我们的社区！",
+    "register_desc": "创建您的账户并开启旅程。",
+    "register_create_account": "创建账户",
+    "register_subtitle": "注册新账户",
+    "creating_account": "正在创建账户...",
+    "already_have_account": "已有账户？",
+    "register_success": "注册成功！请查收验证邮件。",
+    "register_failed": "注册失败。",
+    "preview_alt": "照片预览",
+    "change_photo": "更换照片",
+    "click_to_upload": "点击上传",
+    "face_verification": "人脸验证",
+    "upload_photos_instruction": "请上传不同角度的清晰照片",
+    "right_side_photo": "右侧轮廓照",
+    "right_side_description": "清晰的右侧脸部图",
+    "left_side_photo": "左侧轮廓照",
+    "left_side_description": "清晰的左侧脸部图",
+    "selfie_photo": "自拍照",
+    "selfie_description": "正面自拍照",
+    "confirm": "确认",
+    "ensure_clear_photos": "请确保照片清晰无误",
+    "verify_reset_code_desc": "输入发送至您邮箱的验证码以重置密码。",
+    "success_message": "验证码已通过！",
+    "error_message": "验证码无效。",
+    "resend_success": "新验证码已发送！",
+    "resend_error": "重发失败。",
+    "email_required": "必须填写电子邮件。",
+    "sent_code_email": "我们已向您的邮箱发送了 6 位数验证码",
+    "verification_code_label": "验证码",
+    "verify_code": "验证代码",
+    "did_not_receive_code": "没收到验证码？",
+    "resend_code": "重新发送",
+    "back_to_forgot_password": "返回忘记密码"
+  },
+  "validation": {
+    "email_invalid": "电子邮件格式无效",
+    "pass_req": "必须填写密码",
+    "email_required": "必须填写电子邮件",
+    "otp_incomplete": "请输入 6 位数字",
+    "first_name_required": "必须填写名字",
+    "first_name_too_long": "名字过长",
+    "last_name_required": "必须填写姓氏",
+    "last_name_too_long": "姓氏过长",
+    "kinship_required": "必须填写亲属关系",
+    "invalid_email": "电子邮件无效",
+    "phone_required": "必须填写电话号码",
+    "phone_invalid": "电话号码无效",
+    "phone_min_10_digits": "至少 10 位数字",
+    "reset_token_missing": "缺少令牌。",
+    "password_min_length": "密码至少 8 个字符",
+    "passwords_not_match": "密码不匹配",
+    "gender_required": "必须选择性别",
+    "date_of_birth_required": "必须填写出生日期",
+    "country_required": "必须选择国家",
+    "city_required": "必须选择城市",
+    "password_confirmation_required": "请确认您的密码",
+    "reset_code_length": "验证码必须为 6 个字符",
+    "message_min_10_chars": "至少 10 个字符",
+    "message_too_long": "消息过长"
+  },
+  "fields": {
+    "email": "电子邮件",
+    "email_placeholder": "your@email.com",
+    "email_address": "电子邮件地址",
+    "password": "密码",
+    "password_placeholder": "输入您的密码",
+    "first_name": "名字",
+    "first_name_placeholder": "张",
+    "last_name": "姓氏",
+    "last_name_placeholder": "伟",
+    "kinship": "亲属关系",
+    "kinship_placeholder": "选择亲属关系",
+    "phone_number": "电话号码",
+    "new_password": "新密码",
+    "new_password_placeholder": "输入新密码",
+    "confirm_password": "确认密码",
+    "confirm_password_placeholder": "确认您的密码",
+    "gender": "性别",
+    "gender_placeholder": "选择性别",
+    "country": "国家",
+    "country_placeholder": "选择国家",
+    "city": "城市",
+    "city_placeholder": "选择城市",
+    "date_of_birth": "出生日期",
+    "date_of_birth_placeholder": "选择日期",
+    "phone_placeholder": "输入您的电话",
+    "confirm_password_again_placeholder": "请再次输入",
+    "message": "消息",
+    "message_placeholder": "在此输入您的消息"
+  },
+  "options": {
+    "mother": "母亲",
+    "father": "父亲",
+    "grandmother": "祖母",
+    "grandfather": "祖父",
+    "aunt": "姨妈/姑妈",
+    "uncle": "叔叔/舅舅",
+    "guardian": "监护人",
+    "other": "其他",
+    "male": "男性",
+    "female": "女性"
+  }
+}

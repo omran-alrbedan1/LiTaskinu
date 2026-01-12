@@ -12,15 +12,14 @@ import {
   Plus,
   Film,
 } from "lucide-react";
-import Link from "next/link";
 import { EmptyState } from "@/components/shared";
 import { images } from "@/constants/images";
 import CustomHeader from "@/components/shared/CustomHeader";
 import useGetData from "@/hooks/useGetData";
 import Loader from "@/components/shared/Loader";
+import Link from "next/link";
 
 const InterestsPage = () => {
-  // Fetch user's selected interests from the "my" endpoint
   const {
     data: myInterests,
     loading: isFetchingInterests,

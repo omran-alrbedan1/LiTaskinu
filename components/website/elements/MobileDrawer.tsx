@@ -10,7 +10,7 @@ import ReactCountryFlag from "react-country-flag";
 import { images } from "@/constants/images";
 import { Badge } from "@/components/ui/badge";
 import { LANGUAGE_OPTIONS } from "@/constants/options";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 
 interface MobileDrawerProps {
   isOpen: boolean;

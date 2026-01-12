@@ -4,8 +4,12 @@ import { Search, ArrowUpRight, ChevronDown } from "lucide-react";
 import { people } from "@/constants/temporary";
 import { EmptyResult } from "./_components";
 import { Button } from "antd";
+import { useTranslations } from "next-intl";
 
 export default function PersonFilterPage() {
+  const t = useTranslations("persons");
+  const ft = useTranslations("fields");
+
   const [filters, setFilters] = useState({
     gender: "",
     maritalStatus: "",
@@ -109,13 +113,13 @@ export default function PersonFilterPage() {
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
       <div className="w-80 bg-white p-6 border-r border-gray-200">
-        <h2 className="text-xl font-semibold mb-6 text-gray-800">The Filers</h2>
+        <h2 className="text-xl font-semibold mb-6 text-gray-800">{t('sidebar_title')}</h2>
 
         <div className="space-y-4">
           {/* The Gender */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              The Gender
+              {ft('gender')}
             </label>
             <div className="relative">
               <select
@@ -125,10 +129,10 @@ export default function PersonFilterPage() {
                 }
                 className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg appearance-none cursor-pointer text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300"
               >
-                <option value="">Select</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
+                <option value="">{t('select_opt')}</option>
+                <option value="male">{t('options.male')}</option>
+                <option value="female">{t('options.female')}</option>
+                <option value="other">{t('options.other')}</option>
               </select>
               <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
             </div>
@@ -137,7 +141,7 @@ export default function PersonFilterPage() {
           {/* Marital Status */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Marital Status
+              {t('marital_status')}
             </label>
             <div className="relative">
               <select
@@ -147,11 +151,11 @@ export default function PersonFilterPage() {
                 }
                 className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg appearance-none cursor-pointer text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300"
               >
-                <option value="">Select</option>
-                <option value="single">Single</option>
-                <option value="married">Married</option>
-                <option value="divorced">Divorced</option>
-                <option value="widowed">Widowed</option>
+                <option value="">{t('select_opt')}</option>
+                <option value="single">{t('options.single')}</option>
+                <option value="married">{t('options.married')}</option>
+                <option value="divorced">{t('options.divorced')}</option>
+                <option value="widowed">{t('options.widowed')}</option>
               </select>
               <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
             </div>
@@ -160,7 +164,7 @@ export default function PersonFilterPage() {
           {/* Religion */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Religion
+              {t('religion')}
             </label>
             <div className="relative">
               <select
@@ -170,12 +174,12 @@ export default function PersonFilterPage() {
                 }
                 className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg appearance-none cursor-pointer text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300"
               >
-                <option value="">Select</option>
-                <option value="christianity">Christianity</option>
-                <option value="islam">Islam</option>
-                <option value="hinduism">Hinduism</option>
-                <option value="buddhism">Buddhism</option>
-                <option value="other">Other</option>
+                <option value="">{t('select_opt')}</option>
+                <option value="christianity">{t('options.christianity')}</option>
+                <option value="islam">{t('options.islam')}</option>
+                <option value="hinduism">{t('options.hinduism')}</option>
+                <option value="buddhism">{t('options.buddhism')}</option>
+                <option value="other">{t('options.other')}</option>
               </select>
               <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
             </div>
@@ -184,7 +188,7 @@ export default function PersonFilterPage() {
           {/* Job title */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Job title
+              {t('job_title')}
             </label>
             <input
               type="text"
@@ -193,14 +197,14 @@ export default function PersonFilterPage() {
                 setFilters({ ...filters, jobTitle: e.target.value })
               }
               className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300"
-              placeholder="Enter job title"
+              placeholder={t('job_placeholder')}
             />
           </div>
 
           {/* Place */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Place
+              {t('place')}
             </label>
             <div className="relative">
               <select
@@ -210,10 +214,10 @@ export default function PersonFilterPage() {
                 }
                 className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg appearance-none cursor-pointer text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300"
               >
-                <option value="">Select</option>
-                <option value="urban">Urban</option>
-                <option value="suburban">Suburban</option>
-                <option value="rural">Rural</option>
+                <option value="">{t('select_opt')}</option>
+                <option value="urban">{t('options.urban')}</option>
+                <option value="suburban">{t('options.suburban')}</option>
+                <option value="rural">{t('options.rural')}</option>
               </select>
               <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
             </div>
@@ -222,7 +226,7 @@ export default function PersonFilterPage() {
           {/* Age */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Age
+              {t('age')}
             </label>
             <div className="relative">
               <select
@@ -232,7 +236,7 @@ export default function PersonFilterPage() {
                 }
                 className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg appearance-none cursor-pointer text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300"
               >
-                <option value="">Select</option>
+                <option value="">{t('select_opt')}</option>
                 <option value="18-25">18-25</option>
                 <option value="26-35">26-35</option>
                 <option value="36-45">36-45</option>
@@ -246,7 +250,7 @@ export default function PersonFilterPage() {
           {/* Occupation */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Occupation
+              {t('occupation')}
             </label>
             <div className="relative">
               <select
@@ -256,11 +260,11 @@ export default function PersonFilterPage() {
                 }
                 className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg appearance-none cursor-pointer text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300"
               >
-                <option value="">Select</option>
-                <option value="employed">Employed</option>
-                <option value="self-employed">Self-employed</option>
-                <option value="unemployed">Unemployed</option>
-                <option value="student">Student</option>
+                <option value="">{t('select_opt')}</option>
+                <option value="employed">{t('options.employed')}</option>
+                <option value="self-employed">{t('options.self_employed')}</option>
+                <option value="unemployed">{t('options.unemployed')}</option>
+                <option value="student">{t('options.student')}</option>
               </select>
               <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
             </div>
@@ -269,7 +273,7 @@ export default function PersonFilterPage() {
           {/* Education */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Education
+              {t('education')}
             </label>
             <div className="relative">
               <select
@@ -279,11 +283,11 @@ export default function PersonFilterPage() {
                 }
                 className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg appearance-none cursor-pointer text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300"
               >
-                <option value="">Select</option>
-                <option value="high-school">High School</option>
-                <option value="bachelors">Bachelor's</option>
-                <option value="masters">Master's</option>
-                <option value="phd">PhD</option>
+                <option value="">{t('select_opt')}</option>
+                <option value="high-school">{t('options.high_school')}</option>
+                <option value="bachelors">{t('options.bachelors')}</option>
+                <option value="masters">{t('options.masters')}</option>
+                <option value="phd">{t('options.phd')}</option>
               </select>
               <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
             </div>
@@ -292,7 +296,7 @@ export default function PersonFilterPage() {
           {/* Weight */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Weight
+              {t('weight')}
             </label>
             <div className="relative">
               <select
@@ -302,7 +306,7 @@ export default function PersonFilterPage() {
                 }
                 className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg appearance-none cursor-pointer text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300"
               >
-                <option value="">Select</option>
+                <option value="">{t('select_opt')}</option>
                 <option value="under-50">Under 50kg</option>
                 <option value="50-70">50-70kg</option>
                 <option value="70-90">70-90kg</option>
@@ -315,7 +319,7 @@ export default function PersonFilterPage() {
           {/* Height */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Height
+              {t('height')}
             </label>
             <div className="relative">
               <select
@@ -325,7 +329,7 @@ export default function PersonFilterPage() {
                 }
                 className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg appearance-none cursor-pointer text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300"
               >
-                <option value="">Select</option>
+                <option value="">{t('select_opt')}</option>
                 <option value="under-150">Under 150cm</option>
                 <option value="150-170">150-170cm</option>
                 <option value="170-190">170-190cm</option>
@@ -338,20 +342,8 @@ export default function PersonFilterPage() {
 
         {/* Buttons */}
         <div className="mt-8 space-y-3">
-          <Button
-            onClick={handleContinue}
-            type="primary"
-            className="w-full !py-5"
-          >
-            Continue
-          </Button>
-          <Button
-            onClick={handleContinue}
-            type="dashed"
-            className="w-full text-primary-color1 !py-5"
-          >
-            reset filter
-          </Button>
+          <Button onClick={handleContinue} type="primary" className="w-full !py-5">{t('continue_btn')}</Button>
+          <Button onClick={handleContinue} type="dashed" className="w-full text-primary-color1 !py-5">{t('reset_btn')}</Button>
         </div>
       </div>
 
@@ -365,7 +357,7 @@ export default function PersonFilterPage() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search now..."
+              placeholder={t('search_placeholder')}
               className="w-full pl-12 pr-4 py-4 bg-red-50 border-none rounded-lg text-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-200"
             />
           </div>
@@ -376,14 +368,14 @@ export default function PersonFilterPage() {
           <div className="mt-8">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-bold text-gray-900">
-                Search Results ({filteredPeople.length})
+                {t('results_title', { count: filteredPeople.length })}
               </h2>
             </div>
           </div>
         ) : (
           <div className="mt-8">
             <h3 className="text-sm font-medium text-gray-400 mb-4">
-              Recent search
+              {t('recent_search')}
             </h3>
             <div className="space-y-2">
               {recentSearches.map((search, index) => (

@@ -18,12 +18,13 @@ import {
   CheckCircle
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
 import { images } from '@/constants/images';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { MOCK_MESSAGES } from '@/constants/temporary';
+import { useTranslations } from 'next-intl';
+import { useRouter } from '@/i18n/navigation';
 
 interface Message {
   id: number;
@@ -47,6 +48,8 @@ interface Message {
 }
 
 export default function ChatPage() {
+  const t = useTranslations("sheikh_detail.chat");
+
   const router = useRouter();
   const [message, setMessage] = useState('');
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
@@ -259,8 +262,8 @@ export default function ChatPage() {
     const yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
     
-    if (date.toDateString() === today.toDateString()) return 'Today';
-    if (date.toDateString() === yesterday.toDateString()) return 'Yesterday';
+    if (date.toDateString() === today.toDateString()) return t("date.today");
+    if (date.toDateString() === yesterday.toDateString()) return t("date.yesterday");
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   };
 
@@ -311,8 +314,8 @@ export default function ChatPage() {
                 <div className="flex items-center gap-2">
                   <div className={`h-2 w-2 rounded-full ${sheikh.isOnline ? 'bg-green-500' : 'bg-gray-400'}`}></div>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {sheikh.isOnline ? 'Online' : 'Offline'}
-                    {sheikh.typing && <span className="text-primary-color1 ml-2">• typing...</span>}
+                    {sheikh.isOnline ? t("status.online") : t("status.offline")}
+                    {sheikh.typing && <span className="text-primary-color1 ml-2">• {t("status.typing")}</span>}
                   </p>
                 </div>
               </div>
@@ -391,7 +394,7 @@ export default function ChatPage() {
                           <div className="flex-1 min-w-[120px]">
                             <div className="flex items-center justify-between mb-1">
                               <span className="text-xs font-medium">
-                                {msg.sender === 'user' ? 'Your voice message' : 'Voice message'}
+                                {msg.sender === 'user' ? t("message_types.voice_user") : t("message_types.voice_sheikh")}
                               </span>
                               <span className="text-xs opacity-75">{msg.voice.duration}</span>
                             </div>
@@ -457,7 +460,7 @@ export default function ChatPage() {
                                   className="h-8 text-xs"
                                 >
                                   <Download className="h-3 w-3 mr-1" />
-                                  Download
+                                  {t("message_types.download")}
                                 </Button>
                                 {msg.sender === 'user' && msg.isRead && (
                                   <CheckCircle className="h-4 w-4 text-green-400" />
@@ -516,7 +519,7 @@ export default function ChatPage() {
                 }}
                 className="h-7 text-xs"
               >
-                Clear all
+                {t("input.clear_all")}
               </Button>
             </div>
             <div className="flex gap-2 overflow-x-auto pb-2">
@@ -554,7 +557,7 @@ export default function ChatPage() {
                 </div>
                 <div>
                   <span className="font-medium text-red-600 dark:text-red-400">
-                    Recording voice message
+                    {t("recording.active")}
                   </span>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
                     {Math.floor(recordingTime / 60)}:{(recordingTime % 60).toString().padStart(2, '0')}
@@ -567,7 +570,7 @@ export default function ChatPage() {
                 className="gap-2"
               >
                 <div className="h-3 w-3 bg-white rounded-full"></div>
-                Stop Recording
+                {t("recording.stop")}
               </Button>
             </div>
           </div>
@@ -643,7 +646,7 @@ export default function ChatPage() {
                     handleSendMessage(e);
                   }
                 }}
-                placeholder="Type your message..."
+                placeholder={t("input.placeholder")}
                 rows={1}
                 className="flex-1 px-4 py-3 bg-transparent border-none outline-none resize-none text-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                 style={{ minHeight: '44px', maxHeight: '120px' }}

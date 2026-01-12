@@ -5,8 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
 import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import {
   InputOTP,
@@ -14,16 +13,13 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import usePostData from "@/hooks/usePostData";
-
-// Validation schema for reset code verification
-const VerifyResetCodeValidation = z.object({
-  code: z.string().length(6, "Reset code must be exactly 6 characters"),
-  email: z.string(),
-});
-
-type VerifyResetCodeFormValues = z.infer<typeof VerifyResetCodeValidation>;
+import { useTranslations } from "next-intl";
+import { Link, useRouter } from "@/i18n/navigation";
 
 const VerifyResetCodeForm = () => {
+  const t = useTranslations("auth");
+  const vt = useTranslations("validation");
+
   const [countdown, setCountdown] = useState(30);
   const [canResend, setCanResend] = useState(false);
   const router = useRouter();
@@ -37,8 +33,8 @@ const VerifyResetCodeForm = () => {
     error: verifyError,
   } = usePostData("/api/website/verify-otp", {
     showNotifications: true,
-    successMessage: "Code verified successfully!",
-    errorMessage: "Invalid verification code.",
+    successMessage: t("success_message"),
+    errorMessage: t("error_message"),
     onSuccess: (data) => {
       const resetToken = data.reset_token;
       if (resetToken) {
@@ -54,8 +50,8 @@ const VerifyResetCodeForm = () => {
     "/api/website/forgot-password",
     {
       showNotifications: true,
-      successMessage: "New code sent to your email!",
-      errorMessage: "Failed to resend code.",
+      successMessage: t("resend_success"),
+      errorMessage: t("resend_error"),
     }
   );
 
@@ -69,6 +65,14 @@ const VerifyResetCodeForm = () => {
     }
   }, [countdown]);
 
+  // Validation schema for reset code verification
+  const VerifyResetCodeValidation = z.object({
+    code: z.string().length(6, vt("reset_code_length")),
+    email: z.string(),
+  });
+  
+  type VerifyResetCodeFormValues = z.infer<typeof VerifyResetCodeValidation>;
+
   const form = useForm<VerifyResetCodeFormValues>({
     resolver: zodResolver(VerifyResetCodeValidation),
     defaultValues: {
@@ -81,7 +85,7 @@ const VerifyResetCodeForm = () => {
     if (!email) {
       form.setError("code", {
         type: "manual",
-        message: "Email is required. Please go back and try again.",
+        message: t("email_required"),
       });
       return;
     }
@@ -113,18 +117,16 @@ const VerifyResetCodeForm = () => {
     <div className="w-full max-w-md mx-auto p-6 rounded-lg shadow-sm">
       <div className="text-center mb-6">
         <h2 className="text-2xl font-bold text-white mb-2">
-          Enter Verification Code
+          {t("enter_verification_code")}
         </h2>
-        <p className="text-gray-400 text-sm">
-          We sent a 6-digit code to your email
-        </p>
+        <p className="text-gray-400 text-sm">{t("sent_code_email")}</p>
       </div>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-3">
             <label className="text-sm font-medium text-gray-400">
-              Verification Code
+              {t("verification_code_label")}
             </label>
             <div className="flex justify-center text-white">
               <InputOTP
@@ -157,17 +159,17 @@ const VerifyResetCodeForm = () => {
 
           <SubmitButton
             isLoading={isVerifying}
-            loadingText="Verifying..."
+            loadingText={t("verifying")}
             className="w-full"
           >
-            Verify Code
+            {t("verify_code")}
           </SubmitButton>
         </form>
       </Form>
 
       <div className="mt-6 text-center space-y-4">
         <p className="text-sm text-gray-400">
-          Didn't receive the code?{" "}
+          {t("did_not_receive_code")}{" "}
           <button
             onClick={handleResendCode}
             disabled={!canResend || isResending}
@@ -177,7 +179,7 @@ const VerifyResetCodeForm = () => {
                 : "text-gray-500 cursor-not-allowed"
             }`}
           >
-            {isResending ? "Sending..." : "Resend Code"}{" "}
+            {isResending ? t("sending") : t("resend_code")}{" "}
             {!canResend && !isResending && (
               <span className="text-primary-color1 font-bold">
                 ({String(Math.floor(countdown / 60)).padStart(2, "0")}:
@@ -192,7 +194,7 @@ const VerifyResetCodeForm = () => {
             href="./forgot-password"
             className="text-sm font-medium text-primary-color2 hover:text-primary-color1 transition-colors"
           >
-            ← Back to Forgot Password
+            ← {t("back_to_forgot_password")}
           </Link>
         </div>
       </div>

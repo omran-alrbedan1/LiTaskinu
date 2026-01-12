@@ -3,6 +3,7 @@ import React from "react";
 import { Select, InputNumber, Button } from "antd";
 import { images } from "@/constants/images";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export interface FilterState {
   seeking: string;
@@ -21,6 +22,8 @@ const FilterSection: React.FC<FilterSectionProps> = ({
   filters,
   onFiltersChange,
 }) => {
+  const t = useTranslations("home.filters");
+
   const handleFilterChange = (key: keyof FilterState, value: string) => {
     onFiltersChange({
       ...filters,
@@ -56,25 +59,25 @@ const FilterSection: React.FC<FilterSectionProps> = ({
         {/* Seeking Filter */}
         <div>
           <label className="block text-sm font-medium text-white mb-2">
-            Looking for
+            {t("looking_for")}
           </label>
           <Select
             value={filters.seeking || undefined}
             onChange={(value) => handleFilterChange("seeking", value)}
-            placeholder="Select gender"
+            placeholder={t("select_gender")}
             className="w-full"
             options={[
-              { value: "Female", label: "Female" },
-              { value: "Male", label: "Male" },
-              { value: "Both", label: "Both" },
+              { value: "Female", label: t("female") },
+              { value: "Male", label: t("male") },
+              { value: "Both", label: t("both") },
             ]}
           />
         </div>
 
         {/* Age From Filter */}
-        <div className="">
-          <label className="block text-sm  font-medium text-white mb-2">
-            Age From
+        <div>
+          <label className="block text-sm font-medium text-white mb-2">
+            {t("age_from")}
           </label>
           <InputNumber
             value={filters.ageFrom ? parseInt(filters.ageFrom) : undefined}
@@ -90,7 +93,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
         {/* Age To Filter */}
         <div>
           <label className="block text-sm font-medium text-white mb-2">
-            Age To
+            {t("age_to")}
           </label>
           <InputNumber
             value={filters.ageTo ? parseInt(filters.ageTo) : undefined}
@@ -106,19 +109,19 @@ const FilterSection: React.FC<FilterSectionProps> = ({
         {/* Country Filter */}
         <div>
           <label className="block text-sm font-medium text-white mb-2">
-            Country
+            {t("country")}
           </label>
           <Select
             value={filters.country || undefined}
             onChange={(value) => handleFilterChange("country", value)}
-            placeholder="Select country"
+            placeholder={t("select_country")}
             className="w-full"
             options={[
-              { value: "Jordan", label: "Jordan" },
-              { value: "USA", label: "USA" },
-              { value: "UK", label: "UK" },
-              { value: "Canada", label: "Canada" },
-              { value: "UAE", label: "UAE" },
+              { value: "Jordan", label: t("countries.jordan") },
+              { value: "USA", label: t("countries.usa") },
+              { value: "UK", label: t("countries.uk") },
+              { value: "Canada", label: t("countries.canada") },
+              { value: "UAE", label: t("countries.uae") },
             ]}
           />
         </div>
@@ -126,19 +129,19 @@ const FilterSection: React.FC<FilterSectionProps> = ({
         {/* City Filter */}
         <div>
           <label className="block text-sm font-medium text-white mb-2">
-            City
+            {t("city")}
           </label>
           <Select
             value={filters.city || undefined}
             onChange={(value) => handleFilterChange("city", value)}
-            placeholder="Select city"
+            placeholder={t("select_city")}
             className="w-full"
             options={[
-              { value: "Amman", label: "Amman" },
-              { value: "Irbid", label: "Irbid" },
-              { value: "Zarqa", label: "Zarqa" },
-              { value: "Aqaba", label: "Aqaba" },
-              { value: "Madaba", label: "Madaba" },
+              { value: "Amman", label: t("cities.amman") },
+              { value: "Irbid", label: t("cities.irbid") },
+              { value: "Zarqa", label: t("cities.zarqa") },
+              { value: "Aqaba", label: t("cities.aqaba") },
+              { value: "Madaba", label: t("cities.madaba") },
             ]}
           />
         </div>
@@ -148,7 +151,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
             onClick={handleResetFilters}
             className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors bg-white"
           >
-            Reset Filters
+            {t("reset_filters")}
           </Button>
         </div>
       </div>

@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { SESSION_COOKIES } from "@/lib/session";
+import createIntlMiddleware from "next-intl/middleware";
+import { routing } from "@/i18n/routing";
+
+const intlMiddleware = createIntlMiddleware(routing);
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -9,13 +13,15 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  const response = intlMiddleware(request);
+
   // ===== ADMIN ROUTES =====
   if (pathname.includes("/admin")) {
     const isAdminLogin = pathname.match(/^\/[a-z]{2}\/admin\/login$/i) || 
                          pathname === "/admin/login";
 
     if (isAdminLogin) {
-      return NextResponse.next();
+      return response;
     }
 
     const adminSession = request.cookies.get(SESSION_COOKIES.ADMIN);
@@ -29,7 +35,7 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(loginUrl);
     }
 
-    return NextResponse.next();
+    return response;
   }
 
   // ===== USER/WEBSITE ROUTES =====
@@ -46,7 +52,7 @@ export function middleware(request: NextRequest) {
       false;
 
     if (isPublicRoute) {
-      return NextResponse.next();
+      return response;
     }
 
     const userSession = request.cookies.get(SESSION_COOKIES.USER);
@@ -57,14 +63,15 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(loginUrl);
     }
 
-    return NextResponse.next();
+    return response;
   }
 
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|public/|api/).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|public/).*)",
+    "/(ar|en|tr|es|fr|zh|fa|ru)/:path*"
   ],
 };

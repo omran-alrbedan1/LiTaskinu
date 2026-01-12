@@ -1,6 +1,7 @@
 import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig = {
+  output: "standalone",
   eslint: {
     ignoreDuringBuilds: true,
   },

@@ -3,6 +3,7 @@ import { Check, Users, Shield, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { images } from "@/constants/images";
+import { getTranslations } from "next-intl/server";
 
 // Constants for hardcoded values
 const IMAGES = {
@@ -10,56 +11,56 @@ const IMAGES = {
   WEDDING: images.aboutUs2,
 };
 
-const CHECKLIST_ITEMS = [
-  "Strict adherence to Islamic principles.",
-  "Privacy and dignity maintained throughout.",
-  "Family involvement encouraged and supported.",
-];
+const Page = async () => {
+  const t = await getTranslations("about");
 
-const SERVICES = [
-  {
-    icon: Users,
-    title: "Unique user experience",
-    description: "A platform designed with authenticity and sincerity. We maintain strict standards to protect our community.",
-  },
-  {
-    icon: Shield,
-    title: "Data integrity",
-    description: "Your personal information is protected with the highest security standards, and we'll guardian implementation is facilitated.",
-  },
-  {
-    icon: Sparkles,
-    title: "Islamic vibes",
-    description: "Respectful and ethical approach to help navigate the marriage process according to Shariah.",
-  },
-];
+  const CHECKLIST_ITEMS = [
+    t("checklist.strict_adherence"),
+    t("checklist.privacy_dignity"),
+    t("checklist.family_involvement"),
+  ];
 
-const STATS = [
-  { value: "5,000+", label: "Successful Matches" },
-  { value: "50+", label: "Countries Served" },
-  { value: "95%", label: "Success Rate" },
-  { value: "24/7", label: "Support Available" },
-];
+  const SERVICES = [
+    {
+      icon: Users,
+      title: t("services.unique_experience.title"),
+      description: t("services.unique_experience.description"),
+    },
+    {
+      icon: Shield,
+      title: t("services.data_integrity.title"),
+      description: t("services.data_integrity.description"),
+    },
+    {
+      icon: Sparkles,
+      title: t("services.islamic_vibes.title"),
+      description: t("services.islamic_vibes.description"),
+    },
+  ];
 
-const Page = () => {
+  const STATS = [
+    { value: "5,000+", label: t("stats.successful_matches") },
+    { value: "50+", label: t("stats.countries_served") },
+    { value: "95%", label: t("stats.success_rate") },
+    { value: "24/7", label: t("stats.support_available") },
+  ];
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Header Section */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 text-center">
         <div className="inline-block mb-4 sm:mb-6">
           <span className="px-4 sm:px-6 py-2 bg-white dark:bg-gray-800 rounded-full text-xs sm:text-sm text-gray-600 dark:text-gray-300 shadow-sm border border-gray-200 dark:border-gray-700">
-            Halal Matchmaking Platform
+            {t("header.platform_name")}
           </span>
         </div>
         
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-4 sm:mb-6">
-          About LITASKUNU
+          {t("header.about_title")}
         </h1>
         
         <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
-          We help Muslims find their life partners through a halal, dignified, and modern approach
-          to matchmaking. For years, NikahConnect has been bringing together compatible
-          individuals seeking meaningful Islamic marriages.
+          {t("header.about_description")}
         </p>
       </div>
 
@@ -71,19 +72,16 @@ const Page = () => {
             <div className="order-2 lg:order-1">
               <div className="inline-block mb-4 sm:mb-6">
                 <span className="px-4 sm:px-5 py-2 bg-white dark:bg-gray-800 rounded-full text-xs sm:text-sm text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
-                  Our Purpose
+                  {t("mission.purpose")}
                 </span>
               </div>
               
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4 sm:mb-6">
-                Our Mission
+                {t("mission.title")}
               </h2>
               
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">
-                To facilitate meaningful connections between Muslims seeking
-                marriage, while upholding Islamic values and principles. We
-                believe that finding a righteous spouse is half of one's faith, and
-                we're honored to help you complete your deen.
+                {t("mission.description")}
               </p>
               
               {/* Check List */}
@@ -108,7 +106,7 @@ const Page = () => {
               <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg sm:shadow-xl dark:shadow-gray-900">
                 <Image
                   src={IMAGES.FAMILY}
-                  alt="Muslim family spending time together"
+                  alt={t("mission.family_image_alt")}
                   className="h-96 w-full object-cover"
                   loading="lazy"
                   width={600}
@@ -125,17 +123,16 @@ const Page = () => {
         <div className="text-center mb-8 sm:mb-12">
           <div className="inline-block mb-4 sm:mb-6">
             <span className="px-4 sm:px-6 py-2 bg-white dark:bg-gray-800 rounded-full text-xs sm:text-sm text-gray-600 dark:text-gray-300 shadow-sm border border-gray-200 dark:border-gray-700">
-              What We Offer
+              {t("services.section_title")}
             </span>
           </div>
           
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">
-            Our Services
+            {t("services.title")}
           </h2>
           
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-sm sm:text-base px-4">
-            Comprehensive support on your journey to finding a righteous spouse, guided by
-            Islamic principles.
+            {t("services.description")}
           </p>
         </div>
 
@@ -165,17 +162,16 @@ const Page = () => {
         <div className="text-center mb-8 sm:mb-12">
           <div className="inline-block mb-4 sm:mb-6">
             <span className="px-4 sm:px-6 py-2 bg-white dark:bg-gray-800 rounded-full text-xs sm:text-sm text-gray-600 dark:text-gray-300 shadow-sm border border-gray-200 dark:border-gray-700">
-              Our Impact
+              {t("impact.section_title")}
             </span>
           </div>
           
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">
-            Trusted by the Community
+            {t("impact.title")}
           </h2>
           
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-sm sm:text-base px-4">
-            Our platform is built on trust, dedication, and commitment to helping Muslims find
-            their compatible life partners.
+            {t("impact.description")}
           </p>
         </div>
 
@@ -199,10 +195,10 @@ const Page = () => {
             {/* Right Content */}
             <div className="order-2 lg:order-2">
               <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">
-                Success Stories
+                {t("impact.success_stories_title")}
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
-                Alhamdulillah, we've helped thousands of Muslims find their life partners through our halal and dignified matchmaking platform.
+                {t("impact.success_stories_description")}
               </p>
 
               {/* Stats Grid */}
@@ -227,21 +223,20 @@ const Page = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16">
         <div className="text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">
-            Ready to Begin Your Journey?
+            {t("cta.title")}
           </h2>
           
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-6 sm:mb-8 text-sm sm:text-base px-4">
-            Take the first step towards completing half your deen. Join our trusted Islamic
-            matchmaking platform today.
+            {t("cta.description")}
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <Button className="w-full sm:w-auto px-6 sm:px-8 py-5 rounded-full bg-primary-color1 hover:bg-primary-color2 dark:hover:bg-primary-color2 text-white font-medium transition-colors">
-              Create your profile
+              {t("cta.create_profile")}
             </Button>
             <Button className="w-full sm:w-auto px-6 sm:px-8 py-5 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium rounded-full transition-colors border border-gray-300 dark:border-gray-600">
-              Learn More
+              {t("cta.learn_more")}
             </Button>
           </div>
         </div>

@@ -9,24 +9,14 @@ import SubmitButton from "@/components/Buttons/SubmitButton";
 import CustomFormField, { FormFieldType } from "@/components/shared/CustomInput";
 import usePostData from "@/hooks/usePostData";
 import { ICONS } from "@/constants/icons";
-
-// Validation schema for contact form
-const ContactFormValidation = z.object({
-  firstName: z.string().min(1, "First name is required").max(50, "First name is too long"),
-  lastName: z.string().min(1, "Last name is required").max(50, "Last name is too long"),
-  email: z.string().email("Please enter a valid email address"),
-  phone: z.string()
-    .min(10, "Phone number must be at least 10 digits")
-    .regex(/^[0-9+\-\s()]+$/, "Please enter a valid phone number"),
-  message: z.string()
-    .min(10, "Message must be at least 10 characters")
-    .max(1000, "Message is too long"),
-});
-
-type ContactFormData = z.infer<typeof ContactFormValidation>;
+import { useTranslations } from "next-intl";
 
 // Contact Form Component
 export function ContactForm() {
+  const t = useTranslations("contact");
+  const ft = useTranslations("fields");
+  const vt = useTranslations("validation");
+
   const {
     postData,
     loading: isLoading,
@@ -34,12 +24,27 @@ export function ContactForm() {
     success,
   } = usePostData("/api/contact", {
     showNotifications: true,
-    successMessage: "Message sent successfully!",
-    errorMessage: "Failed to send message. Please try again.",
+    successMessage: t("success_msg"),
+    errorMessage: t("error_msg"),
     onSuccess: () => {
       form.reset();
     },
   });
+
+  // Validation schema for contact form
+  const ContactFormValidation = z.object({
+    firstName: z.string().min(1, vt("first_name_required")).max(50, vt("first_name_too_long")),
+    lastName: z.string().min(1, vt("last_name_required")).max(50, vt("last_name_too_long")),
+    email: z.string().email(vt("email_invalid")),
+    phone: z.string()
+      .min(10, vt("phone_min_10_digits"))
+      .regex(/^[0-9+\-\s()]+$/, vt("phone_invalid")),
+    message: z.string()
+      .min(10, vt("message_min_10_chars"))
+      .max(1000, vt("message_too_long")),
+  });
+
+  type ContactFormData = z.infer<typeof ContactFormValidation>;
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(ContactFormValidation),
@@ -67,8 +72,8 @@ export function ContactForm() {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="firstName"
-              label="First Name"
-              placeholder="John"
+              label={ft("first_name")}
+              placeholder={ft("first_name_placeholder")}
               iconSrc={ICONS.userInput}
             />
             
@@ -76,8 +81,8 @@ export function ContactForm() {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="lastName"
-              label="Last Name"
-              placeholder="Carter"
+              label={ft("last_name")}
+              placeholder={ft("last_name_placeholder")}
               iconSrc={ICONS.userInput}
             />
           </div>
@@ -88,7 +93,7 @@ export function ContactForm() {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="email"
-              label="Email"
+              label={ft("email")}
               iconSrc={ICONS.email}
               placeholder="John@gmail.com"
             />
@@ -97,7 +102,7 @@ export function ContactForm() {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="phone"
-              label="Phone Number"
+              label={ft("phone_number")}
               iconSrc={ICONS.phone}
               placeholder="09613358846"
             />
@@ -107,17 +112,17 @@ export function ContactForm() {
             fieldType={FormFieldType.TEXTAREA}
             control={form.control}
             name="message"
-            label="Message"
-            placeholder="Type here your message"
+            label={ft("message")}
+            placeholder={ft("message_placeholder")}
           />
 
           {/* Submit Button */}
           <SubmitButton
             isLoading={isLoading}
             className="w-full md:w-auto px-8 py-3 bg-primary-color1 hover:bg-primary-color2 dark:hover:bg-primary-color2 text-white font-medium rounded-lg transition-colors"
-            loadingText="Sending..."
+            loadingText={t("sending")}
           >
-            Send Message
+            {t("send_message")}
           </SubmitButton>
         </form>
       </Form>

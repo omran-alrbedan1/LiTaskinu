@@ -1,0 +1,615 @@
+{
+  "header": {
+    "search_here": "Burada Ara",
+    "home": "Ana Sayfa",
+    "chats": "Sohbetler",
+    "about": "Hakkımızda",
+    "contact": "İletişim",
+    "sheikhs": "Şeyhlerimiz",
+    "mental_health": "Ruh Sağlığı"
+  },
+  "footer": {
+    "brand": {
+      "title": "Litaskunu",
+      "subtitle": "İslami Evlilik Platformu",
+      "description": "Modern teknolojiyi İslami geleneklerle harmanlayarak dünya çapında helal evlilikleri kolaylaştırıyoruz."
+    },
+    "contact": {
+      "title": "Bize Ulaşın",
+      "email": "E-posta",
+      "phone": "Telefon",
+      "global": "Küresel",
+      "global_desc": "Dünya Çapında Hizmetinizde"
+    },
+    "legal": {
+      "title": "Yasal",
+      "terms": "Şartlar ve Koşullar",
+      "privacy": "Gizlilik Politikası"
+    },
+    "mission": {
+      "statement": "Geleneksel değerler, saygı ve dürüstlük çerçevesinde anlamlı ilişkiler arayanlar için oldukça uygun fiyatlı bir platformdur. Kültürel özgünlüğü temel alan Litaskunu, ciddi bir adım atmaya hazır milyonlarca kullanıcıyı birbirine bağlar.",
+      "established": "2025'ten beri anlamlı İslami ilişkiler inşa ediyoruz"
+    },
+    "copyright": {
+      "rights": "Tüm hakları saklıdır.",
+      "made_for": "Müslüman Ümmeti için",
+      "made_with": "ile yapıldı"
+    }
+  },
+  "homePage": {
+    "login": "Giriş Yap",
+    "faq_contact": "Hala sorularınız mı var? Yardımcı olmak için buradayız!",
+    "contact_support": "Destekle İletişime Geç"
+  },
+  "chats": {
+    "header": {
+      "title": "Litaskunu",
+      "subtitleStart": "Eşinizi bulma yolculuğuna başlayın",
+      "subtitleContinue": "Bir sohbet seçin veya yeni bağlantılar bulun"
+    },
+    "main": {
+      "titleStart": "Yolculuğunuza Başlayın",
+      "titleContinue": "Yolculuğunuza Devam Edin",
+      "descStart": "Değerlerinizi ve vizyonunuzu paylaşan birini bulalım. Anlamlı sohbetlere başlamak için mükemmel eşinizi arayın.",
+      "descContinue": "Kenar çubuğundaki mevcut sohbetlerinizden birini seçin veya bağlantılarınızı genişletmek için yeni potansiyel eşleşmeleri keşfedin."
+    },
+    "quran": {
+      "verse": "\"Onun ayetlerinden biri de kendileriyle huzur bulasınız diye size kendi türünüzden eşler yaratmasıdır...\"",
+      "reference": "Rum Suresi 30:21"
+    },
+    "actions": {
+      "findFirst": "Eşinizi Bulun",
+      "findNew": "Yeni Eşleşmeler Bulun"
+    },
+    "safety": {
+      "title": "Güvenli ve Saygılı Ortam",
+      "descStart": "Anlamlı İslami ilişkiler için tasarlanmış korunaklı bir alanda aramanıza başlayın.",
+      "descContinue": "Tüm sohbetleriniz, saygılı ve helal bir iletişim sağlamak amacıyla denetlenmektedir."
+    },
+    "guidance": {
+      "labelStart": "Başlarken:",
+      "labelContinue": "Sonraki adımlar:",
+      "steps": {
+        "preferences": "Tercihlerinizi belirleyin",
+        "browse": "Profillere göz atın",
+        "startChat": "Sohbete başlayın",
+        "continueChat": "Sohbetlere devam edin",
+        "explore": "Yeni eşleşmeleri keşfedin",
+        "family": "Aileyi sürece dahil edin"
+      }
+    },
+    "search_placeholder": "Burada ara...",
+    "conversations": "Sohbetler",
+    "status": {
+      "online": "Çevrimiçi",
+      "offline": "Çevrimdışı",
+      "today": "Bugün"
+    },
+    "input": {
+      "placeholder": "Mesajınızı yazın"
+    },
+    "aria": {
+      "sentImage": "Gönderilen görsel",
+      "preview": "Önizleme"
+    }
+  },
+  "about": {
+    "header": {
+      "platform_name": "Helal Evlilik Platformu",
+      "about_title": "LITASKUNU Hakkında",
+      "about_description": "Müslümanların hayat arkadaşını bulmalarına helal, vakur ve modern bir yaklaşımla yardımcı oluyoruz. NikahConnect yıllardır anlamlı İslami evlilikler arayan uyumlu bireyleri bir araya getiriyor."
+    },
+    "mission": {
+      "purpose": "Amacımız",
+      "title": "Misyonumuz",
+      "description": "Evlenmek isteyen Müslümanlar arasında, İslami değerleri ve ilkeleri koruyarak anlamlı bağlantılar kurmayı kolaylaştırmak. Salih bir eş bulmanın dinin yarısı olduğuna inanıyoruz ve dininizi tamamlamanıza yardımcı olmaktan onur duyuyoruz.",
+      "family_image_alt": "Birlikte vakit geçiren Müslüman bir aile"
+    },
+    "checklist": {
+      "strict_adherence": "İslami ilkelere sıkı bağlılık.",
+      "privacy_dignity": "Süreç boyunca korunan mahremiyet ve vakar.",
+      "family_involvement": "Aile katılımı teşvik edilir ve desteklenir."
+    },
+    "services": {
+      "section_title": "Neler Sunuyoruz",
+      "title": "Hizmetlerimiz",
+      "description": "İslami ilkeler rehberliğinde, salih bir eş bulma yolculuğunuzda kapsamlı destek.",
+      "unique_experience": {
+        "title": "Eşsiz kullanıcı deneyimi",
+        "description": "Samimiyet ve dürüstlükle tasarlanmış bir platform. Topluluğumuzu korumak için sıkı standartlar uyguluyoruz."
+      },
+      "data_integrity": {
+        "title": "Veri bütünlüğü",
+        "description": "Kişisel bilgileriniz en yüksek güvenlik standartlarıyla korunur ve veli onayı süreçleri kolaylaştırılır."
+      },
+      "islamic_vibes": {
+        "title": "İslami atmosfer",
+        "description": "Şeriat'a uygun olarak evlilik sürecini yönetmenize yardımcı olacak saygılı ve etik bir yaklaşım."
+      }
+    },
+    "impact": {
+      "section_title": "Etkimiz",
+      "title": "Toplumun Güveni",
+      "description": "Platformumuz güven, özveri ve Müslümanların uyumlu hayat arkadaşlarını bulmalarına yardımcı olma taahhüdü üzerine inşa edilmiştir.",
+      "wedding_image_alt": "Başarılı eşleşmeleri simgeleyen evlilik yüzükleri",
+      "success_stories_title": "Başarı Hikayeleri",
+      "success_stories_description": "Elhamdülillah, helal ve vakur platformumuz aracılığıyla binlerce Müslümanın hayat arkadaşını bulmasına yardımcı olduk."
+    },
+    "stats": {
+      "successful_matches": "Başarılı Eşleşmeler",
+      "countries_served": "Hizmet Verilen Ülkeler",
+      "success_rate": "Başarı Oranı",
+      "support_available": "Destek Mevcut"
+    },
+    "cta": {
+      "title": "Yolculuğunuza Başlamaya Hazır Mısınız?",
+      "description": "Dininizin yarısını tamamlamak için ilk adımı atın. Güvenilir İslami evlilik platformumuza bugün katılın.",
+      "create_profile": "Profilinizi oluşturun",
+      "learn_more": "Daha Fazla Bilgi"
+    }
+  },
+  "contact": {
+    "title": "Bize Ulaşın",
+    "contactInfo": "İletişim bilgilerimiz:",
+    "followUs": "Bizi Takip Edin:",
+    "success_msg": "Mesaj başarıyla gönderildi!",
+    "error_msg": "Mesaj gönderilemedi. Lütfen tekrar deneyin.",
+    "send_message": "Mesaj Gönder",
+    "sending": "Gönderiliyor..."
+  },
+  "home": {
+    "error_loading": "Profiller yüklenirken hata oluştu. Lütfen tekrar deneyin.",
+    "retry": "Tekrar Dene",
+    "empty_title": "Profil bulunamadı",
+    "empty_description": "Daha fazla eşleşme bulmak için aramanızı veya filtrelerinizi ayarlamayı deneyin",
+    "reset_filters": "Filtreleri Sıfırla",
+    "unknown_user": "Bilinmeyen Kullanıcı",
+    "unknown": "Bilinmiyor",
+    "city_id": "Şehir Kimliği",
+    "filters": {
+      "looking_for": "Aranan",
+      "select_gender": "Cinsiyet seçin",
+      "female": "Kadın",
+      "male": "Erkek",
+      "both": "Her ikisi",
+      "age_from": "Yaş Başlangıç",
+      "age_to": "Yaş Bitiş",
+      "country": "Ülke",
+      "select_country": "Ülke seçin",
+      "city": "Şehir",
+      "select_city": "Şehir seçin",
+      "reset_filters": "Filtreleri Sıfırla",
+      "countries": {
+        "jordan": "Ürdün",
+        "usa": "ABD",
+        "uk": "İngiltere",
+        "canada": "Kanada",
+        "uae": "BAE"
+      },
+      "cities": {
+        "amman": "Amman",
+        "irbid": "İrbid",
+        "zarqa": "Zerka",
+        "aqaba": "Akabe",
+        "madaba": "Madaba"
+      }
+    },
+    "profile_card": {
+      "occupation": "Meslek",
+      "location": "Konum",
+      "available_time": "Müsaitlik Zamanı",
+      "message": "Mesaj",
+      "male": "Erkek",
+      "female": "Kadın",
+      "age": "{age} yaşında",
+      "profile_image_alt": "{name} profili"
+    }
+  },
+  "mental_health": {
+    "hero": {
+      "background_alt": "Ruh sağlığı arka planı",
+      "title_start": "Ruh Sağlığı",
+      "title_highlight": "Uzmanınızı",
+      "title_end": "Bulun",
+      "subtitle": "Gizli ve profesyonel ruh sağlığı desteği için lisanslı terapistler ve psikologlarla bağlantı kurun"
+    },
+    "features": {
+      "badge": "NEDEN DOKTORLARIMIZI SEÇMELİSİNİZ",
+      "title": "Profesyonel Ruh Sağlığı Desteği",
+      "subtitle": "Lisanslı profesyonellerden gizli, kanıta dayalı terapi deneyimi yaşayın"
+    },
+    "chat": "Sohbet",
+    "view": "Görüntüle"
+  },
+  "psychiatrist_detail": {
+    "languages": "Diller",
+    "experience": {
+      "title": "Mesleki Deneyim"
+    },
+    "background": {
+      "title": "Mesleki Geçmiş"
+    },
+    "specializations": {
+      "title": "Uzmanlık Alanları"
+    },
+    "chat": {
+      "status": {
+        "online": "Çevrimiçi",
+        "offline": "Çevrimdışı",
+        "typing": "Yazıyor..."
+      },
+      "date": {
+        "today": "Bugün",
+        "yesterday": "Dün"
+      },
+      "messageTypes": {
+        "userVoice": "Sesli mesajınız",
+        "doctorVoice": "Sesli mesaj",
+        "fileDownload": "İndir",
+        "clearAll": "Tümünü temizle"
+      },
+      "input": {
+        "placeholder": "Mesajınızı yazın...",
+        "recording": "Sesli mesaj kaydediliyor",
+        "stopRecording": "Kaydı Durdur"
+      }
+    }
+  },
+  "persons": {
+    "sidebar_title": "Filtreler",
+    "marital_status": "Medeni Durum",
+    "religion": "Din",
+    "job_title": "Meslek Başlığı",
+    "job_placeholder": "Meslek yazın",
+    "place": "Konum",
+    "age": "Yaş",
+    "occupation": "Meslek",
+    "education": "Eğitim",
+    "weight": "Kilo",
+    "height": "Boy",
+    "continue_btn": "Devam Et",
+    "reset_btn": "Filtreyi Sıfırla",
+    "search_placeholder": "Şimdi ara...",
+    "results_title": "Arama Sonuçları ({count})",
+    "recent_search": "Son aramalar",
+    "select_opt": "Seçiniz",
+    "options": {
+      "single": "Bekar",
+      "married": "Evli",
+      "divorced": "Boşanmış",
+      "widowed": "Dul",
+      "christianity": "Hristiyanlık",
+      "islam": "İslam",
+      "hinduism": "Hinduizm",
+      "buddhism": "Budizm",
+      "male": "Erkek",
+      "female": "Kadın",
+      "other": "Diğer",
+      "urban": "Kentsel",
+      "suburban": "Banliyö",
+      "rural": "Kırsal",
+      "high_school": "Lise",
+      "bachelors": "Lisans",
+      "masters": "Yüksek Lisans",
+      "phd": "Doktora",
+      "employed": "Çalışıyor",
+      "self_employed": "Kendi İşinde Çalışıyor",
+      "unemployed": "İşsiz",
+      "student": "Öğrenci"
+    }
+  },
+  "person_detail": {
+    "photos_title": "Fotoğraflar",
+    "send_interest": "İlgi Gönder",
+    "block_user": "Kullanıcıyı Engelle",
+    "info_title": "Bilgiler:",
+    "introduction": "Tanıtım",
+    "personal_details": "Kişisel Bilgiler",
+    "occupation": "Meslek",
+    "job_title": "Meslek Başlığı",
+    "weight": "Kilo",
+    "height": "Boy",
+    "age": "Yaş",
+    "place": "Konum",
+    "religion": "Din",
+    "marital_status": "Medeni Durum",
+    "chat_with": "{name} ile sohbet et",
+    "education": "Eğitim",
+    "success_title": "İstek Başarıyla Gönderildi!",
+    "request_message": "{name} kişisine sohbet isteğiniz gönderildi ve inceleme aşamasında. Velinizin görüşü hakkında en kısa sürede bilgilendirileceksiniz.",
+    "understand_btn": "Anladım",
+    "title": "Sonuç bulunamadı",
+    "description": "Arama sonucu mevcut değil, yeni bir şeyler keşfetmek için tekrar arayın"
+  },
+  "privacy_policy": {
+    "title": "Gizlilik Politikası",
+    "header_desc": "Gizliliğinizi korumaya ve kişisel bilgilerinizi nasıl topladığımız, kullandığımız ve paylaştığımız hakkında şeffaf bilgi sağlamaya kararlıyız. Son güncelleme: 10 Şubat 2025",
+    "last_updated": "Son güncelleme: 10 Şubat 2025. Bu Gizlilik Politikasını istediğimiz zaman güncelleme hakkını saklı tutarız. Herhangi bir değişikliği bu sayfada yeni Gizlilik Politikasını yayınlayarak size bildireceğiz.",
+    "sections": {
+      "intro": {
+        "title": "Giriş",
+        "p1": "<important>Clande</important> web sitesine (\"yasal çerçeve\") hoş geldiniz. Bu Gizlilik Politikası, kişisel bilgi uygulamalarını ana hatlarıyla belirtir...",
+        "p2": "Bu Gizlilik Politikası, sizden topladığımız kişisel bilgi türlerini ve bunları nasıl kullandığımızı, paylaştığımızı ve koruduğumuzu açıklar. Gizliliğinizi korumaya ve veri işleme faaliyetlerimiz hakkında şeffaf olmaya kararlıyız."
+      },
+      "collection": {
+        "title": "Veri Toplama",
+        "desc": "Sizin hakkınızdaki bilgileri doğrudan sizden, Ürünlerimizi kullanımınız aracılığıyla otomatik olarak ve üçüncü taraflardan topluyoruz.",
+        "direct_title": "Doğrudan sizden topladığımız bilgiler:",
+        "items": [
+          "Adınız, e-posta adresiniz, telefon numaranız ve diğer iletişim bilgileriniz",
+          "Kullanıcı adınız ve şifreniz gibi hesap bilgileri",
+          "Satın alma işlemi yaptığınızdaki ödeme bilgileriniz",
+          "Bize gönderdiğiniz iletişimler"
+        ],
+        "footer": "Kullandığımız bilgi türleri: isimler, iletişim bilgileri (e-posta, adres, telefon numarası gibi), demografik ayrıntılar (konum, ilgi alanları ve tercihler), teknik veriler (tarayıcı türü, IP adresi, cihaz, çerez verileri), kullanım bilgileri ve bize sağladığınız dosya ve içerikler. Sizden hassas veya özel veri kategorileri toplarsak, sizi her zaman bilgilendireceğiz ve gerektiğinde rızanızı alacağız."
+      },
+      "usage": {
+        "title": "Veri Kullanımı",
+        "desc": "Topladığımız verileri şunlar için kullanıyoruz:",
+        "items": [
+          "Ürünlerimizi ve hizmetlerimizi size özel özellikler veya içeriklerle kişiselleştirmek",
+          "Ödemeleri işlemek ve talep ettiğiniz işlemleri tamamlamak",
+          "Ürünler veya hizmet güncellemeleri hakkında size önemli bilgiler göndermek",
+          "Hesabınız hakkında sizinle iletişim kurmak veya sorularınıza yanıt vermek",
+          "Pazarlama ve tanıtım iletişimleri (gerektiğinde rızanızla)",
+          "Ürünlerimizi iyileştirmek, özelleştirmek ve geliştirmek",
+          "Ürünleri nasıl kullandığınıza dair analiz ve araştırmalar yapmak",
+          "Sistemlerimizin ve ürünlerimizin emniyetini, bütünlüğünü ve güvenliğini sağlamak"
+        ]
+      },
+      "cookies": {
+        "title": "Çerezler ve Takip",
+        "desc": "Çeşitli amaçlarla hakkınızda bilgi toplamak için çerezler ve benzer takip teknolojileri kullanıyoruz. Bu teknolojiler hizmetlerimizi sunmamıza ve geliştirmemize, kullanıcı davranışını anlamamıza ve size daha kişiselleştirilmiş bir deneyim sunmamıza yardımcı olur.",
+        "essential_title": "Temel çerezler:",
+        "essential_desc": "Bu çerezler, web sitemize ve özelliklerimize erişmeniz ve işlevlerini kullanmanız için gereklidir. Temel çerezler devre dışı bırakılamaz veya kapatılamaz, çünkü site onlara bağımlıdır.",
+        "performance_title": "Performans çerezleri:",
+        "performance_desc": "Bu çerezler, web sitemizi nasıl kullandığınıza dair bilgileri toplayarak sitemizi geliştirmemize olanak tanır. Örneğin, performans çerezleri bize en sık hangi sayfaların ziyaret edildiğini söyler, sitede yaşayabileceğiniz zorlukları kaydetmemize yardımcı olur ve reklamlarımızın etkili olup olmadığını gösterir."
+      },
+      "third_party": {
+        "title": "Üçüncü Taraf Hizmetleri",
+        "desc": "Platformdaki deneyiminizi geliştirmek için güvenilir üçüncü taraf hizmet sağlayıcıları kullanabiliriz. Bu hizmet sağlayıcılar, kişisel bilgilerinize yalnızca bizim adımıza hizmetlerini yerine getirmek için erişebilirler.",
+        "items": [
+          "Güvenli ödeme işlemlerini kolaylaştırmak için ödeme işlemcileri",
+          "Hizmetlerimizi geliştirmemize yardımcı olacak analiz sağlayıcıları",
+          "Verimli iletişim için müşteri destek platformları",
+          "Veri depolama ve işleme için bulut barındırma hizmetleri",
+          "Bülten ve promosyon göndermek için pazarlama platformları (rızanızla)"
+        ],
+        "footer": "Kişisel bilgilerinizi paylaştığımız bu tür üçüncü tarafların, kişisel bilgileriniz için bizim sağladığımız düzeyde bir koruma sağlamasını şart koşuyoruz."
+      },
+      "rights": {
+        "title": "Haklarınız",
+        "desc": "Kişisel bilgilerinizle ilgili aşağıdaki haklara sahipsiniz:",
+        "footer": "Bu haklardan herhangi birini kullanmak için lütfen aşağıdaki Bize Ulaşın bölümünde verilen iletişim bilgilerini kullanarak bizimle iletişime geçin.",
+        "list": {
+          "access": {
+            "title": "Erişim",
+            "desc": "Hakkınızda tuttuğumuz kişisel bilgilerin bir kopyasını talep edin."
+          },
+          "correction": {
+            "title": "Düzeltme",
+            "desc": "Hatalı veya eksik kişisel bilgilerinizin düzeltilmesini talep edin."
+          },
+          "deletion": {
+            "title": "Silme",
+            "desc": "Bazı istisnalar dışında kişisel bilgilerinizin silinmesini talep edin."
+          },
+          "objection": {
+            "title": "İtiraz",
+            "desc": "Kişisel bilgilerinizin belirli amaçlarla işlenmesine itiraz edin."
+          },
+          "portability": {
+            "title": "Veri Taşınabilirliği",
+            "desc": "Kişisel bilgilerinizin yapılandırılmış, yaygın olarak kullanılan ve makine tarafından okunabilir bir formatta kopyasını talep edin."
+          }
+        }
+      },
+      "contact": {
+        "title": "Bize Ulaşın",
+        "desc": "Bu Gizlilik Politikası veya gizlilik uygulamalarımız hakkında herhangi bir sorunuz veya endişeniz varsa, lütfen bizimle şu adresten iletişime geçin:",
+        "email_label": "E-posta:",
+        "phone_label": "Telefon:",
+        "hours_label": "Çalışma Saatleri:",
+        "hours_value": "Pazartesi - Cuma, 09:00 - 18:00"
+      }
+    }
+  },
+  "sheikhs_page": {
+    "hero_title": "İslami Şeriat Danışmanı Şeyhler",
+    "hero_subtitle": "Aile ve evlilik işlerinde uzmanlaşmış seçkin şeyhler ve şeriat danışmanları arasından seçim yapın",
+    "features_badge": "NEDEN ŞEYHLERİMİZİ SEÇMELİSİNİZ",
+    "features_title": "İslami Rehberlikte Mükemmellik",
+    "features_subtitle": "Geleneksel İslami ilim ile modern danışmanlık uzmanlığının mükemmel harmanını deneyimleyin",
+    "buttons": {
+      "chat": "Sohbet",
+      "view": "Görüntüle"
+    },
+    "unknown_alt": "Bilinmeyen Şeyh"
+  },
+  "sheikh_detail": {
+    "labels": {
+      "languages": "Diller",
+      "experience": "Deneyim",
+      "about": "Hakkında",
+      "expertise": "Uzmanlık Alanları"
+    },
+    "chat": {
+      "status": {
+        "online": "Çevrimiçi",
+        "offline": "Çevrimdışı",
+        "typing": "Yazıyor..."
+      },
+      "date": {
+        "today": "Bugün",
+        "yesterday": "Dün"
+      },
+      "recording": {
+        "active": "Sesli mesaj kaydediliyor",
+        "stop": "Kaydı Durdur"
+      },
+      "input": {
+        "placeholder": "Mesajınızı yazın...",
+        "clear_all": "Tümünü temizle"
+      },
+      "message_types": {
+        "voice_user": "Sesli mesajınız",
+        "voice_sheikh": "Sesli mesaj",
+        "download": "İndir"
+      }
+    }
+  },
+  "auth": {
+    "welcome_aboard": "Aramıza Hoş Geldiniz!",
+    "login_success": "Giriş başarılı",
+    "login_failed": "Giriş başarısız. Lütfen tekrar deneyin.",
+    "title": "Tekrar Hoş Geldiniz",
+    "sub_title": "Hesabınıza giriş yapın",
+    "forgot_your_password": "Şifrenizi mi unuttunuz?",
+    "sign_in": "Giriş Yap",
+    "continue_with_email": "Veya e-posta ile devam edin",
+    "continue_with_google": "Google ile devam et",
+    "don't_have_account": "Hesabınız yok mu?",
+    "sign_up_now": "Şimdi üye olun",
+    "reset_password_title": "Şifrenizi Sıfırlayın",
+    "forgot_desc": "E-posta adresinizi girin, şifrenizi sıfırlamanız ve hesabınızı güvenceye almanız için size bir doğrulama kodu gönderelim.",
+    "reset_code_sent": "Sıfırlama kodu e-postanıza gönderildi!",
+    "reset_code_failed": "Sıfırlama kodu gönderilemedi. Lütfen tekrar deneyin.",
+    "send_reset_code": "Sıfırlama Kodu Gönder",
+    "sending_code": "Kod Gönderiliyor...",
+    "back_to_sign_in": "Giriş Sayfasına Dön",
+    "verify_title": "Hesabınızı Doğrulayın",
+    "verify_subtitle": "Hesabınızı güvenceye almak ve kayıt işlemini tamamlamak için e-postanıza gönderilen doğrulama kodunu girin.",
+    "enter_verification_code": "Doğrulama kodunu girin",
+    "verification_code_sent": "E-postanıza bir doğrulama kodu gönderdik",
+    "email_verified_success": "E-posta başarıyla doğrulandı!",
+    "verification_failed": "Doğrulama başarısız.",
+    "verify": "Doğrula",
+    "verifying": "Doğrulanıyor...",
+    "resend_code_success": "E-postanıza yeni kod gönderildi!",
+    "resend_code_failed": "Kod tekrar gönderilemedi.",
+    "send_code_again": "Kodu tekrar gönder",
+    "sending": "Gönderiliyor...",
+    "parent_title": "Veli Profilinizi Tamamlayın",
+    "parent_subtitle": "Veli kayıt işlemini tamamlamak ve aile hesabınızı kurmak için lütfen bilgilerinizi sağlayın.",
+    "parent_information": "Veli Bilgileri",
+    "parent_information_desc": "Lütfen veli ayrıntılarını sağlayın",
+    "continue": "Devam Et",
+    "submitting": "Gönderiliyor...",
+    "or_continue_with": "Veya şununla devam et",
+    "reset_desc": "Hesabınıza tekrar erişmek ve bilgilerinizi korumak için yeni ve güvenli bir şifre oluşturun.",
+    "create_new_password": "Yeni Şifre Oluştur",
+    "new_password_desc": "Lütfen aşağıya yeni şifrenizi girin.",
+    "password_reset_success": "Şifre başarıyla sıfırlandı!",
+    "password_reset_failed": "Şifre sıfırlanamadı.",
+    "reset_password": "Şifreyi Sıfırla",
+    "resetting_password": "Şifre sıfırlanıyor...",
+    "invalid_reset_token": "Geçersiz veya eksik sıfırlama anahtarı. Lütfen yeni bir şifre sıfırlama bağlantısı talep edin.",
+    "select_user_type": "Kullanıcı tipi seçin",
+    "select_user_type_desc": "İşlemi doğru tamamlamak için lütfen kullanıcı tipini seçin.",
+    "regular_user": "Normal kullanıcı",
+    "regular_user_desc": "Kendim için normal kullanıcı olarak kaydoluyorum",
+    "guardian_user": "Veli / Vasî",
+    "guardian_user_desc": "Başka biri için veli olarak kaydoluyorum",
+    "register_title": "Topluluğumuza Katılın!",
+    "register_desc": "Hesabınızı oluşturun ve yolculuğunuza bizimle başlayın.",
+    "register_create_account": "Hesap Oluştur",
+    "register_subtitle": "Yeni bir hesap için kaydolun",
+    "creating_account": "Hesap Oluşturuluyor...",
+    "already_have_account": "Zaten bir hesabınız var mı?",
+    "register_success": "Kayıt başarılı! Lütfen e-postanızı doğrulayın.",
+    "register_failed": "Kayıt başarısız. Lütfen tekrar deneyin.",
+    "preview_alt": "Fotoğraf önizleme",
+    "change_photo": "Fotoğrafı değiştir",
+    "click_to_upload": "Yüklemek için tıklayın",
+    "face_verification": "Yüz Doğrulama",
+    "upload_photos_instruction": "Farklı açılardan net fotoğraflar yükleyin",
+    "right_side_photo": "Sağ profil fotoğrafı",
+    "right_side_description": "Sağ taraftan net görünüm",
+    "left_side_photo": "Sol profil fotoğrafı",
+    "left_side_description": "Sol taraftan net görünüm",
+    "selfie_photo": "Selfie fotoğrafı",
+    "selfie_description": "Önden çekilmiş selfie",
+    "confirm": "Onayla",
+    "ensure_clear_photos": "Fotoğrafların net ve iyi aydınlatılmış olduğundan emin olun",
+    "verify_reset_code_desc": "Şifrenizi sıfırlamak ve hesabınızı güvenceye almak için e-postanıza gönderilen doğrulama kodunu girin. Bu, kişisel bilgilerinizin güvenliğini sağlamamıza yardımcı olur.",
+    "success_message": "Kod başarıyla doğrulandı!",
+    "error_message": "Geçersiz doğrulama kodu.",
+    "resend_success": "E-postanıza yeni kod gönderildi!",
+    "resend_error": "Kod tekrar gönderilemedi.",
+    "email_required": "E-posta gereklidir. Lütfen geri dönüp tekrar deneyin.",
+    "sent_code_email": "E-postanıza 6 haneli bir kod gönderdik",
+    "verification_code_label": "Doğrulama Kodu",
+    "verify_code": "Kodu Doğrula",
+    "did_not_receive_code": "Kod gelmedi mi?",
+    "resend_code": "Kodu Tekrar Gönder",
+    "back_to_forgot_password": "Şifremi Unuttum sayfasına dön"
+  },
+  "validation": {
+    "email_invalid": "Lütfen geçerli bir e-posta adresi girin",
+    "pass_req": "Şifre gereklidir",
+    "email_required": "E-posta gereklidir",
+    "otp_incomplete": "Lütfen 6 haneli kodun tamamını girin",
+    "first_name_required": "İsim gereklidir",
+    "first_name_too_long": "İsim çok uzun",
+    "last_name_required": "Soyisim gereklidir",
+    "last_name_too_long": "Soyisim çok uzun",
+    "kinship_required": "Yakınlık derecesi gereklidir",
+    "invalid_email": "Geçersiz e-posta adresi",
+    "phone_required": "Telefon numarası gereklidir",
+    "phone_invalid": "Lütfen geçerli bir telefon numarası girin",
+    "phone_min_10_digits": "Telefon numarası en az 10 haneli olmalıdır",
+    "reset_token_missing": "Sıfırlama anahtarı eksik. Lütfen yeni bir bağlantı talep edin.",
+    "password_min_length": "Şifre en az 8 karakter olmalıdır",
+    "passwords_not_match": "Şifreler eşleşmiyor",
+    "gender_required": "Cinsiyet gereklidir",
+    "date_of_birth_required": "Doğum tarihi gereklidir",
+    "country_required": "Ülke gereklidir",
+    "city_required": "Şehir gereklidir",
+    "password_confirmation_required": "Lütfen şifrenizi onaylayın",
+    "reset_code_length": "Sıfırlama kodu tam olarak 6 karakter olmalıdır",
+    "message_min_10_chars": "Mesaj en az 10 karakter olmalıdır",
+    "message_too_long": "Mesaj çok uzun"
+  },
+  "fields": {
+    "email": "E-posta",
+    "email_placeholder": "eposta@adresiniz.com",
+    "email_address": "E-posta Adresi",
+    "password": "Şifre",
+    "password_placeholder": "Şifrenizi girin",
+    "first_name": "İsim",
+    "first_name_placeholder": "Ahmet",
+    "last_name": "Soyisim",
+    "last_name_placeholder": "Yılmaz",
+    "kinship": "Yakınlık Derecesi",
+    "kinship_placeholder": "Yakınlık türünü seçin",
+    "phone_number": "Telefon Numarası",
+    "new_password": "Yeni Şifre",
+    "new_password_placeholder": "Yeni şifrenizi girin",
+    "confirm_password": "Şifreyi Onayla",
+    "confirm_password_placeholder": "Yeni şifrenizi onaylayın",
+    "gender": "Cinsiyet",
+    "gender_placeholder": "Cinsiyet seçin",
+    "country": "Ülke",
+    "country_placeholder": "Ülkenizi seçin",
+    "city": "Şehir",
+    "city_placeholder": "Şehrinizi seçin",
+    "date_of_birth": "Doğum Tarihi",
+    "date_of_birth_placeholder": "Doğum tarihinizi seçin",
+    "phone_placeholder": "Telefon numaranızı girin",
+    "confirm_password_again_placeholder": "Şifrenizi tekrar girin",
+    "message": "Mesaj",
+    "message_placeholder": "Mesajınızı buraya yazın"
+  },
+  "options": {
+    "mother": "Anne",
+    "father": "Baba",
+    "grandmother": "Anneanne/Babaanne",
+    "grandfather": "Dede",
+    "aunt": "Hala/Teyze",
+    "uncle": "Amca/Dayı",
+    "guardian": "Veli/Vasî",
+    "other": "Diğer",
+    "male": "Erkek",
+    "female": "Kadın"
+  }
+}

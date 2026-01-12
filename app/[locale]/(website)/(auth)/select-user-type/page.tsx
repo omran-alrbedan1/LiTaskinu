@@ -3,11 +3,13 @@
 import React from "react";
 import SelectUserTypeForm from "@/components/website/forms/SelectUserTypeForm";
 import AuthLayout from "@/components/website/layouts/AuthLayout";
+import { useTranslations } from "next-intl";
 
 const SelectUserType = () => {
+  const t = useTranslations("auth");
   return (
     <AuthLayout
-      title="Welcome Aboard!"
+      title={t("welcome_aboard")}
       description="Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
       showLanguageSwitch={false}
     >

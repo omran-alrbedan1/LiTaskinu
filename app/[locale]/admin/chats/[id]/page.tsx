@@ -1,6 +1,5 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -20,6 +19,7 @@ import { getComplaintConfig } from "@/configs/complaints";
 import { Header } from "@/components/admin/shared";
 import { TiMessages } from "react-icons/ti";
 import { BsPeopleFill } from "react-icons/bs";
+import { useRouter } from "@/i18n/navigation";
 
 const MOCK_CHATS = {
   id: "chat_005",

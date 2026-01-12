@@ -1,15 +1,15 @@
 "use client";
 import VerifiyResetCodeForm from "@/components/website/forms/VerifiyResetCodeForm";
-import { useRouter } from "next/navigation";
 import AuthLayout from "@/components/website/layouts/AuthLayout";
+import { useTranslations } from "next-intl";
 
 const VerifyResetCode = () => {
-  const router = useRouter();
+  const t = useTranslations("auth");
 
   return (
     <AuthLayout
-      title="Verify Your Account"
-      description="Enter the verification code sent to your email to reset your password and secure your account. This helps us ensure the security of your personal information."
+      title={t("verify_title")}
+      description={t("verify_reset_code_desc")}
       showLanguageSwitch={false}
       customFormClasses="-mt-24 "
     >

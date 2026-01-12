@@ -17,6 +17,7 @@ import {
 import { MOCK_PSYCHIATRISTS } from '@/constants/temporary';
 import Link from 'next/link';
 import FloatingChatButton from '@/components/website/shared/FloatingChatButton';
+import { getTranslations } from 'next-intl/server';
 
 interface PsychiatristDetailPageProps {
     params: {
@@ -25,8 +26,9 @@ interface PsychiatristDetailPageProps {
     };
 }
 
-export default function PsychiatristDetailPage({ params }: PsychiatristDetailPageProps) {
+export default async function PsychiatristDetailPage({ params }: PsychiatristDetailPageProps) {
     const { id } = params;
+    const t = await getTranslations('psychiatrist_detail');
 
     const psychiatrist = MOCK_PSYCHIATRISTS.find(p => p.id.toString() === id);
 
@@ -101,7 +103,7 @@ export default function PsychiatristDetailPage({ params }: PsychiatristDetailPag
                                                 <Globe className="h-4 w-4 text-primary-color1" />
                                             </div>
                                             <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                                                Languages
+                                                {t('languages')}
                                             </span>
                                         </div>
                                         <div className="flex flex-wrap gap-2 pl-12">
@@ -150,7 +152,7 @@ export default function PsychiatristDetailPage({ params }: PsychiatristDetailPag
                                     </div>
                                     <div>
                                         <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                                            Professional Experience
+                                            {t("experience.title")}
                                         </h3>
                                         <div className="h-1 w-16 bg-gradient-to-r from-primary-color1 to-primary-color1/40 rounded-full mt-1"></div>
                                     </div>
@@ -168,7 +170,7 @@ export default function PsychiatristDetailPage({ params }: PsychiatristDetailPag
                                     </div>
                                     <div>
                                         <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                                            Professional Background
+                                            {t('background.title')}
                                         </h3>
                                         <div className="h-1 w-16 bg-gradient-to-r from-primary-color1 to-primary-color1/40 rounded-full mt-1"></div>
                                     </div>
@@ -186,7 +188,7 @@ export default function PsychiatristDetailPage({ params }: PsychiatristDetailPag
                                     </div>
                                     <div>
                                         <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                                            Areas of Specialization
+                                            {t("specializations.title")}
                                         </h3>
                                         <div className="h-1 w-16 bg-gradient-to-r from-primary-color1 to-primary-color1/40 rounded-full mt-1"></div>
                                     </div>

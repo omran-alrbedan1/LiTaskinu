@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Button } from "antd";
 import { images } from "@/constants/images";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   FaGraduationCap,
   FaBriefcase,
@@ -23,6 +23,7 @@ import { DetailItem, PhotoGallery } from "@/components/shared";
 import { ChatRequestModal } from "../_components";
 
 const PersonDetailPage = () => {
+  const t = useTranslations("person_detail");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const personData = userData;
 
@@ -72,7 +73,7 @@ const PersonDetailPage = () => {
                 <div className="flex items-center gap-2 mb-3">
                   <FaCamera className="text-primary-color1 w-4 h-4" />
                   <span className="text-sm font-medium text-gray-700">
-                    The Photos
+                    {t('photos_title')}
                   </span>
                 </div>
                 <PhotoGallery photos={mockPhotos} />
@@ -85,7 +86,7 @@ const PersonDetailPage = () => {
                   type="primary"
                   className="w-full !py-4"
                 >
-                  Send Interest
+                  {t('send_interest')}
                 </Button>
 
                 <Button
@@ -94,7 +95,7 @@ const PersonDetailPage = () => {
                   color="danger"
                   className="w-full !py-4"
                 >
-                  Send Interest
+                  {t('block_user')}
                 </Button>
               </div>
             </div>
@@ -104,13 +105,13 @@ const PersonDetailPage = () => {
           <div className="lg:col-span-2">
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                The Information :
+                {t('info_title')}
               </h2>
 
               {/* Introduction */}
               <div className="mb-8">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  Introduction
+                  {t('introduction')}
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed bg-gray-50 p-4 rounded-lg">
                   {personData.introduction}
@@ -120,52 +121,52 @@ const PersonDetailPage = () => {
               {/* Personal Details */}
               <div className="mt-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                  Personal Details
+                  {t('personal_details')}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   <DetailItem
                     icon={<FaGraduationCap />}
-                    label="Education"
+                    label={t('education')}
                     value={userData.details.education}
                   />
                   <DetailItem
                     icon={<FaBriefcase />}
-                    label="Occupation"
+                    label={t('occupation')}
                     value={userData.details.occupation}
                   />
                   <DetailItem
                     icon={<FaUserTie />}
-                    label="Job Title"
+                    label={t('job_title')}
                     value={userData.details.jobTitle}
                   />
                   <DetailItem
                     icon={<FaWeight />}
-                    label="Weight"
+                    label={t('weight')}
                     value={userData.details.weight}
                   />
                   <DetailItem
                     icon={<FaRulerVertical />}
-                    label="Height"
+                    label={t('height')}
                     value={userData.details.height}
                   />
                   <DetailItem
                     icon={<FaBirthdayCake />}
-                    label="Age"
+                    label={t('age')}
                     value={userData.details.age}
                   />
                   <DetailItem
                     icon={<FaMapMarkerAlt />}
-                    label="Place"
+                    label={t('place')}
                     value={userData.details.place}
                   />
                   <DetailItem
                     icon={<FaChurch />}
-                    label="Religion"
+                    label={t('religion')}
                     value={userData.details.religion}
                   />
                   <DetailItem
                     icon={<FaHeart />}
-                    label="Marital Status"
+                    label={t('marital_status')}
                     value={userData.details.maritalStatus}
                   />
                 </div>
@@ -185,7 +186,7 @@ const PersonDetailPage = () => {
                     type="primary"
                     className="w-full !py-5"
                   >
-                    Chat with {personData.name}
+                    {t('chat_with', { name: personData.name })}
                   </Button>
                 </div>
               </div>
