@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
 import { Select, InputNumber, Button } from "antd";
-import { images } from "@/constants/images";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 export interface FilterState {

@@ -10,7 +10,6 @@ import useGetData from "@/hooks/useGetData";
 import HomeLoader from "./_components/homeLoader";
 import { useTranslations } from "next-intl";
 
-import { useTranslations } from "next-intl";
 
 interface UserProfile {
   id: number;

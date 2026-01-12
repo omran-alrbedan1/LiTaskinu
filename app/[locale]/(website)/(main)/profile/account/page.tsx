@@ -1,6 +1,5 @@
 "use client";
 
-<<<<<<< HEAD
 import { Mail, Calendar, MapPin, User, Camera, Edit, Phone } from "lucide-react";
 import Image from "next/image";
 import useGetData from "@/hooks/useGetData";
