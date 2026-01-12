@@ -29,11 +29,10 @@ const OtpForm = () => {
     error: verifyError,
   } = usePostData("/api/website/verify-email", {
     showNotifications: true,
-    successMessage: "Email verified successfully!",
-    errorMessage: "Verification failed.",
-    onSuccess: (data) => {
-      console.log("OTP verified successfully!");
-      router.push("./sign-in");
+    successMessage: t("email_verified_success"),
+    errorMessage: t("verification_failed"),
+    onSuccess: () => {
+      router.push("./home");
     },
   });
 

@@ -17,9 +17,12 @@ import { images } from "@/constants/images";
 import CustomHeader from "@/components/shared/CustomHeader";
 import useGetData from "@/hooks/useGetData";
 import Loader from "@/components/shared/Loader";
+<<<<<<< HEAD
+import Link from "next/link";
+=======
+>>>>>>> development
 
 const InterestsPage = () => {
-  // Fetch user's selected interests from the "my" endpoint
   const {
     data: myInterests,
     loading: isFetchingInterests,

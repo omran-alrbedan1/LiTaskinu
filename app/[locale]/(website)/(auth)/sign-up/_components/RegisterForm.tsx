@@ -15,8 +15,8 @@ import CustomFormField, {
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import useGetData from "@/hooks/useGetData";
 import { useEffect } from "react";
-import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 const RegisterForm = () => {
   const router = useRouter();

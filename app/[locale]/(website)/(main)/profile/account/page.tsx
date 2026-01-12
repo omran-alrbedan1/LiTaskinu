@@ -6,15 +6,20 @@ import useGetData from "@/hooks/useGetData";
 import Loader from "@/components/shared/Loader";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+<<<<<<< HEAD
+
+=======
+>>>>>>> development
 import CustomHeader from "@/components/shared/CustomHeader";
 import { images } from "@/constants/images";
+
 
 const ProfilePage = () => {
 
   // Fetch user data
   const { data: userData, loading: dataLoading } = useGetData<BasicProfileInfo>({
     url: "/api/website/profile/basic",
-  });    
+  });
 
   const userInfo = userData?.data || {};
   const personalPhoto = userInfo?.documents?.personal_photo;
@@ -67,11 +72,11 @@ const ProfilePage = () => {
                 />
               ) : (
                 <AvatarFallback className="text-3xl bg-primary/10 text-primary">
-                     <Image
-                  src={images.Unknown}
-                  alt={`unknown`}
-                  className="object-cover"
-                />
+                  <Image
+                    src={images.Unknown}
+                    alt={`unknown`}
+                    className="object-cover"
+                  />
                 </AvatarFallback>
               )}
             </Avatar>
