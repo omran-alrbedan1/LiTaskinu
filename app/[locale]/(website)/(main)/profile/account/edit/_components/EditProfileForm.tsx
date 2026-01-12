@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+<<<<<<< HEAD
 import { useMemo, useRef } from "react";
 
 
@@ -21,6 +22,23 @@ import { Key, Loader, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "@/i18n/navigation";
 import { Camera, MapPin, User } from "lucide-react";
+=======
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+
+import { ICONS } from "@/constants/icons";
+import { genderOptions } from "@/constants/options";
+
+import CustomFormField, { FormFieldType } from "@/components/shared/CustomInput";
+import SubmitButton from "@/components/Buttons/SubmitButton";
+import useGetData from "@/hooks/useGetData";
+import usePostData from "@/hooks/usePostData";
+
+import { Button } from "@/components/ui/button";
+import Loader from "@/components/shared/Loader";
+
+import { Camera, Key, MapPin, Shield, User } from "lucide-react";
+>>>>>>> development
 
 import ChangePasswordModal from "./ChangePasswordModal";
 import ProfileImageUploader from "./ProfileImageUploader";
@@ -39,10 +57,13 @@ interface ImageSlot {
 }
 
 const EditProfileForm = ({ initialData }: EditProfileFormProps) => {
+<<<<<<< HEAD
   const genderOptions = useGenderOptions();
 
   const [isLoading, setIsLoading] = useState(false);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+=======
+>>>>>>> development
   const router = useRouter();
 
   const { data: userData, loading: dataLoading, refetch } =

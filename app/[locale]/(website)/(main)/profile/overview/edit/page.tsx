@@ -18,6 +18,10 @@ import CustomHeader from "@/components/shared/CustomHeader";
 import { PROFILE_SECTIONS } from "../_constants/profile-sections";
 import { SectionContent } from "../_components/SectionContent";
 import { useProfileForm } from "../_hooks/useProfileForm";
+<<<<<<< HEAD
+=======
+
+>>>>>>> development
 const EditPersonalDataPage = () => {
   const { form, isLoading, error, handleSubmit } = useProfileForm();
 
