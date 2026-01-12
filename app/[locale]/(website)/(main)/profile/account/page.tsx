@@ -1,17 +1,18 @@
 "use client";
 
+<<<<<<< HEAD
 import { Mail, Calendar, MapPin, User, Camera, Edit, Phone } from "lucide-react";
 import Image from "next/image";
 import useGetData from "@/hooks/useGetData";
 import Loader from "@/components/shared/Loader";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
 import CustomHeader from "@/components/shared/CustomHeader";
 import { images } from "@/constants/images";
 
 
 const ProfilePage = () => {
-
 
   // Fetch user data
   const { data: userData, loading: dataLoading } = useGetData<BasicProfileInfo>({

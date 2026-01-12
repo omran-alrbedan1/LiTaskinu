@@ -8,6 +8,7 @@ import { images } from "@/constants/images";
 import ProfileCard from "./_components/ProfileCard";
 import useGetData from "@/hooks/useGetData";
 import HomeLoader from "./_components/homeLoader";
+import { useTranslations } from "next-intl";
 
 import { useTranslations } from "next-intl";
 

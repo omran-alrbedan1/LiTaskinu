@@ -17,6 +17,7 @@ export const useGenderOptions = () => {
       label: t("female"),
       icon: ICONS.female,
     },
+
   ];
 }
 

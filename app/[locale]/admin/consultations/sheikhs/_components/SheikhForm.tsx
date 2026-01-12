@@ -9,11 +9,9 @@ import SubmitButton from "@/components/Buttons/SubmitButton";
 import { Plus, Edit, User, BookOpen, FileText } from "lucide-react";
 import { ICONS } from "@/constants/icons";
 import { useEffect, useState } from "react";
-import CustomUpload from "@/components/shared/CustomUpload";
 import { useGenderOptions } from "@/constants/options";
 import useGetData from "@/hooks/useGetData";
 import { SheikhFormData, SheikhFormValidation } from "@/validation/admin";
-import { genderOptions } from "@/constants/options";
 
 interface SheikhFormProps {
   onSubmit: (data: any) => void;
@@ -32,7 +30,7 @@ export function SheikhForm({
 }: SheikhFormProps) {
   const [selectedCountryId, setSelectedCountryId] = useState<string>("");
   const [isFormSubmitting, setIsFormSubmitting] = useState(false);
-    const genderOptions = useGenderOptions();
+   const genderOptions = useGenderOptions();
 
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [imagePreview, setImagePreview] = useState<string>(

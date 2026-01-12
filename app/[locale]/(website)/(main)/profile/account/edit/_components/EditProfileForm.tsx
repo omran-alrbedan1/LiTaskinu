@@ -39,7 +39,6 @@ interface ImageSlot {
 }
 
 const EditProfileForm = ({ initialData }: EditProfileFormProps) => {
-
   const genderOptions = useGenderOptions();
 
   const [isLoading, setIsLoading] = useState(false);
