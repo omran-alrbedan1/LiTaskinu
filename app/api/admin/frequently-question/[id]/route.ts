@@ -13,7 +13,7 @@ export async function GET(
       );
     }
 
-    const API_BASE_URL = process.env.API_BASE_URL;
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
     if (!API_BASE_URL) {
       throw new Error("API_BASE_URL is not configured");
     }
@@ -75,7 +75,7 @@ export async function PUT(
       );
     }
 
-    const API_BASE_URL = process.env.API_BASE_URL;
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
     if (!API_BASE_URL) {
       throw new Error("API_BASE_URL is not configured");
     }
@@ -132,7 +132,7 @@ export async function DELETE(
       );
     }
 
-    const API_BASE_URL = process.env.API_BASE_URL;
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
     if (!API_BASE_URL) {
       throw new Error("API_BASE_URL is not configured");
     }

@@ -76,15 +76,15 @@ const HomePage = () => {
 
   const convertToProfileCardData = (userProfile: UserProfile) => {
     const name =
-      `${userProfile.user.first_name || ""} ${userProfile.user.last_name || ""}`.trim() ||
+      `${userProfile?.user?.first_name || ""} ${userProfile?.user?.last_name || ""}`.trim() ||
       t("unknown_user");
 
     return {
       id: userProfile.id,
       name: name,
-      gender: userProfile.user.gender.toLowerCase() as "male" | "female",
-      location: `${t("city_id")}: ${userProfile.city_id || t("unknown")}`,
-      image: userProfile.user.image,
+      gender: userProfile?.user?.gender.toLowerCase() as "male" | "female",
+      location: `${t("city_id")}: ${userProfile?.city_id || t("unknown")}`,
+      image: userProfile?.user?.image,
     };
   };
 
