@@ -10,7 +10,7 @@ import {
 import { Avatar } from "@/components/ui/avatar";
 import Image from "next/image";
 import { images } from "@/constants/images";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { Bell, LogOut, User } from "lucide-react";
 import TooltipButton from "./TooltipButton";
 

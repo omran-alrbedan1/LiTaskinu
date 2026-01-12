@@ -2,11 +2,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Edit, Plus } from "lucide-react";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { howItWorks } from "@/constants/admin";
 import CustomHeader from "@/components/shared/CustomHeader";
 import EmptyState from "@/components/shared/EmptyState";
+import { Link } from "@/i18n/navigation";
 
 const HowItWorksPreviewPage = () => {
   const hasSteps = howItWorks && howItWorks.length > 0;

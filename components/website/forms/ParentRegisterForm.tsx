@@ -7,7 +7,7 @@ import { z } from "zod";
 import { Form } from "@/components/ui/form";
 import { useState } from "react";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import SubmitButton from "../../Buttons/SubmitButton";
 import CustomFormField, { FormFieldType } from "../../shared/CustomInput";
 import { ICONS } from "@/constants/icons";

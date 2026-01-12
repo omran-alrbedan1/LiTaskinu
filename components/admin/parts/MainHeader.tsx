@@ -1,6 +1,5 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,6 +11,7 @@ import {
 import { Notifications, UserMenu, SearchBar } from ".";
 import { getBreadcrumbs } from "@/utils/breadcrumbs";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import { usePathname } from "@/i18n/navigation";
 
 const MainHeader = () => {
   const pathname = usePathname();

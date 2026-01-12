@@ -13,8 +13,8 @@ import {
   FaFacebookF,
 } from "react-icons/fa";
 import { TiHeartFullOutline } from "react-icons/ti";
-
-type IconType = React.ComponentType<{ className?: string }>;
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 
 export default async function Footer() {
   const t = await getTranslations("footer");

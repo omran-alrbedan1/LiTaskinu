@@ -20,10 +20,9 @@ import {
 } from "@/components/ui/card";
 import { getComplaintConfig } from "@/configs/complaints";
 import { Badge } from "@/components/ui/badge";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { DeletePermanentModal } from "./DeleteModal"; // Adjust path as needed
 import { SendWarningModal } from "@/components/admin/shared";
+import { Link, useRouter } from "@/i18n/navigation";
 
 const MOCK_REPORTS = [
   {

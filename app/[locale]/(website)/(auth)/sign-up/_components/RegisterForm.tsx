@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
-import { useRouter } from "next/navigation";
 import { ICONS } from "@/constants/icons";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import { useGenderOptions } from "@/constants/options";
@@ -17,6 +16,7 @@ import SubmitButton from "@/components/Buttons/SubmitButton";
 import useGetData from "@/hooks/useGetData";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -48,7 +48,7 @@ const RegisterForm = () => {
     url: "/api/public/countries",
     enabled: true,
   });
-  const countriesData = countries?.map((country) => ({
+  const countriesData = countries?.map((country:Country) => ({
     value: country.id.toString(),
     label: `${country.name}`,
     code: country.code,
@@ -64,7 +64,7 @@ const RegisterForm = () => {
     enabled: true,
   });
 
-  const citiesData = cities?.map((city) => ({
+  const citiesData = cities?.map((city:City) => ({
     value: city.id.toString(),
     label: `${city.name}`,
   }));

@@ -1,0 +1,46 @@
+import { NextRequest, NextResponse } from "next/server";
+import { getSession } from "@/lib/session";
+import { handleFetchError } from "@/lib/fetch-error-handler";
+
+export async function POST(request: NextRequest) {
+  try {
+    const session = await getSession("user");
+    
+    if (!session) {
+      return NextResponse.json(
+        { error: "Unauthorized - Please login first" },
+        { status: 401 }
+      );
+    }
+
+    const API_BASE_URL = process.env.API_BASE_URL;
+
+    if (!API_BASE_URL) {
+      return NextResponse.json(
+        { error: "API_BASE_URL is not configured" },
+        { status: 500 }
+      );
+    }
+
+    // Get FormData from request
+    const formData = await request.formData();
+    
+    const response = await fetch(`${API_BASE_URL}/children/interests/update`, {
+      method: 'POST', 
+      headers: {
+        Authorization: `Bearer ${session.accessToken}`,
+      },
+      body: formData,
+    });
+
+    const responseData = await response.json();
+    
+    return NextResponse.json(responseData, { 
+      status: response.status 
+    });
+    
+  } catch (error: any) {
+    console.error("Update children interests API error:", error);
+    return handleFetchError(error); 
+  }
+}

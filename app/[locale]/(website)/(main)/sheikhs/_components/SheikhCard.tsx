@@ -1,9 +1,9 @@
 import React from 'react';
 import { BookOpen, MessageCircle, Globe, Eye } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { images } from '@/constants/images';
 import { getTranslations } from 'next-intl/server';
+import { Link } from '@/i18n/navigation';
 
 interface SheikhCardProps {
   sheikh: Sheikh

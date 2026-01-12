@@ -87,51 +87,6 @@ export async function getSession(type: SessionType): Promise<Session | null> {
   }
 }
 
-/**
- * Get active session (checks admin first, then user)
- */
-export async function getActiveSession(): Promise<Session | null> {
-  // Check admin session first
-  const adminSession = await getSession("admin");
-  if (adminSession) return adminSession;
-
-  // Fallback to user session
-  return await getSession("user");
-}
-
-/**
- * Get user session (for regular users)
- */
-export async function getUserSession() {
-  const session = await getSession("user");
-
-  if (!session) {
-    return null;
-  }
-
-  return {
-    user: session.user,
-    isAuthenticated: true,
-    isAdmin: false,
-  };
-}
-
-/**
- * Get admin session
- */
-export async function getAdminSession() {
-  const session = await getSession("admin");
-
-  if (!session) {
-    return null;
-  }
-
-  return {
-    user: session.user,
-    isAuthenticated: true,
-    isAdmin: true,
-  };
-}
 
 /**
  * Check if user is authenticated as admin

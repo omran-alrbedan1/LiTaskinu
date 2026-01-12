@@ -32,6 +32,7 @@ import mentalHealth from "../public/images/mental-health.jpg";
 import sheikhBackground from "../public/images/sheikh-background.jpg";
 import emptySheikhs from "../public/images/emptySheikhs.png";
 import emptyPsychiatrists from "../public/images/emptyPsychiatrists.png";
+import emptyProfile from "../public/images/emptyProfile.png";
 
 export const images = {
   couple,
@@ -68,4 +69,5 @@ export const images = {
   sheikhBackground,
   emptySheikhs,
   emptyPsychiatrists,
+  emptyProfile
 };

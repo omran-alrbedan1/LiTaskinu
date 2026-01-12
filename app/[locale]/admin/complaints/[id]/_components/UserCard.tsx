@@ -1,6 +1,5 @@
 "use client";
 import { User, Phone, Mail, ExternalLink } from "lucide-react";
-import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -10,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button as ShadButton } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 
 const UserCard = ({
   user,

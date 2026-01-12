@@ -18,13 +18,13 @@ import {
   CheckCircle
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
 import { images } from '@/constants/images';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { MOCK_MESSAGES } from '@/constants/temporary';
 import { useTranslations } from 'next-intl';
+import { useRouter } from '@/i18n/navigation';
 
 interface Message {
   id: number;
