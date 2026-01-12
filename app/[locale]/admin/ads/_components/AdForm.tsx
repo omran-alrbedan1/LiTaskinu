@@ -115,7 +115,7 @@ export const AdForm: React.FC<AdFormProps> = ({
   // Prepare countries data for the select component
   const countriesData = React.useMemo(() => {
     return (
-      countries?.map((country) => ({
+      countries?.map((country:Country) => ({
         value: country.id.toString(),
         label: `${country.name}`,
         code: country.code,

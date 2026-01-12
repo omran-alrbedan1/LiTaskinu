@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/session";
+import { handleFetchError } from "@/lib/fetch-error-handler";
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getSession("admin");
-
+    const session = await getSession("user");
+    
     if (!session) {
       return NextResponse.json(
         { error: "Unauthorized - Please login first" },
@@ -21,7 +22,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const response = await fetch(`${API_BASE_URL}/users/sheikhs/index`, {
+    const response = await fetch(`${API_BASE_URL}/children/get`, {
       headers: {
         Authorization: `Bearer ${session.accessToken}`,
         'Content-Type': 'application/json',
@@ -29,7 +30,14 @@ export async function GET(request: NextRequest) {
       cache: 'no-store',
     });
 
-    // Pass through the backend response directly
+    if (!response.ok) {
+      const errorData = await response.json();
+      return NextResponse.json(
+        { error: errorData.message || "Failed to fetch children data" },
+        { status: response.status }
+      );
+    }
+
     const responseData = await response.json();
     
     return NextResponse.json(responseData, { 
@@ -37,7 +45,7 @@ export async function GET(request: NextRequest) {
     });
     
   } catch (error: any) {
-    console.error("Fetch sheikhs API error:", error);
+    console.error("Fetch children data API error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
@@ -47,8 +55,8 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getSession("admin");
-
+    const session = await getSession("user");
+    
     if (!session) {
       return NextResponse.json(
         { error: "Unauthorized - Please login first" },
@@ -65,15 +73,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const body = await request.json();
-
-    const response = await fetch(`${API_BASE_URL}/users/create-sheikh`, {
-      method: 'POST',
+    // Get FormData from request
+    const formData = await request.formData();
+    
+    const response = await fetch(`${API_BASE_URL}/children/update`, {
+      method: 'POST', 
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${session.accessToken}`,
       },
-      body: JSON.stringify(body),
+      body: formData,
     });
 
     const responseData = await response.json();
@@ -83,10 +91,7 @@ export async function POST(request: NextRequest) {
     });
     
   } catch (error: any) {
-    console.error("Add sheikh API error:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    console.error("Update children preferences API error:", error);
+    return handleFetchError(error); 
   }
 }

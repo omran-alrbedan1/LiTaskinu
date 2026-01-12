@@ -29,10 +29,11 @@ const OtpForm = () => {
     error: verifyError,
   } = usePostData("/api/website/verify-email", {
     showNotifications: true,
-    successMessage: t("email_verified_success"),
-    errorMessage: t("verification_failed"),
-    onSuccess: () => {
-      router.push("./home");
+    successMessage: "Email verified successfully!",
+    errorMessage: "Verification failed.",
+    onSuccess: (data) => {
+      console.log("OTP verified successfully!");
+      router.push("./sign-in");
     },
   });
 
@@ -118,12 +119,6 @@ const OtpForm = () => {
               </InputOTPGroup>
             </InputOTP>
           </div>
-
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-          {verifyError && (
-            <p className="text-red-500 text-sm text-center">{verifyError}</p>
-          )}
-
           <SubmitButton
             isLoading={isVerifying}
             loadingText={t("verifying")}

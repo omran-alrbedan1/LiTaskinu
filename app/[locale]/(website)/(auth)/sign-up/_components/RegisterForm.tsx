@@ -48,7 +48,7 @@ const RegisterForm = () => {
     url: "/api/public/countries",
     enabled: true,
   });
-  const countriesData = countries?.map((country) => ({
+  const countriesData = countries?.map((country:Country) => ({
     value: country.id.toString(),
     label: `${country.name}`,
     code: country.code,
@@ -64,7 +64,7 @@ const RegisterForm = () => {
     enabled: true,
   });
 
-  const citiesData = cities?.map((city) => ({
+  const citiesData = cities?.map((city:City) => ({
     value: city.id.toString(),
     label: `${city.name}`,
   }));
