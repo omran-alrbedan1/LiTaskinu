@@ -5,6 +5,9 @@ import { User, Heart } from "lucide-react";
 import CustomHeader from "@/components/shared/CustomHeader";
 import useGetData from "@/hooks/useGetData";
 import Loader from "@/components/shared/Loader";
+import { EmptyState } from "@/components/shared";
+import { images } from "@/constants/images";
+import Link from "next/link";
 
 const OverviewPage = () => {
   const {
@@ -16,76 +19,65 @@ const OverviewPage = () => {
     url: "/api/website/profile/info",
     enabled: true,
   });
+  
   const {
     data: preferenceInfo,
+    loading: isFetchingPreferenceInfo,
+    error: preferenceError,
+    refetch: refetchPreferenceInfo,
   } = useGetData({
     url: "/api/website/profile/preferences",
     enabled: true,
   });
 
-
-  if (isFetchingProfileInfo) {
+  // Check for any errors
+  const hasError = fetchError || preferenceError;
+  
+  if (isFetchingProfileInfo || isFetchingPreferenceInfo) {
     return (
       <div className="space-y-6">
         <CustomHeader
           title="Personal Overview"
           description="Manage your profile information and partner preferences"
-          action={[
-            {
-              label: "Edit Profile",
-              href: "./overview/edit",
-              icon: User,
-              variant: "outline",
-            },
-            {
-              label: "Update Preferences",
-              href: "./overview/preferenceEdit",
-              icon: Heart,
-              variant: "default",
-            },
-          ]}
+    
         />
-       <Loader/>
+        <Loader />
       </div>
     );
   }
 
-  if (fetchError) {
+  if (hasError) {
     return (
       <div className="space-y-6">
         <CustomHeader
           title="Personal Overview"
           description="Manage your profile information and partner preferences"
-          action={[
-            {
-              label: "Edit Profile",
-              href: "./overview/edit",
-              icon: User,
-              variant: "outline",
-            },
-            {
-              label: "Update Preferences",
-              href: "./overview/preferenceEdit",
-              icon: Heart,
-              variant: "default",
-            },
-          ]}
         />
-        <div className="text-center py-12">
-          <p className="text-red-600">Error loading profile: {fetchError.message}</p>
-          <button 
-            onClick={() => refetchProfileInfo()} 
-            className="mt-4 px-4 py-2 bg-primary-color1 text-white rounded hover:bg-primary-color2"
-          >
-            Retry
-          </button>
-        </div>
+        
+         <EmptyState
+          title="No Profile Information"
+          description="You haven't set up your profile yet. Start by adding your basic information and preferences."
+          image={images.emptyProfile}
+          action={
+            <div className="flex flex-col sm:flex-row gap-3 mt-4">
+              <Link 
+                href="./overview/edit"
+                className="bg-primary-color1 hover:bg-primary-color2 flex items-center text-white p-2 rounded-sm"
+              >
+                <User className="w-4 h-4 mr-2" />
+                Set Profile Info
+              </Link>
+            </div>
+          }
+        />
       </div>
     );
   }
+
 
   const profileData = profileInfo?.data || {};
   const preferenceData = preferenceInfo?.data || {};
+  
   return (
     <div className="space-y-6">
       <CustomHeader
@@ -107,19 +99,18 @@ const OverviewPage = () => {
         ]}
       />
 
-      {profileSectionsConfig.map((section) => {
-        
-        return (
-          <ProfileSection
-            key={section.title}
-            title={section.title}
-            icon={section.icon}
-            personalData={profileData}
-            seekingData={preferenceData}
-            fields={section.fields}
-          />
-        );
-      })}
+ 
+
+      {profileSectionsConfig.map((section) => (
+        <ProfileSection
+          key={section.title}
+          title={section.title}
+          icon={section.icon}
+          personalData={profileData}
+          seekingData={preferenceData}
+          fields={section.fields}
+        />
+      ))}
     </div>
   );
 };

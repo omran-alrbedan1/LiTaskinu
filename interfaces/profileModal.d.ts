@@ -171,7 +171,7 @@ declare type ValueTransformer = (value: any, transformFn?: TransformFunction) =>
 
 
 // basic profile types : 
-declare interface BasicProfileInfo {
+declare interface   BasicProfileInfo {
   id: number;
   first_name: string;
   last_name: string;
@@ -180,8 +180,16 @@ declare interface BasicProfileInfo {
   birth_day: string | null;
   gender: string;
   child_id: number;
-  Country_id: number | null;
-  city_id: number | null;
+  Country_id?: number | null;
+  city_id?: number | null;
+  city:{
+    id:number;
+    name:string;
+  };
+  country:{
+    id:number;
+    name:string;
+  }
   documents: {
     id: number;
     personal_identity: string | null;
@@ -189,3 +197,23 @@ declare interface BasicProfileInfo {
     images: (string | null)[];
   };
 }
+
+// interests types : 
+interface CategoryItems {
+  [id: string]: string;
+}
+
+interface InterestsData {
+  [category: string]: CategoryItems;
+}
+
+interface InterestData {
+  status: boolean;
+  message: string;
+  data: {
+    interests: InterestsData;
+  };
+}
+
+type InterestCategory = "Entertainment" | "Music" | "Food" | "Sports";
+  

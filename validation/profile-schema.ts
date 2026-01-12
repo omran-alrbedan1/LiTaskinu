@@ -104,7 +104,7 @@ export const profileBasicInfo = z.object({
   ),
   
   // Location
-  country_id: z.string().optional(),
+  Country_id: z.string().optional(),
   city_id: z.string().optional(),
   
   // Contact Information
@@ -115,3 +115,24 @@ export const profileBasicInfo = z.object({
   images: z.any().optional(), 
   
 });
+
+
+export const ChangePasswordSchema = z
+  .object({
+    current_password: z.string().min(6, "Current password is required"),
+    password: z
+      .string()
+      .min(6, "New password must be at least 6 characters"),
+    password_confirmation: z.string().min(6, "Please confirm your new password"),
+  })
+  .refine((data) => data.password === data.password_confirmation, {
+    path: ["password_confirmation"],
+    message: "Passwords do not match",
+  });
+
+  export const interestsSchema = z.object({
+    interests: z.array(z.number()).default([]),
+  });
+  
+ 
+ export type InterestsFormData = z.infer<typeof interestsSchema>;

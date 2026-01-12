@@ -7,7 +7,6 @@ interface RouteParams {
   };
 }
 
-// GET single sheikh by ID
 export async function GET(
   request: NextRequest,
   { params }: RouteParams
@@ -22,7 +21,7 @@ export async function GET(
       );
     }
 
-    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const API_BASE_URL = process.env.API_BASE_URL;
 
     if (!API_BASE_URL) {
       return NextResponse.json(
@@ -70,7 +69,7 @@ export async function PUT(
       );
     }
 
-    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const API_BASE_URL = process.env.API_BASE_URL;
 
     if (!API_BASE_URL) {
       return NextResponse.json(
@@ -84,7 +83,7 @@ export async function PUT(
     // Get the request body
     const body = await request.json();
 
-    const response = await fetch(`${API_BASE_URL}/sheikhs/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/users/sheikhs/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -109,7 +108,6 @@ export async function PUT(
   }
 }
 
-// DELETE sheikh by ID
 export async function DELETE(
   request: NextRequest,
   { params }: RouteParams
@@ -124,7 +122,7 @@ export async function DELETE(
       );
     }
 
-    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const API_BASE_URL = process.env.API_BASE_URL;
 
     if (!API_BASE_URL) {
       return NextResponse.json(
@@ -135,7 +133,7 @@ export async function DELETE(
 
     const { id } = params;
 
-    const response = await fetch(`${API_BASE_URL}/sheikhs/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/users/sheikhs/${id}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${session.accessToken}`,

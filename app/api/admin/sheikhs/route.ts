@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const API_BASE_URL = process.env.API_BASE_URL;
 
     if (!API_BASE_URL) {
       return NextResponse.json(
@@ -21,11 +21,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-
-    
-  
-
-    const response = await fetch(`${API_BASE_URL}/sheikhs`, {
+    const response = await fetch(`${API_BASE_URL}/users/sheikhs/index`, {
       headers: {
         Authorization: `Bearer ${session.accessToken}`,
         'Content-Type': 'application/json',
@@ -60,7 +56,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const API_BASE_URL = process.env.API_BASE_URL;
 
     if (!API_BASE_URL) {
       return NextResponse.json(

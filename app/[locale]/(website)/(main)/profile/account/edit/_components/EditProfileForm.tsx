@@ -1,328 +1,228 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Form } from "@/components/ui/form";
-import { useState, useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+
 import { ICONS } from "@/constants/icons";
 import { genderOptions } from "@/constants/options";
-import CustomFormField, {
-  FormFieldType,
-} from "@/components/shared/CustomInput";
+
+import CustomFormField, { FormFieldType } from "@/components/shared/CustomInput";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import useGetData from "@/hooks/useGetData";
 import usePostData from "@/hooks/usePostData";
-import { Calendar, Key, Shield, Camera, MapPin, User } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
-import ChangePasswordModal from "./ChangePasswordModal";
-import ImageUploader from "./ImageUploader";
-import ProfileImageUploader from "./ProfileImageUploader";
-import { profileBasicInfo } from "@/validation/profile-schema";
 import Loader from "@/components/shared/Loader";
-import { cn } from "@/lib/utils";
+
+import { Camera, Key, MapPin, Shield, User } from "lucide-react";
+
+import ChangePasswordModal from "./ChangePasswordModal";
+import ProfileImageUploader from "./ProfileImageUploader";
+import SingleImageUploader from "./SingleImageUploader";
+
+import { profileBasicInfo } from "@/validation/profile-schema";
 
 interface EditProfileFormProps {
   initialData?: BasicProfileInfo;
 }
 
+interface ImageSlot {
+  file: File | null;
+  deleted: boolean;
+  existingUrl: string | null;
+}
+
 const EditProfileForm = ({ initialData }: EditProfileFormProps) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
-  const [personalPhotoFile, setPersonalPhotoFile] = useState<File | null>(null);
-  const [additionalImagesFiles, setAdditionalImagesFiles] = useState<File[]>([]);
-  const [existingImages, setExistingImages] = useState<string[]>([]);
-  const [isFormInitialized, setIsFormInitialized] = useState(false);
-  const [userCityId, setUserCityId] = useState<string | null>(null);
-  const [userCountryId, setUserCountryId] = useState<string | null>(null);
-  
   const router = useRouter();
 
-  // Fetch user data
-  const {
-    data: userData,
-    loading: dataLoading,
-    error: dataError,
-    refetch,
-  } = useGetData<BasicProfileInfo>({
-    url: "/api/website/profile/basic",
-  });
+  const { data: userData, loading: dataLoading, refetch } =
+    useGetData<BasicProfileInfo>({
+      url: "/api/website/profile/basic",
+    });
 
   const userInfo = userData?.data || initialData || {};
+  const documents = userInfo?.documents || {};
+  const imagesObj = documents?.images || {};
 
-  // Date formatting helper
-  const formatDateForForm = (dateString: string | null): Date | string => {
-    if (!dateString) return "";
-    try {
-      return new Date(dateString);
-    } catch {
-      return "";
-    }
-  };
-
-  // Initialize form with default values
-  const form = useForm<z.infer<typeof profileBasicInfo>>({
-    resolver: zodResolver(profileBasicInfo),
-    defaultValues: {
-      first_name: "",
-      last_name: "",
-      gender: "",
-      birth_day: "",
-      country_id: "",
-      city_id: "",
-      email: "",
-      phone: "",
-    },
-    mode: "onChange",
+  // Get default values from userInfo if available
+  const getDefaultValues = () => ({
+    first_name: userInfo?.first_name || "",
+    last_name: userInfo?.last_name || "",
+    gender: userInfo?.gender || "",
+    birth_day: userInfo?.birth_day ? new Date(userInfo.birth_day) : "",
+    Country_id: userInfo?.Country_id ? userInfo.Country_id.toString() : "",
+    city_id: userInfo?.city_id ? userInfo.city_id.toString() : "",
+    email: userInfo?.email || "",
+    phone: userInfo?.phone ? userInfo.phone.toString() : "",
   });
 
-  // Watched values
-  const watchedCountryId = form.watch("country_id");
+  const form = useForm<z.infer<typeof profileBasicInfo>>({
+    resolver: zodResolver(profileBasicInfo),
+    defaultValues: getDefaultValues(),
+  });
 
-  // Fetch countries
-  const {
-    data: countries,
-    loading: isFetchingCountries,
-    error: fetchCountriesError,
-  } = useGetData<Country[]>({
+  const { data: countries, loading: countriesLoading } = useGetData<Country[]>({
     url: "/api/public/countries",
     enabled: true,
   });
 
-  // Fetch cities based on selected country
-  const {
-    data: cities,
-    loading: isFetchingCities,
-    error: fetchCitiesError,
-    refetch: refetchCities,
-  } = useGetData<City[]>({
-    url: '/api/public/cities',
-    enabled: !!watchedCountryId || !!userCountryId,
+  const { data: allCities, loading: citiesLoading } = useGetData<City[]>({
+    url: "/api/public/cities",
+    enabled: true,
   });
 
-  // Format countries data for select
-  const countriesData = useMemo(() => 
-    countries?.map((country: Country) => ({
-      value: country.id.toString(),
-      label: country.name,
-      code: country.code,
-    })) || [],
+  const countryOptions = useMemo(
+    () =>
+      (countries || []).map((country: Country) => ({
+        value: country.id.toString(),
+        label: country.name,
+      })),
     [countries]
   );
 
-  // Format cities data for select
-  const citiesData = useMemo(() => 
-    cities?.map((city: City) => ({
-      value: city.id.toString(),
-      label: city.name,
-    })) || [],
-    [cities]
+  const cityOptions = useMemo(
+    () =>
+      (allCities || []).map((city: City) => ({
+        value: city.id.toString(),
+        label: city.name,
+      })),
+    [allCities]
   );
 
-  // Submit handler
-  const {
-    postData,
-    loading: submitLoading,
-    success: submitSuccess,
-  } = usePostData("/api/website/profile/basic", {
-    showNotifications: true,
-    successMessage: "Profile updated successfully!",
-    onSuccess: () => {
-      refetch();
-    },
-  });
+  const [personalPhotoFile, setPersonalPhotoFile] = useState<File | null>(null);
+  const [personalPhotoDeleted, setPersonalPhotoDeleted] = useState(false);
 
-  // Initialize form with user data
+  const [imageSlots, setImageSlots] = useState<ImageSlot[]>([
+    { file: null, deleted: false, existingUrl: null },
+    { file: null, deleted: false, existingUrl: null },
+    { file: null, deleted: false, existingUrl: null },
+    { file: null, deleted: false, existingUrl: null },
+  ]);
+
+  const didInitSlots = useRef(false);
+
+  // Initialize form with user data as soon as it's available
   useEffect(() => {
-    if (userInfo && Object.keys(userInfo).length > 0 && !isFormInitialized) {
-      const preparedValues = {
-        first_name: userInfo.first_name || "",
-        last_name: userInfo.last_name || "",
-        gender: userInfo.gender || "",
-        birth_day: formatDateForForm(userInfo.birth_day),
-        country_id: userInfo.country_id ? userInfo.country_id.toString() : "",
-        city_id: userInfo.city_id ? userInfo.city_id.toString() : "",
-        email: userInfo.email || "",
-        phone: userInfo.phone ? userInfo.phone.toString() : "",
-      };
+    if (!userInfo?.id) return;
 
-      // Store original location IDs for comparison
-      setUserCityId(userInfo.city_id ? userInfo.city_id.toString() : null);
-      setUserCountryId(userInfo.country_id ? userInfo.country_id.toString() : null);
+    // Reset form with new data
+    form.reset(getDefaultValues());
 
-      // Reset form with user data
-      form.reset(preparedValues);
-      setIsFormInitialized(true);
-
-      // Initialize images
-      if (userInfo?.documents?.images) {
-        const validImages = userInfo.documents.images.filter(
-          (img: any): img is string => img !== null && img !== ""
-        );
-        setExistingImages(validImages);
-      }
+    // Initialize image slots if not already done
+    if (!didInitSlots.current) {
+      didInitSlots.current = true;
+      setImageSlots([
+        { file: null, deleted: false, existingUrl: imagesObj?.image_1 || null },
+        { file: null, deleted: false, existingUrl: imagesObj?.image_2 || null },
+        { file: null, deleted: false, existingUrl: imagesObj?.image_3 || null },
+        { file: null, deleted: false, existingUrl: imagesObj?.image_4 || null },
+      ]);
     }
-  }, [userInfo, form, isFormInitialized]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userInfo?.id, form]);
 
-  // Refetch cities when country changes
-  useEffect(() => {
-    if (watchedCountryId && watchedCountryId !== "") {
-      refetchCities();
-      
-      // Clear city if user switches to a different country
-      if (userCityId && watchedCountryId !== userCountryId) {
-        form.setValue("city_id", "");
-      }
+  const { postData, loading: submitLoading } = usePostData(
+    "/api/website/profile/basic",
+    {
+      showNotifications: true,
+      successMessage: "Profile updated successfully!",
+      onSuccess: () => {
+        refetch?.();
+      },
     }
-  }, [watchedCountryId, refetchCities, form, userCityId, userCountryId]);
+  );
 
-  // Handlers for file uploads
-  const handlePersonalPhotoChange = (file: File | null) => {
-    setPersonalPhotoFile(file);
+  const handleSlotChange = (index: number, file: File | null, deleted: boolean) => {
+    setImageSlots((prev) => {
+      const next = [...prev];
+      next[index] = { ...next[index], file: deleted ? null : file, deleted: !!deleted };
+      return next;
+    });
   };
 
-  const handleAdditionalImagesChange = (files: File[], existingUrls: string[]) => {
-    setAdditionalImagesFiles(files);
-    setExistingImages(existingUrls);
-  };
-
-  // Format date for API submission
-  const formatDateForApi = (dateValue: any): string | null => {
-    if (!dateValue) return null;
-    
-    try {
-      if (typeof dateValue === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(dateValue)) {
-        return dateValue;
-      }
-      
-      if (dateValue instanceof Date) {
-        return dateValue.toISOString().split('T')[0];
-      }
-      
-      const date = new Date(dateValue);
-      if (!isNaN(date.getTime())) {
-        return date.toISOString().split('T')[0];
-      }
-      
-      return null;
-    } catch {
-      return null;
-    }
-  };
-
-  // Form submission
   const onSubmit = async (values: z.infer<typeof profileBasicInfo>) => {
-    setIsLoading(true);
-    
-    try {
-      // Prepare FormData
-      const formData = new FormData();
-      
-      // Append basic information
-      const fields = [
-        'first_name',
-        'last_name', 
-        'gender',
-        'email',
-        'phone',
-        'country_id',
-        'city_id'
-      ] as const;
-      
-      fields.forEach(field => {
-        if (values[field]) {
-          formData.append(field, values[field].toString());
-        }
-      });
-      
-      // Format and append birth date
-      const formattedBirthDay = formatDateForApi(values.birth_day);
-      if (formattedBirthDay) {
-        formData.append('birth_day', formattedBirthDay);
-      }
-      
-      // Handle personal photo
-      if (personalPhotoFile) {
-        formData.append('personal_photo', personalPhotoFile);
-      } else if (userInfo?.documents?.personal_photo) {
-        formData.append('existing_personal_photo', userInfo.documents.personal_photo);
-      }
-      
-      // Handle additional images
-      additionalImagesFiles.forEach((file, index) => {
-        formData.append(`images[${index}]`, file);
-      });
-      
-      existingImages.forEach((url, index) => {
-        formData.append(`existing_images[${index}]`, url);
-      });
+    const formData = new FormData();
 
-      // Submit data
-      await postData(formData);
-      
-    } catch (error) {
-      console.error("Submit error:", error);
-    } finally {
-      setIsLoading(false);
+    // Basic fields
+    (Object.keys(values) as Array<keyof typeof values>).forEach((key) => {
+      const value = values[key];
+
+      if (key === "birth_day") return;
+
+      if (value !== undefined && value !== null && value !== "") {
+        formData.append(key, value.toString());
+      }
+    });
+
+    // birth_day: yyyy-mm-dd
+    if (values.birth_day) {
+      const date = new Date(values.birth_day);
+      formData.append("birth_day", date.toISOString().split("T")[0]);
     }
+
+    // personal_photo
+    if (personalPhotoDeleted) {
+      formData.append("personal_photo", "");
+    } else if (personalPhotoFile) {
+      formData.append("personal_photo", personalPhotoFile);
+    }
+
+    // Additional images
+    imageSlots.forEach((slot, index) => {
+      if (slot.deleted) {
+        formData.append(`images[${index}]`, "");
+      } else if (slot.file) {
+        formData.append(`images[${index}]`, slot.file);
+      }
+    });
+
+    await postData(formData);
   };
 
-  // Loading state
-  if (dataLoading && !initialData) {
-    return <Loader />;
-  }
+  // =========================
+  // UI
+  // =========================
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
-  const sectionClasses = cn(
-    "p-6 rounded-lg border",
-    "bg-white dark:bg-gray-900",
-    "border-gray-200 dark:border-gray-800",
-  );
+  // Show loader only on initial load, not when data is already available
+  if (dataLoading && !initialData && !userInfo?.id) return <Loader />;
 
-
-
-  const sectionDescriptionClasses = cn(
-    "text-sm",
-    "text-gray-600 dark:text-gray-400"
-  );
-
- 
-  const cardClasses = cn(
-    "p-4 rounded-lg border",
-    "bg-gray-50 dark:bg-gray-800",
-    "border-gray-200 dark:border-gray-700"
-  );
+  // Get the current form values to check if select fields have values
+  const formValues = form.watch();
 
   return (
-    <div className="w-full pb-20 px-4 md:p-6 md:pb-20">
+    <div className="w-full pb-20 px-4 md:p-6">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          {/* Personal Photo Section */}
-          <div className={sectionClasses}>
+          {/* Personal Photo */}
+          <div className="p-6 rounded-lg border bg-white dark:bg-gray-900">
             <div className="flex items-center gap-3 mb-6">
-              <Camera className={'w-6 h-6'} />
-              <h3 className={'text-xl font-semibold text-gray-600 dark:text-gray-300'}>Personal Photo</h3>
+              <Camera className="w-6 h-6" />
+              <h3 className="text-xl font-semibold">Personal Photo</h3>
             </div>
-            
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-              <div className="flex-1">
-                <p className={cn("text-sm mb-4 text-gray-600 dark:text-gray-300")}>
-                  Upload your main profile picture. This will be the primary image shown on your profile.
-                </p>
-                <ProfileImageUploader
-                  initialImage={userInfo?.documents?.personal_photo}
-                  onChange={handlePersonalPhotoChange}
-                  maxSize={5}
-                />
-              </div>
-            </div>
+
+            <ProfileImageUploader
+              initialImage={documents?.personal_photo || null}
+              onChange={(file) => {
+                setPersonalPhotoFile(file);
+                if (file === null && !!documents?.personal_photo) {
+                  setPersonalPhotoDeleted(true);
+                } else {
+                  setPersonalPhotoDeleted(false);
+                }
+              }}
+            />
           </div>
 
-          {/* Basic Information Section */}
-          <div className={sectionClasses}>
+          {/* Basic Information */}
+          <div className="p-6 rounded-lg border bg-white dark:bg-gray-900">
             <div className="flex items-center gap-3 mb-6">
-              <User className={'w-6 h-6'} />
-              <h3 className={'text-xl font-medium text-gray-600 dark:text-gray-300'}>Basic Information</h3>
+              <User className="w-6 h-6" />
+              <h3 className="text-xl font-semibold">Basic Information</h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -343,16 +243,16 @@ const EditProfileForm = ({ initialData }: EditProfileFormProps) => {
                 placeholder="Doe"
                 iconSrc={ICONS.userInput}
               />
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+              {/* Fixed: Always show selected value */}
               <CustomFormField
                 fieldType={FormFieldType.SELECT}
                 control={form.control}
                 name="gender"
                 label="Gender"
-                placeholder="Select gender"
+                placeholder={formValues.gender ? "" : "Select gender"}
                 options={genderOptions}
+                value={formValues.gender} // Ensure value prop is passed
               />
 
               <CustomFormField
@@ -365,47 +265,42 @@ const EditProfileForm = ({ initialData }: EditProfileFormProps) => {
             </div>
           </div>
 
-          {/* Location Information */}
-          <div className={sectionClasses}>
+          {/* Location */}
+          <div className="p-6 rounded-lg border bg-white dark:bg-gray-900">
             <div className="flex items-center gap-3 mb-6">
-              <MapPin className={'w-6 h-6'} />
-              <h3 className={'text-xl font-medium text-gray-600 dark:text-gray-300'}>Location Information</h3>
+              <MapPin className="w-6 h-6" />
+              <h3 className="text-xl font-semibold">Location</h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Fixed: Use value prop and conditional placeholder */}
               <CustomFormField
                 fieldType={FormFieldType.SELECT}
                 control={form.control}
-                name="country_id"
+                name="Country_id"
                 label="Country"
-                placeholder="Select your country"
-                options={countriesData}
-                disabled={isFetchingCountries}
+                placeholder={formValues.Country_id ? "" : "Select your country"}
+                options={countryOptions}
+                value={formValues.Country_id}
               />
 
+              {/* Fixed: Only show when country is selected */}
               <CustomFormField
                 fieldType={FormFieldType.SELECT}
                 control={form.control}
                 name="city_id"
                 label="City"
-                placeholder={
-                  !watchedCountryId && !userCountryId
-                    ? "Select country first"
-                    : isFetchingCities
-                    ? "Loading cities..."
-                    : "Select your city"
-                }
-                options={citiesData}
-                disabled={(!watchedCountryId && !userCountryId) || isFetchingCities}
+                placeholder={formValues.city_id ? "" : "Select your city"}
+                options={cityOptions}
+                value={formValues.city_id}
+                disabled={!formValues.Country_id} // Optional: disable until country is selected
               />
             </div>
           </div>
 
-          {/* Contact Information Section */}
-          <div className={sectionClasses}>
-            <h3 className={cn("font-semibold mb-6", 'text-xl font-medium text-gray-600 dark:text-gray-300')}>
-              Contact Information
-            </h3>
+          {/* Contact */}
+          <div className="p-6 rounded-lg border bg-white dark:bg-gray-900">
+            <h3 className="text-xl font-semibold mb-6">Contact Information</h3>
 
             <CustomFormField
               fieldType={FormFieldType.INPUT}
@@ -416,7 +311,7 @@ const EditProfileForm = ({ initialData }: EditProfileFormProps) => {
               iconSrc={ICONS.email}
               disabled
             />
-            
+
             <div className="mt-4">
               <CustomFormField
                 fieldType={FormFieldType.PHONE_INPUT}
@@ -427,99 +322,79 @@ const EditProfileForm = ({ initialData }: EditProfileFormProps) => {
             </div>
           </div>
 
-          {/* Additional Images Section */}
-          <div className={sectionClasses}>
+          {/* Additional Images */}
+          <div className="p-6 rounded-lg border bg-white dark:bg-gray-900">
             <div className="flex items-center gap-3 mb-6">
-              <Camera className={'w-6 h-6'} />
-              <h3 className={'text-xl font-medium text-gray-600 dark:text-gray-300'}>Additional Profile Images</h3>
+              <Camera className="w-6 h-6" />
+              <h3 className="text-xl font-semibold">Additional Images</h3>
             </div>
 
-            <p className={cn("text-sm mb-6 text-gray-600 dark:text-gray-300")}>
-              Upload up to 4 additional images to showcase more about yourself. These will be displayed in your profile gallery.
-            </p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[0, 1, 2, 3].map((index) => (
+                <SingleImageUploader
+                  key={`image-${index}`}
+                  label={`Image ${index + 1}`}
+                  existingImage={imageSlots[index]?.existingUrl || null}
+                  imageKey={`image_${index + 1}`}
+                  onImageChange={(file, deleted) =>
+                    handleSlotChange(index, file, deleted)
+                  }
+                />
+              ))}
+            </div>
+          </div>
 
-            <ImageUploader
-              existingImages={existingImages}
-              onChange={handleAdditionalImagesChange}
-              maxImages={4}
+          {/* Security */}
+          <div className="p-6 rounded-lg border bg-white dark:bg-gray-900">
+            <div className="flex items-center gap-3 mb-6">
+              <Shield className="w-6 h-6" />
+              <h3 className="text-xl font-semibold">Account Security</h3>
+            </div>
+
+            <div className="p-4 rounded-lg border bg-gray-50 dark:bg-gray-800">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <Key className="w-4 h-4" />
+                    <h4 className="font-semibold">Password</h4>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Last changed: Recently
+                  </p>
+                </div>
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setIsPasswordModalOpen(true)}
+                >
+                  Change Password
+                </Button>
+              </div>
+            </div>
+
+            <ChangePasswordModal
+              open={isPasswordModalOpen}
+              onClose={() => setIsPasswordModalOpen(false)}
             />
           </div>
 
-          {/* Security Section */}
-          <div className={sectionClasses}>
-            <div className="flex items-center gap-3 mb-6">
-              <Shield className={'w-6 h-6'} />
-              <h3 className={'text-xl font-medium text-gray-600 dark:text-gray-300'}>Account Security</h3>
-            </div>
-
-            <div className="space-y-4">
-              {/* Password Change Card */}
-              <div className={cardClasses}>
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <Key className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-                      <h4 className="font-semibold text-gray-900 dark:text-gray-100">Password</h4>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                      <Calendar className="w-3 h-3" />
-                      <span>Last changed: Recently</span>
-                    </div>
-                  </div>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => setIsPasswordModalOpen(true)}
-                    className={cn(
-                      "flex items-center gap-2 whitespace-nowrap",
-                      "border-primary-color1 dark:border-primary-color2",
-                      "text-primary-color1 dark:text-primary-color2",
-                      "hover:bg-primary-color1 hover:text-white",
-                      "dark:hover:bg-primary-color2 dark:hover:text-white",
-                      "transition-colors"
-                    )}
-                  >
-                    Change Password
-                  </Button>
-                </div>
-              </div>
-
-              <ChangePasswordModal
-                open={isPasswordModalOpen}
-                onClose={() => setIsPasswordModalOpen(false)}
-              />
-            </div>
-          </div>
-
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row justify-end items-center gap-3 pt-6">
+          <div className="flex flex-col sm:flex-row justify-end gap-3 pt-6">
             <Button
               type="button"
               variant="outline"
               onClick={() => router.back()}
-              className={cn(
-                "w-full sm:w-auto px-6 py-2.5 rounded-lg",
-                "border border-gray-300 dark:border-gray-700",
-                "text-gray-600 dark:text-gray-400",
-                "hover:bg-gray-50 dark:hover:bg-gray-800",
-                "hover:text-gray-800 dark:hover:text-gray-200",
-                "transition-all duration-200"
-              )}
+              className="w-full sm:w-auto"
             >
               Cancel
             </Button>
 
             <SubmitButton
-              isLoading={isLoading || submitLoading}
+              isLoading={submitLoading}
               loadingText="Updating Profile..."
               type="submit"
-              className={cn(
-                "w-full sm:w-auto px-8 py-2.5 rounded-lg shadow-sm",
-                "bg-primary-color1 dark:bg-primary-color2",
-                "text-white",
-                "hover:bg-primary-color2 dark:hover:bg-primary-color1",
-                "transition-all duration-200"
-              )}
+              className="w-full sm:w-auto"
             >
               Save Changes
             </SubmitButton>

@@ -1,25 +1,3 @@
-  declare interface Sheikh {
-    id: number;
-    first_name: string;
-    last_name: string;
-    gender: string;
-    image: string;
-    experience: string;
-    specialization: string;
-    languages: string[];
-    bio: string;
-    email: string;
-    phone?: string;
-    username: string;
-    password?: string;
-
-    country_id: string|number;
-    city_id: string;
-
-    created_at: string;
-    updated_at?: string;
-  }
-
 
   declare interface Psychiatrist {
     id: number;
@@ -36,3 +14,40 @@
     created_at: string;
     updated_at?: string;
   }
+
+
+  interface Sheikh {
+    id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+    gender: string;
+    phone: string | number | null;
+    birth_day: string | null;
+    account_status: string;
+    sheikh?: {
+      id: number;
+      user_id: number;
+      experience: string;
+      specialization: string;
+      languages: string[];
+      bio: string;
+      country_id: number;
+      city_id: number;
+    };
+  }
+  
+  interface SheikhResponse {
+    status: boolean;
+    message: string;
+    data: {
+      data: Sheikh[];
+      meta?: {
+        current_page: number;
+        total: number;
+        per_page: number;
+        last_page: number;
+      };
+    };
+  }
+  

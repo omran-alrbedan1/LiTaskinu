@@ -22,25 +22,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get FormData from request
-    const formData = await request.formData();
-    
-    const response = await fetch(`${API_BASE_URL}/children/interests/update`, {
-      method: 'POST', 
+    const body = await request.json();
+
+    const response = await fetch(`${API_BASE_URL}/change-password`, {
+      method: 'POST',
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${session.accessToken}`,
       },
-      body: formData,
+      body: JSON.stringify(body),
     });
 
-    const responseData = await response.json();
+ const responseData = await response.json();
+    
     
     return NextResponse.json(responseData, { 
       status: response.status 
     });
     
-  } catch (error: any) {
-    console.error("Update children interests API error:", error);
-    return handleFetchError(error); 
-  }
+  }catch (error: any) {
+        console.error("Update children preferences API error:", error);
+        return handleFetchError(error); 
+      }
 }

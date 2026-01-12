@@ -14,11 +14,6 @@ export const genderOptions = [
     label: "Female",
     icon: ICONS.female,
   },
-  {
-    value: "other",
-    label: "Other",
-    icon: ICONS.user,
-  },
 ];
 
 export const countryOptions = [

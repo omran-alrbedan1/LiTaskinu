@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -9,51 +10,87 @@ import {
   Music,
   Dumbbell,
   Plus,
+  Film,
 } from "lucide-react";
 import Link from "next/link";
 import { EmptyState } from "@/components/shared";
 import { images } from "@/constants/images";
 import CustomHeader from "@/components/shared/CustomHeader";
-
-const mockUserInterests = {
-  interests: ["Reading", "Traveling", "Photography", "Cooking"],
-  food: ["Italian", "Japanese", "Mexican", "Vegetarian"],
-  music: ["Rock", "Jazz", "Classical", "Pop"],
-  sports: ["Football", "Basketball", "Swimming", "Hiking"],
-};
+import useGetData from "@/hooks/useGetData";
+import Loader from "@/components/shared/Loader";
 
 const InterestsPage = () => {
-  const { interests, food, music, sports } = mockUserInterests;
+  // Fetch user's selected interests from the "my" endpoint
+  const {
+    data: myInterests,
+    loading: isFetchingInterests,
+    error: fetchError,
+    refetch: refetchInterests,
+  } = useGetData<InterestData>({
+    url: "/api/website/profile/interests/my",
+    enabled: true,
+  });
+
+  // Extract category names from the API response
+  const categoryNames: InterestCategory[] = myInterests?.data?.interests ? 
+    Object.keys(myInterests.data.interests) as InterestCategory[] : [];
+
+  // Check if any category has items
+  const hasAnyInterests = categoryNames.some(
+    (category: InterestCategory) => {
+      const categoryData = myInterests?.data?.interests[category];
+      return categoryData && Object.keys(categoryData).length > 0;
+    }
+  );
+
+  // Get icon for each category
+  const getCategoryIcon = (category: InterestCategory) => {
+    switch (category) {
+      case "Entertainment":
+        return Film;
+      case "Music":
+        return Music;
+      case "Food":
+        return UtensilsCrossed;
+      case "Sports":
+        return Dumbbell;
+      default:
+        return Heart;
+    }
+  };
 
   const Section = ({
-    title,
-    items,
-    icon: Icon,
+    category,
   }: {
-    title: string;
-    items: string[];
-    icon: React.ComponentType<any>;
-  }) => (
-    <Card className="hover:shadow-md shadow-sm transition-shadow duration-300">
-      <CardHeader className="pb-4">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-primary/10">
-            <Icon className="h-5 w-5 text-primary" />
+    category: InterestCategory;
+  }) => {
+    const categoryData = myInterests?.data?.interests[category];
+    const items: string[] = categoryData ? Object.values(categoryData) : [];
+
+    if (items.length === 0) return null;
+
+    const Icon = getCategoryIcon(category);
+
+    return (
+      <Card className="hover:shadow-md shadow-sm transition-shadow duration-300">
+        <CardHeader className="pb-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-primary/10">
+              <Icon className="h-5 w-5 text-primary" />
+            </div>
+            <div>
+              <CardTitle className="text-lg font-semibold text-primary-color1">
+                {category}
+              </CardTitle>
+              <p className="text-sm text-muted-foreground">
+                {items.length} {items.length === 1 ? "item" : "items"}
+              </p>
+            </div>
           </div>
-          <div>
-            <CardTitle className="text-lg font-semibold text-primary-color1">
-              {title}
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">
-              {items.length} {items.length === 1 ? "item" : "items"}
-            </p>
-          </div>
-        </div>
-      </CardHeader>
-      <CardContent className="pt-0">
-        <div className="flex flex-wrap gap-2">
-          {items.length > 0 ? (
-            items.map((item, index) => (
+        </CardHeader>
+        <CardContent className="pt-0">
+          <div className="flex flex-wrap gap-2">
+            {items.map((item: string, index: number) => (
               <Badge
                 key={index}
                 variant="secondary"
@@ -61,35 +98,20 @@ const InterestsPage = () => {
               >
                 {item}
               </Badge>
-            ))
-          ) : (
-            <div className="text-center py-6 mx-auto">
-              <p className="text-muted-foreground text-sm mb-3">
-                No {title.toLowerCase()} selected
-              </p>
-              <Link href="./interest/edit">
-                <Button variant="outline" size="sm">
-                  <Plus className="h-3 w-3 mr-1" />
-                  Add
-                </Button>
-              </Link>
-            </div>
-          )}
-        </div>
-      </CardContent>
-    </Card>
-  );
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    );
+  };
 
-  const hasNoInterests =
-    interests.length === 0 &&
-    food.length === 0 &&
-    music.length === 0 &&
-    sports.length === 0;
+  // Show loading state
+    if (isFetchingInterests) return <Loader />;
 
-  return (
-    <div className="min-h-screen">
-      <div className="   space-y-8">
-        {/* Header Section */}
+  // Show error state
+  if (fetchError) {
+    return (
+      <div className="min-h-screen">
         <CustomHeader
           title="My Interests"
           description="Discover my hobbies, preferences, and passions"
@@ -98,33 +120,41 @@ const InterestsPage = () => {
             href: "./interest/edit",
             icon: Edit,
           }}
-          condition={!hasNoInterests}
+        />
+        <div className="text-center py-12">
+          <p className="text-destructive mb-4">Failed to load interests</p>
+          <Button onClick={() => refetchInterests()} variant="outline">
+            Try Again
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen">
+      <div className="space-y-8">
+        {/* Header Section */}
+        <CustomHeader
+          title="My Interests"
+          description="Discover my hobbies, preferences, and passions"
+          action={{
+            label: hasAnyInterests ? "Edit Interests" : "Add Interests",
+            href: "./interest/edit",
+            icon: hasAnyInterests ? Edit : Plus,
+          }}
         />
 
-        {/* Interests Grid - Show when there ARE interests */}
-        {!hasNoInterests && (
+        {hasAnyInterests ? (
           <div className="grid gap-6">
-            <Section
-              title="Hobbies & Interests"
-              items={interests}
-              icon={Heart}
-            />
-            <Section
-              title="Favorite Food"
-              items={food}
-              icon={UtensilsCrossed}
-            />
-            <Section title="Music Preferences" items={music} icon={Music} />
-            <Section
-              title="Sports & Activities"
-              items={sports}
-              icon={Dumbbell}
-            />
+            {categoryNames.map((category: InterestCategory) => (
+              <Section 
+                key={category} 
+                category={category} 
+              />
+            ))}
           </div>
-        )}
-
-        {/* Empty State - Show when there are NO interests */}
-        {hasNoInterests && (
+        ) : (
           <EmptyState
             title="No Interests Added"
             description="Share your interests to connect with like-minded people"

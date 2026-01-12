@@ -5,11 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Search, Bell, Filter } from "lucide-react";
 import { SAMPLE_NOTIFICATIONS } from "@/constants/admin";
-import {
-  NotificationActions,
-  NotificationCard,
-  NotificationFilters,
-} from "@/app/admin/[locale]/notifications/_components";
+// import {
+//   NotificationActions,
+//   NotificationCard,
+//   NotificationFilters,
+// } from "@/app/admin/[locale]/notifications/_components";
 import { Header } from "@/components/admin/shared";
 import { mockNotifications } from "@/constants/temporary";
 
@@ -140,9 +140,10 @@ const NotificationsPage = () => {
       </div>
 
       {/* Main Content - Add scrolling here instead */}
+    
       <div className="px-6 space-y-6 pb-6">
         {/* Actions Bar */}
-        <NotificationActions
+        {/* <NotificationActions
           selectedCount={selectedNotifications.size}
           unreadCount={unreadCount}
           onMarkAllAsRead={handleMarkAllAsRead}
@@ -150,15 +151,15 @@ const NotificationsPage = () => {
           onSelectAll={handleSelectAll}
           onClearSelection={handleClearSelection}
           hasUnread={unreadCount > 0}
-        />
+        /> */}
 
         {/* Filters */}
-        <NotificationFilters
+        {/* <NotificationFilters
           filters={filters}
           onFiltersChange={setFilters}
           unreadCount={unreadCount}
           totalCount={totalCount}
-        />
+        /> */}
 
         {/* Notifications List with scrolling */}
         <Card className="shadow-sm border-gray-200 dark:border-gray-700 ">
@@ -199,11 +200,11 @@ const NotificationsPage = () => {
                       className="mt-5 h-4 w-4 !bg-primary-color1 rounded border-gray-300 dark:border-gray-600 focus:ring-primary-color1 dark:bg-gray-700 dark:checked:bg-primary-color1"
                     />
                     <div className="flex-1">
-                      <NotificationCard
+                      {/* <NotificationCard
                         notification={notification}
                         onMarkAsRead={handleMarkAsRead}
                         onDelete={handleDelete}
-                      />
+                      /> */}
                     </div>
                   </div>
                 ))
@@ -212,6 +213,7 @@ const NotificationsPage = () => {
           </CardContent>
         </Card>
       </div>
+    
     </div>
   );
 };

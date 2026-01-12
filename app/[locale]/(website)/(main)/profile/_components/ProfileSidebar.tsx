@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HelpCircle, LogOut, Globe, User, Home } from "lucide-react";
 import { FaPersonBurst } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import { images } from "@/constants/images";
 import { MdOutlineInterests } from "react-icons/md";
 import { cn } from "@/lib/utils";
 import LogoutModal from "./LogoutModal";
+import useGetData from "@/hooks/useGetData";
 
 const ProfileSidebar = () => {
   const [activeSection, setActiveSection] = useState("profile");
@@ -18,6 +19,15 @@ const ProfileSidebar = () => {
 
   const router = useRouter();
   const pathname = usePathname();
+
+    const { data: userData, loading: dataLoading } = useGetData<BasicProfileInfo>({
+    url: "/api/website/profile/basic",
+  });    
+  useEffect(() => {
+    console.log("Complete userData response:", userData);
+    console.log("Data keys:", userData ? Object.keys(userData) : []);
+    console.log("Documents structure:", userData?.documents);
+  }, [userData]);
 
   const menuItems = [
     {
@@ -49,11 +59,6 @@ const ProfileSidebar = () => {
 
   const accountActions = [
     {
-      id: "language",
-      label: "Language",
-      icon: Globe,
-    },
-    {
       id: "logout",
       label: "Log Out",
       icon: LogOut,
@@ -61,16 +66,11 @@ const ProfileSidebar = () => {
     },
   ];
 
-  const user = {
-    name: "Abdullah",
-    avatar: images.avatar,
-  };
+
 
   const isActiveRoute = (itemId: string) => {
-    // Split the current pathname into segments
     const pathSegments = pathname.split("/").filter((segment) => segment);
 
-    // Get the base profile segment (e.g., "overview", "account", etc.)
     const profileSegmentIndex = pathSegments.findIndex((segment) =>
       [
         "overview",
@@ -127,19 +127,24 @@ const ProfileSidebar = () => {
 
   return (
     <>
-      <div className="bg-white pb-12 rounded-xl shadow-sm border border-gray-200/60 p-6 sticky top-8">
+      <div className=" pb-12 rounded-xl shadow-sm border border-gray-200/60 p-6 top-8">
         {/* User Info Header */}
         <div className="text-center mb-6 pb-6 ">
-          <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-            <Image
-              src={user.avatar || images.Unknown}
-              height={84}
-              width={84}
-              alt="User Avatar"
-              className="rounded-full object-cover"
-            />
+          <div className="w-20 h-20  rounded-full mx-auto mb-4 flex items-center justify-center">
+
+    <Image
+      src={userData?.data.documents?.personal_photo ? 
+        `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${userData.data.documents.personal_photo}` : 
+        images.Unknown
+      }
+      height={84}
+      width={84}
+      alt="User Avatar"
+      className="rounded-full object-cover"
+    />
+ 
           </div>
-          <h2 className="text-xl font-semibold text-gray-900">{user.name}</h2>
+          <h2 className="text-xl font-semibold text-gray-900">{userData?.first_name}</h2>
         </div>
 
         {/* Navigation Menu */}

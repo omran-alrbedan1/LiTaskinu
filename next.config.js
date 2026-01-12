@@ -25,6 +25,11 @@ const nextConfig = {
         pathname: "/storage/**",
       },
       {
+        protocol: "https",
+        hostname: "api.litaskunu.com",
+        pathname: "//storage/**",
+      },
+      {
         protocol: "http",
         hostname: "api.litaskunu.com",
         pathname: "/storage/**",

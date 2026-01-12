@@ -12,19 +12,9 @@ import SubmitButton from "@/components/Buttons/SubmitButton";
 import usePostData from "@/hooks/usePostData";
 import { images } from "@/constants/images";
 import { ICONS } from "@/constants/icons";
+import { ChangePasswordSchema } from "@/validation/profile-schema";
 
-const ChangePasswordSchema = z
-  .object({
-    currentPassword: z.string().min(6, "Current password is required"),
-    newPassword: z
-      .string()
-      .min(6, "New password must be at least 6 characters"),
-    confirmPassword: z.string().min(6, "Please confirm your new password"),
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    path: ["confirmPassword"],
-    message: "Passwords do not match",
-  });
+
 
 interface ChangePasswordModalProps {
   open: boolean;
@@ -35,9 +25,9 @@ const ChangePasswordModal = ({ open, onClose }: ChangePasswordModalProps) => {
   const form = useForm<z.infer<typeof ChangePasswordSchema>>({
     resolver: zodResolver(ChangePasswordSchema),
     defaultValues: {
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
+      current_password: "",
+      password: "",
+      password_confirmation: "",
     },
   });
 
@@ -45,7 +35,7 @@ const ChangePasswordModal = ({ open, onClose }: ChangePasswordModalProps) => {
     postData,
     loading,
     reset: resetPost,
-  } = usePostData("/api/user/change-password", {
+  } = usePostData("/api/website/profile/change-password", {
     showNotifications: true,
     successMessage: "Password changed successfully!",
     onSuccess: () => {
@@ -104,7 +94,7 @@ const ChangePasswordModal = ({ open, onClose }: ChangePasswordModalProps) => {
             <CustomFormField
               fieldType={FormFieldType.PASSWORD}
               control={form.control}
-              name="currentPassword"
+              name="current_password"
               label="Current Password"
               iconSrc={ICONS.lock}
               placeholder="Enter current password"
@@ -113,7 +103,7 @@ const ChangePasswordModal = ({ open, onClose }: ChangePasswordModalProps) => {
             <CustomFormField
               fieldType={FormFieldType.PASSWORD}
               control={form.control}
-              name="newPassword"
+              name="password"
               label="New Password"
               iconSrc={ICONS.lock}
               placeholder="Enter new password"
@@ -122,7 +112,7 @@ const ChangePasswordModal = ({ open, onClose }: ChangePasswordModalProps) => {
             <CustomFormField
               fieldType={FormFieldType.PASSWORD}
               control={form.control}
-              name="confirmPassword"
+              name="password_confirmation"
               label="Confirm Password"
               iconSrc={ICONS.lock}
               placeholder="Re-enter new password"
