@@ -9,32 +9,47 @@ import { images } from "@/constants/images";
 import { TooltipButton } from "@/components/admin/parts";
 import { Badge } from "@/components/ui/badge";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
-import { NAV_LINKS } from "@/constants/website";
+import { useNavLinks } from "@/constants/website";
 import { useNavigation } from "@/hooks/useNavigation";
 import { DesktopNav } from "./DesktopNav";
 import { MobileDrawer } from "./MobileDrawer";
 import { LanguageDropdown } from "./LanguageDropdown";
+import { useLocale, useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 const SearchBar: React.FC<{
   searchQuery: string;
   onSearchChange: (value: string) => void;
   onSearchSubmit: (e: React.FormEvent) => void;
-}> = ({ searchQuery, onSearchChange, onSearchSubmit }) => (
-  <div className="hidden sm:block bg-gray-100 dark:bg-gray-800 rounded-full relative">
-    <form onSubmit={onSearchSubmit} className="relative">
-      <FaSearch className="absolute z-20 text-primary-color1 dark:text-primary-color1-dark mt-2.5 ml-3" />
-      <input
-        type="text"
-        placeholder="Search Here"
-        value={searchQuery}
-        onChange={(e) => onSearchChange(e.target.value)}
-        className="bg-white/15 dark:bg-gray-700/30 backdrop-blur-sm border-none text-black dark:text-white rounded-full pl-10 pr-4 py-1.5 placeholder-gray-300 dark:placeholder-gray-400 focus:bg-white/25 dark:focus:bg-gray-700/50 focus:outline-none focus:ring-2 focus:ring-primary-color1 dark:focus:ring-primary-color1-dark transition-all duration-300 w-48 focus:w-64"
-      />
-    </form>
-  </div>
-);
+}> = ({ searchQuery, onSearchChange, onSearchSubmit }) => {
+  const t = useTranslations("header");
+
+  const locale = useLocale();
+  const isRTL = locale === "ar" || locale === "fa";
+
+  return (
+    <div className="hidden sm:block bg-gray-100 dark:bg-gray-800 rounded-full relative">
+      <form onSubmit={onSearchSubmit} className="relative">
+        <FaSearch className={cn("absolute z-20 text-primary-color1 dark:text-primary-color1-dark mt-2.5", isRTL ? "right-3" : "left-3")} />
+        <input
+          type="text"
+          placeholder={t("search_here")}
+          value={searchQuery}
+          onChange={(e) => onSearchChange(e.target.value)}
+          className={cn(
+            "bg-white/15 dark:bg-gray-700/30 backdrop-blur-sm border-none text-black dark:text-white rounded-full py-1.5 placeholder-gray-300 dark:placeholder-gray-400 focus:bg-white/25 dark:focus:bg-gray-700/50 focus:outline-none focus:ring-2 focus:ring-primary-color1 dark:focus:ring-primary-color1-dark transition-all duration-300 w-48 focus:w-64",
+            isRTL ? "pl-4 pr-10" : "pl-10 pr-4"
+          )}
+        />
+      </form>
+    </div>
+  );
+}
 
 const Header: React.FC = () => {
+  const locale = useLocale();
+  const isRTL = locale === "ar" || locale === "fa";
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -53,6 +68,8 @@ const Header: React.FC = () => {
     e.preventDefault();
     console.log("Searching for:", searchQuery);
   };
+
+  const NAV_LINKS = useNavLinks();
 
   const links = useMemo(
     () =>
@@ -87,14 +104,14 @@ const Header: React.FC = () => {
 </div>
           <DesktopNav links={links} isActiveLink={isActiveLink} />
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center gap-4">
             <SearchBar
               searchQuery={searchQuery}
               onSearchChange={setSearchQuery}
               onSearchSubmit={handleSearch}
             />
 
-            <div className="hidden md:flex items-center space-x-2">
+            <div className="hidden md:flex items-center gap-2">
               <TooltipButton
                 tooltipContent="notifications"
                 className="!relative"
@@ -104,7 +121,7 @@ const Header: React.FC = () => {
                 }
               >
                 <Bell className="size-5 text-gray-500 dark:text-gray-300" />
-                <Badge className="!rounded-full text-center text-xs !h-4 !w-4 bg-red-400 dark:bg-red-500 absolute top-0 left-6">
+                <Badge className={cn("!rounded-full text-center text-xs !h-4 !w-4 bg-red-400 dark:bg-red-500 absolute top-0", isRTL ? "right-6" : "left-6")}>
                   3
                 </Badge>
               </TooltipButton>

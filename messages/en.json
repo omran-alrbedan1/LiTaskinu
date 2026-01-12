@@ -1,16 +1,615 @@
 {
-    "Home": {
-      "title": "NextJS i18n Tutorial",
-      "description": "Tutorial of how to manipulate i18n based on route path or domain with  Nextjs v15"
+  "header": {
+    "search_here": "Search Here",
+    "home": "Home",
+    "chats": "Chats",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "sheikhs": "Our Sheikhs",
+    "mental_health": "Mental Health"
+  },
+  "footer": {
+    "brand": {
+      "title": "Litaskunu",
+      "subtitle": "Islamic Marriage Platform",
+      "description": "Making halal marriages accessible worldwide through modern technology while honoring Islamic traditions."
     },
-    "Step1": {
-      "title": "Step 1 Title",
-      "EXPLANATION_PARAGRAPH1": "lorem ipsum"
+    "contact": {
+      "title": "Contact Us",
+      "email": "Email",
+      "phone": "Phone",
+      "global": "Global",
+      "global_desc": "Available Worldwide"
     },
-    "Step2": {
-      "title": "Step 2 Title",
-      "EXPLANATION_PARAGRAPH1": "lorem ipsum",
-      "EXPLANATION_PARAGRAPH2": "lorem ipsum",
-      "EXPLANATION_PARAGRAPH3": "lorem ipsum"
+    "legal": {
+      "title": "Legal",
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy"
+    },
+    "mission": {
+      "statement": "It is also an incredibly affordable platform for those seeking meaningful relationships through traditional values, respect, and honesty. With cultural authenticity at its core, Litaskunu connects millions of users worldwide who are ready for serious commitments.",
+      "established": "Building meaningful Islamic relationships since 2025"
+    },
+    "copyright": {
+      "rights": "All rights reserved.",
+      "made_for": "for the Muslim Ummah",
+      "made_with": "Made with"
     }
+  },
+  "homePage": {
+    "login": "Login",
+    "faq_contact": "Still have questions? We're here to help!",
+    "contact_support": "Contact Support"
+  },
+  "chats": {
+    "header": {
+      "title": "Litaskunu",
+      "subtitleStart": "Start your journey to find a match",
+      "subtitleContinue": "Select a conversation or find new connections"
+    },
+    "main": {
+      "titleStart": "Start Your Journey",
+      "titleContinue": "Continue Your Journey",
+      "descStart": "Let's find someone who shares your values and vision for a blessed marriage. Search for your perfect match to begin meaningful conversations.",
+      "descContinue": "Choose from your existing conversations in the sidebar or explore new potential matches to expand your connections."
+    },
+    "quran": {
+      "verse": "\"And among His signs is that He created for you mates from among yourselves...\"",
+      "reference": "Quran 30:21"
+    },
+    "actions": {
+      "findFirst": "Find Your Match",
+      "findNew": "Find New Matches"
+    },
+    "safety": {
+      "title": "Safe & Respectful Environment",
+      "descStart": "Start your search in a protected space designed for meaningful Islamic relationships.",
+      "descContinue": "All your conversations are monitored to ensure respectful and halal communication."
+    },
+    "guidance": {
+      "labelStart": "Getting started:",
+      "labelContinue": "Next steps:",
+      "steps": {
+        "preferences": "Set your preferences",
+        "browse": "Browse profiles",
+        "startChat": "Start chatting",
+        "continueChat": "Continue conversations",
+        "explore": "Explore new matches",
+        "family": "Involve family"
+      }
+    },
+    "search_placeholder": "Search here...",
+    "conversations": "Conversations",
+    "status": {
+      "online": "Online",
+      "offline": "Offline",
+      "today": "Today"
+    },
+    "input": {
+      "placeholder": "Type your message"
+    },
+    "aria": {
+      "sentImage": "Sent image",
+      "preview": "Preview"
+    }
+  },
+  "about": {
+    "header": {
+      "platform_name": "Halal Matchmaking Platform",
+      "about_title": "About LITASKUNU",
+      "about_description": "We help Muslims find their life partners through a halal, dignified, and modern approach to matchmaking. For years, NikahConnect has been bringing together compatible individuals seeking meaningful Islamic marriages."
+    },
+    "mission": {
+      "purpose": "Our Purpose",
+      "title": "Our Mission",
+      "description": "To facilitate meaningful connections between Muslims seeking marriage, while upholding Islamic values and principles. We believe that finding a righteous spouse is half of one's faith, and we're honored to help you complete your deen.",
+      "family_image_alt": "Muslim family spending time together"
+    },
+    "checklist": {
+      "strict_adherence": "Strict adherence to Islamic principles.",
+      "privacy_dignity": "Privacy and dignity maintained throughout.",
+      "family_involvement": "Family involvement encouraged and supported."
+    },
+    "services": {
+      "section_title": "What We Offer",
+      "title": "Our Services",
+      "description": "Comprehensive support on your journey to finding a righteous spouse, guided by Islamic principles.",
+      "unique_experience": {
+        "title": "Unique user experience",
+        "description": "A platform designed with authenticity and sincerity. We maintain strict standards to protect our community."
+      },
+      "data_integrity": {
+        "title": "Data integrity",
+        "description": "Your personal information is protected with the highest security standards, and we'll guardian implementation is facilitated."
+      },
+      "islamic_vibes": {
+        "title": "Islamic vibes",
+        "description": "Respectful and ethical approach to help navigate the marriage process according to Shariah."
+      }
+    },
+    "impact": {
+      "section_title": "Our Impact",
+      "title": "Trusted by the Community",
+      "description": "Our platform is built on trust, dedication, and commitment to helping Muslims find their compatible life partners.",
+      "wedding_image_alt": "Wedding rings symbolizing successful matches",
+      "success_stories_title": "Success Stories",
+      "success_stories_description": "Alhamdulillah, we've helped thousands of Muslims find their life partners through our halal and dignified matchmaking platform."
+    },
+    "stats": {
+      "successful_matches": "Successful Matches",
+      "countries_served": "Countries Served",
+      "success_rate": "Success Rate",
+      "support_available": "Support Available"
+    },
+    "cta": {
+      "title": "Ready to Begin Your Journey?",
+      "description": "Take the first step towards completing half your deen. Join our trusted Islamic matchmaking platform today.",
+      "create_profile": "Create your profile",
+      "learn_more": "Learn More"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "contactInfo": "Our Contact information :",
+    "followUs": "Follow Us On:",
+    "success_msg": "Message sent successfully!",
+    "error_msg": "Failed to send message. Please try again.",
+    "send_message": "Send Message",
+    "sending": "Sending..."
+  },
+  "home": {
+    "error_loading": "Error loading profiles. Please try again.",
+    "retry": "Retry",
+    "empty_title": "No profiles found",
+    "empty_description": "Try adjusting your search or filters to find more matches",
+    "reset_filters": "Reset Filters",
+    "unknown_user": "Unknown User",
+    "unknown": "Unknown",
+    "city_id": "City ID",
+    "filters": {
+      "looking_for": "Looking for",
+      "select_gender": "Select gender",
+      "female": "Female",
+      "male": "Male",
+      "both": "Both",
+      "age_from": "Age From",
+      "age_to": "Age To",
+      "country": "Country",
+      "select_country": "Select country",
+      "city": "City",
+      "select_city": "Select city",
+      "reset_filters": "Reset Filters",
+      "countries": {
+        "jordan": "Jordan",
+        "usa": "USA",
+        "uk": "UK",
+        "canada": "Canada",
+        "uae": "UAE"
+      },
+      "cities": {
+        "amman": "Amman",
+        "irbid": "Irbid",
+        "zarqa": "Zarqa",
+        "aqaba": "Aqaba",
+        "madaba": "Madaba"
+      }
+    },
+    "profile_card": {
+      "occupation": "Occupation",
+      "location": "Location",
+      "available_time": "Available Time",
+      "message": "Message",
+      "male": "Male",
+      "female": "Female",
+      "age": "{age} years",
+      "profile_image_alt": "{name}'s profile"
+    }
+  },
+  "mental_health": {
+    "hero": {
+      "background_alt": "Mental health background",
+      "title_start": "Find Your",
+      "title_highlight": "Mental Health",
+      "title_end": "Specialist",
+      "subtitle": "Connect with licensed therapists and psychologists for confidential and professional mental health support"
+    },
+    "features": {
+      "badge": "WHY CHOOSE OUR DOCTORS",
+      "title": "Professional Mental Health Support",
+      "subtitle": "Experience confidential, evidence-based therapy from licensed professionals"
+    },
+    "chat": "Chat",
+    "view": "View"
+  },
+  "psychiatrist_detail": {
+    "languages": "Languages",
+    "experience": {
+      "title": "Professional Experience"
+    },
+    "background": {
+      "title": "Professional Background"
+    },
+    "specializations": {
+      "title": "Areas of Specialization"
+    },
+    "chat": {
+      "status": {
+        "online": "Online",
+        "offline": "Offline",
+        "typing": "Typing..."
+      },
+      "date": {
+        "today": "Today",
+        "yesterday": "Yesterday"
+      },
+      "messageTypes": {
+        "userVoice": "Your voice message",
+        "doctorVoice": "Voice message",
+        "fileDownload": "Download",
+        "clearAll": "Clear all"
+      },
+      "input": {
+        "placeholder": "Type your message...",
+        "recording": "Recording voice message",
+        "stopRecording": "Stop Recording"
+      }
+    }
+  },
+  "persons": {
+    "sidebar_title": "The Filters",
+    "marital_status": "Marital Status",
+    "religion": "Religion",
+    "job_title": "Job title",
+    "job_placeholder": "Enter job title",
+    "place": "Place",
+    "age": "Age",
+    "occupation": "Occupation",
+    "education": "Education",
+    "weight": "Weight",
+    "height": "Height",
+    "continue_btn": "Continue",
+    "reset_btn": "reset filter",
+    "search_placeholder": "Search now...",
+    "results_title": "Search Results ({count})",
+    "recent_search": "Recent search",
+    "select_opt": "Select",
+    "options": {
+      "single": "Single",
+      "married": "Married",
+      "divorced": "Divorced",
+      "widowed": "Widowed",
+      "christianity": "Christianity",
+      "islam": "Islam",
+      "hinduism": "Hinduism",
+      "buddhism": "Buddhism",
+      "male": "Male",
+      "female": "Female",
+      "other": "Other",
+      "urban": "Urban",
+      "suburban": "Suburban",
+      "rural": "Rural",
+      "high_school": "High School",
+      "bachelors": "Bachelor's",
+      "masters": "Master's",
+      "phd": "PhD",
+      "employed": "Employed",
+      "self_employed": "Self-employed",
+      "unemployed": "Unemployed",
+      "student": "Student"
+    }
+  },
+  "person_detail": {
+    "photos_title": "The Photos",
+    "send_interest": "Send Interest",
+    "block_user": "Block User",
+    "info_title": "The Information :",
+    "introduction": "Introduction",
+    "personal_details": "Personal Details",
+    "occupation": "Occupation",
+    "job_title": "Job Title",
+    "weight": "Weight",
+    "height": "Height",
+    "age": "Age",
+    "place": "Place",
+    "religion": "Religion",
+    "marital_status": "Marital Status",
+    "chat_with": "Chat with {name}",
+    "education": "Education",
+    "success_title": "Request Sent Successfully!",
+    "request_message": "Your chat request to {name} has been sent and is under review. You will be informed as soon as possible about the opinion of your guardian.",
+    "understand_btn": "I Understand",
+    "title": "No results found",
+    "description": "The search result is not available, re-search again for something new and explore"
+  },
+  "privacy_policy": {
+    "title": "Privacy Policy",
+    "header_desc": "We are strongly committed to protecting your privacy and providing transparent information about how we collect, use, and share your personal information. Last updated: February 10th, 2025",
+    "last_updated": "Last updated: February 10th, 2025. We reserve the right to update this Privacy Policy at any time. We will notify you of any changes by posting the new Privacy Policy on this page.",
+    "sections": {
+      "intro": {
+        "title": "Introduction",
+        "p1": "Welcome to the <important>Clande</important> website (the \"legal frame\"). This Privacy Policy outlines the personal information practices...",
+        "p2": "This Privacy Policy describes the types of personal information we collect from you and how we use, share, and protect it. We are committed to protecting your privacy and being transparent about our data processing activities."
+      },
+      "collection": {
+        "title": "Data Collection",
+        "desc": "We collect information about you directly from you and automatically through your use of our Products, as well as from third parties.",
+        "direct_title": "Information we collect directly from you:",
+        "items": [
+          "Your name, email address, phone number, and other contact information",
+          "Account credentials, such as your username and password",
+          "Payment information when you make a purchase",
+          "Communications you send to us"
+        ],
+        "footer": "Types of information we use: names, contact info (such email, address, phone number), demographic details (location, interests, and preferences), technical data (browser type, IP address, device, cookie data), usage information, and files and content you provide to us. If we collect sensitive or special categories of data from you, we will always inform you and obtain your consent where required."
+      },
+      "usage": {
+        "title": "Use of Data",
+        "desc": "We use the data we collect about you for:",
+        "items": [
+          "Providing and personalizing our products and services to you, including any tailored features or content",
+          "Processing payments and completing your requested transactions",
+          "Sending you important information about the Products or service updates",
+          "Communicating with you about your account or responding to your inquiries",
+          "Marketing and promotional communications (with your consent where required)",
+          "Improving, customizing, and developing our Products",
+          "Conducting analytics and research about how you use the Products",
+          "Ensuring the safety, integrity, and security of our systems and our products"
+        ]
+      },
+      "cookies": {
+        "title": "Cookies and Tracking",
+        "desc": "We use cookies and similar tracking technologies to collect information about you for various purposes. These technologies help us to provide and improve our services, understand user behavior, and provide you with a more personalized experience.",
+        "essential_title": "Essential cookies:",
+        "essential_desc": "These cookies are required for you to access our website and features and use its functionalities. Essential cookies cannot be disabled or turned off, as the site is dependent upon them.",
+        "performance_title": "Performance cookies:",
+        "performance_desc": "These cookies collect information about how you use our website so we can improve it. For instance, performance cookies tell us which pages are most frequently visited, help us record difficulties you may have with the site, and show us whether our advertising is effective or not."
+      },
+      "third_party": {
+        "title": "Third party Services",
+        "desc": "We may use trusted third-party service providers to enhance your experience on our platform. These service providers may have access to your personal information only to perform their services on our behalf.",
+        "items": [
+          "Payment processors to facilitate secure payment transactions",
+          "Analytics providers to help us improve our services",
+          "Customer support platforms for efficient communication",
+          "Cloud hosting services for data storage and processing",
+          "Marketing platforms for sending newsletters and promotions (with your consent)"
+        ],
+        "footer": "We require such third parties with which we share your personal information to provide an equivalent level of protection of your personal information as we do."
+      },
+      "rights": {
+        "title": "Your Rights",
+        "desc": "You have the following rights regarding your personal information:",
+        "footer": "To exercise any of these rights, please contact us using the contact information provided in the Contact Us section below.",
+        "list": {
+          "access": {
+            "title": "Access",
+            "desc": "Request a copy of the personal information we hold about you."
+          },
+          "correction": {
+            "title": "Correction",
+            "desc": "Request that we correct any inaccurate or incomplete personal information."
+          },
+          "deletion": {
+            "title": "Deletion",
+            "desc": "Request that we delete your personal information, subject to certain exceptions."
+          },
+          "objection": {
+            "title": "Objection",
+            "desc": "Object to our processing of your personal information for certain purposes."
+          },
+          "portability": {
+            "title": "Data Portability",
+            "desc": "Request a copy of your personal information in a structured, commonly used, and machine-readable format."
+          }
+        }
+      },
+      "contact": {
+        "title": "Contact Us",
+        "desc": "If you have any questions or concerns about this Privacy policy or our privacy practices, please contact us at:",
+        "email_label": "Email:",
+        "phone_label": "Phone:",
+        "hours_label": "Business Hours:",
+        "hours_value": "Monday to Friday, 9:00 AM - 6:00 PM"
+      }
+    }
+  },
+  "sheikhs_page": {
+    "hero_title": "Islamic Sharia Consultation Sheikhs",
+    "hero_subtitle": "Choose from an elite group of sheikhs and sharia consultants specialized in family and marital affairs",
+    "features_badge": "WHY CHOOSE OUR SHEIKHS",
+    "features_title": "Excellence in Islamic Guidance",
+    "features_subtitle": "Experience the perfect blend of traditional Islamic scholarship and modern counseling expertise",
+    "buttons": {
+      "chat": "Chat",
+      "view": "View"
+    },
+    "unknown_alt": "Unknown Sheikh"
+  },
+  "sheikh_detail": {
+    "labels": {
+      "languages": "Languages",
+      "experience": "Experience",
+      "about": "About",
+      "expertise": "Areas of Expertise"
+    },
+    "chat": {
+      "status": {
+        "online": "Online",
+        "offline": "Offline",
+        "typing": "Typing..."
+      },
+      "date": {
+        "today": "Today",
+        "yesterday": "Yesterday"
+      },
+      "recording": {
+        "active": "Recording voice message",
+        "stop": "Stop Recording"
+      },
+      "input": {
+        "placeholder": "Type your message...",
+        "clear_all": "Clear all"
+      },
+      "message_types": {
+        "voice_user": "Your voice message",
+        "voice_sheikh": "Voice message",
+        "download": "Download"
+      }
+    }
+  },
+  "auth": {
+    "welcome_aboard": "Welcome Aboard!",
+    "login_success": "Login successful",
+    "login_failed": "Login failed. Please try again.",
+    "title": "Welcome Back",
+    "sub_title": "Sign in to your account",
+    "forgot_your_password": "Forgot your password?",
+    "sign_in": "Sign In",
+    "continue_with_email": "Or continue with email",
+    "continue_with_google": "Continue with Google",
+    "don't_have_account": "Don't have an account?",
+    "sign_up_now": "Sign up now",
+    "reset_password_title": "Reset Your Password",
+    "forgot_desc": "Enter your email address and we'll send you a verification code to reset your password and secure your account.",
+    "reset_code_sent": "Reset code sent to your email!",
+    "reset_code_failed": "Failed to send reset code. Please try again.",
+    "send_reset_code": "Send Reset Code",
+    "sending_code": "Sending Code...",
+    "back_to_sign_in": "Back to Sign In",
+    "verify_title": "Verify Your Account",
+    "verify_subtitle": "Enter the verification code sent to your email to secure your account and complete the registration process.",
+    "enter_verification_code": "Enter verification code",
+    "verification_code_sent": "We've sent a verification code to your email",
+    "email_verified_success": "Email verified successfully!",
+    "verification_failed": "Verification failed.",
+    "verify": "Verify",
+    "verifying": "Verifying...",
+    "resend_code_success": "New code sent to your email!",
+    "resend_code_failed": "Failed to resend code.",
+    "send_code_again": "Send code again",
+    "sending": "Sending...",
+    "parent_title": "Complete Your Parent Profile",
+    "parent_subtitle": "Please provide your information to complete the parent registration process and set up your family account.",
+    "parent_information": "Parent Information",
+    "parent_information_desc": "Please provide parent details",
+    "continue": "Continue",
+    "submitting": "Submitting...",
+    "or_continue_with": "Or continue with",
+    "reset_desc": "Create a new secure password for your account to regain access and protect your information.",
+    "create_new_password": "Create New Password",
+    "new_password_desc": "Please enter your new password below.",
+    "password_reset_success": "Password reset successfully!",
+    "password_reset_failed": "Failed to reset password.",
+    "reset_password": "Reset Password",
+    "resetting_password": "Resetting Password...",
+    "invalid_reset_token": "Invalid or missing reset token. Please request a new password reset link.",
+    "select_user_type": "Select user type",
+    "select_user_type_desc": "Please select the user type you want to complete the process correctly.",
+    "regular_user": "Regular user",
+    "regular_user_desc": "I'm registering for myself as a regular user",
+    "guardian_user": "Guardian",
+    "guardian_user_desc": "I'm registering as a guardian for someone else",
+    "register_title": "Join Our Community!",
+    "register_desc": "Create your account and start your journey with us.",
+    "register_create_account": "Create Account",
+    "register_subtitle": "Sign up for a new account",
+    "creating_account": "Creating Account...",
+    "already_have_account": "Already have an account?",
+    "register_success": "Registration successful! Please verify your email.",
+    "register_failed": "Registration failed. Please try again.",
+    "preview_alt": "Photo preview",
+    "change_photo": "Change photo",
+    "click_to_upload": "Click to upload",
+    "face_verification": "Face Verification",
+    "upload_photos_instruction": "Upload clear photos from different angles",
+    "right_side_photo": "Right side photo",
+    "right_side_description": "Clear view of right side",
+    "left_side_photo": "Left side photo",
+    "left_side_description": "Clear view of left side",
+    "selfie_photo": "Selfie photo",
+    "selfie_description": "Front facing selfie",
+    "confirm": "Confirm",
+    "ensure_clear_photos": "Ensure photos are clear and well-lit",
+    "verify_reset_code_desc": "Enter the verification code sent to your email to reset your password and secure your account. This helps us ensure the security of your personal information.",
+    "success_message": "Code verified successfully!",
+    "error_message": "Invalid verification code.",
+    "resend_success": "New code sent to your email!",
+    "resend_error": "Failed to resend code.",
+    "email_required": "Email is required. Please go back and try again.",
+    "sent_code_email": "We sent a 6-digit code to your email",
+    "verification_code_label": "Verification Code",
+    "verify_code": "Verify Code",
+    "did_not_receive_code": "Didn't receive the code?",
+    "resend_code": "Resend Code",
+    "back_to_forgot_password": "Back to Forgot Password"
+  },
+  "validation": {
+    "email_invalid": "Please enter a valid email address",
+    "pass_req": "Password is required",
+    "email_required": "Email is required",
+    "otp_incomplete": "Please enter the complete 6-digit code",
+    "first_name_required": "First name is required",
+    "first_name_too_long": "First name is too long",
+    "last_name_required": "Last name is required",
+    "last_name_too_long": "Last name is too long",
+    "kinship_required": "Type of kinship is required",
+    "invalid_email": "Invalid email address",
+    "phone_required": "Phone number is required",
+    "phone_invalid": "Please enter a valid phone number",
+    "phone_min_10_digits": "Phone number must be at least 10 digits",
+    "reset_token_missing": "Reset token is missing. Please request a new reset link.",
+    "password_min_length": "Password must be at least 8 characters",
+    "passwords_not_match": "Passwords don't match",
+    "gender_required": "Gender is required",
+    "date_of_birth_required": "Date of birth is required",
+    "country_required": "Country is required",
+    "city_required": "City is required",
+    "password_confirmation_required": "Please confirm your password",
+    "reset_code_length": "Reset code must be exactly 6 characters",
+    "message_min_10_chars": "Message must be at least 10 characters",
+    "message_too_long": "Message is too long"
+  },
+  "fields": {
+    "email": "Email",
+    "email_placeholder": "your@email.com",
+    "email_address": "Email Address",
+    "password": "Password",
+    "password_placeholder": "Enter your password",
+    "first_name": "First Name",
+    "first_name_placeholder": "John",
+    "last_name": "Last Name",
+    "last_name_placeholder": "Doe",
+    "kinship": "Type of kinship",
+    "kinship_placeholder": "Select kinship type",
+    "phone_number": "Phone Number",
+    "new_password": "New Password",
+    "new_password_placeholder": "Enter your new password",
+    "confirm_password": "Confirm Password",
+    "confirm_password_placeholder": "Confirm your new password",
+    "gender": "Gender",
+    "gender_placeholder": "Select gender",
+    "country": "Country",
+    "country_placeholder": "Select your country",
+    "city": "City",
+    "city_placeholder": "Select your city",
+    "date_of_birth": "Date of Birth",
+    "date_of_birth_placeholder": "Select your birth date",
+    "phone_placeholder": "Enter your phone number",
+    "confirm_password_again_placeholder": "Enter your password again",
+    "message": "Message",
+    "message_placeholder": "Type here your message"
+  },
+  "options": {
+    "mother": "Mother",
+    "father": "Father",
+    "grandmother": "Grandmother",
+    "grandfather": "Grandfather",
+    "aunt": "Aunt",
+    "uncle": "Uncle",
+    "guardian": "Guardian",
+    "other": "Other",
+    "male": "Male",
+    "female": "Female"
   }
+}

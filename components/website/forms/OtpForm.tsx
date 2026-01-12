@@ -3,23 +3,26 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import React, { useState, useEffect } from "react";
 import SubmitButton from "../../Buttons/SubmitButton";
 import { useSearchParams } from "next/navigation";
 import usePostData from "@/hooks/usePostData";
+import { useTranslations } from "next-intl";
 
 const OtpForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
 
+  const t = useTranslations("auth");
+  const vt = useTranslations("validation");
+
   const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
   const [countdown, setCountdown] = useState(20);
   const [canResend, setCanResend] = useState(false);
 
-  // OTP Verification Hook
   const {
     postData: verifyOtp,
     loading: isVerifying,
@@ -34,17 +37,15 @@ const OtpForm = () => {
     },
   });
 
-  // Resend OTP Hook
   const { postData: resendOtp, loading: isResending } = usePostData(
     "/api/website/resend-otp",
     {
       showNotifications: true,
-      successMessage: "New code sent to your email!",
-      errorMessage: "Failed to resend code.",
+      successMessage: t("resend_code_success"),
+      errorMessage: t("resend_code_failed"),
     }
   );
 
-  // Countdown timer effect
   useEffect(() => {
     if (countdown > 0) {
       const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
@@ -59,12 +60,12 @@ const OtpForm = () => {
     setError("");
 
     if (!email) {
-      setError("Email is required");
+      setError(vt("email_required"));
       return;
     }
 
     if (otp.length !== 6) {
-      setError("Please enter the complete 6-digit code");
+      setError(vt("otp_incomplete"));
       return;
     }
 
@@ -91,10 +92,10 @@ const OtpForm = () => {
       <div className="w-full p-8 rounded-xl">
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-white mb-2">
-            Enter verification code
+            {t("enter_verification_code")}
           </h1>
           <p className="text-gray-400 text-sm">
-            We've sent a verification code to your email{" "}
+            {t("verification_code_sent")}{" "}
             <span className="font-medium text-primary-color1">{email}</span>
           </p>
         </div>
@@ -120,10 +121,10 @@ const OtpForm = () => {
           </div>
           <SubmitButton
             isLoading={isVerifying}
-            loadingText="Verifying..."
+            loadingText={t("verifying")}
             className="w-full"
           >
-            Verify
+            {t("verify")}
           </SubmitButton>
         </form>
 
@@ -137,7 +138,7 @@ const OtpForm = () => {
                 : "text-gray-400"
             } transition-colors`}
           >
-            {isResending ? "Sending..." : "Send code again"}{" "}
+            {isResending ? t("sending") : t("send_code_again")}{" "}
             {!canResend && !isResending && (
               <span className="text-primary-color1 font-bold">
                 {String(Math.floor(countdown / 60)).padStart(2, "0")}:

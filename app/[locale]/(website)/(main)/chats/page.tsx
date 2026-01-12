@@ -3,8 +3,11 @@ import React, { useState } from "react";
 import { Search, Shield, Heart, Users } from "lucide-react";
 import Image from "next/image";
 import { images } from "@/constants/images";
+import { useTranslations } from "next-intl";
 
 const Page = () => {
+  const t = useTranslations("chats");
+
   const [conversations] = useState([]);
 
   return (
@@ -14,11 +17,9 @@ const Page = () => {
         <div className="flex items-center gap-3">
           <Image src={images.logo2} height={60} width={60} alt="logo" />
           <div>
-            <h2 className="font-semibold text-gray-900">Litaskunu</h2>
+            <h2 className="font-semibold text-gray-900">{t('header.title')}</h2>
             <p className="text-xs text-primary-color1">
-              {conversations.length === 0
-                ? "Start your journey to find a match"
-                : "Select a conversation or find new connections"}
+              {conversations.length === 0 ? t('header.subtitleStart') : t('header.subtitleContinue')}
             </p>
           </div>
         </div>
@@ -39,26 +40,21 @@ const Page = () => {
             </div>
 
             <h1 className="text-xl font-bold text-gray-900">
-              {conversations.length === 0
-                ? "Start Your Journey"
-                : "Continue Your Journey"}
+              {conversations.length === 0 ? t('main.titleStart') : t('main.titleContinue')}
             </h1>
 
             <p className="text-gray-600 text-sm">
-              {conversations.length === 0
-                ? "Let's find someone who shares your values and vision for a blessed marriage. Search for your perfect match to begin meaningful conversations."
-                : "Choose from your existing conversations in the sidebar or explore new potential matches to expand your connections."}
+              {conversations.length === 0 ? t('main.descStart') : t('main.descContinue')}
             </p>
           </div>
 
           {/* Quranic Verse */}
           <div className="bg-white rounded-lg p-3 border border-primary-color1 border-opacity-20">
             <p className="text-xs text-primary-color1 italic">
-              "And among His signs is that He created for you mates from among
-              yourselves..."
+              {t('quran.verse')}
             </p>
             <p className="text-xs text-primary-color1 text-opacity-70 mt-1">
-              Quran 30:21
+              {t('quran.reference')}
             </p>
           </div>
 
@@ -66,9 +62,7 @@ const Page = () => {
           <button className="w-full px-4 py-3 bg-primary-color1 text-white rounded-lg font-semibold shadow-md hover:shadow-lg transition-all flex items-center justify-center space-x-2 hover:scale-105">
             <Search className="w-4 h-4" />
             <span>
-              {conversations.length === 0
-                ? "Find Your Match"
-                : "Find New Matches"}
+              {conversations.length === 0 ? t('actions.findFirst') : t('actions.findNew')}
             </span>
           </button>
 
@@ -80,12 +74,10 @@ const Page = () => {
               </div>
               <div className="text-left">
                 <h3 className="font-medium text-gray-900 text-sm">
-                  Safe & Respectful Environment
+                  {t('safety.title')}
                 </h3>
                 <p className="text-xs text-gray-600">
-                  {conversations.length === 0
-                    ? "Start your search in a protected space designed for meaningful Islamic relationships."
-                    : "All your conversations are monitored to ensure respectful and halal communication."}
+                  {conversations.length === 0 ? t('safety.descStart') : t('safety.descContinue')}
                 </p>
               </div>
             </div>
@@ -94,31 +86,31 @@ const Page = () => {
           {/* Additional Guidance */}
           <div className=" bg-opacity-5 -mt-12 rounded-lg p-3">
             <p className="text-xs font-medium text-primary-color1 mb-2">
-              {conversations.length === 0 ? "Getting started:" : "Next steps:"}
+              {conversations.length === 0 ? t('guidance.labelStart') : t('guidance.labelContinue')}
             </p>
             <div className="flex flex-wrap gap-1 justify-center">
               {conversations.length === 0 ? (
                 <>
                   <span className="px-2 py-1 bg-white text-primary-color1 rounded text-xs font-medium">
-                    Set your preferences
+                    {t('guidance.steps.preferences')}
                   </span>
                   <span className="px-2 py-1 bg-white text-primary-color1 rounded text-xs font-medium">
-                    Browse profiles
+                    {t('guidance.steps.browse')}
                   </span>
                   <span className="px-2 py-1 bg-white text-primary-color1 rounded text-xs font-medium">
-                    Start chatting
+                    {t('guidance.steps.startChat')}
                   </span>
                 </>
               ) : (
                 <>
                   <span className="px-2 py-1 bg-white text-primary-color1 rounded text-xs font-medium">
-                    Continue conversations
+                    {t('guidance.steps.continueChat')}
                   </span>
                   <span className="px-2 py-1 bg-white text-primary-color1 rounded text-xs font-medium">
-                    Explore new matches
+                    {t('guidance.steps.explore')}
                   </span>
                   <span className="px-2 py-1 bg-white text-primary-color1 rounded text-xs font-medium">
-                    Involve family
+                    {t('guidance.steps.family')}
                   </span>
                 </>
               )}

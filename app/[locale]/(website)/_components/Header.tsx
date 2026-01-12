@@ -2,10 +2,12 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { images } from "@/constants/images";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export default function Header() {
+  const t = useTranslations("homePage");
   return (
     <motion.header
       className="dark:bg-black bg-white fixed -top-6 flex w-full shadow-sm shadow-primary-light/30 dark:shadow-gray-800/50 md:-left-3.5 z-50"
@@ -35,10 +37,10 @@ export default function Header() {
           whileTap={{ scale: 0.95 }}
         >
           <Link
-            href="/en/sign-in"
+            href="/sign-in"
             className="bg-[#A1AA8A] dark:bg-[#8B9475] text-white px-4 sm:px-6 py-2 rounded-full font-semibold hover:bg-[#8f9978] dark:hover:bg-[#7A8366] transition-all duration-300 shadow-lg hover:shadow-xl dark:shadow-gray-800/50 text-sm sm:text-base"
           >
-            Login
+            {t("login")}
           </Link>
         </motion.div>
       </div>

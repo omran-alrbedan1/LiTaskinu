@@ -12,7 +12,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Pause, Play, MoreVertical, Edit, Trash2, Eye, Loader2 } from "lucide-react";
 import { Image } from "antd";
-import Link from "next/link";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,6 +19,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import CustomPremiumIcon from "@/components/shared/PremiumIcon";
+import { Link } from "@/i18n/navigation";
 
 interface AdsCardProps {
   ad: Ad;

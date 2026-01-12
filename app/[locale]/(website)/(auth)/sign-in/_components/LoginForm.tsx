@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
-import { useRouter } from "next/navigation";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import { ICONS } from "@/constants/icons";
 import CustomFormField, {
@@ -13,16 +12,21 @@ import CustomFormField, {
 import usePostData from "@/hooks/usePostData";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
-
-// Simple validation schema for user login
-const UserLoginValidation = z.object({
-  email: z.string().email("Please enter a valid email address"),
-  password: z.string().min(1, "Password is required"),
-});
+import { useTranslations } from "next-intl";
+import { Link, useRouter } from "@/i18n/navigation";
 
 export const LoginForm = () => {
+  const t = useTranslations("auth");
+  const vt = useTranslations("validation");
+  const ft = useTranslations("fields");
+
   const router = useRouter();
+
+  // Simple validation schema for user login
+  const UserLoginValidation = z.object({
+    email: z.string().email(vt("email_invalid")),
+    password: z.string().min(1, vt("pass_req")),
+  });
 
   const {
     postData,
@@ -31,8 +35,8 @@ export const LoginForm = () => {
     success,
   } = usePostData("/api/website/signin", {
     showNotifications: true,
-    successMessage: "Login successful",
-    errorMessage: "Login failed. Please try again.",
+    successMessage: t("login_success"),
+    errorMessage: t("login_failed"),
     onSuccess: (data) => {
       router.push("./home");
       router.refresh();
@@ -70,8 +74,8 @@ export const LoginForm = () => {
   return (
     <div className="w-full dark p-8 bg-transparent rounded-lg  ">
       <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-white">Welcome Back</h2>
-        <p className="text-gray-300 mt-2">Sign in to your account</p>
+        <h2 className="text-2xl font-bold text-white">{t("title")}</h2>
+        <p className="text-gray-300 mt-2">{t("sub_title")}</p>
       </div>
 
       {/* Login Form */}
@@ -85,7 +89,7 @@ export const LoginForm = () => {
             fieldType={FormFieldType.INPUT}
             control={form.control}
             name="email"
-            label="Email Address"
+            label={ft("email_address")}
             placeholder="user@example.com"
             iconSrc={ICONS.email}
             iconAlt="email"
@@ -97,8 +101,8 @@ export const LoginForm = () => {
             fieldType={FormFieldType.PASSWORD}
             control={form.control}
             name="password"
-            label="Password"
-            placeholder="Enter your password"
+            label={ft("password")}
+            placeholder={ft("password_placeholder")}
             iconSrc={ICONS.lock}
             iconAlt="password"
             inputClassName="bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:border-blue-500"
@@ -110,7 +114,7 @@ export const LoginForm = () => {
               href="/forgot-password"
               className="text-sm text-primary-color1 hover:underline"
             >
-              Forgot your password?
+              {t("forgot_your_password")}
             </Link>
           </div>
 
@@ -120,7 +124,7 @@ export const LoginForm = () => {
             className="w-full !p-3"
             loadingText="Signing In..."
           >
-            Sign In
+            {t("sign_in")}
           </SubmitButton>
         </form>
       </Form>
@@ -131,7 +135,7 @@ export const LoginForm = () => {
         </div>
         <div className="relative flex justify-center text-xs uppercase">
           <span className="bg-gray-900 px-2 text-gray-400">
-            Or continue with email
+            {t("continue_with_email")}
           </span>
         </div>
       </div>
@@ -148,18 +152,18 @@ export const LoginForm = () => {
           alt="Google"
           className="w-5 h-5"
         />
-        <span>Continue with Google</span>
+        <span>{t("continue_with_google")}</span>
       </Button>
 
       {/* Sign Up Link */}
       <div className="text-center mt-6 pt-6 border-t border-gray-800">
         <p className="text-gray-400">
-          Don't have an account?{" "}
+          {t("don't_have_account")}{" "}
           <Link
             href="./sign-up"
             className="text-primary-color1 font-medium hover:underline"
           >
-            Sign up now
+            {t("sign_up_now")}
           </Link>
         </p>
       </div>

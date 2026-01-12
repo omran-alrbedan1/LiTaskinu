@@ -1,20 +1,29 @@
+import { useTranslations } from "next-intl";
 import { ICONS } from "./icons";
 
 export const CLIENT_ID =
   "507971599114-9jr4uguscf3eku4nchkdk9n90u4u4ldu.apps.googleusercontent.com";
 
-export const genderOptions = [
-  {
-    value: "male",
-    label: "Male",
-    icon: ICONS.male,
-  },
-  {
-    value: "female",
-    label: "Female",
-    icon: ICONS.female,
-  },
-];
+export const useGenderOptions = () => {
+  const t = useTranslations("options");
+  return [
+    {
+      value: "male",
+      label: t("male"),
+      icon: ICONS.male,
+    },
+    {
+      value: "female",
+      label: t("female"),
+      icon: ICONS.female,
+    },
+    {
+      value: "other",
+      label: t("other"),
+      icon: ICONS.user,
+    },
+  ];
+}
 
 export const countryOptions = [
   { value: "us", label: "United States", code: "US" },
@@ -39,23 +48,27 @@ export const languageOptions = [
 export const LANGUAGE_OPTIONS = [
   { value: "en", label: "English", code: "US", native: "English" },
   { value: "ar", label: "العربية", code: "JO", native: "العربية" },
-  { value: "fr", label: "Français", code: "FR", native: "Français" },
-  { value: "es", label: "Español", code: "ES", native: "Español" },
-  { value: "de", label: "Deutsch", code: "DE", native: "Deutsch" },
-  { value: "zh", label: "中文", code: "CN", native: "中文" },
-  { value: "ja", label: "日本語", code: "JP", native: "日本語" },
+  { value: "tr", label: "Turkish", code: "TR", native: "Türkçe" },
+  { value: "es", label: "Spanish", code: "ES", native: "Español" },
+  { value: "fr", label: "French", code: "FR", native: "Français" },
+  { value: "zh", label: "Chinese", code: "CN", native: "中文" },
+  { value: "fa", label: "Persian", code: "IR", native: "فارسی" },
+  { value: "ru", label: "Russian", code: "RU", native: "Русский" },
 ] as const;
 
-export const kinshipOptions = [
-  { value: "mother", label: "Mother" },
-  { value: "father", label: "Father" },
-  { value: "grandmother", label: "Grandmother" },
-  { value: "grandfather", label: "Grandfather" },
-  { value: "aunt", label: "Aunt" },
-  { value: "uncle", label: "Uncle" },
-  { value: "guardian", label: "Guardian" },
-  { value: "other", label: "Other" },
-];
+export const useKinshipOptions = () => {
+  const t = useTranslations("options");
+  return [
+    { value: "mother", label: t("mother") },
+    { value: "father", label: t("father") },
+    { value: "grandmother", label: t("grandmother") },
+    { value: "grandfather", label: t("grandfather") },
+    { value: "aunt", label: t("aunt") },
+    { value: "uncle", label: t("uncle") },
+    { value: "guardian", label: t("guardian") },
+    { value: "other", label: t("other") },
+  ];
+}
 
 export const religionOptions = [
   { value: "christianity", label: "Christianity" },

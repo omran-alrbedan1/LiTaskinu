@@ -2,8 +2,8 @@
 
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { images } from "@/constants/images";
+import { Link } from "@/i18n/navigation";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -67,7 +67,7 @@ export default function Hero() {
         >
           <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}>
             <Link
-              href="/en/sign-up"
+              href="/sign-up"
               className="bg-[#A1AA8A] dark:bg-[#8B9475] hover:bg-[#8f9978] dark:hover:bg-[#7A8366] transition-all duration-300 px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl dark:shadow-gray-800/50"
             >
               Get Started

@@ -12,6 +12,7 @@ import {
 import { MOCK_SHEIKHS } from '@/constants/temporary';
 import Link from 'next/link';
 import FloatingChatButton from '@/components/website/shared/FloatingChatButton';
+import { getTranslations } from 'next-intl/server';
 
 interface SheikhDetailPageProps {
   params: {
@@ -20,7 +21,8 @@ interface SheikhDetailPageProps {
   };
 }
 
-export default function SheikhDetailPage({ params }: SheikhDetailPageProps) {
+export default async function SheikhDetailPage({ params }: SheikhDetailPageProps) {
+  const t = await getTranslations('sheikh_detail');
   const { id } = params;
 
   const sheikh = MOCK_SHEIKHS.find(s => s.id.toString() === id);
@@ -93,7 +95,7 @@ export default function SheikhDetailPage({ params }: SheikhDetailPageProps) {
                         <Globe className="h-4 w-4 text-primary-color1" />
                       </div>
                       <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                        Languages
+                        {t('labels.languages')}
                       </span>
                     </div>
                     <div className="flex flex-wrap gap-2 pl-12">
@@ -132,7 +134,7 @@ export default function SheikhDetailPage({ params }: SheikhDetailPageProps) {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                      Experience
+                      {t('labels.experience')}
                     </h3>
                     <div className="h-1 w-16 bg-gradient-to-r from-primary-color1 to-primary-color1/40 rounded-full mt-1"></div>
                   </div>
@@ -150,7 +152,7 @@ export default function SheikhDetailPage({ params }: SheikhDetailPageProps) {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                      About
+                      {t('labels.about')}
                     </h3>
                     <div className="h-1 w-16 bg-gradient-to-r from-primary-color1 to-primary-color1/40 rounded-full mt-1"></div>
                   </div>
@@ -168,7 +170,7 @@ export default function SheikhDetailPage({ params }: SheikhDetailPageProps) {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                      Areas of Expertise
+                      {t('labels.expertise')}
                     </h3>
                     <div className="h-1 w-16 bg-gradient-to-r from-primary-color1 to-primary-color1/40 rounded-full mt-1"></div>
                   </div>

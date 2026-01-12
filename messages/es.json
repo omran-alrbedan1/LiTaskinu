@@ -1,0 +1,615 @@
+{
+  "header": {
+    "search_here": "Buscar aquí",
+    "home": "Inicio",
+    "chats": "Chats",
+    "about": "Sobre nosotros",
+    "contact": "Contacto",
+    "sheikhs": "Nuestros Jeques",
+    "mental_health": "Salud Mental"
+  },
+  "footer": {
+    "brand": {
+      "title": "Litaskunu",
+      "subtitle": "Plataforma de Matrimonio Islámico",
+      "description": "Haciendo accesibles los matrimonios halal en todo el mundo a través de la tecnología moderna, respetando las tradiciones islámicas."
+    },
+    "contact": {
+      "title": "Contáctenos",
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "global": "Global",
+      "global_desc": "Disponible en todo el mundo"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Términos y Condiciones",
+      "privacy": "Política de Privacidad"
+    },
+    "mission": {
+      "statement": "Es una plataforma increíblemente asequible para quienes buscan relaciones significativas a través de valores tradicionales, respeto y honestidad. Con autenticidad cultural en su núcleo, Litaskunu conecta a millones de usuarios listos para compromisos serios.",
+      "established": "Construyendo relaciones islámicas significativas desde 2025"
+    },
+    "copyright": {
+      "rights": "Todos los derechos reservados.",
+      "made_for": "para la Ummah Musulmana",
+      "made_with": "Hecho con"
+    }
+  },
+  "homePage": {
+    "login": "Iniciar sesión",
+    "faq_contact": "¿Aún tienes preguntas? ¡Estamos aquí para ayudarte!",
+    "contact_support": "Contactar a Soporte"
+  },
+  "chats": {
+    "header": {
+      "title": "Litaskunu",
+      "subtitleStart": "Comienza tu viaje para encontrar pareja",
+      "subtitleContinue": "Selecciona una conversación o busca nuevas conexiones"
+    },
+    "main": {
+      "titleStart": "Comienza tu viaje",
+      "titleContinue": "Continúa tu viaje",
+      "descStart": "Encontremos a alguien que comparta tus valores y visión para un matrimonio bendecido. Busca tu pareja ideal para comenzar conversaciones significativas.",
+      "descContinue": "Elige entre tus conversaciones existentes en la barra lateral o explora nuevas parejas potenciales para ampliar tus conexiones."
+    },
+    "quran": {
+      "verse": "\"Y entre Sus signos está haber creado para vosotros cónyuges de entre vosotros mismos para que encontréis sosiego en ellos...\"",
+      "reference": "Corán 30:21"
+    },
+    "actions": {
+      "findFirst": "Encuentra tu pareja",
+      "findNew": "Buscar nuevas parejas"
+    },
+    "safety": {
+      "title": "Ambiente Seguro y Respetuoso",
+      "descStart": "Comienza tu búsqueda en un espacio protegido diseñado para relaciones islámicas significativas.",
+      "descContinue": "Todas tus conversaciones son supervisadas para asegurar una comunicación respetuosa y halal."
+    },
+    "guidance": {
+      "labelStart": "Para empezar:",
+      "labelContinue": "Próximos pasos:",
+      "steps": {
+        "preferences": "Establece tus preferencias",
+        "browse": "Explorar perfiles",
+        "startChat": "Empezar a chatear",
+        "continueChat": "Continuar conversaciones",
+        "explore": "Explorar nuevas parejas",
+        "family": "Involucrar a la familia"
+      }
+    },
+    "search_placeholder": "Buscar aquí...",
+    "conversations": "Conversaciones",
+    "status": {
+      "online": "En línea",
+      "offline": "Desconectado",
+      "today": "Hoy"
+    },
+    "input": {
+      "placeholder": "Escribe tu mensaje"
+    },
+    "aria": {
+      "sentImage": "Imagen enviada",
+      "preview": "Vista previa"
+    }
+  },
+  "about": {
+    "header": {
+      "platform_name": "Plataforma de Parejas Halal",
+      "about_title": "Sobre LITASKUNU",
+      "about_description": "Ayudamos a los musulmanes a encontrar su compañero de vida a través de un enfoque halal, digno y moderno. Durante años, hemos unido a personas compatibles que buscan matrimonios islámicos significativos."
+    },
+    "mission": {
+      "purpose": "Nuestro Propósito",
+      "title": "Nuestra Misión",
+      "description": "Facilitar conexiones significativas entre musulmanes que buscan el matrimonio, manteniendo los valores y principios islámicos. Creemos que encontrar un cónyuge virtuoso es la mitad de la fe, y nos honra ayudarte a completar tu deen.",
+      "family_image_alt": "Familia musulmana pasando tiempo junta"
+    },
+    "checklist": {
+      "strict_adherence": "Adhesión estricta a los principios islámicos.",
+      "privacy_dignity": "Privacidad y dignidad mantenidas en todo momento.",
+      "family_involvement": "Participación familiar fomentada y apoyada."
+    },
+    "services": {
+      "section_title": "Lo que ofrecemos",
+      "title": "Nuestros Servicios",
+      "description": "Apoyo integral en tu viaje para encontrar un cónyuge virtuoso, guiado por principios islámicos.",
+      "unique_experience": {
+        "title": "Experiencia de usuario única",
+        "description": "Una plataforma diseñada con autenticidad y sinceridad. Mantenemos estándares estrictos para proteger a nuestra comunidad."
+      },
+      "data_integrity": {
+        "title": "Integridad de datos",
+        "description": "Tu información personal está protegida con los más altos estándares de seguridad y se facilita la intervención del tutor (Wali)."
+      },
+      "islamic_vibes": {
+        "title": "Ambiente Islámico",
+        "description": "Enfoque respetuoso y ético para ayudar a navegar el proceso matrimonial según la Sharia."
+      }
+    },
+    "impact": {
+      "section_title": "Nuestro Impacto",
+      "title": "Confiados por la Comunidad",
+      "description": "Nuestra plataforma se basa en la confianza, dedicación y el compromiso de ayudar a los musulmanes a encontrar compañeros de vida compatibles.",
+      "wedding_image_alt": "Anillos de boda simbolizando uniones exitosas",
+      "success_stories_title": "Historias de Éxito",
+      "success_stories_description": "Alhamdulillah, hemos ayudado a miles de musulmanes a encontrar su pareja ideal a través de nuestra plataforma digna y halal."
+    },
+    "stats": {
+      "successful_matches": "Uniones Exitosas",
+      "countries_served": "Países Atendidos",
+      "success_rate": "Tasa de Éxito",
+      "support_available": "Soporte Disponible"
+    },
+    "cta": {
+      "title": "¿Listo para comenzar tu viaje?",
+      "description": "Da el primer paso para completar la mitad de tu deen. Únete hoy a nuestra confiable plataforma matrimonial islámica.",
+      "create_profile": "Crea tu perfil",
+      "learn_more": "Saber más"
+    }
+  },
+  "contact": {
+    "title": "Contáctenos",
+    "contactInfo": "Nuestra información de contacto:",
+    "followUs": "Síguenos en:",
+    "success_msg": "¡Mensaje enviado con éxito!",
+    "error_msg": "Error al enviar el mensaje. Inténtalo de nuevo.",
+    "send_message": "Enviar Mensaje",
+    "sending": "Enviando..."
+  },
+  "home": {
+    "error_loading": "Error al cargar perfiles. Por favor, inténtalo de nuevo.",
+    "retry": "Reintentar",
+    "empty_title": "No se encontraron perfiles",
+    "empty_description": "Intenta ajustar tu búsqueda o filtros para encontrar más resultados",
+    "reset_filters": "Restablecer Filtros",
+    "unknown_user": "Usuario Desconocido",
+    "unknown": "Desconocido",
+    "city_id": "ID de Ciudad",
+    "filters": {
+      "looking_for": "Buscando",
+      "select_gender": "Seleccionar género",
+      "female": "Mujer",
+      "male": "Hombre",
+      "both": "Ambos",
+      "age_from": "Edad desde",
+      "age_to": "Edad hasta",
+      "country": "País",
+      "select_country": "Seleccionar país",
+      "city": "Ciudad",
+      "select_city": "Seleccionar ciudad",
+      "reset_filters": "Restablecer Filtros",
+      "countries": {
+        "jordan": "Jordania",
+        "usa": "EE.UU.",
+        "uk": "Reino Unido",
+        "canada": "Canadá",
+        "uae": "EAU"
+      },
+      "cities": {
+        "amman": "Amán",
+        "irbid": "Irbid",
+        "zarqa": "Zarqa",
+        "aqaba": "Aqaba",
+        "madaba": "Madaba"
+      }
+    },
+    "profile_card": {
+      "occupation": "Ocupación",
+      "location": "Ubicación",
+      "available_time": "Tiempo Disponible",
+      "message": "Mensaje",
+      "male": "Hombre",
+      "female": "Mujer",
+      "age": "{age} años",
+      "profile_image_alt": "Perfil de {name}"
+    }
+  },
+  "mental_health": {
+    "hero": {
+      "background_alt": "Fondo de salud mental",
+      "title_start": "Encuentra tu",
+      "title_highlight": "Especialista",
+      "title_end": "en Salud Mental",
+      "subtitle": "Conéctate con terapeutas y psicólogos licenciados para apoyo profesional y confidencial."
+    },
+    "features": {
+      "badge": "POR QUÉ ELEGIR A NUESTROS DOCTORES",
+      "title": "Apoyo Profesional en Salud Mental",
+      "subtitle": "Experimenta terapia confidencial basada en evidencia con profesionales licenciados."
+    },
+    "chat": "Chat",
+    "view": "Ver"
+  },
+  "psychiatrist_detail": {
+    "languages": "Idiomas",
+    "experience": {
+      "title": "Experiencia Profesional"
+    },
+    "background": {
+      "title": "Antecedentes Profesionales"
+    },
+    "specializations": {
+      "title": "Áreas de Especialización"
+    },
+    "chat": {
+      "status": {
+        "online": "En línea",
+        "offline": "Desconectado",
+        "typing": "Escribiendo..."
+      },
+      "date": {
+        "today": "Hoy",
+        "yesterday": "Ayer"
+      },
+      "messageTypes": {
+        "userVoice": "Tu mensaje de voz",
+        "doctorVoice": "Mensaje de voz",
+        "fileDownload": "Descargar",
+        "clearAll": "Borrar todo"
+      },
+      "input": {
+        "placeholder": "Escribe tu mensaje...",
+        "recording": "Grabando mensaje de voz",
+        "stopRecording": "Detener Grabación"
+      }
+    }
+  },
+  "persons": {
+    "sidebar_title": "Filtros",
+    "marital_status": "Estado Civil",
+    "religion": "Religión",
+    "job_title": "Título del puesto",
+    "job_placeholder": "Ingresa el puesto",
+    "place": "Lugar",
+    "age": "Edad",
+    "occupation": "Ocupación",
+    "education": "Educación",
+    "weight": "Peso",
+    "height": "Altura",
+    "continue_btn": "Continuar",
+    "reset_btn": "restablecer filtro",
+    "search_placeholder": "Buscar ahora...",
+    "results_title": "Resultados de búsqueda ({count})",
+    "recent_search": "Búsqueda reciente",
+    "select_opt": "Seleccionar",
+    "options": {
+      "single": "Soltero/a",
+      "married": "Casado/a",
+      "divorced": "Divorciado/a",
+      "widowed": "Viudo/a",
+      "christianity": "Cristianismo",
+      "islam": "Islam",
+      "hinduism": "Hinduismo",
+      "buddhism": "Budismo",
+      "male": "Hombre",
+      "female": "Mujer",
+      "other": "Otro",
+      "urban": "Urbano",
+      "suburban": "Suburbano",
+      "rural": "Rural",
+      "high_school": "Escuela Secundaria",
+      "bachelors": "Licenciatura",
+      "masters": "Maestría",
+      "phd": "Doctorado",
+      "employed": "Empleado",
+      "self_employed": "Autónomo",
+      "unemployed": "Desempleado",
+      "student": "Estudiante"
+    }
+  },
+  "person_detail": {
+    "photos_title": "Fotos",
+    "send_interest": "Enviar Interés",
+    "block_user": "Bloquear Usuario",
+    "info_title": "Información:",
+    "introduction": "Introducción",
+    "personal_details": "Detalles Personales",
+    "occupation": "Ocupación",
+    "job_title": "Título del Puesto",
+    "weight": "Peso",
+    "height": "Altura",
+    "age": "Edad",
+    "place": "Lugar",
+    "religion": "Religión",
+    "marital_status": "Estado Civil",
+    "chat_with": "Chatear con {name}",
+    "education": "Educación",
+    "success_title": "¡Solicitud enviada con éxito!",
+    "request_message": "Tu solicitud de chat a {name} ha sido enviada y está bajo revisión. Se te informará lo antes posible sobre la opinión de tu tutor.",
+    "understand_btn": "Entiendo",
+    "title": "No se encontraron resultados",
+    "description": "El resultado de la búsqueda no está disponible, busca de nuevo para explorar algo nuevo"
+  },
+  "privacy_policy": {
+    "title": "Política de Privacidad",
+    "header_desc": "Estamos comprometidos con la protección de tu privacidad y con proporcionar información transparente sobre cómo recopilamos y usamos tus datos. Última actualización: 10 de febrero de 2025",
+    "last_updated": "Última actualización: 10 de febrero de 2025. Nos reservamos el derecho de actualizar esta política en cualquier momento.",
+    "sections": {
+      "intro": {
+        "title": "Introducción",
+        "p1": "Bienvenido al sitio web de <important>Clande</important>. Esta Política de Privacidad describe nuestras prácticas de información personal...",
+        "p2": "Nos comprometemos a proteger tu privacidad y a ser transparentes sobre nuestras actividades de procesamiento de datos."
+      },
+      "collection": {
+        "title": "Recopilación de Datos",
+        "desc": "Recopilamos información sobre ti directamente de ti, automáticamente a través del uso de nuestros Productos y de terceros.",
+        "direct_title": "Información que recopilamos directamente de ti:",
+        "items": [
+          "Nombre, correo electrónico, número de teléfono y otra información de contacto",
+          "Credenciales de cuenta, como nombre de usuario y contraseña",
+          "Información de pago al realizar una compra",
+          "Comunicaciones que nos envías"
+        ],
+        "footer": "Tipos de información que usamos: nombres, datos de contacto, detalles demográficos, datos técnicos y contenido que nos proporcionas. Si recopilamos datos sensibles, te informaremos y obtendremos tu consentimiento."
+      },
+      "usage": {
+        "title": "Uso de los Datos",
+        "desc": "Usamos tus datos para:",
+        "items": [
+          "Personalizar nuestros servicios y contenido para ti",
+          "Procesar pagos y completar transacciones",
+          "Enviar actualizaciones importantes del servicio",
+          "Responder a tus consultas",
+          "Comunicaciones de marketing (con tu consentimiento)",
+          "Mejorar y desarrollar nuestros Productos",
+          "Realizar análisis e investigación",
+          "Garantizar la seguridad de nuestros sistemas"
+        ]
+      },
+      "cookies": {
+        "title": "Cookies y Seguimiento",
+        "desc": "Usamos cookies para mejorar nuestra plataforma y entender el comportamiento del usuario.",
+        "essential_title": "Cookies esenciales:",
+        "essential_desc": "Necesarias para el funcionamiento del sitio. No se pueden desactivar.",
+        "performance_title": "Cookies de rendimiento:",
+        "performance_desc": "Nos ayudan a mejorar el sitio al saber qué páginas son las más visitadas."
+      },
+      "third_party": {
+        "title": "Servicios de Terceros",
+        "desc": "Podemos usar proveedores terceros de confianza para mejorar tu experiencia.",
+        "items": [
+          "Procesadores de pago seguros",
+          "Proveedores de análisis",
+          "Plataformas de soporte al cliente",
+          "Servicios de alojamiento en la nube",
+          "Plataformas de marketing"
+        ],
+        "footer": "Exigimos a los terceros el mismo nivel de protección de datos que nosotros aplicamos."
+      },
+      "rights": {
+        "title": "Tus Derechos",
+        "desc": "Tienes derechos sobre tu información personal:",
+        "footer": "Para ejercer estos derechos, contáctanos a través de la sección de contacto.",
+        "list": {
+          "access": {
+            "title": "Acceso",
+            "desc": "Solicitar una copia de tus datos personales."
+          },
+          "correction": {
+            "title": "Corrección",
+            "desc": "Solicitar la corrección de datos incorrectos."
+          },
+          "deletion": {
+            "title": "Eliminación",
+            "desc": "Solicitar la eliminación de tus datos, con ciertas excepciones."
+          },
+          "objection": {
+            "title": "Oposición",
+            "desc": "Oponerte al procesamiento de tus datos para ciertos fines."
+          },
+          "portability": {
+            "title": "Portabilidad",
+            "desc": "Solicitar tus datos en un formato estructurado y legible por máquina."
+          }
+        }
+      },
+      "contact": {
+        "title": "Contáctenos",
+        "desc": "Si tienes preguntas sobre esta política, contáctanos en:",
+        "email_label": "Email:",
+        "phone_label": "Teléfono:",
+        "hours_label": "Horario comercial:",
+        "hours_value": "Lunes a Viernes, 9:00 AM - 6:00 PM"
+      }
+    }
+  },
+  "sheikhs_page": {
+    "hero_title": "Consultores de Sharia Islámica",
+    "hero_subtitle": "Elige entre un grupo de jeques y consultores especializados en asuntos familiares y matrimoniales",
+    "features_badge": "POR QUÉ ELEGIR A NUESTROS JEQUES",
+    "features_title": "Excelencia en Guía Islámica",
+    "features_subtitle": "Experimenta la mezcla perfecta de conocimiento islámico tradicional y asesoramiento moderno.",
+    "buttons": {
+      "chat": "Chat",
+      "view": "Ver"
+    },
+    "unknown_alt": "Jeque Desconocido"
+  },
+  "sheikh_detail": {
+    "labels": {
+      "languages": "Idiomas",
+      "experience": "Experiencia",
+      "about": "Acerca de",
+      "expertise": "Áreas de Experiencia"
+    },
+    "chat": {
+      "status": {
+        "online": "En línea",
+        "offline": "Desconectado",
+        "typing": "Escribiendo..."
+      },
+      "date": {
+        "today": "Hoy",
+        "yesterday": "Ayer"
+      },
+      "recording": {
+        "active": "Grabando mensaje de voz",
+        "stop": "Detener Grabación"
+      },
+      "input": {
+        "placeholder": "Escribe tu mensaje...",
+        "clear_all": "Borrar todo"
+      },
+      "message_types": {
+        "voice_user": "Tu mensaje de voz",
+        "voice_sheikh": "Mensaje de voz",
+        "download": "Descargar"
+      }
+    }
+  },
+  "auth": {
+    "welcome_aboard": "¡Bienvenido a Bordo!",
+    "login_success": "Inicio de sesión exitoso",
+    "login_failed": "Error al iniciar sesión. Inténtalo de nuevo.",
+    "title": "Bienvenido de Nuevo",
+    "sub_title": "Inicia sesión en tu cuenta",
+    "forgot_your_password": "¿Olvidaste tu contraseña?",
+    "sign_in": "Iniciar Sesión",
+    "continue_with_email": "O continúa con correo",
+    "continue_with_google": "Continuar con Google",
+    "don't_have_account": "¿No tienes una cuenta?",
+    "sign_up_now": "Regístrate ahora",
+    "reset_password_title": "Restablecer Contraseña",
+    "forgot_desc": "Ingresa tu email y te enviaremos un código para restablecer tu contraseña.",
+    "reset_code_sent": "¡Código enviado a tu correo!",
+    "reset_code_failed": "Error al enviar el código.",
+    "send_reset_code": "Enviar Código",
+    "sending_code": "Enviando Código...",
+    "back_to_sign_in": "Volver a Iniciar Sesión",
+    "verify_title": "Verifica tu Cuenta",
+    "verify_subtitle": "Ingresa el código enviado a tu correo para completar el registro.",
+    "enter_verification_code": "Ingresa el código",
+    "verification_code_sent": "Hemos enviado un código a tu correo",
+    "email_verified_success": "¡Email verificado con éxito!",
+    "verification_failed": "Fallo en la verificación.",
+    "verify": "Verificar",
+    "verifying": "Verificando...",
+    "resend_code_success": "¡Nuevo código enviado!",
+    "resend_code_failed": "Error al reenviar el código.",
+    "send_code_again": "Enviar código de nuevo",
+    "sending": "Enviando...",
+    "parent_title": "Completa tu Perfil de Tutor",
+    "parent_subtitle": "Proporciona tu información para configurar la cuenta familiar.",
+    "parent_information": "Información del Tutor",
+    "parent_information_desc": "Detalles del padre/tutor",
+    "continue": "Continuar",
+    "submitting": "Enviando...",
+    "or_continue_with": "O continuar con",
+    "reset_desc": "Crea una nueva contraseña segura para tu cuenta.",
+    "create_new_password": "Crear Nueva Contraseña",
+    "new_password_desc": "Ingresa tu nueva contraseña abajo.",
+    "password_reset_success": "¡Contraseña restablecida!",
+    "password_reset_failed": "Error al restablecer contraseña.",
+    "reset_password": "Restablecer Contraseña",
+    "resetting_password": "Restableciendo...",
+    "invalid_reset_token": "Token inválido. Solicita un nuevo enlace.",
+    "select_user_type": "Selecciona tipo de usuario",
+    "select_user_type_desc": "Selecciona el tipo de usuario para continuar correctamente.",
+    "regular_user": "Usuario regular",
+    "regular_user_desc": "Me registro para mí mismo",
+    "guardian_user": "Tutor / Guardián",
+    "guardian_user_desc": "Registro como tutor para otra persona",
+    "register_title": "¡Únete a nuestra Comunidad!",
+    "register_desc": "Crea tu cuenta y comienza tu viaje.",
+    "register_create_account": "Crear Cuenta",
+    "register_subtitle": "Regístrate para una nueva cuenta",
+    "creating_account": "Creando Cuenta...",
+    "already_have_account": "¿Ya tienes cuenta?",
+    "register_success": "¡Registro exitoso! Verifica tu correo.",
+    "register_failed": "Error en el registro.",
+    "preview_alt": "Vista previa de foto",
+    "change_photo": "Cambiar foto",
+    "click_to_upload": "Click para subir",
+    "face_verification": "Verificación Facial",
+    "upload_photos_instruction": "Sube fotos claras desde diferentes ángulos",
+    "right_side_photo": "Foto perfil derecho",
+    "right_side_description": "Vista clara del lado derecho",
+    "left_side_photo": "Foto perfil izquierdo",
+    "left_side_description": "Vista clara del lado izquierdo",
+    "selfie_photo": "Foto selfie",
+    "selfie_description": "Selfie frontal",
+    "confirm": "Confirmar",
+    "ensure_clear_photos": "Asegúrate de que las fotos sean claras",
+    "verify_reset_code_desc": "Ingresa el código enviado a tu correo para restablecer tu contraseña.",
+    "success_message": "¡Código verificado!",
+    "error_message": "Código inválido.",
+    "resend_success": "¡Nuevo código enviado!",
+    "resend_error": "Error al reenviar.",
+    "email_required": "Email requerido.",
+    "sent_code_email": "Enviamos un código de 6 dígitos a tu email",
+    "verification_code_label": "Código de Verificación",
+    "verify_code": "Verificar Código",
+    "did_not_receive_code": "¿No recibiste el código?",
+    "resend_code": "Reenviar Código",
+    "back_to_forgot_password": "Volver a Olvidé Contraseña"
+  },
+  "validation": {
+    "email_invalid": "Email inválido",
+    "pass_req": "Contraseña requerida",
+    "email_required": "Email requerido",
+    "otp_incomplete": "Ingresa los 6 dígitos",
+    "first_name_required": "Nombre requerido",
+    "first_name_too_long": "Nombre demasiado largo",
+    "last_name_required": "Apellido requerido",
+    "last_name_too_long": "Apellido demasiado largo",
+    "kinship_required": "Parentesco requerido",
+    "invalid_email": "Email inválido",
+    "phone_required": "Teléfono requerido",
+    "phone_invalid": "Teléfono inválido",
+    "phone_min_10_digits": "Mínimo 10 dígitos",
+    "reset_token_missing": "Token ausente.",
+    "password_min_length": "Mínimo 8 caracteres",
+    "passwords_not_match": "Las contraseñas no coinciden",
+    "gender_required": "Género requerido",
+    "date_of_birth_required": "Fecha de nacimiento requerida",
+    "country_required": "País requerido",
+    "city_required": "Ciudad requerida",
+    "password_confirmation_required": "Confirma tu contraseña",
+    "reset_code_length": "El código debe tener 6 caracteres",
+    "message_min_10_chars": "Mínimo 10 caracteres",
+    "message_too_long": "Mensaje demasiado largo"
+  },
+  "fields": {
+    "email": "Email",
+    "email_placeholder": "tu@email.com",
+    "email_address": "Dirección de Correo",
+    "password": "Contraseña",
+    "password_placeholder": "Ingresa tu contraseña",
+    "first_name": "Nombre",
+    "first_name_placeholder": "Juan",
+    "last_name": "Apellido",
+    "last_name_placeholder": "Pérez",
+    "kinship": "Parentesco",
+    "kinship_placeholder": "Selecciona parentesco",
+    "phone_number": "Número de Teléfono",
+    "new_password": "Nueva Contraseña",
+    "new_password_placeholder": "Ingresa nueva contraseña",
+    "confirm_password": "Confirmar Contraseña",
+    "confirm_password_placeholder": "Confirma tu contraseña",
+    "gender": "Género",
+    "gender_placeholder": "Selecciona género",
+    "country": "País",
+    "country_placeholder": "Selecciona país",
+    "city": "Ciudad",
+    "city_placeholder": "Selecciona ciudad",
+    "date_of_birth": "Fecha de Nacimiento",
+    "date_of_birth_placeholder": "Selecciona fecha",
+    "phone_placeholder": "Ingresa tu teléfono",
+    "confirm_password_again_placeholder": "Ingresa de nuevo",
+    "message": "Mensaje",
+    "message_placeholder": "Escribe aquí tu mensaje"
+  },
+  "options": {
+    "mother": "Madre",
+    "father": "Padre",
+    "grandmother": "Abuela",
+    "grandfather": "Abuelo",
+    "aunt": "Tía",
+    "uncle": "Tío",
+    "guardian": "Tutor",
+    "other": "Otro",
+    "male": "Hombre",
+    "female": "Mujer"
+  }
+}

@@ -1,12 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import FAQCard from "./FAQCard";
 import { animationVariants, faqItems } from "@/constants/landingData";
 import SectionHeader from "./SectionHeader";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export default function FAQ() {
+  const t = useTranslations("homePage");
   return (
     <motion.section
       className="py-16 sm:py-20 bg-primary-light3 dark:bg-black"
@@ -33,14 +35,14 @@ export default function FAQ() {
             variants={animationVariants.item}
           >
             <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Still have questions? We're here to help!
+              {t("faq_contact")}
             </p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/contact"
                 className="bg-transparent border border-[#A1AA8A] dark:border-[#8B9475] text-[#8B9475] dark:text-[#A1AA8A] hover:bg-[#A1AA8A] dark:hover:bg-[#8B9475] hover:text-white dark:hover:text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl dark:shadow-gray-800/50 inline-flex items-center gap-2"
               >
-                Contact Support
+                {t("contact_support")}
                 <svg
                   className="w-4 h-4"
                   fill="none"

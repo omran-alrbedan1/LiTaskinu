@@ -4,8 +4,11 @@ import { MOCK_SHEIKHS } from '@/constants/temporary';
 import Image from 'next/image';
 import { images } from '@/constants/images';
 import FeatureCard from '@/components/website/shared/FeatureCard';
+import { getTranslations } from 'next-intl/server';
 
-export default function SheikhsPage() {
+export default async function SheikhsPage() {
+  const t = await getTranslations('sheikhs_page');
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -22,15 +25,15 @@ export default function SheikhsPage() {
 
           {/* Dark Overlay - Black/Gray only */}
           <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-gray-900/40 to-gray-800/30 dark:from-black/90 dark:via-gray-900/80 dark:to-gray-800/70"></div>
-
         </div>
+        
         <div className="container mx-auto px-4 py-16 relative">
           <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Islamic Sharia Consultation Sheikhs
+              {t('hero_title')}
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8">
-              Choose from an elite group of sheikhs and sharia consultants specialized in family and marital affairs
+              {t('hero_subtitle')}
             </p>
           </div>
         </div>
@@ -60,19 +63,19 @@ export default function SheikhsPage() {
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-gradient-to-r from-[#8B9475]/10 to-[#6B7355]/10 dark:from-[#6B7355]/20 dark:to-[#4A5237]/20 border border-[#8B9475]/20 dark:border-[#6B7355]/30 mb-4">
               <span className="text-sm font-semibold text-primary-color1">
-                WHY CHOOSE OUR SHEIKHS
+                {t('features_badge')}
               </span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-primary-color1  mb-4">
-              Excellence in Islamic Guidance
+              {t('features_title')}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Experience the perfect blend of traditional Islamic scholarship and modern counseling expertise
+              {t('features_subtitle')}
             </p>
           </div>
 
           {/* Features Grid */}
-       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {FEATURES.map((feature, index) => (
               <FeatureCard
                 key={index}

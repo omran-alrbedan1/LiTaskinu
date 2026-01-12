@@ -19,7 +19,7 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import { ICONS } from "@/constants/icons";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { EmailModal, VerifyModal, UnbanModal } from ".";
 
 interface UserTableProps {

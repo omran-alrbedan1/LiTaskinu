@@ -14,6 +14,7 @@ import {
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
 import { Image as AntdImage, Button } from "antd";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 interface Message {
   id: string;
@@ -26,6 +27,8 @@ interface Message {
 }
 
 export default function ChatPage() {
+  const t = useTranslations("chats");
+
   const params = useParams();
   const chatId = params.id as string;
   const [messages, setMessages] = useState<Message[]>([]);
@@ -306,7 +309,7 @@ export default function ChatPage() {
           <div>
             <h2 className="font-semibold text-gray-900">{chatInfo.name}</h2>
             <p className="text-xs text-green-500">
-              {chatInfo.online ? "Online" : "Offline"}
+              {chatInfo.online ? t("status.online") : t("status.offline")}
             </p>
           </div>
         </div>
@@ -330,7 +333,7 @@ export default function ChatPage() {
       >
         <div className="text-center">
           <span className="text-xs text-gray-500 bg-white px-3 py-1 rounded-full">
-            Today
+            {t("status.today")}
           </span>
         </div>
 
@@ -375,7 +378,7 @@ export default function ChatPage() {
                       <div className="w-20 h-20 bg-gray-200 rounded-2xl overflow-hidden">
                         <AntdImage
                           src={image}
-                          alt={`Sent image ${index + 1}`}
+                          alt={`${t("aria.sentImage")} ${index + 1}`}
                           width={80}
                           height={80}
                           className="w-full h-full object-cover"
@@ -415,7 +418,7 @@ export default function ChatPage() {
                 <div className="w-24 h-24 bg-gray-200 rounded-lg overflow-hidden">
                   <AntdImage
                     src={preview}
-                    alt={`Preview ${index + 1}`}
+                    alt={`${t("aria.preview")} ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -454,7 +457,7 @@ export default function ChatPage() {
 
           <input
             type="text"
-            placeholder="Type your message"
+            placeholder={t("input.placeholder")}
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             className="flex-1 px-4 py-2 bg-gray-100 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-color1"

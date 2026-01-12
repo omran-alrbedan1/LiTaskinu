@@ -2,12 +2,14 @@
 import React from "react";
 import ParentRegisterForm from "@/components/website/forms/ParentRegisterForm";
 import AuthLayout from "@/components/website/layouts/AuthLayout";
+import { useTranslations } from "next-intl";
 
 const ParentInfo = () => {
+  const t = useTranslations("auth");
   return (
     <AuthLayout
-      title="Complete Your Parent Profile"
-      description="Please provide your information to complete the parent registration process and set up your family account."
+      title={t("parent_title")}
+      description={t("parent_subtitle")}
       showLanguageSwitch={false}
       showSocialMedia={false}
       customFormClasses="pb-44"
