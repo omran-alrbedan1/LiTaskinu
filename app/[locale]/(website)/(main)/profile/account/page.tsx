@@ -6,10 +6,7 @@ import useGetData from "@/hooks/useGetData";
 import Loader from "@/components/shared/Loader";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-<<<<<<< HEAD
 
-=======
->>>>>>> development
 import CustomHeader from "@/components/shared/CustomHeader";
 import { images } from "@/constants/images";
 

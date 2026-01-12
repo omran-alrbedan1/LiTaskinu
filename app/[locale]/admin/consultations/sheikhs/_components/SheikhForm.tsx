@@ -9,10 +9,7 @@ import SubmitButton from "@/components/Buttons/SubmitButton";
 import { Plus, Edit, User, BookOpen, FileText } from "lucide-react";
 import { ICONS } from "@/constants/icons";
 import { useEffect, useState } from "react";
-<<<<<<< HEAD
 import { useGenderOptions } from "@/constants/options";
-=======
->>>>>>> development
 import useGetData from "@/hooks/useGetData";
 import { SheikhFormData, SheikhFormValidation } from "@/validation/admin";
 
@@ -33,17 +30,14 @@ export function SheikhForm({
 }: SheikhFormProps) {
   const [selectedCountryId, setSelectedCountryId] = useState<string>("");
   const [isFormSubmitting, setIsFormSubmitting] = useState(false);
-<<<<<<< HEAD
-   const genderOptions = useGenderOptions();
+  const genderOptions = useGenderOptions();
 
-    const [imageFile, setImageFile] = useState<File | null>(null);
-    const [imagePreview, setImagePreview] = useState<string>(
-        initialData?.image 
-            ? `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ''}/${initialData.image}`
-            : ""
-    );
-=======
->>>>>>> development
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>(
+    initialData?.image
+      ? `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ''}/${initialData.image}`
+      : ""
+  );
 
   // Fetch countries data
   const {
@@ -108,7 +102,7 @@ export function SheikhForm({
         first_name: initialData.first_name || "",
         last_name: initialData.last_name || "",
         email: initialData.email || "",
-        password: "", 
+        password: "",
         experience: initialData.sheikh?.experience || "",
         specialization: initialData.sheikh?.specialization || "",
         languages: Array.isArray(initialData.sheikh?.languages)
@@ -174,7 +168,7 @@ export function SheikhForm({
         apiData.phone = values.phone;
       }
 
-      if ( values.password) {
+      if (values.password) {
         apiData.password = values.password;
       }
 
@@ -279,15 +273,15 @@ export function SheikhForm({
                 disabled={isSubmitting}
               />
 
-                <CustomFormField
-                  fieldType={FormFieldType.PASSWORD}
-                  control={form.control}
-                  name="password"
-                  label="Password"
-                  placeholder="Create a password "
-                  iconSrc={ICONS.lock}
-                  disabled={isSubmitting}
-                />
+              <CustomFormField
+                fieldType={FormFieldType.PASSWORD}
+                control={form.control}
+                name="password"
+                label="Password"
+                placeholder="Create a password "
+                iconSrc={ICONS.lock}
+                disabled={isSubmitting}
+              />
 
               <CustomFormField
                 fieldType={FormFieldType.INPUT}
