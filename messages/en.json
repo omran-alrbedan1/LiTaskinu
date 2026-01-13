@@ -542,7 +542,8 @@
     "verify_code": "Verify Code",
     "did_not_receive_code": "Didn't receive the code?",
     "resend_code": "Resend Code",
-    "back_to_forgot_password": "Back to Forgot Password"
+    "back_to_forgot_password": "Back to Forgot Password",
+    "follow_us_on": "Follow  us on "
   },
   "validation": {
     "email_invalid": "Please enter a valid email address",
@@ -598,7 +599,10 @@
     "phone_placeholder": "Enter your phone number",
     "confirm_password_again_placeholder": "Enter your password again",
     "message": "Message",
-    "message_placeholder": "Type here your message"
+    "message_placeholder": "Type here your message",
+    "select_country_first":"Select country first",
+    "loading":"Loading..."
+    
   },
   "options": {
     "mother": "Mother",

@@ -10,7 +10,7 @@ import { useTheme } from "next-themes";
 export function Providers({ children, ...props }: ThemeProviderProps) {
   return (
     <NextThemesProvider
-  attribute="class"
+      attribute="class"
       defaultTheme="system"
       enableSystem
       disableTransitionOnChange

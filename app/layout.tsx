@@ -16,8 +16,8 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
-      <body className=" text-base">
+    <html suppressHydrationWarning>
+      <body className=" text-base" suppressHydrationWarning>
         <AppProvider>{children}</AppProvider>
       </body>
     </html>

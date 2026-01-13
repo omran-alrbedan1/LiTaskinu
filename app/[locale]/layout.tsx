@@ -17,14 +17,13 @@ export default async function LocaleLayout({
   }
 
   const messages = await getMessages({ locale });
+  const dir = locale === "ar" || locale === "fa" ? "rtl" : "ltr";
 
   return (
-    <html lang={locale} dir={locale === "ar"|| locale === "fa" ? "rtl" : "ltr"}>
-      <body>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <div dir={dir} className="min-h-screen">
+      <NextIntlClientProvider locale={locale} messages={messages}>
+        {children}
+      </NextIntlClientProvider>
+    </div>
   );
 }

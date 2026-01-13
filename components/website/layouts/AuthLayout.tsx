@@ -1,10 +1,13 @@
 // components/layout/AuthLayout.tsx
 "use client";
-import React from "react";
+
+import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+
 import { images } from "@/constants/images";
-import { Globe } from "lucide-react";
 import {
   mobileContainerVariants,
   mobileItemVariants,
@@ -14,27 +17,97 @@ import {
   scaleVariants,
 } from "@/constants/animation-variants";
 import { socialMediaLinks } from "@/constants/userTemporary";
-import { Link, useRouter } from "@/i18n/navigation";
 
-interface AuthLayoutProps {
-  children: React.ReactNode;
-  title: string;
-  description: string;
+type AuthLayoutProps = {
+  // children: ReactNode;
+
+  /** Pass raw text (no translation) */
+  title?: string;
+  description?: string;
+
+  /** Pass translation keys (will use t("auth") inside layout) */
+  titleKey?: string;
+  descriptionKey?: string;
+
+  /** Optional switches if you pass title/description but still want translation */
+  translateTitle?: boolean; // default false
+  translateDescription?: boolean; // default false
+
   customFormClasses?: string;
   showSocialMedia?: boolean;
-}
+};
 
-const AuthLayout = ({
+export default function AuthLayout({
   children,
   title,
   description,
+  titleKey,
+  descriptionKey,
+  translateTitle = false,
+  translateDescription = false,
   customFormClasses = "",
   showSocialMedia = true,
-}: AuthLayoutProps) => {
-  const router = useRouter();
+}: AuthLayoutProps) {
+  const t = useTranslations("auth");
 
+  // Resolve displayed text
+  const resolvedTitle =
+    titleKey ? t(titleKey) : title ? (translateTitle ? t(title) : title) : "";
 
-  // Common content for both sides
+  const resolvedDescription =
+    descriptionKey
+      ? t(descriptionKey)
+      : description
+      ? translateDescription
+        ? t(description)
+        : description
+      : "";
+
+  const SocialIcons = ({ size = "desktop" }: { size?: "desktop" | "mobile" }) => (
+    <div
+      className={
+        size === "desktop"
+          ? "flex gap-4 lg:gap-6 pb-4 lg:pb-6 lg:ml-16 xl:ml-24 2xl:ml-32 lg:-mt-16 xl:-mt-24 2xl:-mt-32"
+          : "flex justify-center gap-3 sm:gap-4"
+      }
+    >
+      {socialMediaLinks.map((social) => {
+        const IconComponent = social.icon;
+        const base =
+          size === "desktop" ? "w-10 h-10 lg:w-12 lg:h-12" : "w-8 h-8 sm:w-9 sm:h-9";
+
+        return (
+          <motion.div
+            key={social.name}
+            whileHover={
+              size === "desktop"
+                ? { scale: 1.12, y: -4, transition: { type: "spring", stiffness: 400 } }
+                : { scale: 1.1 }
+            }
+            whileTap={{ scale: 0.95 }}
+          >
+            <Link
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.name}
+              className={`${base} rounded-full bg-white/10 flex items-center justify-center text-white transition-all duration-300 ${social.color} backdrop-blur-sm border border-white/20`}
+            >
+              <IconComponent
+                className={
+                  size === "desktop"
+                    ? "w-4 h-4 lg:w-5 lg:h-5"
+                    : "w-3 h-3 sm:w-3.5 sm:h-3.5"
+                }
+              />
+              <span className="sr-only">{social.name}</span>
+            </Link>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+
   const welcomeContent = (
     <motion.div
       variants={desktopContainerVariants}
@@ -42,31 +115,30 @@ const AuthLayout = ({
       animate="visible"
       className="hidden lg:flex lg:w-2/3 flex-col items-start justify-between p-4 sm:p-6 lg:p-8 xl:p-12"
     >
-      {/* Logo and Welcome Text */}
       <motion.div
         variants={desktopItemVariants}
         className="flex-1 flex lg:ml-16 xl:ml-24 2xl:ml-32 flex-col lg:-mt-16 xl:-mt-24 2xl:-mt-32 items-start justify-center text-start w-full max-w-md"
       >
-        {/* Logo */}
-        <motion.a
+        <motion.div
           variants={scaleVariants}
           initial="hidden"
           animate="visible"
           transition={{ delay: 0.4 }}
           className="mb-6 lg:mb-8"
-          href="./"
         >
-          <Image
-            src={images.logo2}
-            alt="logo"
-            width={160}
-            height={160}
-            className="object-cover lg:w-[180px] lg:h-[180px] xl:w-[200px] xl:h-[200px]"
-            quality={100}
-          />
-        </motion.a>
+          <Link href="/" aria-label="Home">
+            <Image
+              src={images.logo2}
+              alt="logo"
+              width={160}
+              height={160}
+              className="object-cover lg:w-[180px] lg:h-[180px] xl:w-[200px] xl:h-[200px]"
+              quality={100}
+              priority
+            />
+          </Link>
+        </motion.div>
 
-        {/* Welcome Text */}
         <motion.h1
           variants={fadeInUpVariants}
           initial="hidden"
@@ -74,8 +146,9 @@ const AuthLayout = ({
           transition={{ delay: 0.6 }}
           className="text-2xl lg:text-3xl xl:text-4xl font-bold text-primary-color3 mb-4 lg:mb-6"
         >
-          {title}
+          {resolvedTitle}
         </motion.h1>
+
         <motion.p
           variants={fadeInUpVariants}
           initial="hidden"
@@ -83,44 +156,18 @@ const AuthLayout = ({
           transition={{ delay: 0.8 }}
           className="text-primary-color3 text-sm lg:text-base leading-relaxed"
         >
-          {description}
+          {resolvedDescription}
         </motion.p>
       </motion.div>
 
-      {/* Social Media Icons */}
       {showSocialMedia && (
         <motion.div
           variants={fadeInUpVariants}
           initial="hidden"
           animate="visible"
           transition={{ delay: 1 }}
-          className="flex gap-4 lg:gap-6 pb-4 lg:pb-6 lg:ml-16 xl:ml-24 2xl:ml-32 lg:-mt-16 xl:-mt-24 2xl:-mt-32"
         >
-          {socialMediaLinks.map((social) => {
-            const IconComponent = social.icon;
-            return (
-              <motion.button
-                key={social.name}
-                whileHover={{
-                  scale: 1.2,
-                  y: -5,
-                  transition: { type: "spring", stiffness: 400 },
-                }}
-                whileTap={{ scale: 0.9 }}
-                className={`w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/10 flex items-center justify-center text-white transition-all duration-300 ${social.color} backdrop-blur-sm border border-white/20`}
-                title={social.name}
-              >
-                <Link
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-full h-full"
-                >
-                  <IconComponent className="w-4 h-4 lg:w-5 lg:h-5" />
-                </Link>
-              </motion.button>
-            );
-          })}
+          <SocialIcons size="desktop" />
         </motion.div>
       )}
     </motion.div>
@@ -133,28 +180,26 @@ const AuthLayout = ({
       animate="visible"
       className="lg:hidden flex flex-col items-center p-3 sm:p-4 pt-4 sm:pt-6"
     >
-      {/* Mobile Logo */}
       <motion.div variants={mobileItemVariants} className="mb-3 sm:mb-4">
-        <Image
-          src={images.logo2}
-          alt="logo"
-          width={70}
-          height={70}
-          className="object-cover sm:w-[90px] sm:h-[90px]"
-          quality={100}
-        />
+        <Link href="/" aria-label="Home">
+          <Image
+            src={images.logo2}
+            alt="logo"
+            width={70}
+            height={70}
+            className="object-cover sm:w-[90px] sm:h-[90px]"
+            quality={100}
+            priority
+          />
+        </Link>
       </motion.div>
 
-      {/* Mobile Welcome Text */}
-      <motion.div
-        variants={mobileItemVariants}
-        className="text-center mb-4 sm:mb-6 px-2"
-      >
+      <motion.div variants={mobileItemVariants} className="text-center mb-4 sm:mb-6 px-2">
         <h1 className="text-lg sm:text-xl font-bold text-primary-color3 mb-2 sm:mb-3">
-          {title}
+          {resolvedTitle}
         </h1>
         <p className="text-primary-color3 text-xs sm:text-sm leading-relaxed max-w-xs sm:max-w-md">
-          {description}
+          {resolvedDescription}
         </p>
       </motion.div>
     </motion.div>
@@ -173,9 +218,6 @@ const AuthLayout = ({
         transition={{ duration: 0.6, delay: 0.4 }}
         className="w-full max-w-xs sm:max-w-sm lg:max-w-md lg:w-[400px] xl:w-[450px] space-y-4 sm:space-y-5 lg:space-y-6"
       >
-
-
-        {/* Form Content */}
         <motion.div
           variants={fadeInUpVariants}
           initial="hidden"
@@ -186,7 +228,6 @@ const AuthLayout = ({
           {children}
         </motion.div>
 
-        {/* Mobile Social Media Icons */}
         {showSocialMedia && (
           <motion.div
             variants={mobileContainerVariants}
@@ -194,35 +235,11 @@ const AuthLayout = ({
             animate="visible"
             className="lg:hidden mt-6 sm:mt-8"
           >
-            <motion.div
-              variants={mobileItemVariants}
-              className="text-center mb-4"
-            >
-              <p className="text-white text-xs sm:text-sm mb-3">Follow us on</p>
-              <div className="flex justify-center gap-3 sm:gap-4">
-                {socialMediaLinks.map((social) => {
-                  const IconComponent = social.icon;
-                  return (
-                    <motion.button
-                      key={social.name}
-                      variants={mobileItemVariants}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/10 flex items-center justify-center text-white transition-all duration-300 ${social.color} backdrop-blur-sm border border-white/20`}
-                      title={social.name}
-                    >
-                      <Link
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center w-full h-full"
-                      >
-                        <IconComponent className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                      </Link>
-                    </motion.button>
-                  );
-                })}
-              </div>
+            <motion.div variants={mobileItemVariants} className="text-center mb-4">
+              <p className="text-white text-xs sm:text-sm mb-3">
+                {t("follow_us_on")}
+              </p>
+              <SocialIcons size="mobile" />
             </motion.div>
           </motion.div>
         )}
@@ -231,8 +248,7 @@ const AuthLayout = ({
   );
 
   return (
-    <div className="min-h-screen  z-50 relative overflow-hidden">
-      {/* Full Screen Background Image with Blur */}
+    <div className="min-h-screen z-50 relative overflow-hidden">
       <div className="absolute inset-0">
         <Image
           src={images.authBackground}
@@ -242,23 +258,14 @@ const AuthLayout = ({
           priority
           quality={100}
         />
-        {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black/80" />
       </div>
 
-      {/* Content Container */}
       <div className="relative z-10 min-h-screen flex flex-col lg:flex-row">
-        {/* Mobile Header */}
         {mobileHeader}
-
-        {/* Desktop Layout */}
-        <>
-          {welcomeContent}
-          {formSection}
-        </>
+        {welcomeContent}
+        {formSection}
       </div>
     </div>
   );
-};
-
-export default AuthLayout;
+}

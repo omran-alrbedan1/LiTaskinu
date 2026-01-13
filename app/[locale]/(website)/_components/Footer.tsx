@@ -1,7 +1,11 @@
+// app/[locale]/(website)/_components/Footer.tsx
+
 import Image from "next/image";
-import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { images } from "@/constants/images";
+
+import type { IconType } from "react-icons";
 import {
   FaEnvelope,
   FaPhone,
@@ -13,18 +17,15 @@ import {
   FaFacebookF,
 } from "react-icons/fa";
 import { TiHeartFullOutline } from "react-icons/ti";
-import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
 
 export default async function Footer() {
   const t = await getTranslations("footer");
 
-  const socialLinks: { icon: IconType; href: string; label: string; hover: string }[] =
-    [
-      { icon: FaInstagram, href: "#", label: "Instagram", hover: "hover:text-pink-400" },
-      { icon: FaTwitter, href: "#", label: "Twitter", hover: "hover:text-blue-400" },
-      { icon: FaFacebookF, href: "#", label: "Facebook", hover: "hover:text-blue-600" },
-    ];
+  const socialLinks: { icon: IconType; href: string; label: string; hover: string }[] = [
+    { icon: FaInstagram, href: "#", label: "Instagram", hover: "hover:text-pink-400" },
+    { icon: FaTwitter, href: "#", label: "Twitter", hover: "hover:text-blue-400" },
+    { icon: FaFacebookF, href: "#", label: "Facebook", hover: "hover:text-blue-600" },
+  ];
 
   const contactItems: { icon: IconType; title: string; text: string }[] = [
     { icon: FaEnvelope, title: t("contact.email"), text: "om.alrbedan100@gmail.com" },
@@ -52,9 +53,11 @@ export default async function Footer() {
               <div className="flex items-center mb-6">
                 <Image
                   src={images.logo2}
-                  priority
                   alt="litaskunu logo light"
-                  className="h-16 w-20 mr-4"
+                  width={80}
+                  height={64}
+                  priority
+                  className="h-16 w-20 mr-4 object-contain"
                 />
                 <div>
                   <h3 className="text-2xl font-bold">{t("brand.title")}</h3>
@@ -75,7 +78,7 @@ export default async function Footer() {
                     aria-label={s.label}
                     target={s.href.startsWith("http") ? "_blank" : undefined}
                     rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white/70 hover:bg-white/20 sees transition-all duration-300"
+                    className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white/70 hover:bg-white/20 transition-all duration-300"
                   >
                     <s.icon className={`text-sm ${s.hover}`} />
                   </a>
@@ -118,9 +121,23 @@ export default async function Footer() {
                     <div className={pillIconWrap}>
                       <item.icon className="text-white text-sm" />
                     </div>
-                    <Link href={item.href} className="hover:cursor-pointer" aria-label={item.title}>
-                      <p className="text-white/90 font-medium">{item.title}</p>
-                    </Link>
+
+                    {/* Use i18n Link for internal routes */}
+                    {item.href.startsWith("http") ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:cursor-pointer"
+                        aria-label={item.title}
+                      >
+                        <p className="text-white/90 font-medium">{item.title}</p>
+                      </a>
+                    ) : (
+                      <Link href={item.href} className="hover:cursor-pointer" aria-label={item.title}>
+                        <p className="text-white/90 font-medium">{item.title}</p>
+                      </Link>
+                    )}
                   </div>
                 ))}
               </div>
