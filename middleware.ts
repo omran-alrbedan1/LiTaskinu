@@ -1,58 +1,80 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { SESSION_COOKIES } from "@/lib/session";
 import createIntlMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
+import { SESSION_COOKIES } from "@/lib/session";
 
 const intlMiddleware = createIntlMiddleware(routing);
+
+function getLocaleFromPathname(pathname: string) {
+  const locales = routing.locales ?? [];
+  const first = pathname.split("/")[1];
+  return locales.includes(first) ? first : null;
+}
+
+function isAdminLoginPath(pathname: string) {
+  // Matches:
+  // /admin/login
+  // /en/admin/login, /ar/admin/login, etc.
+  return /^\/(?:[a-z]{2}\/)?admin\/login\/?$/i.test(pathname);
+}
+
+function isAdminPath(pathname: string) {
+  // /admin/... or /{locale}/admin/...
+  return /^\/(?:[a-z]{2}\/)?admin(?:\/|$)/i.test(pathname);
+}
+
+function isPublicUserRoute(pathname: string, locale: string) {
+  const base = `/${locale}`;
+  return (
+    pathname === `${base}/sign-in` ||
+    pathname === `${base}/sign-up` ||
+    pathname === `${base}/login` ||
+    pathname === `${base}/otp-verification`
+  );
+}
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Never touch API routes in middleware
   if (pathname.startsWith("/api/")) {
     return NextResponse.next();
   }
 
-  const response = intlMiddleware(request);
+  // Let next-intl do its job (may rewrite/redirect to add locale)
+  const intlResponse = intlMiddleware(request);
+
+  // Determine locale (from URL after intlMiddleware potentially rewrote path)
+  // Note: request.nextUrl.pathname is unchanged; we parse from the original pathname.
+  const locale = getLocaleFromPathname(pathname);
 
   // ===== ADMIN ROUTES =====
-  if (pathname.includes("/admin")) {
-    const isAdminLogin = pathname.match(/^\/[a-z]{2}\/admin\/login$/i) || 
-                         pathname === "/admin/login";
-
-    if (isAdminLogin) {
-      return response;
+  if (isAdminPath(pathname)) {
+    if (isAdminLoginPath(pathname)) {
+      return intlResponse;
     }
 
     const adminSession = request.cookies.get(SESSION_COOKIES.ADMIN);
 
     if (!adminSession) {
-      // Redirect to admin login with locale if present
-      const localeMatch = pathname.match(/^\/([a-z]{2})\//i);
-      const locale = localeMatch ? `/${localeMatch[1]}` : "";
-      const loginUrl = new URL(`${locale}/admin/login`, request.url);
+      const loginPath = `${locale ? `/${locale}` : ""}/admin/login`;
+      const loginUrl = new URL(loginPath, request.url);
       loginUrl.searchParams.set("from", pathname);
-      return NextResponse.redirect(loginUrl);
+
+      // Preserve headers/cookies set by next-intl
+      const redirect = NextResponse.redirect(loginUrl);
+      intlResponse.headers.forEach((value, key) => redirect.headers.set(key, value));
+      return redirect;
     }
 
-    return response;
+    return intlResponse;
   }
 
   // ===== USER/WEBSITE ROUTES =====
-  const localeMatch = pathname.match(/^\/([a-z]{2})\//i);
-  
-  if (localeMatch) {
-    const locale = localeMatch[1];
-    
-    const isPublicRoute = 
-      pathname === `/${locale}/sign-in` ||
-      pathname === `/${locale}/sign-up` ||
-      pathname === `/${locale}/login` ||
-      pathname === `/${locale}/otp-verification` ||
-      false;
-
-    if (isPublicRoute) {
-      return response;
+  if (locale) {
+    if (isPublicUserRoute(pathname, locale)) {
+      return intlResponse;
     }
 
     const userSession = request.cookies.get(SESSION_COOKIES.USER);
@@ -60,18 +82,22 @@ export function middleware(request: NextRequest) {
     if (!userSession) {
       const loginUrl = new URL(`/${locale}/sign-in`, request.url);
       loginUrl.searchParams.set("from", pathname);
-      return NextResponse.redirect(loginUrl);
+
+      const redirect = NextResponse.redirect(loginUrl);
+      intlResponse.headers.forEach((value, key) => redirect.headers.set(key, value));
+      return redirect;
     }
 
-    return response;
+    return intlResponse;
   }
 
-  return response;
+  // If no locale in path, next-intl may redirect/rewrite — keep its result.
+  return intlResponse;
 }
 
 export const config = {
   matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|public/).*)",
-    "/(ar|en|tr|es|fr|zh|fa|ru)/:path*"
+    // Run on all routes except Next internals / static files
+    "/((?!api|_next|.*\\..*).*)"
   ],
 };
