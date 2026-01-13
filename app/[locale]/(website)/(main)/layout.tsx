@@ -2,14 +2,18 @@ import Header from "@/components/website/elements/Header";
 import React from "react";
 import Footer from "../_components/Footer";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="max-h-screen overflow-auto sidebar-scrollbar ">
+    <div className="max-h-screen overflow-auto sidebar-scrollbar">
       <Header />
-      {children}
-      <Footer/>
+
+      <main className="flex-1 ">
+        {children}
+      </main>
+
+      <Footer />
     </div>
   );
 };
 
-export default layout;
+export default Layout;
