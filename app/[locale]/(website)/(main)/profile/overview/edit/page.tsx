@@ -11,14 +11,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
-// Hooks
 
 // Components
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import CustomHeader from "@/components/shared/CustomHeader";
 import { PROFILE_SECTIONS } from "../_constants/profile-sections";
 import { SectionContent } from "../_components/SectionContent";
-import Loader from "@/components/shared/Loader";
 import { useProfileForm } from "../_hooks/useProfileForm";
 
 const EditPersonalDataPage = () => {

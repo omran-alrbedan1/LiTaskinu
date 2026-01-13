@@ -1,24 +1,24 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useMemo, useRef } from "react";
 
+import { Form } from "@/components/ui/form";
+import { useState, useEffect } from "react";
 import { ICONS } from "@/constants/icons";
-import { genderOptions } from "@/constants/options";
-
-import CustomFormField, { FormFieldType } from "@/components/shared/CustomInput";
+import { useGenderOptions } from "@/constants/options";
+import CustomFormField, {
+  FormFieldType,
+} from "@/components/shared/CustomInput";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import useGetData from "@/hooks/useGetData";
 import usePostData from "@/hooks/usePostData";
-
+import { Key, Loader, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Loader from "@/components/shared/Loader";
-
-import { Camera, Key, MapPin, Shield, User } from "lucide-react";
+import { useRouter } from "@/i18n/navigation";
+import { Camera, MapPin, User } from "lucide-react";
 
 import ChangePasswordModal from "./ChangePasswordModal";
 import ProfileImageUploader from "./ProfileImageUploader";
@@ -37,6 +37,11 @@ interface ImageSlot {
 }
 
 const EditProfileForm = ({ initialData }: EditProfileFormProps) => {
+  const genderOptions = useGenderOptions();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+
   const router = useRouter();
 
   const { data: userData, loading: dataLoading, refetch } =
@@ -183,12 +188,7 @@ const EditProfileForm = ({ initialData }: EditProfileFormProps) => {
     await postData(formData);
   };
 
-  // =========================
-  // UI
-  // =========================
-  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
-  // Show loader only on initial load, not when data is already available
   if (dataLoading && !initialData && !userInfo?.id) return <Loader />;
 
   // Get the current form values to check if select fields have values

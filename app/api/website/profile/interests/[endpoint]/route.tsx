@@ -15,7 +15,7 @@ export async function GET(
       );
     }
 
-    const API_BASE_URL = process.env.API_BASE_URL;
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
     if (!API_BASE_URL) {
       return NextResponse.json(
